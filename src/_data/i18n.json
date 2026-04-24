@@ -1,0 +1,90 @@
+{
+  "search": {
+    "fr": "Rechercher",
+    "en": "Search"
+  },
+  "search_placeholder": {
+    "fr": "Rechercher un pattern, une action...",
+    "en": "Search patterns, actions..."
+  },
+  "navigate": {
+    "fr": "naviguer",
+    "en": "navigate"
+  },
+  "select": {
+    "fr": "sélectionner",
+    "en": "select"
+  },
+  "patterns": {
+    "fr": "patterns",
+    "en": "patterns"
+  },
+  "what": {
+    "fr": "Ce que c'est",
+    "en": "What it is"
+  },
+  "why": {
+    "fr": "Pourquoi ça marche",
+    "en": "Why it works"
+  },
+  "demo": {
+    "fr": "Démo",
+    "en": "Demo"
+  },
+  "examples": {
+    "fr": "Meilleurs exemples",
+    "en": "Best examples"
+  },
+  "guide": {
+    "fr": "Guide d'implémentation",
+    "en": "Implementation guide"
+  },
+  "pitfalls": {
+    "fr": "Pièges à éviter",
+    "en": "Pitfalls to avoid"
+  },
+  "copy": {
+    "fr": "Copier",
+    "en": "Copy"
+  },
+  "copied": {
+    "fr": "Copié !",
+    "en": "Copied!"
+  },
+  "link_copied": {
+    "fr": "Lien copié !",
+    "en": "Link copied!"
+  },
+  "no_results": {
+    "fr": "Aucun résultat",
+    "en": "No results"
+  },
+  "shortcut_to_navigate": {
+    "fr": "pour naviguer",
+    "en": "to navigate"
+  },
+  "shortcut_to_select": {
+    "fr": "pour sélectionner",
+    "en": "to select"
+  },
+  "shortcut_to_close": {
+    "fr": "pour fermer",
+    "en": "to close"
+  },
+  "categories": {
+    "fr": "Catégories",
+    "en": "Categories"
+  },
+  "all_patterns": {
+    "fr": "Tous les patterns",
+    "en": "All patterns"
+  },
+  "showing": {
+    "fr": "Affichage de",
+    "en": "Showing"
+  },
+  "of": {
+    "fr": "sur",
+    "en": "of"
+  }
+}

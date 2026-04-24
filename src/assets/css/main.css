@@ -1,0 +1,235 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom base styles */
+@layer base {
+  :root {
+    --sidebar-width: 240px;
+    --sidebar-collapsed: 56px;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-bg text-text-primary antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-bg;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-border-strong rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-text-muted;
+  }
+
+  /* Selection */
+  ::selection {
+    @apply bg-accent/30 text-text-primary;
+  }
+}
+
+@layer components {
+  /* Sidebar styles */
+  .sidebar {
+    @apply fixed left-0 top-0 h-full bg-surface border-r border-border transition-all duration-200 ease-in-out z-40;
+    width: var(--sidebar-width);
+  }
+
+  .sidebar.collapsed {
+    width: var(--sidebar-collapsed);
+  }
+
+  .sidebar-item {
+    @apply flex items-center gap-3 px-4 py-2.5 text-text-secondary hover:text-text-primary hover:bg-surface-hover rounded-lg transition-colors cursor-pointer;
+  }
+
+  .sidebar-item.active {
+    @apply bg-accent/10 text-accent-light border-r-2 border-accent;
+  }
+
+  .sidebar.collapsed .sidebar-item {
+    @apply justify-center px-2;
+  }
+
+  .sidebar.collapsed .sidebar-item span {
+    @apply hidden;
+  }
+
+  /* Pattern card styles */
+  .pattern-card {
+    @apply bg-surface border border-border rounded-xl overflow-hidden transition-all hover:border-border-strong;
+  }
+
+  .pattern-card-header {
+    @apply flex items-center gap-4 p-5 border-b border-border;
+  }
+
+  .pattern-number {
+    @apply flex items-center justify-center w-10 h-10 rounded-lg bg-accent/10 text-accent font-bold text-lg;
+  }
+
+  .category-badge {
+    @apply px-2.5 py-0.5 rounded-full text-xs font-medium bg-surface-elevated text-text-secondary border border-border;
+  }
+
+  /* Demo/ASCII art block */
+  .demo-block {
+    @apply bg-surface-elevated rounded-lg p-4 font-mono text-sm text-text-secondary overflow-x-auto;
+  }
+
+  .demo-block pre {
+    @apply m-0 whitespace-pre;
+  }
+
+  /* Code block styles */
+  pre code {
+    @apply block font-mono text-sm;
+  }
+
+  /* Inline code */
+  code {
+    @apply font-mono text-sm bg-surface-elevated text-accent-light px-1.5 py-0.5 rounded;
+  }
+
+  pre code {
+    @apply bg-transparent text-text-secondary p-0;
+  }
+
+  /* Command palette */
+  .command-palette {
+    @apply fixed inset-0 z-50 flex items-start justify-center pt-[15vh] bg-black/50 backdrop-blur-sm;
+  }
+
+  .command-palette-modal {
+    @apply w-full max-w-2xl bg-surface border border-border rounded-xl shadow-2xl overflow-hidden animate-slide-up;
+  }
+
+  .command-input {
+    @apply w-full px-5 py-4 bg-transparent text-text-primary text-lg placeholder:text-text-muted outline-none border-b border-border;
+  }
+
+  .command-item {
+    @apply flex items-center gap-3 px-4 py-3 cursor-pointer transition-colors;
+  }
+
+  .command-item:hover,
+  .command-item.selected {
+    @apply bg-surface-hover;
+  }
+
+  .command-shortcut {
+    @apply ml-auto text-xs text-text-muted font-mono;
+  }
+
+  /* Skeleton loading */
+  .skeleton {
+    @apply animate-pulse bg-surface-elevated rounded;
+  }
+
+  /* Section expand/collapse */
+  .section-toggle {
+    @apply flex items-center justify-between w-full py-3 text-left font-medium text-text-primary hover:text-accent transition-colors;
+  }
+
+  .section-content {
+    @apply text-text-secondary leading-relaxed pb-2;
+  }
+
+  .section-content p {
+    @apply mb-3 last:mb-0;
+  }
+
+  .section-content ul {
+    @apply space-y-1;
+  }
+
+  /* Toast notification */
+  .toast {
+    @apply fixed bottom-4 right-4 flex items-center gap-3 px-4 py-3 bg-surface-elevated border border-border rounded-lg shadow-lg animate-slide-up;
+  }
+
+  /* Language switcher */
+  .lang-switcher {
+    @apply flex items-center gap-1 p-1 bg-surface-elevated rounded-lg border border-border;
+  }
+
+  .lang-switcher button {
+    @apply px-3 py-1 text-sm rounded-md transition-colors text-text-secondary hover:text-text-primary;
+  }
+
+  .lang-switcher button.active {
+    @apply bg-accent text-white;
+  }
+
+  /* Search highlight */
+  .search-highlight {
+    @apply bg-accent/20 text-accent-light;
+  }
+
+  /* List item bullet styles */
+  .guide-list {
+    @apply space-y-2;
+  }
+
+  .guide-list li {
+    @apply relative pl-6 py-1 text-text-secondary leading-relaxed;
+  }
+
+  .guide-list li::before {
+    content: "";
+    @apply absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-accent;
+  }
+
+  .guide-list li strong {
+    @apply text-text-primary font-semibold;
+  }
+
+  .pitfalls-list {
+    @apply space-y-2;
+  }
+
+  .pitfalls-list li {
+    @apply relative pl-6 py-1.5 text-text-secondary leading-relaxed;
+  }
+
+  .pitfalls-list li::before {
+    content: "✕";
+    @apply absolute left-0 top-1.5 text-danger text-sm;
+  }
+
+  .pitfalls-list li strong {
+    @apply text-text-primary font-semibold;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .pattern-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 640px) {
+    .pattern-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+}

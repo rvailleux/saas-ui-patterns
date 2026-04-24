@@ -1,0 +1,52 @@
+[
+  {
+    "slug": "navigation",
+    "fr": "Navigation & Structure",
+    "en": "Navigation & Structure"
+  },
+  {
+    "slug": "layout",
+    "fr": "Layout & Workspace",
+    "en": "Layout & Workspace"
+  },
+  {
+    "slug": "commands",
+    "fr": "Commandes & Recherche",
+    "en": "Commands & Search"
+  },
+  {
+    "slug": "data",
+    "fr": "Data & Tables",
+    "en": "Data & Tables"
+  },
+  {
+    "slug": "feedback",
+    "fr": "Feedback & États",
+    "en": "Feedback & States"
+  },
+  {
+    "slug": "ai-access",
+    "fr": "AI — Accès & Invocation",
+    "en": "AI — Access & Invocation"
+  },
+  {
+    "slug": "ai-generation",
+    "fr": "AI — Génération & Édition",
+    "en": "AI — Generation & Editing"
+  },
+  {
+    "slug": "ai-context",
+    "fr": "AI — Contexte & Mémoire",
+    "en": "AI — Context & Memory"
+  },
+  {
+    "slug": "ai-feedback",
+    "fr": "AI — Feedback & Contrôle",
+    "en": "AI — Feedback & Control"
+  },
+  {
+    "slug": "ai-prompt",
+    "fr": "AI — Prompt UX",
+    "en": "AI — Prompt UX"
+  }
+]

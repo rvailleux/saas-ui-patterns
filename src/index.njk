@@ -1,0 +1,24 @@
+---
+layout: null
+---
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="refresh" content="0; url=/fr/">
+  <title>Redirecting...</title>
+</head>
+<body>
+  <p>Redirecting to <a href="/fr/">French version</a>...</p>
+  <script>
+    // Check browser language preference
+    const lang = navigator.language || navigator.userLanguage;
+    if (lang.startsWith('en')) {
+      window.location.href = '/en/';
+    } else {
+      window.location.href = '/fr/';
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,2853 @@
+[
+  {
+    "id": 1,
+    "slug": "sidebar-collapsible-icon-rail",
+    "category": "navigation",
+    "title": {
+      "fr": "Sidebar collapsible icon-rail",
+      "en": "Sidebar Collapsible Icon Rail"
+    },
+    "categoryLabel": {
+      "slug": "navigation",
+      "fr": "Navigation & Structure",
+      "en": "Navigation & Structure"
+    },
+    "examples": [
+      {
+        "name": "Obsidian",
+        "desc": {
+          "fr": "transition fluide, état mémorisé par vault",
+          "en": "smooth transition, state persistence par vault"
+        }
+      },
+      {
+        "name": "Linear",
+        "desc": {
+          "fr": "icône rail avec flyout de sous-navigation au hover",
+          "en": "icon rail with flyout de sous-navigation au hover"
+        }
+      },
+      {
+        "name": "Jira",
+        "desc": {
+          "fr": "collapse partiel (icônes) + collapse total (rail invisible)",
+          "en": "collapse partiel (icônes) + collapse total (rail invisible)"
+        }
+      },
+      {
+        "name": "VS Code",
+        "desc": {
+          "fr": "référence fondatrice du pattern dans les IDEs",
+          "en": "foundational reference du pattern dans les IDEs"
+        }
+      },
+      {
+        "name": "SharePoint",
+        "desc": {
+          "fr": "implémentation enterprise avec états persistants par user",
+          "en": "enterprise implementation avec états persistants par user"
+        }
+      }
+    ],
+    "guide": [
+      "**Largeur** : ouverte entre 200–260px, réduite entre 40–56px. Ne pas descendre sous 40px (zone de clic trop petite).",
+      "**Transition** : `transition: width 200ms ease-in-out` suffit. Éviter les animations de contenu (opacité des labels séparément) qui retardent l'affichage.",
+      "**État persistant** : sauvegarder l'état (ouvert/fermé) en `localStorage` ou côté serveur par utilisateur. Ne jamais reset à chaque visite.",
+      "**Tooltip** : en état réduit, un tooltip au hover est obligatoire — `title` HTML ou composant dédié avec delay de 300ms.",
+      "**Sous-navigation** : en état réduit, les sections avec sous-menus s'ouvrent en flyout (panneau flottant ancré sur l'icône), pas en accordion.",
+      "**Breakpoints** : sur mobile, la sidebar devient un drawer (overlay) plutôt qu'un icon-rail — le rail est un pattern desktop uniquement."
+    ],
+    "pitfalls": [
+      "❌ Masquer les icônes en état réduit — les icônes sont l'élément navigable, pas les labels",
+      "❌ Oublier le focus clavier — Tab doit traverser les icônes avec un outline visible",
+      "❌ Icônes trop génériques (étoile, point) qui perdent leur sens sans label — choisir des icônes sémantiquement fortes",
+      "❌ Déclencher le collapse au hover (sans clic) — crée des fermetures involontaires lors des déplacements de souris",
+      "❌ Animer width ET opacity en même temps — la surcharge d'animation perturbe la lecture",
+      "--"
+    ],
+    "what": {
+      "fr": "La sidebar de navigation se réduit à une colonne d'icônes lorsqu'elle est fermée. Au survol ou au clic sur une icône, le label et les sous-éléments réapparaissent.",
+      "en": "[EN] La sidebar de navigation se réduit à une colonne d'icônes lorsqu'elle est fermée. Au survol ou au cl..."
+    },
+    "why": {
+      "fr": "L'espace de travail est le bien le plus précieux d'une interface. La sidebar réduite libère de la largeur pour le contenu tout en maintenant la navigation accessible à tout moment. Les icônes seules suffisent aux utilisateurs réguliers ; les labels restent disponibles pour les nouveaux. C'est le meilleur compromis entre affordance et densité.",
+      "en": "[EN] L'espace de travail est le bien le plus précieux d'une interface. La sidebar réduite libère de la la..."
+    },
+    "demo": {
+      "fr": "```\nÉtat ouvert (240px)          État réduit (48px)\n┌──────────────────┐         ┌────┐\n│ 📁  Projets      │         │ 📁 │\n│ 📋  Tâches       │  ───►   │ 📋 │\n│ 📊  Rapports     │         │ 📊 │\n│ ⚙️  Paramètres   │         │ ⚙️ │\n└──────────────────┘         └────┘\n                               ▲\n                         Hover → tooltip \"Projets\"\n                         ou flyout avec sous-menu\n```",
+      "en": "[EN] ```\nÉtat ouvert (240px)          État réduit (48px)\n┌──────────────────┐         ┌────┐\n│ 📁  Projet..."
+    }
+  },
+  {
+    "id": 2,
+    "slug": "top-nav-contextual-left-panel",
+    "category": "navigation",
+    "title": {
+      "fr": "Top nav + contextual left panel",
+      "en": "Top Nav + Contextual Left Panel"
+    },
+    "categoryLabel": {
+      "slug": "navigation",
+      "fr": "Navigation & Structure",
+      "en": "Navigation & Structure"
+    },
+    "examples": [
+      {
+        "name": "GitHub",
+        "desc": {
+          "fr": "référence absolue, top nav + left panel parfaitement coordonnés",
+          "en": "absolute reference, top nav + left panel perfectly coordinated"
+        }
+      },
+      {
+        "name": "Figma",
+        "desc": {
+          "fr": "top nav (fichiers/équipes) + left panel (pages/layers) selon le contexte",
+          "en": "top nav (fichiers/équipes) + left panel (pages/layers) selon le contexte"
+        }
+      },
+      {
+        "name": "GitLab",
+        "desc": {
+          "fr": "déclinaison plus dense avec icônes dans le left panel",
+          "en": "denser variant avec icônes dans le left panel"
+        }
+      },
+      {
+        "name": "Salesforce",
+        "desc": {
+          "fr": "enterprise avec top nav configurable par admin",
+          "en": "enterprise avec top nav admin-configurable"
+        }
+      }
+    ],
+    "guide": [
+      "**Hiérarchie stricte** : top nav = sections globales (max 6–8 items), left panel = navigation interne à la section. Ne pas mélanger les deux niveaux.",
+      "**Hauteur du top nav** : 48–64px. En dessous, les zones de clic sont trop petites sur desktop avec une souris imprécise.",
+      "**Indicateur actif** : dans le top nav, l'item actif doit être visuellement distinct (underline, background, couleur). Dans le left panel, un highlight de fond suffit.",
+      "**Left panel width** : 200–240px fixe. Éviter le redimensionnable sauf si c'est une feature explicite (ex : explorateur de fichiers).",
+      "**Scroll indépendant** : le left panel doit scroller indépendamment du contenu principal (`overflow-y: auto` sur le panel)."
+    ],
+    "pitfalls": [
+      "❌ Trop d'items dans le top nav — au-delà de 7–8, utiliser un menu \"Plus\" ou revoir l'architecture IA",
+      "❌ Left panel qui disparaît ou change lors du scroll — il doit rester `position: sticky`",
+      "❌ Doublon de navigation entre top nav et left panel pour le même niveau",
+      "❌ Left panel sans état actif clairement visible — l'utilisateur perd son orientation",
+      "--"
+    ],
+    "what": {
+      "fr": "Une barre de navigation horizontale fixe en haut gère la navigation globale (entre grandes sections), tandis qu'un panneau gauche contextuel affiche la navigation secondaire propre à la section active.",
+      "en": "[EN] Une barre de navigation horizontale fixe en haut gère la navigation globale (entre grandes sections)..."
+    },
+    "why": {
+      "fr": "Sépare clairement les deux niveaux hiérarchiques de navigation. Le top nav reste stable (ancrage cognitif), le left panel change selon le contexte sans perturber l'orientation de l'utilisateur. Particulièrement adapté aux applications avec des domaines fonctionnels très différents (ex : code vs issues vs settings dans GitHub).",
+      "en": "[EN] Sépare clairement les deux niveaux hiérarchiques de navigation. Le top nav reste stable (ancrage cog..."
+    },
+    "demo": {
+      "fr": "```\n┌─────────────────────────────────────────────┐\n│  Logo  |  Code  |  Issues  |  Actions  |  ▼ │  ← Top nav (fixe)\n├─────────┬───────────────────────────────────┤\n│ Issues  │                                   │\n│ ──────  │   #1234 Fix login bug             │\n│ Open    │   ─────────────────────────────   │\n│ Closed  │   Labels · Assignees · Milestone  │\n│ Labels  │                                   │\n│ Milest. │                                   │  ← Left panel contextuel\n└─────────┴───────────────────────────────────┘\n   ▲\n   Change quand on clique sur \"Actions\" dans le top nav\n```",
+      "en": "[EN] ```\n┌─────────────────────────────────────────────┐\n│  Logo  |  Code  |  Issues  |  Actions  |  ▼ │ ..."
+    }
+  },
+  {
+    "id": 3,
+    "slug": "breadcrumb-dynamique",
+    "category": "navigation",
+    "title": {
+      "fr": "Breadcrumb dynamique",
+      "en": "Dynamic Breadcrumb"
+    },
+    "categoryLabel": {
+      "slug": "navigation",
+      "fr": "Navigation & Structure",
+      "en": "Navigation & Structure"
+    },
+    "examples": [
+      {
+        "name": "Notion",
+        "desc": {
+          "fr": "breadcrumb avec hover dropdown sur chaque segment, éditable inline",
+          "en": "breadcrumb avec hover dropdown on each segment, inline editable"
+        }
+      },
+      {
+        "name": "Confluence",
+        "desc": {
+          "fr": "breadcrumb avec espaces, sections, pages imbriquées",
+          "en": "breadcrumb avec espaces, sections, pages imbriquées"
+        }
+      },
+      {
+        "name": "AWS Console",
+        "desc": {
+          "fr": "breadcrumb technique avec ARN raccourci, essentiel pour naviguer entre resources",
+          "en": "breadcrumb technique avec ARN raccourci, essentiel pour naviguer entre resources"
+        }
+      },
+      {
+        "name": "Figma",
+        "desc": {
+          "fr": "breadcrumb de fichier dans la top bar, clic = retour au project",
+          "en": "breadcrumb de fichier dans la top bar, clic = retour au project"
+        }
+      }
+    ],
+    "guide": [
+      "**Troncature** : sur les chemins longs, tronquer les segments du milieu avec `…` cliquable qui révèle le chemin complet. Toujours afficher le premier et le dernier segment.",
+      "**Dernier segment** : le segment actuel (dernier) ne doit pas être un lien — c'est là où on est. Le styliser différemment (plus sombre, non souligné).",
+      "**Hover dropdown** : délai de 150ms avant ouverture pour éviter les ouvertures accidentelles. Max 8–10 items, avec scroll si plus.",
+      "**URL** : chaque segment doit correspondre à une URL propre et partageable.",
+      "**Accessibilité** : wrapper dans `<nav aria-label=\"Breadcrumb\">` + `<ol>` avec `aria-current=\"page\"` sur le dernier item."
+    ],
+    "pitfalls": [
+      "❌ Breadcrumb qui ne reflète pas l'URL réelle — crée une désorientation totale",
+      "❌ Trop de niveaux sans troncature (6+ segments) — illisible",
+      "❌ Breadcrumb statique non interactif — perd 80% de sa valeur",
+      "❌ Séparateur `>` sans espace — `›` ou `/` avec padding est plus lisible",
+      "--"
+    ],
+    "what": {
+      "fr": "Un fil d'Ariane mis à jour en temps réel qui reflète la position exacte de l'utilisateur dans la hiérarchie, avec des segments interactifs (clic, sous-menu au hover).",
+      "en": "[EN] Un fil d'Ariane mis à jour en temps réel qui reflète la position exacte de l'utilisateur dans la hié..."
+    },
+    "why": {
+      "fr": "Dans les applications avec une hiérarchie profonde (espace de travail > projet > dossier > document), le breadcrumb est le seul moyen de maintenir l'orientation sans occuper d'espace permanent. Le rendre cliquable et avec des sous-menus transforme un indicateur passif en outil de navigation rapide.",
+      "en": "[EN] Dans les applications avec une hiérarchie profonde (espace de travail > projet > dossier > document)..."
+    },
+    "demo": {
+      "fr": "```\nAcme Corp  ›  Produit  ›  Q4 2025  ›  Sprint 12\n    ▲              ▲\n    Clic → retour  Hover → dropdown des autres projets\n    à l'accueil    ┌──────────────────┐\n                   │ ✓ Produit        │\n                   │   Marketing      │\n                   │   Engineering    │\n                   │ + Nouveau projet │\n                   └──────────────────┘\n```",
+      "en": "[EN] ```\nAcme Corp  ›  Produit  ›  Q4 2025  ›  Sprint 12\n    ▲              ▲\n    Clic → retour  Hover → ..."
+    }
+  },
+  {
+    "id": 4,
+    "slug": "tabs-persistants-pinnable",
+    "category": "navigation",
+    "title": {
+      "fr": "Tabs persistants / pinnable",
+      "en": "Persistent / Pinnable Tabs"
+    },
+    "categoryLabel": {
+      "slug": "navigation",
+      "fr": "Navigation & Structure",
+      "en": "Navigation & Structure"
+    },
+    "examples": [
+      {
+        "name": "VS Code",
+        "desc": {
+          "fr": "référence : tabs dot (non sauvegardé), preview tab en italique",
+          "en": "référence : tabs dot (non sauvegardé), preview tab en italique"
+        }
+      },
+      {
+        "name": "Linear",
+        "desc": {
+          "fr": "tabs par vue dans un projet, mémorisés",
+          "en": "tabs par vue dans un projet, mémorisés"
+        }
+      },
+      {
+        "name": "Penpot",
+        "desc": {
+          "fr": "tabs de pages dans un fichier de design",
+          "en": "tabs de pages dans un fichier de design"
+        }
+      },
+      {
+        "name": "Zed",
+        "desc": {
+          "fr": "tabs avec preview mode (italique) avant édition réelle",
+          "en": "tabs avec preview mode (italique) avant édition réelle"
+        }
+      }
+    ],
+    "guide": [
+      "**Preview tab** : ouvrir un item en \"preview\" (italique) par défaut. Il devient un vrai tab dès que l'utilisateur l'édite ou double-clique. Évite la prolifération de tabs.",
+      "**Dot indicateur** : afficher un point sur le tab si des modifications non sauvegardées existent.",
+      "**Overflow** : quand les tabs dépassent la largeur, utiliser un scroll horizontal ou un dropdown `+N autres` — ne jamais tronquer le titre sans indicateur.",
+      "**Clic droit** : menu contextuel avec au minimum : Épingler / Fermer / Fermer les autres.",
+      "**Drag & drop** : réorganisation par drag est attendue — utiliser une lib type `dnd-kit` ou équivalent.",
+      "**Persistance** : sauvegarder l'ordre et l'état épinglé côté serveur, pas seulement localStorage."
+    ],
+    "pitfalls": [
+      "❌ Tabs qui se ferment sans confirmation quand des modifications existent",
+      "❌ Plus de 8–10 tabs ouverts sans overflow géré — l'UI s'effondre",
+      "❌ Tabs identiques (même titre) sans différenciateur (chemin, icône)",
+      "❌ Oublier le raccourci `Ctrl+W` / `Cmd+W` pour fermer le tab actif",
+      "--",
+      "--",
+      "--"
+    ],
+    "what": {
+      "fr": "Des onglets dans l'espace de travail qui persistent entre sessions, peuvent être réorganisés, épinglés ou fermés — inspirés des onglets de navigateur ou d'IDE.",
+      "en": "[EN] Des onglets dans l'espace de travail qui persistent entre sessions, peuvent être réorganisés, épingl..."
+    },
+    "why": {
+      "fr": "Les utilisateurs avancés travaillent simultanément sur plusieurs contextes. Les tabs persistants éliminent le coût cognitif de retrouver et rouvrir les mêmes éléments à chaque session. L'épinglage signale l'importance sans encombrer.",
+      "en": "[EN] Les utilisateurs avancés travaillent simultanément sur plusieurs contextes. Les tabs persistants éli..."
+    },
+    "demo": {
+      "fr": "```\n┌──────────┬────────────┬──────────────┬───┐\n│ 📌 Home  │ #1234 Bug  │ Sprint Plan  │ + │\n└──────────┴────────────┴──────────────┴───┘\n    ▲              ▲\n    Épinglé,     Clic droit → Pin / Close /\n    non fermable  Close others / Close all\n```",
+      "en": "[EN] ```\n┌──────────┬────────────┬──────────────┬───┐\n│ 📌 Home  │ #1234 Bug  │ Sprint Plan  │ + │\n└─────..."
+    }
+  },
+  {
+    "id": 5,
+    "slug": "right-panel-contextuel-d-tail",
+    "category": "layout",
+    "title": {
+      "fr": "Right panel contextuel (détail)",
+      "en": "Contextual Right Panel (Detail)"
+    },
+    "categoryLabel": {
+      "slug": "layout",
+      "fr": "Layout & Workspace",
+      "en": "Layout & Workspace"
+    },
+    "examples": [
+      {
+        "name": "Linear",
+        "desc": {
+          "fr": "right panel avec édition complète inline, largeur ajustable",
+          "en": "right panel avec full inline editing, adjustable width"
+        }
+      },
+      {
+        "name": "Jira",
+        "desc": {
+          "fr": "\"detail view\" sur les issues en board et list",
+          "en": "\"detail view\" sur les issues en board et list"
+        }
+      },
+      {
+        "name": "Asana",
+        "desc": {
+          "fr": "right panel avec sous-tâches, commentaires, pièces jointes",
+          "en": "right panel avec sous-tâches, commentaires, pièces jointes"
+        }
+      },
+      {
+        "name": "HubSpot",
+        "desc": {
+          "fr": "détail de contact/deal sans quitter la liste CRM",
+          "en": "contact/deal detail sans quitter la liste CRM"
+        }
+      }
+    ],
+    "guide": [
+      "**Largeur** : 360–480px fixe ou redimensionnable. Fixer un minimum (320px) et un maximum (50% de l'écran).",
+      "**Animation** : slide-in depuis la droite, `transform: translateX(100%)` → `translateX(0)`, durée 200ms. Éviter les fades purs.",
+      "**Fermeture** : toujours possible via Échap, clic sur X, et clic en dehors du panneau (ou non — à définir selon le flux).",
+      "**Item actif** : mettre en évidence l'item sélectionné dans la liste (background, border-left colorée).",
+      "**URL** : l'ouverture du panneau doit idéalement mettre à jour l'URL (`?item=1234`) pour permettre le partage.",
+      "**Mobile** : sur mobile, le right panel devient une page entière ou un bottom sheet — jamais un panneau superposé."
+    ],
+    "pitfalls": [
+      "❌ Panneau qui couvre toute la liste sur les écrans < 1280px sans adaptation",
+      "❌ Pas de raccourci clavier pour naviguer entre items (↑/↓) depuis le panneau",
+      "❌ Panneau sans scroll interne — le contenu déborde",
+      "❌ Fermeture involontaire au clic en dehors sans confirmation si des modifications existent",
+      "--"
+    ],
+    "what": {
+      "fr": "Un panneau qui s'ouvre sur la droite de l'interface lorsque l'utilisateur sélectionne un élément dans une liste ou un board, affichant le détail et les actions sans changer de page.",
+      "en": "[EN] Un panneau qui s'ouvre sur la droite de l'interface lorsque l'utilisateur sélectionne un élément dan..."
+    },
+    "why": {
+      "fr": "Évite le coût de navigation aller-retour (liste → détail → retour à la liste). L'utilisateur garde le contexte de la liste tout en accédant aux détails. Particulièrement puissant pour les workflows de triage (issues, tickets, emails).",
+      "en": "[EN] Évite le coût de navigation aller-retour (liste → détail → retour à la liste). L'utilisateur garde l..."
+    },
+    "demo": {
+      "fr": "```\n┌─────────────────────┬──────────────────────┐\n│ LISTE               │ DÉTAIL               │\n│ ──────────────────  │ ──────────────────   │\n│ ▶ Bug login #1234   │ Bug login #1234      │\n│   Task A            │ ─────────────────    │\n│   Task B            │ Assigné : Alice      │\n│                     │ Statut : In progress │\n│                     │ Description...       │\n│                     │ [Edit]  [Close]      │\n└─────────────────────┴──────────────────────┘\n                        ▲\n              S'ouvre au clic sur un item,\n              se ferme avec Échap ou X\n```",
+      "en": "[EN] ```\n┌─────────────────────┬──────────────────────┐\n│ LISTE               │ DÉTAIL               │\n│ ..."
+    }
+  },
+  {
+    "id": 6,
+    "slug": "split-view-panneau-dual",
+    "category": "layout",
+    "title": {
+      "fr": "Split view / panneau dual",
+      "en": "Split View / Dual Panel"
+    },
+    "categoryLabel": {
+      "slug": "layout",
+      "fr": "Layout & Workspace",
+      "en": "Layout & Workspace"
+    },
+    "examples": [
+      {
+        "name": "Notion",
+        "desc": {
+          "fr": "split de pages en colonnes (drag & drop de blocs)",
+          "en": "page split en colonnes (drag & drop de blocs)"
+        }
+      },
+      {
+        "name": "GitHub",
+        "desc": {
+          "fr": "split diff (changes side-by-side vs unified)",
+          "en": "split diff (changes side-by-side vs unified)"
+        }
+      },
+      {
+        "name": "Obsidian",
+        "desc": {
+          "fr": "split de notes, horizontal et vertical, emboîtables",
+          "en": "note split, horizontal et vertical, emboîtables"
+        }
+      },
+      {
+        "name": "Raycast",
+        "desc": {
+          "fr": "split list+preview dans les résultats de recherche",
+          "en": "split list+preview dans les résultats de recherche"
+        }
+      }
+    ],
+    "guide": [
+      "**Poignée** : zone de 8px avec curseur `col-resize`. Highlight au hover. Double-clic → reset à 50/50.",
+      "**Tailles min** : définir `min-width` sur chaque panneau (ex: 240px) pour éviter l'effondrement.",
+      "**Persistance** : sauvegarder le ratio en localStorage par contexte.",
+      "**Synchronisation** : si les deux panneaux affichent le même document (source/preview), le scroll peut être synchronisé — avec option pour désactiver.",
+      "**Collapse** : permettre de réduire un panneau à 0 (= fermer le split) en double-cliquant sur la poignée ou via un bouton."
+    ],
+    "pitfalls": [
+      "❌ Poignée trop fine (< 4px) — difficile à attraper",
+      "❌ Pas de minimum width — un panneau peut devenir invisible",
+      "❌ Split imposé sans possibilité de revenir en vue simple",
+      "❌ Les deux panneaux se scrollent ensemble sans option de désolidariser",
+      "--"
+    ],
+    "what": {
+      "fr": "Deux zones de travail côte à côte, redimensionnables par une poignée centrale, affichant deux vues du même contenu ou deux contenus différents.",
+      "en": "[EN] Deux zones de travail côte à côte, redimensionnables par une poignée centrale, affichant deux vues d..."
+    },
+    "why": {
+      "fr": "Certains workflows nécessitent une comparaison simultanée (markdown source + preview, code + résultat, deux documents). Le split view élimine le alt-tab constant et donne les deux contextes en permanence.",
+      "en": "[EN] Certains workflows nécessitent une comparaison simultanée (markdown source + preview, code + résulta..."
+    },
+    "demo": {
+      "fr": "```\n┌───────────────────┬─┬───────────────────┐\n│ # Mon document    │ │ Mon document       │\n│                   │◄►│                  │\n│ Voici un **titre**│ │ Voici un **titre** │\n│ et du texte.      │ │ et du texte.       │\n│                   │ │                   │\n└───────────────────┴─┴───────────────────┘\n         ▲           ▲\n       Source    Poignée    Preview rendu\n                drag pour resize\n```",
+      "en": "[EN] ```\n┌───────────────────┬─┬───────────────────┐\n│ # Mon document    │ │ Mon document       │\n│      ..."
+    }
+  },
+  {
+    "id": 7,
+    "slug": "floating-action-button-fab",
+    "category": "layout",
+    "title": {
+      "fr": "Floating Action Button (FAB)",
+      "en": "Floating Action Button (FAB)"
+    },
+    "categoryLabel": {
+      "slug": "layout",
+      "fr": "Layout & Workspace",
+      "en": "Layout & Workspace"
+    },
+    "examples": [
+      {
+        "name": "Gmail mobile",
+        "desc": {
+          "fr": "FAB compose, s'étend en options au long-press",
+          "en": "FAB compose, s'étend en options au long-press"
+        }
+      },
+      {
+        "name": "Trello",
+        "desc": {
+          "fr": "FAB contextuel selon la vue (board, timeline)",
+          "en": "FAB contextuel selon la vue (board, timeline)"
+        }
+      },
+      {
+        "name": "Monday.com",
+        "desc": {
+          "fr": "FAB avec menu radial d'actions",
+          "en": "FAB avec radial action menu"
+        }
+      }
+    ],
+    "guide": [
+      "**Position** : `position: fixed; bottom: 24px; right: 24px`. Prévoir un offset si une bottom navigation bar est présente.",
+      "**Taille** : 56px de diamètre (Material Design spec), 48px minimum.",
+      "**Ombre** : légère, sans être criarde. `box-shadow: 0 4px 12px rgba(0,0,0,0.15)`.",
+      "**Une seule action principale** : si le FAB ouvre un menu, limiter à 4–5 options max.",
+      "**Label au hover** : un tooltip ou label étendu (FAB étendu) améliore la découvrabilité.",
+      "**Masquer au scroll** : sur mobile, masquer le FAB quand l'utilisateur scrolle vers le bas, réafficher quand il remonte."
+    ],
+    "pitfalls": [
+      "❌ FAB qui couvre du contenu important (colonnes de tableau, dernière ligne de liste)",
+      "❌ Plusieurs FAB sur la même page — un seul par vue",
+      "❌ Icon ambigu (ex: étoile, cœur) — l'action principale doit être évidente",
+      "❌ FAB sur desktop sans équivalent dans la navigation principale",
+      "--"
+    ],
+    "what": {
+      "fr": "Un bouton d'action principal flottant, généralement en bas à droite de l'interface, qui déclenche l'action la plus fréquente ou ouvre un menu d'actions rapides.",
+      "en": "[EN] Un bouton d'action principal flottant, généralement en bas à droite de l'interface, qui déclenche l'..."
+    },
+    "why": {
+      "fr": "Le FAB matérialise la loi de Fitts : zone de grand bouton, positionnée proche du pouce sur mobile, toujours accessible quel que soit le scroll. Il signale clairement \"voilà ce que tu peux faire maintenant\".",
+      "en": "[EN] Le FAB matérialise la loi de Fitts : zone de grand bouton, positionnée proche du pouce sur mobile, t..."
+    },
+    "demo": {
+      "fr": "```\n┌────────────────────────────────┐\n│                                │\n│   Liste de tâches...           │\n│                                │\n│                                │\n│                          ╭───╮ │  ← Hover / tap\n│                          │ + │ │     ↓\n│                          ╰───╯ │  ╭─────────────╮\n└────────────────────────────────┘  │ 📝 Nouvelle  │\n                                    │ 📁 Dossier   │\n                                    │ 📥 Importer  │\n                                    ╰─────────────╯\n```",
+      "en": "[EN] ```\n┌────────────────────────────────┐\n│                                │\n│   Liste de tâches...    ..."
+    }
+  },
+  {
+    "id": 8,
+    "slug": "board-vue-switcher",
+    "category": "layout",
+    "title": {
+      "fr": "Board & vue switcher",
+      "en": "Board & View Switcher"
+    },
+    "categoryLabel": {
+      "slug": "layout",
+      "fr": "Layout & Workspace",
+      "en": "Layout & Workspace"
+    },
+    "examples": [
+      {
+        "name": "Linear",
+        "desc": {
+          "fr": "board/list/timeline, switcher en haut, préférence par project",
+          "en": "board/list/timeline, switcher en haut, préférence par project"
+        }
+      },
+      {
+        "name": "Notion",
+        "desc": {
+          "fr": "database views (board, table, gallery, calendar, list, timeline)",
+          "en": "database views (board, table, gallery, calendar, list, timeline)"
+        }
+      },
+      {
+        "name": "ClickUp",
+        "desc": {
+          "fr": "15+ vues, dont Gantt, Workload, Map",
+          "en": "15+ vues, dont Gantt, Workload, Map"
+        }
+      },
+      {
+        "name": "Airtable",
+        "desc": {
+          "fr": "grid/gallery/kanban/calendar avec configs indépendantes par vue",
+          "en": "grid/gallery/kanban/calendar avec configs indépendantes par vue"
+        }
+      }
+    ],
+    "guide": [
+      "**Persistance** : mémoriser la vue active par section et par utilisateur (pas globalement).",
+      "**URL** : encoder la vue dans l'URL (`?view=board`) pour le partage.",
+      "**Filtres indépendants** : chaque vue peut avoir ses propres filtres et groupements — ne pas forcer un filtre global qui casse certaines vues.",
+      "**Icônes + labels** : le switcher doit avoir icône ET label — les icônes seules ne sont pas suffisamment distinctives (board vs timeline sont souvent confondus).",
+      "**Transitions** : un fade rapide (100ms) entre les vues évite le flash de contenu."
+    ],
+    "pitfalls": [
+      "❌ Données qui changent selon la vue (ex: certains champs invisibles en board) sans indication",
+      "❌ Vue par défaut identique pour tous les utilisateurs sans possibilité de changer",
+      "❌ Drag & drop disponible seulement en board — les autres vues se sentent \"dégradées\"",
+      "❌ Trop de vues disponibles (> 6) sans hiérarchie — surcharge de choix",
+      "--",
+      "--",
+      "--"
+    ],
+    "what": {
+      "fr": "Le même dataset affiché dans plusieurs représentations (board kanban, liste, tableau, calendrier, timeline), switchable via un sélecteur de vue persistant par utilisateur.",
+      "en": "[EN] Le même dataset affiché dans plusieurs représentations (board kanban, liste, tableau, calendrier, ti..."
+    },
+    "why": {
+      "fr": "Différents utilisateurs ont des modèles mentaux différents. Le développeur veut la liste, le PM veut le board, le manager veut la timeline. Proposer plusieurs vues sur les mêmes données évite de dupliquer l'information et permet à chaque profil de travailler avec son paradigme.",
+      "en": "[EN] Différents utilisateurs ont des modèles mentaux différents. Le développeur veut la liste, le PM veut..."
+    },
+    "demo": {
+      "fr": "```\n[Board] [Liste] [Tableau] [Calendrier]   ← Switcher\n   ▲\nVue active\n\nBoard view:\n┌─────────┐  ┌──────────┐  ┌──────────┐\n│ To do   │  │ In prog. │  │ Done     │\n│ ─────── │  │ ──────── │  │ ──────── │\n│ Task A  │  │ Task C   │  │ Task E   │\n│ Task B  │  │ Task D   │  │          │\n└─────────┘  └──────────┘  └──────────┘\n```",
+      "en": "[EN] ```\n[Board] [Liste] [Tableau] [Calendrier]   ← Switcher\n   ▲\nVue active\n\nBoard view:\n┌─────────┐  ┌─..."
+    }
+  },
+  {
+    "id": 9,
+    "slug": "command-palette-k",
+    "category": "commands",
+    "title": {
+      "fr": "Command palette (⌘K)",
+      "en": "Command Palette (⌘K)"
+    },
+    "categoryLabel": {
+      "slug": "commands",
+      "fr": "Commandes & Recherche",
+      "en": "Commands & Search"
+    },
+    "examples": [
+      {
+        "name": "Linear",
+        "desc": {
+          "fr": "référence UX : fuzzy search, actions contextuelles, raccourcis affichés",
+          "en": "UX reference : fuzzy search, contextual actions, displayed shortcuts"
+        }
+      },
+      {
+        "name": "Raycast",
+        "desc": {
+          "fr": "la command palette comme produit entier, avec extensions",
+          "en": "la command palette as entire product, avec extensions"
+        }
+      },
+      {
+        "name": "Figma",
+        "desc": {
+          "fr": "`⌘/` pour les actions, `⌘K` pour la navigation",
+          "en": "`⌘/` pour les actions, `⌘K` pour la navigation"
+        }
+      },
+      {
+        "name": "Vercel",
+        "desc": {
+          "fr": "navigation + déploiements + actions dans une palette unifiée",
+          "en": "navigation + déploiements + actions dans une palette unifiée"
+        }
+      },
+      {
+        "name": "Notion",
+        "desc": {
+          "fr": "`⌘K` avec recherche full-text et navigation imbriquée",
+          "en": "`⌘K` avec full-text search et nested navigation"
+        }
+      }
+    ],
+    "guide": [
+      "**Raccourci** : `⌘K` sur Mac, `Ctrl+K` sur Windows/Linux. Documenter les deux. Ne pas utiliser un raccourci non standard.",
+      "**Fuzzy search** : utiliser une lib comme `fuse.js` ou `cmdk`. La recherche doit tolérer les fautes et les abréviations.",
+      "**Groupes** : organiser les résultats en sections (Récents, Navigation, Actions, Contenu) avec headers.",
+      "**Raccourcis affichés** : montrer les raccourcis keyboard à droite des actions — renforce l'apprentissage.",
+      "**Actions contextuelles** : les premières suggestions doivent être contextuelles (page actuelle, projet actif).",
+      "**Performance** : la palette doit s'ouvrir en < 50ms et les résultats apparaître en < 100ms.",
+      "**Fermeture** : Échap ferme, clic en dehors ferme, Enter exécute la première action."
+    ],
+    "pitfalls": [
+      "❌ Recherche qui ne couvre pas les actions, seulement les contenus (ou vice-versa)",
+      "❌ Résultats sans score de pertinence — les items les plus récents/fréquents doivent remonter",
+      "❌ Palette trop large ou trop haute — max 600px de large, max 400px de haut avec scroll",
+      "❌ Pas de mode clavier pur (↑/↓/Enter) — la palette doit fonctionner sans souris",
+      "❌ Ouvrir une modale au-dessus d'une autre modale existante",
+      "--"
+    ],
+    "what": {
+      "fr": "Une palette de commandes universelle, accessible par raccourci clavier, qui permet de déclencher n'importe quelle action, naviguer vers n'importe quelle page, ou rechercher n'importe quel contenu — sans souris.",
+      "en": "[EN] Une palette de commandes universelle, accessible par raccourci clavier, qui permet de déclencher n'i..."
+    },
+    "why": {
+      "fr": "C'est l'interface la plus efficace possible pour les utilisateurs avancés : une seule entrée pour tout. Élimine le besoin de connaître l'emplacement exact d'une feature dans l'UI. La recherche floue rend l'accès aux commandes rarement utilisées aussi rapide qu'aux commandes fréquentes.",
+      "en": "[EN] C'est l'interface la plus efficace possible pour les utilisateurs avancés : une seule entrée pour to..."
+    },
+    "demo": {
+      "fr": "```\n         ┌────────────────────────────────────┐\n         │ 🔍  Rechercher ou taper une commande│\n         ├────────────────────────────────────┤\n         │ 🕐 Récents                         │\n         │    Sprint 12 Planning              │\n         │    #1234 Bug login                 │\n         ├────────────────────────────────────┤\n         │ ⚡ Actions                          │\n         │    Créer une tâche          ⌘N     │\n         │    Changer de projet        ⌘P     │\n         │    Inviter un membre               │\n         └────────────────────────────────────┘\n```",
+      "en": "[EN] ```\n         ┌────────────────────────────────────┐\n         │ 🔍  Rechercher ou taper une commande│..."
+    }
+  },
+  {
+    "id": 10,
+    "slug": "omnibox-unified-search",
+    "category": "commands",
+    "title": {
+      "fr": "Omnibox / unified search",
+      "en": "Omnibox / Unified Search"
+    },
+    "categoryLabel": {
+      "slug": "commands",
+      "fr": "Commandes & Recherche",
+      "en": "Commands & Search"
+    },
+    "examples": [
+      {
+        "name": "Slack",
+        "desc": {
+          "fr": "search unifié messages + channels + personnes + fichiers",
+          "en": "search unifié messages + channels + personnes + fichiers"
+        }
+      },
+      {
+        "name": "HubSpot",
+        "desc": {
+          "fr": "contacts + deals + companies + activités dans une barre",
+          "en": "contacts + deals + companies + activités dans une barre"
+        }
+      },
+      {
+        "name": "Intercom",
+        "desc": {
+          "fr": "conversations + contacts + articles dans une recherche",
+          "en": "conversations + contacts + articles dans une recherche"
+        }
+      },
+      {
+        "name": "Glean",
+        "desc": {
+          "fr": "enterprise search unifié cross-apps (Confluence, Jira, Drive...)",
+          "en": "enterprise search unifié cross-apps (Confluence, Jira, Drive...)"
+        }
+      }
+    ],
+    "guide": [
+      "**Debounce** : déclencher la recherche après 200–300ms sans frappe pour éviter les requêtes à chaque caractère.",
+      "**Minimum 2 caractères** avant de lancer une recherche réseau.",
+      "**Résultats groupés** : header par catégorie, max 3–4 résultats par catégorie avant \"Voir tout\".",
+      "**Highlighting** : mettre en gras le terme recherché dans les résultats.",
+      "**Recherche vide** : afficher les récents et les favoris quand la query est vide.",
+      "**Indexation** : côté serveur, utiliser ElasticSearch ou Typesense pour la recherche full-text avec ranking."
+    ],
+    "pitfalls": [
+      "❌ Recherche qui ne couvre qu'un seul type d'objet (ex: que les contacts)",
+      "❌ Résultats non triés par pertinence — les correspondances exactes d'abord",
+      "❌ Pas de résultat vide géré — toujours afficher \"Aucun résultat pour X\" avec suggestion",
+      "❌ Recherche qui bloque l'UI pendant la requête — toujours asynchrone avec skeleton",
+      "--"
+    ],
+    "what": {
+      "fr": "Une barre de recherche globale qui interroge simultanément plusieurs types de données (pages, objets, utilisateurs, actions) et présente les résultats groupés par type.",
+      "en": "[EN] Une barre de recherche globale qui interroge simultanément plusieurs types de données (pages, objets..."
+    },
+    "why": {
+      "fr": "Dans les applications complexes, l'utilisateur ne sait souvent pas exactement où chercher. L'omnibox centralise toutes les sources et laisse les résultats guider. C'est le Google de votre application.",
+      "en": "[EN] Dans les applications complexes, l'utilisateur ne sait souvent pas exactement où chercher. L'omnibox..."
+    },
+    "demo": {
+      "fr": "```\n┌─────────────────────────────────────────┐\n│ 🔍  \"alice\"                         ✕  │\n├─────────────────────────────────────────┤\n│ PERSONNES                               │\n│ 👤 Alice Martin  — Engineering         │\n│ 👤 Alice Dupont  — Marketing           │\n├─────────────────────────────────────────┤\n│ TICKETS                                │\n│ 🎫 #1201 Assigné à Alice               │\n│ 🎫 #987  Créé par Alice                │\n├─────────────────────────────────────────┤\n│ DOCUMENTS                              │\n│ 📄 Rapport Alice Q3                    │\n└─────────────────────────────────────────┘\n```",
+      "en": "[EN] ```\n┌─────────────────────────────────────────┐\n│ 🔍  \"alice\"                         ✕  │\n├────────..."
+    }
+  },
+  {
+    "id": 11,
+    "slug": "inline-slash-commands",
+    "category": "commands",
+    "title": {
+      "fr": "Inline slash commands",
+      "en": "Inline Slash Commands"
+    },
+    "categoryLabel": {
+      "slug": "commands",
+      "fr": "Commandes & Recherche",
+      "en": "Commands & Search"
+    },
+    "examples": [
+      {
+        "name": "Notion",
+        "desc": {
+          "fr": "référence fondatrice, 50+ types de blocs",
+          "en": "foundational reference, 50+ types de blocs"
+        }
+      },
+      {
+        "name": "Linear",
+        "desc": {
+          "fr": "slash commands dans les descriptions de tickets",
+          "en": "slash commands dans les descriptions de tickets"
+        }
+      },
+      {
+        "name": "Coda",
+        "desc": {
+          "fr": "slash commands pour formules, tables, boutons",
+          "en": "slash commands pour formules, tables, boutons"
+        }
+      },
+      {
+        "name": "Slack",
+        "desc": {
+          "fr": "`/remind`, `/poll`, `/giphy` — commandes d'application",
+          "en": "`/remind`, `/poll`, `/giphy` — commandes d'application"
+        }
+      }
+    ],
+    "guide": [
+      "**Déclencheur** : `/` en début de ligne ou après un espace. Ne pas déclencher au milieu d'un mot.",
+      "**Filtrage** : fuzzy match sur le texte tapé après `/`. Fermer le menu si aucun résultat.",
+      "**Fermeture** : Échap ferme sans insérer. Backspace jusqu'au `/` ferme le menu.",
+      "**Position** : ancrer le menu au curseur, pas au coin de l'écran. Gérer l'overflow si le curseur est en bas de page.",
+      "**Catégories** : grouper les commandes (Texte, Médias, Structure, AI) avec headers.",
+      "**Raccourcis directs** : permettre `/h1`, `/h2`, `/table` pour les blocs fréquents — skip le menu."
+    ],
+    "pitfalls": [
+      "❌ Menu qui ne se ferme pas si l'utilisateur continue à écrire sans sélectionner",
+      "❌ Trop de commandes sans filtre (> 20 items) — la liste devient inutilisable",
+      "❌ Menu qui sort des limites de l'écran sans repositionnement",
+      "❌ Pas de preview du bloc au hover dans le menu",
+      "--"
+    ],
+    "what": {
+      "fr": "Taper `/` dans un éditeur de texte déclenche un menu contextuel d'insertion de blocs, de mise en forme, ou d'exécution d'actions — sans quitter le clavier.",
+      "en": "[EN] Taper `/` dans un éditeur de texte déclenche un menu contextuel d'insertion de blocs, de mise en for..."
+    },
+    "why": {
+      "fr": "Élimine le besoin de barres d'outils encombrantes. L'utilisateur reste dans son flux d'écriture. Le menu est contextuel (déclenché à la position du curseur) et filtrable par frappe, ce qui le rend rapide même avec une grande liste d'options.",
+      "en": "[EN] Élimine le besoin de barres d'outils encombrantes. L'utilisateur reste dans son flux d'écriture. Le ..."
+    },
+    "demo": {
+      "fr": "```\nJ'écris mon document et je veux insérer...\n\n/tab                   ← filtrage en temps réel\n┌──────────────────────────────┐\n│ 📊 Tableau           ↵       │\n│ 📋 Template                  │\n│ 📑 Table des matières        │\n└──────────────────────────────┘\n```",
+      "en": "[EN] ```\nJ'écris mon document et je veux insérer...\n\n/tab                   ← filtrage en temps réel\n┌───..."
+    }
+  },
+  {
+    "id": 12,
+    "slug": "contextual-right-click-menu",
+    "category": "commands",
+    "title": {
+      "fr": "Contextual right-click menu",
+      "en": "Contextual Right-Click Menu"
+    },
+    "categoryLabel": {
+      "slug": "commands",
+      "fr": "Commandes & Recherche",
+      "en": "Commands & Search"
+    },
+    "examples": [
+      {
+        "name": "Figma",
+        "desc": {
+          "fr": "contextual menu ultra-riche, différent selon le type d'objet sélectionné",
+          "en": "contextual menu ultra-riche, différent selon le type d'objet sélectionné"
+        }
+      },
+      {
+        "name": "Miro",
+        "desc": {
+          "fr": "menu contextuel pour sticky notes, shapes, connexions",
+          "en": "menu contextuel pour sticky notes, shapes, connexions"
+        }
+      },
+      {
+        "name": "Airtable",
+        "desc": {
+          "fr": "clic droit sur cellule, ligne, colonne avec actions distinctes",
+          "en": "clic droit sur cellule, ligne, colonne avec actions distinctes"
+        }
+      },
+      {
+        "name": "Penpot",
+        "desc": {
+          "fr": "menu contextuel design avec raccourcis clavier affichés",
+          "en": "menu contextuel design avec raccourcis clavier affichés"
+        }
+      }
+    ],
+    "guide": [
+      "**Contextualité** : les actions doivent changer selon l'objet ciblé (cellule vs header de colonne vs row dans un tableau).",
+      "**Séparateurs** : grouper les actions par famille (clipboard, organisation, suppression) avec des séparateurs.",
+      "**Raccourcis affichés** : toujours afficher les raccourcis keyboard à droite — renforce l'apprentissage.",
+      "**Sous-menus** : max 1 niveau de sous-menu. Au-delà, revoir l'architecture.",
+      "**Position** : calculer si le menu sort de l'écran et le repositionner (flip vertical ou horizontal).",
+      "**Fermeture** : clic en dehors, Échap, ou sélection d'une action."
+    ],
+    "pitfalls": [
+      "❌ Menu identique quelle que soit la sélection — perd toute la valeur contextuelle",
+      "❌ Actions destructives (Supprimer) sans confirmation ou sans undo disponible",
+      "❌ Menu trop long (> 12 items) sans séparateurs ni sous-menus",
+      "❌ Remplacer le menu natif du browser sur des éléments où le menu natif est utile (input texte)",
+      "--",
+      "--",
+      "--"
+    ],
+    "what": {
+      "fr": "Un menu contextuel riche et cohérent déclenché par clic droit (ou long-press sur mobile), présentant les actions disponibles pour l'élément ciblé.",
+      "en": "[EN] Un menu contextuel riche et cohérent déclenché par clic droit (ou long-press sur mobile), présentant..."
+    },
+    "why": {
+      "fr": "Remplace les barres d'outils toujours visibles par des actions disponibles à la demande. Réduit le bruit visuel tout en maintenant l'accessibilité des actions. Les utilisateurs expérimentés préfèrent le clic droit aux boutons dans la toolbar.",
+      "en": "[EN] Remplace les barres d'outils toujours visibles par des actions disponibles à la demande. Réduit le b..."
+    },
+    "demo": {
+      "fr": "```\n[Clic droit sur un calque dans Figma]\n\n┌────────────────────────────┐\n│ Copier                ⌘C   │\n│ Coller ici            ⌘V   │\n│ Dupliquer             ⌘D   │\n├────────────────────────────┤\n│ Grouper               ⌘G   │\n│ Créer un composant         │\n├────────────────────────────┤\n│ Renommer              ⌘R   │\n│ Supprimer             ⌫    │\n└────────────────────────────┘\n```",
+      "en": "[EN] ```\n[Clic droit sur un calque dans Figma]\n\n┌────────────────────────────┐\n│ Copier                ⌘C..."
+    }
+  },
+  {
+    "id": 13,
+    "slug": "spreadsheet-like-inline-editing",
+    "category": "data",
+    "title": {
+      "fr": "Spreadsheet-like inline editing",
+      "en": "Spreadsheet-like Inline Editing"
+    },
+    "categoryLabel": {
+      "slug": "data",
+      "fr": "Data & Tables",
+      "en": "Data & Tables"
+    },
+    "examples": [
+      {
+        "name": "Airtable",
+        "desc": {
+          "fr": "référence absolue, édition inline pour tous les types de champs",
+          "en": "absolute reference, édition inline pour tous les types de champs"
+        }
+      },
+      {
+        "name": "Notion databases",
+        "desc": {
+          "fr": "inline editing avec types de champs riches",
+          "en": "inline editing avec types de champs riches"
+        }
+      },
+      {
+        "name": "Attio",
+        "desc": {
+          "fr": "CRM avec édition inline façon spreadsheet",
+          "en": "CRM avec édition inline façon spreadsheet"
+        }
+      },
+      {
+        "name": "Linear",
+        "desc": {
+          "fr": "édition inline des propriétés dans les listes",
+          "en": "édition inline des propriétés dans les listes"
+        }
+      }
+    ],
+    "guide": [
+      "**Déclencheur** : simple clic pour les selects/dates, double-clic pour le texte long (évite les éditions accidentelles au scroll).",
+      "**Navigation clavier** : Tab → cellule suivante, Shift+Tab → précédente, Entrée → ligne suivante, Échap → annuler l'édition.",
+      "**Types de champs** : chaque type a son widget inline — text input, select dropdown, date picker, checkbox, user picker.",
+      "**Validation** : valider à la perte de focus (blur), pas seulement à Entrée.",
+      "**Indicateur d'édition** : outline colored sur la cellule active + curseur `text` ou `pointer` selon le type.",
+      "**Undo** : `⌘Z` doit annuler la dernière modification cellule par cellule."
+    ],
+    "pitfalls": [
+      "❌ Édition déclenchée au survol — éditions accidentelles",
+      "❌ Pas de feedback visuel sur la cellule en cours d'édition",
+      "❌ Soumission uniquement via un bouton \"Sauvegarder\" — casse le flux tableur",
+      "❌ Champs texte long sans expansion de hauteur — le contenu est tronqué",
+      "--"
+    ],
+    "what": {
+      "fr": "Les cellules d'un tableau deviennent éditables au clic ou double-clic, avec des raccourcis clavier type tableur (Tab, Entrée, flèches) pour naviguer entre les champs.",
+      "en": "[EN] Les cellules d'un tableau deviennent éditables au clic ou double-clic, avec des raccourcis clavier t..."
+    },
+    "why": {
+      "fr": "Élimine le round-trip modal (cliquer pour ouvrir une modale, éditer, valider, fermer). Pour les workflows de data entry intensifs, la différence de vitesse est radicale. Les utilisateurs habitués à Excel/Sheets adoptent le pattern instantanément.",
+      "en": "[EN] Élimine le round-trip modal (cliquer pour ouvrir une modale, éditer, valider, fermer). Pour les work..."
+    },
+    "demo": {
+      "fr": "```\n┌──────────────┬───────────┬────────────┐\n│ Nom          │ Statut    │ Priorité   │\n├──────────────┼───────────┼────────────┤\n│ Bug login    │ [In prog▼]│ High       │  ← clic → dropdown inline\n│ Fix CSS      │ Done      │[Medium   ▼]│  ← Tab navigue à la cellule suivante\n│ [Nouvelle...│           │            │  ← Entrée en bas = nouvelle ligne\n└──────────────┴───────────┴────────────┘\n```",
+      "en": "[EN] ```\n┌──────────────┬───────────┬────────────┐\n│ Nom          │ Statut    │ Priorité   │\n├───────────..."
+    }
+  },
+  {
+    "id": 14,
+    "slug": "filtres-persistants-url-encod-s",
+    "category": "data",
+    "title": {
+      "fr": "Filtres persistants & URL-encodés",
+      "en": "Persistent & URL-encoded Filters"
+    },
+    "categoryLabel": {
+      "slug": "data",
+      "fr": "Data & Tables",
+      "en": "Data & Tables"
+    },
+    "examples": [
+      {
+        "name": "Linear",
+        "desc": {
+          "fr": "filtres URL-encodés, vues sauvegardables avec nom",
+          "en": "filtres URL-encodés, vues sauvegardables avec nom"
+        }
+      },
+      {
+        "name": "GitHub Issues",
+        "desc": {
+          "fr": "query language puissant dans l'URL (`is:open assignee:alice`)",
+          "en": "query language puissant dans l'URL (`is:open assignee:alice`)"
+        }
+      },
+      {
+        "name": "Retool",
+        "desc": {
+          "fr": "filtres dynamiques URL-driven pour les apps internes",
+          "en": "filtres dynamiques URL-driven pour les apps internes"
+        }
+      },
+      {
+        "name": "Metabase",
+        "desc": {
+          "fr": "dashboards filtrables avec paramètres URL partageables",
+          "en": "dashboards filtrables avec paramètres URL partageables"
+        }
+      }
+    ],
+    "guide": [
+      "**Format URL** : query params standards (`?key=value&key2=value2`). Pour les valeurs multiples : `?status=open&status=in_progress` ou `?status[]=open`.",
+      "**Synchronisation** : l'état des filtres dans l'UI doit être entièrement dérivé de l'URL. L'URL est la source de vérité.",
+      "**Mise à jour URL** : utiliser `history.pushState` (nouvelle entrée d'historique) pour les changements significatifs, `history.replaceState` pour les changements de tri ou de pagination.",
+      "**Indicateur visuel** : afficher les filtres actifs sous forme de chips/tags avec bouton de suppression.",
+      "**Reset** : bouton \"Effacer les filtres\" qui remet l'URL à son état de base.",
+      "**Validation** : valider les paramètres URL à l'arrivée — des paramètres invalides ne doivent pas casser la page."
+    ],
+    "pitfalls": [
+      "❌ État de filtre en `useState` local uniquement — perdu au refresh",
+      "❌ URL trop longue (> 2000 caractères) avec de nombreux filtres — préférer les vues sauvegardées côté serveur",
+      "❌ Pas de décompte de résultats visible avec les filtres actifs",
+      "❌ Filtres qui s'appliquent uniquement à la vue actuelle mais pas aux données exportées",
+      "--"
+    ],
+    "what": {
+      "fr": "Les filtres actifs sont encodés dans l'URL, persistants entre sessions, et partageables — un lien filtré envoie le destinataire à la même vue filtrée.",
+      "en": "[EN] Les filtres actifs sont encodés dans l'URL, persistants entre sessions, et partageables — un lien fi..."
+    },
+    "why": {
+      "fr": "Les vues filtrées sont souvent des \"vues de travail\" récurrentes. Les encoder dans l'URL permet : partager une vue précise par lien, sauvegarder une URL comme bookmark, et naviguer avec le bouton retour sans perdre ses filtres.",
+      "en": "[EN] Les vues filtrées sont souvent des \"vues de travail\" récurrentes. Les encoder dans l'URL permet : pa..."
+    },
+    "demo": {
+      "fr": "```\nURL : /issues?status=open&assignee=alice&priority=high&sort=updated\n\n┌──────────────────────────────────────────────────┐\n│ Filtres actifs :  [Ouvert ✕]  [Alice ✕]  [High ✕]│\n│                   + Ajouter un filtre             │\n├──────────────────────────────────────────────────┤\n│ Résultats (12)                         ↕ Récents  │\n│ ...                                               │\n└──────────────────────────────────────────────────┘\n```",
+      "en": "[EN] ```\nURL : /issues?status=open&assignee=alice&priority=high&sort=updated\n\n┌──────────────────────────..."
+    }
+  },
+  {
+    "id": 15,
+    "slug": "virtual-scrolling",
+    "category": "data",
+    "title": {
+      "fr": "Virtual scrolling",
+      "en": "Virtual Scrolling"
+    },
+    "categoryLabel": {
+      "slug": "data",
+      "fr": "Data & Tables",
+      "en": "Data & Tables"
+    },
+    "examples": [
+      {
+        "name": "Slack",
+        "desc": {
+          "fr": "messages history avec virtual scroll + sticky date headers",
+          "en": "messages history avec virtual scroll + sticky date headers"
+        }
+      },
+      {
+        "name": "Gmail",
+        "desc": {
+          "fr": "liste d'emails (milliers de threads sans lag)",
+          "en": "liste d'emails (milliers de threads sans lag)"
+        }
+      },
+      {
+        "name": "Airtable",
+        "desc": {
+          "fr": "grilles avec des dizaines de milliers de lignes",
+          "en": "grilles avec des dizaines de milliers de lignes"
+        }
+      },
+      {
+        "name": "Figma",
+        "desc": {
+          "fr": "panneau Layers avec virtual scroll sur les designs complexes",
+          "en": "panneau Layers avec virtual scroll sur les designs complexes"
+        }
+      }
+    ],
+    "guide": [
+      "**Librairies** : `react-window`, `react-virtual` (TanStack Virtual), `vue-virtual-scroller`. Ne pas réimplémenter from scratch.",
+      "**Hauteur fixe vs variable** : hauteur fixe par item = simple et performant. Hauteur variable = nécessite une estimation initiale et mesure au rendu.",
+      "**Overscan** : rendre 3–5 items supplémentaires au-delà du viewport (en haut et en bas) pour éviter le flash au scroll rapide.",
+      "**Sticky headers** : compatibles avec le virtual scroll si implémentés séparément (position sticky sur un container wrappant le virtual list).",
+      "**Focus clavier** : le virtual scroll peut casser la navigation clavier — s'assurer que Tab et les flèches déclenchent le scroll vers les items non rendus."
+    ],
+    "pitfalls": [
+      "❌ Implémenter le virtual scroll pour des listes < 200 items — overhead inutile",
+      "❌ Animer les items au scroll (entrée/sortie) — crée des artifacts visuels",
+      "❌ `innerHTML` pour le recycling — toujours utiliser le virtual DOM du framework",
+      "❌ Oublier le `scrollRestoration` — l'utilisateur revient en haut après navigation",
+      "--"
+    ],
+    "what": {
+      "fr": "Technique de rendu qui n'affiche que les éléments de liste visibles dans le viewport, même si la liste contient des milliers d'entrées.",
+      "en": "[EN] Technique de rendu qui n'affiche que les éléments de liste visibles dans le viewport, même si la lis..."
+    },
+    "why": {
+      "fr": "Sans virtual scrolling, une liste de 10 000 items crée 10 000 nœuds DOM — le navigateur s'effondre. Avec le virtual scroll, seuls 20–50 nœuds existent à tout moment. L'utilisateur ne voit pas la différence mais les performances sont radicalement meilleures.",
+      "en": "[EN] Sans virtual scrolling, une liste de 10 000 items crée 10 000 nœuds DOM — le navigateur s'effondre. ..."
+    },
+    "demo": {
+      "fr": "```\n┌─────────────────────┐\n│ Item 1              │  ← rendu\n│ Item 2              │  ← rendu\n│ Item 3              │  ← rendu\n│ ...                 │\n│ Item 20             │  ← rendu (dernier visible)\n└─────────────────────┘\n   │                     Items 21–10000 : non rendus,\n   ▼ scroll              remplacés par un spacer div de\n                         hauteur calculée\n┌─────────────────────┐\n│ Item 21             │  ← rendu (recycling du DOM)\n│ Item 22             │\n...\n```",
+      "en": "[EN] ```\n┌─────────────────────┐\n│ Item 1              │  ← rendu\n│ Item 2              │  ← rendu\n│ Item..."
+    }
+  },
+  {
+    "id": 16,
+    "slug": "column-resizing-reordering",
+    "category": "data",
+    "title": {
+      "fr": "Column resizing & reordering",
+      "en": "Column Resizing & Reordering"
+    },
+    "categoryLabel": {
+      "slug": "data",
+      "fr": "Data & Tables",
+      "en": "Data & Tables"
+    },
+    "examples": [
+      {
+        "name": "Airtable",
+        "desc": {
+          "fr": "resize + reorder + hide/show colonnes",
+          "en": "resize + reorder + hide/show colonnes"
+        }
+      },
+      {
+        "name": "Notion tables",
+        "desc": {
+          "fr": "resize des colonnes, réorganisation par drag",
+          "en": "resize des colonnes, réorganisation par drag"
+        }
+      },
+      {
+        "name": "HubSpot CRM",
+        "desc": {
+          "fr": "colonnes configurables avec état mémorisé par user",
+          "en": "colonnes configurables avec state persistence par user"
+        }
+      },
+      {
+        "name": "Attio",
+        "desc": {
+          "fr": "configuration avancée des colonnes par vue",
+          "en": "configuration avancée des colonnes par vue"
+        }
+      }
+    ],
+    "guide": [
+      "**Resize** : zone de 6–8px sur la bordure droite du header, curseur `col-resize`. Largeur minimum par colonne (ex: 80px).",
+      "**Reorder** : drag sur le corps du header (pas la zone resize). Indicateur visuel de drop position (ligne verticale entre colonnes).",
+      "**Persistance** : sauvegarder largeurs et ordre en base côté serveur (pas seulement localStorage) — l'utilisateur retrouve sa config sur tous ses appareils.",
+      "**Colonnes fixes** : permettre d'épingler des colonnes à gauche (comme Excel freeze panes). Séparateur visuel entre colonnes fixes et scrollables.",
+      "**Menu de colonne** : clic sur header → dropdown avec Trier, Filtrer, Masquer, Épingler, Redimensionner à l'auto."
+    ],
+    "pitfalls": [
+      "❌ Resize qui affecte toutes les colonnes suivantes au lieu de juste celle ciblée",
+      "❌ Pas de largeur minimum — les colonnes peuvent disparaître",
+      "❌ Reorder qui se déclenche accidentellement pendant un clic simple sur le header (pour trier)",
+      "❌ Préférences perdues au refresh car uniquement en mémoire",
+      "--",
+      "--",
+      "--"
+    ],
+    "what": {
+      "fr": "Les colonnes d'un tableau peuvent être redimensionnées par drag sur la bordure et réorganisées par drag & drop sur le header. Ces préférences sont mémorisées par utilisateur.",
+      "en": "[EN] Les colonnes d'un tableau peuvent être redimensionnées par drag sur la bordure et réorganisées par d..."
+    },
+    "why": {
+      "fr": "Les utilisateurs ont des workflows différents et valorisent des colonnes différentes. Donner le contrôle sur la disposition est un gage de respect de leur workflow. C'est la personnalisation minimale attendue de tout tableau de données professionnel.",
+      "en": "[EN] Les utilisateurs ont des workflows différents et valorisent des colonnes différentes. Donner le cont..."
+    },
+    "demo": {
+      "fr": "```\n         Poignée de resize\n               ↓\n┌──────────────╫──────────┬──────────────┐\n│ Nom          ║ Statut   │ Date         │  ← drag header pour réordonner\n├──────────────╫──────────┼──────────────┤\n│              ║          │              │\n│   drag →→→  ║          │              │\n│              ║          │              │\n└──────────────╫──────────┴──────────────┘\n        curseur col-resize\n```",
+      "en": "[EN] ```\n         Poignée de resize\n               ↓\n┌──────────────╫──────────┬──────────────┐\n│ Nom    ..."
+    }
+  },
+  {
+    "id": 17,
+    "slug": "toast-notification-undo",
+    "category": "feedback",
+    "title": {
+      "fr": "Toast notification + undo",
+      "en": "Toast Notification + Undo"
+    },
+    "categoryLabel": {
+      "slug": "feedback",
+      "fr": "Feedback & États",
+      "en": "Feedback & States"
+    },
+    "examples": [
+      {
+        "name": "Gmail",
+        "desc": {
+          "fr": "référence absolue, archive/suppression avec undo",
+          "en": "absolute reference, archive/suppression avec undo"
+        }
+      },
+      {
+        "name": "Linear",
+        "desc": {
+          "fr": "toast sur toutes les actions de modification",
+          "en": "toast sur toutes les actions de modification"
+        }
+      },
+      {
+        "name": "Notion",
+        "desc": {
+          "fr": "toast sur suppression de blocs avec undo",
+          "en": "toast sur suppression de blocs avec undo"
+        }
+      },
+      {
+        "name": "Slack",
+        "desc": {
+          "fr": "toast sur archivage de channel",
+          "en": "toast sur archivage de channel"
+        }
+      }
+    ],
+    "guide": [
+      "**Durée** : 4–6 secondes. Suffisant pour lire et réagir, pas assez long pour gêner.",
+      "**Position** : bas gauche ou bas centre de l'écran. Jamais en haut (couvre le contenu d'action).",
+      "**Stack** : si plusieurs toasts apparaissent en séquence, les empiler verticalement (le plus récent en bas).",
+      "**Pause au hover** : le timer de disparition se met en pause quand la souris est sur le toast.",
+      "**Action undo côté serveur** : l'undo doit fonctionner côté serveur si l'action a déjà été persistée (soft delete + restore, pas seulement côté client).",
+      "**Types** : success (vert), error (rouge), info (bleu), warning (orange) — avec icône correspondante."
+    ],
+    "pitfalls": [
+      "❌ Toast sans undo pour les actions destructives irréversibles",
+      "❌ Toast qui disparaît en < 3 secondes — trop court pour lire et réagir",
+      "❌ Empiler plus de 3 toasts simultanément — les regrouper",
+      "❌ Toast positionné devant un bouton d'action fréquent",
+      "--"
+    ],
+    "what": {
+      "fr": "Une notification éphémère (toast) qui apparaît en bas de l'écran après une action, avec un bouton \"Annuler\" accessible pendant quelques secondes — remplaçant les modales de confirmation.",
+      "en": "[EN] Une notification éphémère (toast) qui apparaît en bas de l'écran après une action, avec un bouton \"A..."
+    },
+    "why": {
+      "fr": "\"Êtes-vous sûr ?\" est le pattern UX le plus détesté : il interrompt, demande un effort cognitif, et n'empêche pas les erreurs (les utilisateurs cliquent \"Oui\" par réflexe). Le toast + undo est moins intrusif, aussi sûr, et plus rapide.",
+      "en": "[EN] \"Êtes-vous sûr ?\" est le pattern UX le plus détesté : il interrompt, demande un effort cognitif, et ..."
+    },
+    "demo": {
+      "fr": "```\nAction : supprimer un email\n\n[Aucune modale de confirmation]\n\n┌──────────────────────────────────┐\n│  Email archivé    [Annuler]   ✕  │  ← toast, disparaît après 5s\n└──────────────────────────────────┘\n          ▲\n    Clic \"Annuler\" → action reversée\n    Laisser disparaître → action confirmée\n```",
+      "en": "[EN] ```\nAction : supprimer un email\n\n[Aucune modale de confirmation]\n\n┌─────────────────────────────────..."
+    }
+  },
+  {
+    "id": 18,
+    "slug": "optimistic-ui",
+    "category": "feedback",
+    "title": {
+      "fr": "Optimistic UI",
+      "en": "Optimistic UI"
+    },
+    "categoryLabel": {
+      "slug": "feedback",
+      "fr": "Feedback & États",
+      "en": "Feedback & States"
+    },
+    "examples": [
+      {
+        "name": "Linear",
+        "desc": {
+          "fr": "toutes les actions de statut, assignation, priorité",
+          "en": "toutes les actions de statut, assignation, priorité"
+        }
+      },
+      {
+        "name": "Figma",
+        "desc": {
+          "fr": "déplacement d'objets, changement de propriétés",
+          "en": "déplacement d'objets, changement de propriétés"
+        }
+      },
+      {
+        "name": "Superhuman",
+        "desc": {
+          "fr": "archive, snooze, labels instantanés",
+          "en": "archive, snooze, labels instantanés"
+        }
+      },
+      {
+        "name": "Twitter/X",
+        "desc": {
+          "fr": "likes, retweets (avec rollback visible si erreur réseau)",
+          "en": "likes, retweets (avec rollback visible si erreur réseau)"
+        }
+      }
+    ],
+    "guide": [
+      "**Mutation locale d'abord** : mettre à jour le store/state local immédiatement, puis lancer la requête réseau en parallèle.",
+      "**Rollback sur erreur** : en cas d'erreur serveur, restaurer l'état précédent et afficher un toast d'erreur.",
+      "**Idempotence** : s'assurer que les actions sont idempotentes côté serveur — en cas de double soumission, le résultat doit être identique.",
+      "**Conflits** : gérer le cas où l'utilisateur effectue une deuxième action avant la confirmation de la première (queue ou annulation de la première).",
+      "**Librairies** : `react-query` / `TanStack Query` et `SWR` ont un support natif des mutations optimistes."
+    ],
+    "pitfalls": [
+      "❌ Optimistic UI sur des actions avec effets secondaires importants (paiement, envoi d'email) — réserver aux mutations simples",
+      "❌ Rollback sans notification à l'utilisateur — il ne comprend pas pourquoi l'état a changé",
+      "❌ Pas de gestion de l'état \"pending\" pour les actions qui prennent du temps (> 2s)",
+      "❌ Optimistic UI avec des données dérivées complexes — la cohérence est difficile à maintenir",
+      "--"
+    ],
+    "what": {
+      "fr": "L'interface se met à jour immédiatement après l'action de l'utilisateur, avant que le serveur confirme. Si le serveur retourne une erreur, l'UI revient à son état précédent silencieusement.",
+      "en": "[EN] L'interface se met à jour immédiatement après l'action de l'utilisateur, avant que le serveur confir..."
+    },
+    "why": {
+      "fr": "Élimine la latence perçue. Sur une bonne connexion, l'utilisateur ne voit jamais l'état de chargement. L'interface semble instantanée. La grande majorité des actions réussissant, le rollback reste un cas rare.",
+      "en": "[EN] Élimine la latence perçue. Sur une bonne connexion, l'utilisateur ne voit jamais l'état de chargemen..."
+    },
+    "demo": {
+      "fr": "```\nUtilisateur clique \"Marquer comme fait\"\n\nSans optimistic UI :            Avec optimistic UI :\n☐ Tâche A                      ✓ Tâche A  ← immédiat\n[spinner 300ms]                 (confirmation serveur arrive 300ms après,\n✓ Tâche A                        invisible pour l'user)\n```",
+      "en": "[EN] ```\nUtilisateur clique \"Marquer comme fait\"\n\nSans optimistic UI :            Avec optimistic UI :\n☐ ..."
+    }
+  },
+  {
+    "id": 19,
+    "slug": "empty-states-actionnables",
+    "category": "feedback",
+    "title": {
+      "fr": "Empty states actionnables",
+      "en": "Actionable Empty States"
+    },
+    "categoryLabel": {
+      "slug": "feedback",
+      "fr": "Feedback & États",
+      "en": "Feedback & States"
+    },
+    "examples": [
+      {
+        "name": "Notion",
+        "desc": {
+          "fr": "empty states avec templates suggérés et exemples cliquables",
+          "en": "empty states avec templates suggérés et exemples cliquables"
+        }
+      },
+      {
+        "name": "Linear",
+        "desc": {
+          "fr": "empty states distincts selon le contexte (premier projet, filtre sans résultat, recherche vide)",
+          "en": "empty states distincts selon le contexte (premier projet, filtre sans résultat, recherche vide)"
+        }
+      },
+      {
+        "name": "Mailchimp",
+        "desc": {
+          "fr": "empty states avec illustrations custom et guides d'action",
+          "en": "empty states avec illustrations custom et guides d'action"
+        }
+      },
+      {
+        "name": "Stripe Dashboard",
+        "desc": {
+          "fr": "empty states avec données de test pour explorer",
+          "en": "empty states avec données de test pour explorer"
+        }
+      }
+    ],
+    "guide": [
+      "**Distinguer les types d'empty state** :",
+      "**Hiérarchie visuelle** : illustration ou icône → titre → description courte → CTA principal → CTA secondaire optionnel.",
+      "**Ton** : positif et orienté action. Éviter \"Aucun X trouvé.\" Préférer \"Commencez par créer votre premier X.\"",
+      "**Illustrations** : optionnel mais efficace — cohérent avec le design system, pas trop complexe.",
+      "**CTA unique** : un seul bouton principal. Deux maximum si les deux actions sont vraiment distinctes."
+    ],
+    "pitfalls": [
+      "❌ \"Aucun résultat.\" sans plus d'information",
+      "❌ Même empty state pour tous les contextes — l'état post-filtre n'est pas l'état first-use",
+      "❌ Illustration trop grande qui pousse le CTA hors du viewport",
+      "❌ Empty state qui disparaît et réapparaît pendant le chargement — gérer l'ordre loading → data → empty",
+      "--"
+    ],
+    "what": {
+      "fr": "Quand une liste ou une vue est vide, afficher un état vide qui guide vers une action concrète plutôt qu'un message générique \"Aucun résultat\".",
+      "en": "[EN] Quand une liste ou une vue est vide, afficher un état vide qui guide vers une action concrète plutôt..."
+    },
+    "why": {
+      "fr": "Un état vide est une opportunité d'onboarding. L'utilisateur est exactement là où il a besoin d'être pour commencer. Un bon empty state répond à \"qu'est-ce que je fais maintenant ?\" avec une action immédiate.",
+      "en": "[EN] Un état vide est une opportunité d'onboarding. L'utilisateur est exactement là où il a besoin d'être..."
+    },
+    "demo": {
+      "fr": "```\nVue \"Mes projets\" sans projet :\n\n     ┌──────────────────────────┐\n     │                          │\n     │    🗂️                    │\n     │                          │\n     │  Aucun projet pour l'    │\n     │  instant                 │\n     │                          │\n     │  Organisez votre travail │\n     │  en projets pour mieux   │\n     │  collaborer.             │\n     │                          │\n     │  [+ Créer un projet]     │\n     │  [Importer depuis Jira]  │\n     │                          │\n     └──────────────────────────┘\n```",
+      "en": "[EN] ```\nVue \"Mes projets\" sans projet :\n\n     ┌──────────────────────────┐\n     │                       ..."
+    }
+  },
+  {
+    "id": 20,
+    "slug": "skeleton-screens",
+    "category": "feedback",
+    "title": {
+      "fr": "Skeleton screens",
+      "en": "Skeleton Screens"
+    },
+    "categoryLabel": {
+      "slug": "feedback",
+      "fr": "Feedback & États",
+      "en": "Feedback & States"
+    },
+    "examples": [
+      {
+        "name": "LinkedIn",
+        "desc": {
+          "fr": "skeleton parfaitement calqué sur la structure du feed",
+          "en": "skeleton parfaitement calqué sur la structure du feed"
+        }
+      },
+      {
+        "name": "Slack",
+        "desc": {
+          "fr": "skeleton de la liste de messages et du panneau de channels",
+          "en": "skeleton de la liste de messages et du panneau de channels"
+        }
+      },
+      {
+        "name": "GitHub",
+        "desc": {
+          "fr": "skeleton sur les listes d'issues et pull requests",
+          "en": "skeleton sur les listes d'issues et pull requests"
+        }
+      },
+      {
+        "name": "Stripe",
+        "desc": {
+          "fr": "skeleton sur les tableaux du dashboard",
+          "en": "skeleton sur les tableaux du dashboard"
+        }
+      }
+    ],
+    "guide": [
+      "**Structure fidèle** : le skeleton doit approximer la structure réelle (nombre de lignes, hauteurs relatives). Pas un rectangle unique.",
+      "**Animation shimmer** : gradient qui se déplace de gauche à droite en boucle. `@keyframes` sur `background-position`.",
+      "**Couleur** : `--color-background-secondary` pour les blocks, légèrement plus clair pour le shimmer. S'adapter au dark mode.",
+      "**Durée** : afficher le skeleton après 150–200ms (évite le flash pour les chargements rapides). Si les données arrivent en < 150ms, ne pas afficher le skeleton du tout.",
+      "**Transition** : fade out du skeleton (100ms) avant d'afficher le contenu pour éviter un flash brutal."
+    ],
+    "pitfalls": [
+      "❌ Skeleton qui ne ressemble pas à la structure réelle — le layout shift reste présent",
+      "❌ Skeleton affiché indéfiniment si la requête échoue — prévoir un état d'erreur",
+      "❌ Animation trop rapide (< 1s) ou trop lente (> 2s) — 1.5s est le sweet spot",
+      "❌ Skeleton sur des composants à chargement instantané (< 100ms) — ajoute de la complexité sans bénéfice",
+      "--",
+      "--",
+      "--"
+    ],
+    "what": {
+      "fr": "Pendant le chargement des données, afficher des silhouettes grises animées qui reproduisent la structure du contenu à venir, plutôt qu'un spinner centré.",
+      "en": "[EN] Pendant le chargement des données, afficher des silhouettes grises animées qui reproduisent la struc..."
+    },
+    "why": {
+      "fr": "Les skeleton screens réduisent la perception de latence en montrant que quelque chose arrive. Ils préviennent le layout shift (le contenu n'arrive pas en déplaçant l'UI) et maintiennent l'orientation spatiale de l'utilisateur pendant le chargement.",
+      "en": "[EN] Les skeleton screens réduisent la perception de latence en montrant que quelque chose arrive. Ils pr..."
+    },
+    "demo": {
+      "fr": "```\nChargement d'une liste de contacts :\n\n┌────────────────────────────────────┐\n│ ████  ████████████████  ████████   │  ← animation shimmer\n│ ████  █████████  ████   ████       │    de gauche à droite\n│ ████  ████████████████  ████████   │\n│ ████  █████  ████████   █████      │\n└────────────────────────────────────┘\n```",
+      "en": "[EN] ```\nChargement d'une liste de contacts :\n\n┌────────────────────────────────────┐\n│ ████  ███████████..."
+    }
+  },
+  {
+    "id": 21,
+    "slug": "ai-sidebar-persistante",
+    "category": "ai-access",
+    "title": {
+      "fr": "AI sidebar persistante",
+      "en": "Persistent AI Sidebar"
+    },
+    "categoryLabel": {
+      "slug": "ai-access",
+      "fr": "AI — Accès & Invocation",
+      "en": "AI — Access & Invocation"
+    },
+    "examples": [
+      {
+        "name": "GitHub Copilot Chat",
+        "desc": {
+          "fr": "sidebar contextuelle au fichier ouvert dans VS Code",
+          "en": "sidebar contextuelle au fichier ouvert dans VS Code"
+        }
+      },
+      {
+        "name": "Notion AI",
+        "desc": {
+          "fr": "sidebar qui connaît le document en cours",
+          "en": "sidebar qui connaît le document en cours"
+        }
+      },
+      {
+        "name": "HubSpot Breeze",
+        "desc": {
+          "fr": "AI sidebar dans le CRM, accès aux données contact",
+          "en": "AI sidebar dans le CRM, accès aux données contact"
+        }
+      },
+      {
+        "name": "Salesforce Einstein",
+        "desc": {
+          "fr": "sidebar avec contexte CRM injecté automatiquement",
+          "en": "sidebar avec contexte CRM injecté automatiquement"
+        }
+      }
+    ],
+    "guide": [
+      "**Largeur** : 320–400px. Rétractable avec le même pattern icon-rail (pattern #1).",
+      "**Contexte automatique** : injecter silencieusement dans le system prompt le contexte de la vue active (titre du document, statut du ticket, données du contact) sans que l'utilisateur ait à le préciser.",
+      "**Historique** : persister l'historique par session de travail (document, ticket, etc.) — idéalement côté serveur.",
+      "**Indicateur de contexte** : afficher visuellement quel contexte est injecté (\"Je vois : Ticket #1234\") pour la transparence.",
+      "**Actions rapides** : proposer des actions en un clic selon le contexte (Résumer, Améliorer, Traduire)."
+    ],
+    "pitfalls": [
+      "❌ Sidebar qui perd son historique à chaque navigation",
+      "❌ Contexte injecté mais non visible — l'utilisateur ne comprend pas pourquoi l'AI \"sait\" des choses",
+      "❌ Largeur fixe non rétractable sur les petits écrans",
+      "❌ Sidebar qui ralentit le chargement de la page principale",
+      "--"
+    ],
+    "what": {
+      "fr": "Un panneau latéral dédié à l'IA, accessible depuis n'importe quelle vue de l'application, rétractable, qui maintient l'historique de conversation dans le contexte de la session de travail.",
+      "en": "[EN] Un panneau latéral dédié à l'IA, accessible depuis n'importe quelle vue de l'application, rétractabl..."
+    },
+    "why": {
+      "fr": "Évite de quitter l'application pour accéder à un outil AI externe. L'AI a accès au contexte de la vue courante (document ouvert, ticket sélectionné) sans que l'utilisateur ait à copier-coller. La persistance du fil permet de construire sur les échanges précédents.",
+      "en": "[EN] Évite de quitter l'application pour accéder à un outil AI externe. L'AI a accès au contexte de la vu..."
+    },
+    "demo": {
+      "fr": "```\n┌──────────────────────┬───────────────────┐\n│ CONTENU PRINCIPAL    │ AI Assistant      │\n│                      │ ─────────────── │\n│ # Mon ticket         │ 👤 Comment        │\n│ Description...       │ améliorer cette   │\n│                      │ description ?     │\n│                      │                   │\n│                      │ 🤖 Voici 3        │\n│                      │ suggestions...    │\n│                      │                   │\n│                      │ ────────────────  │\n│                      │ [Écrire...    ↑] │\n└──────────────────────┴───────────────────┘\n```",
+      "en": "[EN] ```\n┌──────────────────────┬───────────────────┐\n│ CONTENU PRINCIPAL    │ AI Assistant      │\n│     ..."
+    }
+  },
+  {
+    "id": 22,
+    "slug": "k-ai-intent",
+    "category": "ai-access",
+    "title": {
+      "fr": "⌘K → AI intent",
+      "en": "⌘K → AI Intent"
+    },
+    "categoryLabel": {
+      "slug": "ai-access",
+      "fr": "AI — Accès & Invocation",
+      "en": "AI — Access & Invocation"
+    },
+    "examples": [
+      {
+        "name": "Linear",
+        "desc": {
+          "fr": "`⌘K` détecte les questions et propose une réponse AI",
+          "en": "`⌘K` détecte les questions et propose une réponse AI"
+        }
+      },
+      {
+        "name": "Raycast AI",
+        "desc": {
+          "fr": "extension AI native dans la palette Raycast",
+          "en": "extension AI native dans la palette Raycast"
+        }
+      },
+      {
+        "name": "Vercel v0",
+        "desc": {
+          "fr": "prompt natural language → génération de composant",
+          "en": "prompt natural language → génération de composant"
+        }
+      },
+      {
+        "name": "Coda",
+        "desc": {
+          "fr": "`/` + question naturelle → AI response inline",
+          "en": "`/` + question naturelle → AI response inline"
+        }
+      }
+    ],
+    "guide": [
+      "**Détection d'intention** : heuristiques simples — query commençant par un verbe (Résume, Génère, Explique), contenant \"?\" ou \"comment\", dépassant 4 mots. Pas besoin de ML côté client.",
+      "**Indicateur visuel** : changer l'icône de loupe en icône sparkle/AI quand le mode bascule.",
+      "**Transition douce** : ne pas changer l'UI brutalement — animer la transition entre mode recherche et mode AI.",
+      "**Fallback** : si l'AI ne comprend pas, retomber sur la recherche classique.",
+      "**Raccourci explicite** : permettre aussi de forcer le mode AI avec un préfixe (ex: `?` ou `ai:`)."
+    ],
+    "pitfalls": [
+      "❌ Basculer en mode AI trop agressivement (dès 2 mots) — perturbe la recherche normale",
+      "❌ Pas de moyen de forcer la recherche classique quand le mode AI est activé",
+      "❌ Latence visible lors du basculement de mode",
+      "❌ Réponse AI dans la palette qui nécessite un scroll — la palette doit rester compacte",
+      "--"
+    ],
+    "what": {
+      "fr": "La command palette (pattern #9) détecte quand l'utilisateur saisit une question ou une commande en langage naturel plutôt qu'un terme de recherche, et bascule automatiquement vers un mode AI.",
+      "en": "[EN] La command palette (pattern #9) détecte quand l'utilisateur saisit une question ou une commande en l..."
+    },
+    "why": {
+      "fr": "Un seul point d'entrée pour tout. L'utilisateur n'a pas besoin de choisir entre \"rechercher\" et \"demander à l'AI\" — la palette fait la distinction automatiquement. Réduit la friction d'adoption de l'AI en l'intégrant dans un pattern déjà familier.",
+      "en": "[EN] Un seul point d'entrée pour tout. L'utilisateur n'a pas besoin de choisir entre \"rechercher\" et \"dem..."
+    },
+    "demo": {
+      "fr": "```\n⌘K →\n\nMode recherche :          Mode AI (détection automatique) :\n┌──────────────────┐      ┌──────────────────────────────┐\n│ 🔍 sprint 12     │      │ ✨ Résume les tickets ouverts │\n│ ─────────────    │  vs  │ ─────────────────────────────│\n│ 📋 Sprint 12     │      │ Appuyez sur Entrée pour      │\n│ 🔍 Voir tout...  │      │ demander à l'AI              │\n└──────────────────┘      └──────────────────────────────┘\n```",
+      "en": "[EN] ```\n⌘K →\n\nMode recherche :          Mode AI (détection automatique) :\n┌──────────────────┐      ┌───..."
+    }
+  },
+  {
+    "id": 23,
+    "slug": "floating-ai-button-contextuel",
+    "category": "ai-access",
+    "title": {
+      "fr": "Floating AI button contextuel",
+      "en": "Contextual Floating AI Button"
+    },
+    "categoryLabel": {
+      "slug": "ai-access",
+      "fr": "AI — Accès & Invocation",
+      "en": "AI — Access & Invocation"
+    },
+    "examples": [
+      {
+        "name": "Notion AI",
+        "desc": {
+          "fr": "toolbar AI sur sélection de texte",
+          "en": "toolbar AI sur sélection de texte"
+        }
+      },
+      {
+        "name": "Google Docs",
+        "desc": {
+          "fr": "\"Help me write\" sur sélection",
+          "en": "\"Help me write\" sur sélection"
+        }
+      },
+      {
+        "name": "Grammarly",
+        "desc": {
+          "fr": "suggestions sur sélection dans tout champ texte",
+          "en": "suggestions sur sélection dans tout champ texte"
+        }
+      },
+      {
+        "name": "Superhuman",
+        "desc": {
+          "fr": "actions AI sur sélection d'email",
+          "en": "actions AI sur sélection d'email"
+        }
+      }
+    ],
+    "guide": [
+      "**Déclencheur** : écouter l'event `mouseup` / `selectionchange`. N'afficher qu'après que la sélection est stable (debounce 100ms).",
+      "**Position** : au-dessus de la sélection par défaut, en dessous si la sélection est trop proche du haut du viewport.",
+      "**Actions** : limiter à 4–6 actions. Les plus fréquentes en icônes directes, les autres dans un \"...\" menu.",
+      "**Fermeture** : disparaît si la sélection est désélectionnée (click en dehors), si Échap est pressé.",
+      "**Résultat** : remplacer la sélection par le résultat AI, ou l'afficher dans un panel séparé avec accept/reject (pattern #26)."
+    ],
+    "pitfalls": [
+      "❌ Toolbar qui apparaît sur des sélections accidentelles d'un mot",
+      "❌ Position fixe (coin de l'écran) non ancrée sur la sélection",
+      "❌ Actions trop génériques sans lien avec le type de contenu sélectionné",
+      "❌ Toolbar qui bloque le texte sélectionné",
+      "--"
+    ],
+    "what": {
+      "fr": "Un bouton ou menu AI qui apparaît à la sélection de texte ou d'un objet, ancré sur la sélection, proposant des actions contextuelles (améliorer, résumer, traduire, expliquer).",
+      "en": "[EN] Un bouton ou menu AI qui apparaît à la sélection de texte ou d'un objet, ancré sur la sélection, pro..."
+    },
+    "why": {
+      "fr": "Le moment de sélection est le signal d'intention le plus fort : l'utilisateur a identifié un contenu sur lequel il veut agir. Proposer des actions AI exactement à ce moment, sans déplacement vers une autre interface, est le plus court chemin vers la valeur.",
+      "en": "[EN] Le moment de sélection est le signal d'intention le plus fort : l'utilisateur a identifié un contenu..."
+    },
+    "demo": {
+      "fr": "```\nL'utilisateur sélectionne du texte :\n\n\"Cette fonctionnalité permettra aux utilisateurs de...\"\n ═══════════════════════════════════════\n              ┌───────────────────────────┐\n              │ ✨ Améliorer  📝 Résumer  │\n              │ 🌍 Traduire  💬 Expliquer │\n              └───────────────────────────┘\n```",
+      "en": "[EN] ```\nL'utilisateur sélectionne du texte :\n\n\"Cette fonctionnalité permettra aux utilisateurs de...\"\n ═..."
+    }
+  },
+  {
+    "id": 24,
+    "slug": "inline-slash-ai-commands",
+    "category": "ai-access",
+    "title": {
+      "fr": "Inline slash AI commands",
+      "en": "Inline Slash AI Commands"
+    },
+    "categoryLabel": {
+      "slug": "ai-access",
+      "fr": "AI — Accès & Invocation",
+      "en": "AI — Access & Invocation"
+    },
+    "examples": [
+      {
+        "name": "Notion AI",
+        "desc": {
+          "fr": "`/ai` ouvre un prompt inline avec contexte du document",
+          "en": "`/ai` ouvre un prompt inline avec contexte du document"
+        }
+      },
+      {
+        "name": "Coda AI",
+        "desc": {
+          "fr": "commandes AI intégrées dans l'éditeur de doc",
+          "en": "commandes AI intégrées dans l'éditeur de doc"
+        }
+      },
+      {
+        "name": "Linear",
+        "desc": {
+          "fr": "`/summarize` dans les commentaires de ticket",
+          "en": "`/summarize` dans les commentaires de ticket"
+        }
+      },
+      {
+        "name": "Confluence AI",
+        "desc": {
+          "fr": "commandes AI dans l'éditeur de page",
+          "en": "commandes AI dans l'éditeur de page"
+        }
+      }
+    ],
+    "guide": [
+      "**Prompt inline** : après la commande slash, afficher un champ de saisie pour les instructions supplémentaires.",
+      "**Contexte** : injecter automatiquement le contenu environnant (paragraphe précédent, titre de section) dans le prompt.",
+      "**Streaming** : afficher le texte généré en streaming directement dans l'éditeur avec un curseur clignotant ou un fond de couleur distinct.",
+      "**Accept/reject** : toujours proposer d'accepter, modifier, ou annuler avant de committer le contenu généré.",
+      "**Annulation** : Échap annule la génération en cours et supprime le contenu partiellement généré."
+    ],
+    "pitfalls": [
+      "❌ Génération qui remplace immédiatement le contenu existant sans confirmation",
+      "❌ Pas d'indicateur de chargement pendant la génération",
+      "❌ Commandes AI qui ne fonctionnent qu'à certains endroits (début de ligne uniquement)",
+      "❌ Résultat non éditable après génération",
+      "--",
+      "--",
+      "--"
+    ],
+    "what": {
+      "fr": "Extension du pattern slash commands (pattern #11) avec des commandes dédiées à l'AI : `/ai`, `/generate`, `/improve`, `/summarize` — qui déclenchent une génération inline dans l'éditeur.",
+      "en": "[EN] Extension du pattern slash commands (pattern #11) avec des commandes dédiées à l'AI : `/ai`, `/gener..."
+    },
+    "why": {
+      "fr": "Intègre l'AI directement dans le flux d'écriture sans sortir de l'éditeur. L'utilisateur reste dans son contexte cognitif. La génération se fait à la position du curseur, exactement là où le contenu est attendu.",
+      "en": "[EN] Intègre l'AI directement dans le flux d'écriture sans sortir de l'éditeur. L'utilisateur reste dans ..."
+    },
+    "demo": {
+      "fr": "```\n# Mon rapport Q3\n\n/améliore ce paragraphe\n\n┌─────────────────────────────────────────┐\n│ ✨ Améliorer le paragraphe ci-dessus... │\n│ [Écrire des instructions...          ]  │\n│                                [Générer]│\n└─────────────────────────────────────────┘\n```",
+      "en": "[EN] ```\n# Mon rapport Q3\n\n/améliore ce paragraphe\n\n┌─────────────────────────────────────────┐\n│ ✨ Améli..."
+    }
+  },
+  {
+    "id": 25,
+    "slug": "streaming-text-typewriter",
+    "category": "ai-generation",
+    "title": {
+      "fr": "Streaming text (typewriter)",
+      "en": "Streaming Text (Typewriter)"
+    },
+    "categoryLabel": {
+      "slug": "ai-generation",
+      "fr": "AI — Génération & Édition",
+      "en": "AI — Generation & Editing"
+    },
+    "examples": [
+      {
+        "name": "Claude",
+        "desc": {
+          "fr": "streaming avec affichage progressif du markdown rendu",
+          "en": "streaming avec affichage progressif du markdown rendu"
+        }
+      },
+      {
+        "name": "ChatGPT",
+        "desc": {
+          "fr": "streaming avec rendu progressif du markdown",
+          "en": "streaming avec rendu progressif du markdown"
+        }
+      },
+      {
+        "name": "Notion AI",
+        "desc": {
+          "fr": "streaming dans l'éditeur de document",
+          "en": "streaming dans l'éditeur de document"
+        }
+      },
+      {
+        "name": "GitHub Copilot Chat",
+        "desc": {
+          "fr": "streaming dans la sidebar VS Code",
+          "en": "streaming dans la sidebar VS Code"
+        }
+      }
+    ],
+    "guide": [
+      "**SSE ou WebSocket** : utiliser Server-Sent Events (`EventSource`) pour les réponses unidirectionnelles. WebSocket si la bidirectionnalité est nécessaire.",
+      "**Rendu du markdown** : éviter de re-render tout le markdown à chaque token (coûteux). Stratégie : accumuler dans un buffer, re-render par chunks de 50–100ms.",
+      "**Curseur clignotant** : ajouter un curseur animé à la fin du texte en cours de streaming pour indiquer que l'écriture continue.",
+      "**Stop button** : toujours afficher un bouton d'arrêt pendant le streaming — l'utilisateur doit pouvoir interrompre.",
+      "**Scroll automatique** : faire scroller le conteneur pour suivre le dernier token généré, mais stopper si l'utilisateur scrolle manuellement vers le haut."
+    ],
+    "pitfalls": [
+      "❌ Re-render complet à chaque token — le scroll saute, l'UI tremble",
+      "❌ Pas de stop button — l'utilisateur est captif d'une mauvaise génération",
+      "❌ Cacher la réponse partielle derrière un skeleton pendant le streaming",
+      "❌ Scroll forcé qui ramène l'utilisateur en bas alors qu'il lisait plus haut",
+      "--"
+    ],
+    "what": {
+      "fr": "La réponse de l'AI s'affiche progressivement, token par token, au lieu d'apparaître d'un bloc après un temps d'attente — donnant l'impression que l'AI \"écrit\" en temps réel.",
+      "en": "[EN] La réponse de l'AI s'affiche progressivement, token par token, au lieu d'apparaître d'un bloc après ..."
+    },
+    "why": {
+      "fr": "Réduit massivement la perception de latence. L'utilisateur commence à lire pendant que la génération se poursuit. Le mouvement du texte signale que le système est actif. Psychologiquement, attendre une réponse partielle est moins frustrant qu'attendre une réponse complète.",
+      "en": "[EN] Réduit massivement la perception de latence. L'utilisateur commence à lire pendant que la génération..."
+    },
+    "demo": {
+      "fr": "```\n[Requête envoyée]\n\nSans streaming :            Avec streaming :\n                            Voici▌\n[······ 3s ······]          Voici une▌\n                            Voici une réponse▌\nVoici une réponse           Voici une réponse complète▌\ncomplète avec tous          Voici une réponse complète\nles détails.                avec tous les détails.\n```",
+      "en": "[EN] ```\n[Requête envoyée]\n\nSans streaming :            Avec streaming :\n                            Voic..."
+    }
+  },
+  {
+    "id": 26,
+    "slug": "diff-view-accept-reject",
+    "category": "ai-generation",
+    "title": {
+      "fr": "Diff view accept/reject",
+      "en": "Diff View Accept/Reject"
+    },
+    "categoryLabel": {
+      "slug": "ai-generation",
+      "fr": "AI — Génération & Édition",
+      "en": "AI — Generation & Editing"
+    },
+    "examples": [
+      {
+        "name": "GitHub Copilot",
+        "desc": {
+          "fr": "diff view dans l'éditeur pour les suggestions de code",
+          "en": "diff view dans l'éditeur pour les suggestions de code"
+        }
+      },
+      {
+        "name": "Cursor",
+        "desc": {
+          "fr": "diff view avec accept/reject par hunk de code",
+          "en": "diff view avec accept/reject par hunk de code"
+        }
+      },
+      {
+        "name": "Devin",
+        "desc": {
+          "fr": "diff view sur les modifications de fichiers par l'agent",
+          "en": "diff view sur les modifications de fichiers par l'agent"
+        }
+      },
+      {
+        "name": "Windsurf",
+        "desc": {
+          "fr": "diff view avec inline accept sur chaque ligne",
+          "en": "diff view avec inline accept sur chaque ligne"
+        }
+      }
+    ],
+    "guide": [
+      "**Niveau de granularité** : accept/reject global + accept/reject par bloc de changement (hunk). Le line-by-line est optionnel.",
+      "**Couleurs** : vert pour les ajouts (`#dcfce7` bg, `#16a34a` texte), rouge pour les suppressions (`#fee2e2` bg, `#dc2626` texte). Gris neutre pour l'inchangé.",
+      "**Lib de diff** : utiliser `diff` (npm) pour calculer le diff, `react-diff-viewer` ou équivalent pour l'affichage.",
+      "**Édition post-accept** : après acceptation, le contenu doit être éditable normalement.",
+      "**Raccourcis** : `Tab` pour naviguer entre les hunks, `Y` pour accepter, `N` pour rejeter (convention Git)."
+    ],
+    "pitfalls": [
+      "❌ Diff illisible sur les changements de formatage purs (espaces, retours à la ligne)",
+      "❌ Pas de moyen d'accepter partiellement (seulement global accept/reject)",
+      "❌ Diff qui ne gère pas les déplacements de blocs (texte déplacé = tout supprimé + tout ajouté)",
+      "❌ Accept qui ne peut pas être annulé (⌘Z doit fonctionner)",
+      "--"
+    ],
+    "what": {
+      "fr": "Les modifications suggérées par l'AI sont présentées en mode diff (ajouts en vert, suppressions en rouge), et l'utilisateur peut accepter ou rejeter globalement ou bloc par bloc.",
+      "en": "[EN] Les modifications suggérées par l'AI sont présentées en mode diff (ajouts en vert, suppressions en r..."
+    },
+    "why": {
+      "fr": "Donne le contrôle total à l'utilisateur. Il voit exactement ce que l'AI veut changer avant que ça soit appliqué. La granularité (accepter ligne par ligne) permet de prendre le meilleur de la suggestion sans accepter l'entier. C'est le pattern qui convertit la méfiance envers l'AI en confiance.",
+      "en": "[EN] Donne le contrôle total à l'utilisateur. Il voit exactement ce que l'AI veut changer avant que ça so..."
+    },
+    "demo": {
+      "fr": "```\n┌─────────────────────────────────────────────────┐\n│ - L'utilisateur peut modifier les paramètres.   │  ← rouge : supprimé\n│ + L'utilisateur peut personnaliser les          │  ← vert : ajouté\n│ + paramètres selon ses préférences.             │\n│                                                 │\n│   Le système enregistre les changements.        │  ← gris : inchangé\n├─────────────────────────────────────────────────┤\n│  [✓ Accepter tout]  [✗ Rejeter tout]  [Modifier]│\n└─────────────────────────────────────────────────┘\n```",
+      "en": "[EN] ```\n┌─────────────────────────────────────────────────┐\n│ - L'utilisateur peut modifier les paramètr..."
+    }
+  },
+  {
+    "id": 27,
+    "slug": "ghost-text-inline-autocomplete",
+    "category": "ai-generation",
+    "title": {
+      "fr": "Ghost text / inline autocomplete",
+      "en": "Ghost Text / Inline Autocomplete"
+    },
+    "categoryLabel": {
+      "slug": "ai-generation",
+      "fr": "AI — Génération & Édition",
+      "en": "AI — Generation & Editing"
+    },
+    "examples": [
+      {
+        "name": "GitHub Copilot",
+        "desc": {
+          "fr": "référence fondatrice dans VS Code",
+          "en": "foundational reference dans VS Code"
+        }
+      },
+      {
+        "name": "Cursor",
+        "desc": {
+          "fr": "ghost text sur tous les fichiers de code",
+          "en": "ghost text sur tous les fichiers de code"
+        }
+      },
+      {
+        "name": "Superhuman",
+        "desc": {
+          "fr": "ghost text pour la complétion d'emails",
+          "en": "ghost text pour la complétion d'emails"
+        }
+      },
+      {
+        "name": "Notion",
+        "desc": {
+          "fr": "ghost text dans l'éditeur après quelques mots",
+          "en": "ghost text dans l'éditeur après quelques mots"
+        }
+      }
+    ],
+    "guide": [
+      "**Déclencheur** : après une pause de frappe (300–500ms). Annuler et relancer à chaque frappe.",
+      "**Affichage** : couleur `--color-text-tertiary` (gris clair) pour la suggestion. Ne jamais la rendre aussi visible que le texte réel.",
+      "**Acceptance** : Tab accepte la suggestion complète. ⌘→ peut accepter mot par mot.",
+      "**Rejection** : Échap supprime la suggestion. Toute autre touche que Tab continue la saisie et ignore la suggestion.",
+      "**Longueur** : limiter la suggestion à 1–3 phrases. Les suggestions très longues ont un taux d'acceptation plus faible.",
+      "**Debounce + cancel** : annuler la requête en cours si l'utilisateur tape avant que la suggestion arrive."
+    ],
+    "pitfalls": [
+      "❌ Ghost text de même couleur que le texte réel — impossible à distinguer",
+      "❌ Suggestion qui remplace le texte existant au lieu de s'ajouter après",
+      "❌ Pas d'annulation quand l'utilisateur tape avant la fin de génération",
+      "❌ Tab qui accepte la suggestion et insère aussi une tabulation",
+      "--"
+    ],
+    "what": {
+      "fr": "Une suggestion de complétion grisée s'affiche dans le champ de saisie, après le curseur. L'utilisateur l'accepte en appuyant sur Tab, ou continue à taper pour l'ignorer.",
+      "en": "[EN] Une suggestion de complétion grisée s'affiche dans le champ de saisie, après le curseur. L'utilisate..."
+    },
+    "why": {
+      "fr": "Zéro friction : la suggestion est là, visible, acceptée en une touche. Pas de menu à ouvrir, pas de dialogue. Réduit considérablement le temps de saisie pour les utilisateurs qui trouvent les suggestions pertinentes. La touche Tab est le contrat universel — connu de tous depuis les IDEs.",
+      "en": "[EN] Zéro friction : la suggestion est là, visible, acceptée en une touche. Pas de menu à ouvrir, pas de ..."
+    },
+    "demo": {
+      "fr": "```\nUtilisateur tape : \"Rédigez un email pour\"\nSuggestion AI  : \" confirmer le rendez-vous du 15 janvier\"\n\n[Rédigez un email pour confirmer le rendez-vous du 15 janvier]\n                      ↑ grisé, transparent\n                      Tab → accepté\n                      Toute autre touche → ignoré\n```",
+      "en": "[EN] ```\nUtilisateur tape : \"Rédigez un email pour\"\nSuggestion AI  : \" confirmer le rendez-vous du 15 jan..."
+    }
+  },
+  {
+    "id": 28,
+    "slug": "canvas-artifact-panel",
+    "category": "ai-generation",
+    "title": {
+      "fr": "Canvas / artifact panel",
+      "en": "Canvas / Artifact Panel"
+    },
+    "categoryLabel": {
+      "slug": "ai-generation",
+      "fr": "AI — Génération & Édition",
+      "en": "AI — Generation & Editing"
+    },
+    "examples": [
+      {
+        "name": "Claude Artifacts",
+        "desc": {
+          "fr": "canvas pour code, HTML, SVG, React, Markdown",
+          "en": "canvas pour code, HTML, SVG, React, Markdown"
+        }
+      },
+      {
+        "name": "ChatGPT Canvas",
+        "desc": {
+          "fr": "canvas pour documents et code avec edition collaborative",
+          "en": "canvas pour documents et code avec edition collaborative"
+        }
+      },
+      {
+        "name": "v0 (Vercel)",
+        "desc": {
+          "fr": "canvas pour composants React avec preview live",
+          "en": "canvas pour composants React avec preview live"
+        }
+      },
+      {
+        "name": "Gemini Docs",
+        "desc": {
+          "fr": "génération dans Google Docs directement",
+          "en": "génération dans Google Docs directement"
+        }
+      }
+    ],
+    "guide": [
+      "**Types d'artefacts** : définir les types supportés (Markdown, Code, HTML, JSON, Tableau) et les rendre extensibles.",
+      "**Iframe sandboxé** : pour les artefacts HTML/JS, utiliser un iframe sandbox pour l'isolation de sécurité.",
+      "**Synchronisation** : les modifications manuelles dans le canvas doivent être reflétées dans les échanges suivants (injection dans le contexte de conversation).",
+      "**Version history** : chaque génération/modification crée une version — permettre de revenir à une version précédente.",
+      "**Export** : toujours proposer copier dans le presse-papier + télécharger en format natif."
+    ],
+    "pitfalls": [
+      "❌ Canvas qui réinitialise à chaque message — l'artefact doit persister",
+      "❌ Pas de moyen d'éditer manuellement l'artefact — la génération AI ne peut pas être parfaite",
+      "❌ Canvas sans version history — les modifications accidentelles ne peuvent pas être annulées",
+      "❌ Sécurité insuffisante sur les artefacts exécutables (XSS si pas de sandbox)",
+      "--",
+      "--",
+      "--"
+    ],
+    "what": {
+      "fr": "La réponse AI génère un objet riche (document, code, tableau, composant UI) dans un panneau séparé du chat, éditable directement, persistant entre les échanges.",
+      "en": "[EN] La réponse AI génère un objet riche (document, code, tableau, composant UI) dans un panneau séparé d..."
+    },
+    "why": {
+      "fr": "Sort du paradigme \"réponse texte dans le chat\" pour créer un objet de travail réel. L'utilisateur peut itérer sur l'artefact (\"rends ce tableau plus formel\", \"ajoute une colonne Total\") sans perdre l'objet entre les échanges. Le chat devient un outil de manipulation de l'artefact, pas juste de réponse à des questions.",
+      "en": "[EN] Sort du paradigme \"réponse texte dans le chat\" pour créer un objet de travail réel. L'utilisateur pe..."
+    },
+    "demo": {
+      "fr": "```\n┌────────────────────────┬──────────────────────┐\n│ CHAT                   │ CANVAS               │\n│ ─────────────────────  │ ──────────────────── │\n│ 👤 Génère un tableau   │ | Produit | Prix | Q │\n│    des ventes Q3       │ | ─────── | ─── | ─ │\n│                        │ | Widget  | 29€ | 42 │\n│ 🤖 Voici le tableau.   │ | Gadget  | 49€ | 28 │\n│    [Voir dans canvas→] │ | Truc    | 19€ | 67 │\n│                        │ ──────────────────── │\n│ 👤 Ajoute une colonne  │ Éditable directement │\n│    Total               │ ──────────────────── │\n│                        │ [Exporter] [Copier]  │\n└────────────────────────┴──────────────────────┘\n```",
+      "en": "[EN] ```\n┌────────────────────────┬──────────────────────┐\n│ CHAT                   │ CANVAS             ..."
+    }
+  },
+  {
+    "id": 29,
+    "slug": "mentions-pour-le-contexte",
+    "category": "ai-context",
+    "title": {
+      "fr": "@-mentions pour le contexte",
+      "en": "@-mentions for Context"
+    },
+    "categoryLabel": {
+      "slug": "ai-context",
+      "fr": "AI — Contexte & Mémoire",
+      "en": "AI — Context & Memory"
+    },
+    "examples": [
+      {
+        "name": "GitHub Copilot",
+        "desc": {
+          "fr": "`@workspace`, `@file`, `#selection` dans Copilot Chat",
+          "en": "`@workspace`, `@file`, `#selection` dans Copilot Chat"
+        }
+      },
+      {
+        "name": "Cursor",
+        "desc": {
+          "fr": "`@file`, `@folder`, `@code`, `@docs` dans le prompt",
+          "en": "`@file`, `@folder`, `@code`, `@docs` dans le prompt"
+        }
+      },
+      {
+        "name": "Notion AI",
+        "desc": {
+          "fr": "`@page` pour référencer d'autres documents",
+          "en": "`@page` pour référencer d'autres documents"
+        }
+      },
+      {
+        "name": "Linear",
+        "desc": {
+          "fr": "`@issue` dans les commentaires avec preview inline",
+          "en": "`@issue` dans les commentaires avec preview inline"
+        }
+      }
+    ],
+    "guide": [
+      "**Déclencheur** : `@` ouvre un autocomplete de sélection. Fuzzy search sur les noms.",
+      "**Types supportés** : définir les types mentionnables (fichiers, pages, utilisateurs, issues) avec des icônes distinctes.",
+      "**Preview inline** : au hover sur une mention résolue, afficher un preview du contenu référencé.",
+      "**Limite de contexte** : calculer la taille du contenu injecté et avertir si la fenêtre de contexte est dépassée.",
+      "**Rendu** : les mentions résolues s'affichent comme des chips (badge coloré avec nom) dans le champ de saisie."
+    ],
+    "pitfalls": [
+      "❌ Injection silencieuse sans que l'utilisateur sache ce qui est envoyé à l'API",
+      "❌ Pas de limite sur la taille du contexte injecté — dépasser la fenêtre de contexte casse la réponse",
+      "❌ Mentions qui ne se résolvent pas (affichent `@fichier` en texte brut) sans indication d'erreur",
+      "❌ Pas d'autocomplete — l'utilisateur doit connaître l'exact nom du fichier",
+      "--"
+    ],
+    "what": {
+      "fr": "Mentionner `@fichier`, `@page`, `@utilisateur`, `@ticket` dans le prompt injecte le contenu référencé dans le contexte de la requête AI, de manière explicite et auditable.",
+      "en": "[EN] Mentionner `@fichier`, `@page`, `@utilisateur`, `@ticket` dans le prompt injecte le contenu référenc..."
+    },
+    "why": {
+      "fr": "Résout le problème du contexte de l'AI de manière transparente. L'utilisateur contrôle exactement quelles données sont envoyées. L'AI a le bon contexte sans que l'utilisateur copie-colle. La mention est visible dans le prompt — ce qui est injecté est connu.",
+      "en": "[EN] Résout le problème du contexte de l'AI de manière transparente. L'utilisateur contrôle exactement qu..."
+    },
+    "demo": {
+      "fr": "```\n[Prompt de l'utilisateur]\n\nRésume les blocages de @Sprint-12 et\nassigne les tâches critiques à @Alice\n\n          ↓ résolution avant envoi à l'AI\n\n[Prompt réel envoyé à l'API]\nRésume les blocages de [contenu complet du Sprint 12]\net assigne les tâches critiques à [Alice Martin, alice@company.com]\n```",
+      "en": "[EN] ```\n[Prompt de l'utilisateur]\n\nRésume les blocages de @Sprint-12 et\nassigne les tâches critiques à @..."
+    }
+  },
+  {
+    "id": 30,
+    "slug": "fil-de-conversation-persistant",
+    "category": "ai-context",
+    "title": {
+      "fr": "Fil de conversation persistant",
+      "en": "Persistent Conversation Thread"
+    },
+    "categoryLabel": {
+      "slug": "ai-context",
+      "fr": "AI — Contexte & Mémoire",
+      "en": "AI — Context & Memory"
+    },
+    "examples": [
+      {
+        "name": "Linear AI",
+        "desc": {
+          "fr": "fil par ticket, persistant entre sessions",
+          "en": "fil par ticket, persistant entre sessions"
+        }
+      },
+      {
+        "name": "Intercom Fin",
+        "desc": {
+          "fr": "historique de conversation par contact client",
+          "en": "historique de conversation par contact client"
+        }
+      },
+      {
+        "name": "HubSpot Breeze",
+        "desc": {
+          "fr": "fil AI par deal/contact dans le CRM",
+          "en": "fil AI par deal/contact dans le CRM"
+        }
+      },
+      {
+        "name": "Notion AI",
+        "desc": {
+          "fr": "historique par page de document",
+          "en": "historique par page de document"
+        }
+      }
+    ],
+    "guide": [
+      "**Scope du fil** : définir l'unité de contexte (par document, par ticket, par utilisateur) selon les usages métier.",
+      "**Injection dans le contexte** : les N derniers messages du fil sont injectés en context dans chaque nouvelle requête (fenêtre glissante).",
+      "**Résumé automatique** : pour les longs fils, générer un résumé automatique à intégrer au contexte plutôt que les messages bruts (économie de tokens).",
+      "**Visibilité** : afficher l'historique avec timestamps et noms d'utilisateurs. Multi-utilisateurs si la collaboration est supportée.",
+      "**Effacement** : permettre d'effacer le fil pour repartir d'un contexte vierge."
+    ],
+    "pitfalls": [
+      "❌ Fil qui s'efface à la fermeture de la session",
+      "❌ Injecter tout l'historique sans limite — dépasse la fenêtre de contexte pour les longs fils",
+      "❌ Fil partagé entre utilisateurs sans contrôle d'accès",
+      "❌ Pas de moyen de voir ce qui a été injecté dans le contexte",
+      "--"
+    ],
+    "what": {
+      "fr": "L'historique des échanges AI est sauvegardé par objet de travail (document, ticket, projet) et reste accessible à la reprise, sans avoir à redonner le contexte.",
+      "en": "[EN] L'historique des échanges AI est sauvegardé par objet de travail (document, ticket, projet) et reste..."
+    },
+    "why": {
+      "fr": "Le contexte est une ressource précieuse. Reconstruire le contexte à chaque session est un coût cognitif et temporel. Les fils persistants permettent des workflows itératifs sur plusieurs jours — \"reprends notre discussion d'hier sur la spec\".",
+      "en": "[EN] Le contexte est une ressource précieuse. Reconstruire le contexte à chaque session est un coût cogni..."
+    },
+    "demo": {
+      "fr": "```\nLundi :\n👤 Aide-moi à rédiger la spec de ce ticket\n🤖 Voici une première version...\n\nMercredi (retour sur le même ticket) :\n[Historique visible en grisé]\n\n👤 Reprends la spec et ajoute une section erreurs\n🤖 [En utilisant le contexte de lundi...] Voici la version mise à jour...\n```",
+      "en": "[EN] ```\nLundi :\n👤 Aide-moi à rédiger la spec de ce ticket\n🤖 Voici une première version...\n\nMercredi (r..."
+    }
+  },
+  {
+    "id": 31,
+    "slug": "memory-pr-f-rences-utilisateur",
+    "category": "ai-context",
+    "title": {
+      "fr": "Memory / préférences utilisateur",
+      "en": "Memory / User Preferences"
+    },
+    "categoryLabel": {
+      "slug": "ai-context",
+      "fr": "AI — Contexte & Mémoire",
+      "en": "AI — Context & Memory"
+    },
+    "examples": [
+      {
+        "name": "ChatGPT Memory",
+        "desc": {
+          "fr": "mémoire explicite avec liste visible et éditable",
+          "en": "mémoire explicite avec liste visible et éditable"
+        }
+      },
+      {
+        "name": "Claude",
+        "desc": {
+          "fr": "mémoire avec projets et instructions personnalisées",
+          "en": "mémoire avec projets et instructions personnalisées"
+        }
+      },
+      {
+        "name": "Rewind",
+        "desc": {
+          "fr": "mémoire basée sur l'historique de l'ordinateur",
+          "en": "mémoire basée sur l'historique de l'ordinateur"
+        }
+      },
+      {
+        "name": "Mem.ai",
+        "desc": {
+          "fr": "notes transformées en mémoire structurée",
+          "en": "notes transformées en mémoire structurée"
+        }
+      }
+    ],
+    "guide": [
+      "**Transparence** : toujours montrer à l'utilisateur ce qui est mémorisé. Une page \"Mes mémoires\" avec liste éditable est obligatoire.",
+      "**Contrôle** : l'utilisateur peut ajouter, modifier, supprimer des mémoires manuellement.",
+      "**Mémorisation** : deux modes possibles — automatique (l'AI détecte ce qui mérite d'être retenu) ou explicite (\"Souviens-toi que...\").",
+      "**Injection** : les mémoires pertinentes sont injectées dans le system prompt de chaque conversation.",
+      "**RGPD** : droit à l'effacement de toutes les mémoires, export en JSON, pas de partage entre utilisateurs."
+    ],
+    "pitfalls": [
+      "❌ Mémoire invisible — l'utilisateur ne sait pas ce que l'AI \"sait\" sur lui",
+      "❌ Mémorisation de données sensibles (passwords, numéros de carte) sans protection",
+      "❌ Mémoires qui influencent les réponses sans rapport avec la question",
+      "❌ Pas de moyen d'effacer toutes les mémoires d'un coup",
+      "--"
+    ],
+    "what": {
+      "fr": "L'AI retient des faits sur l'utilisateur (préférences de style, contexte professionnel, informations récurrentes) entre sessions et les réutilise proactivement dans les réponses suivantes.",
+      "en": "[EN] L'AI retient des faits sur l'utilisateur (préférences de style, contexte professionnel, informations..."
+    },
+    "why": {
+      "fr": "Élimine la répétition. L'utilisateur ne devrait pas avoir à réexpliquer son rôle, son style préféré, ou ses conventions à chaque conversation. La mémoire transforme l'AI d'un outil générique en assistant personnel.",
+      "en": "[EN] Élimine la répétition. L'utilisateur ne devrait pas avoir à réexpliquer son rôle, son style préféré,..."
+    },
+    "demo": {
+      "fr": "```\nSession 1 :\n👤 Je suis CPO dans une startup SaaS B2B.\n🤖 [mémorisation silencieuse]\n\nSession 2 (semaine suivante) :\n👤 Aide-moi à rédiger un email de relance client\n🤖 [sans que l'user ait réexpliqué] Voici un email \n   adapté à un contexte B2B SaaS, avec un ton\n   professionnel mais accessible...\n```",
+      "en": "[EN] ```\nSession 1 :\n👤 Je suis CPO dans une startup SaaS B2B.\n🤖 [mémorisation silencieuse]\n\nSession 2 (..."
+    }
+  },
+  {
+    "id": 32,
+    "slug": "sources-cit-es-grounding",
+    "category": "ai-context",
+    "title": {
+      "fr": "Sources citées / grounding",
+      "en": "Cited Sources / Grounding"
+    },
+    "categoryLabel": {
+      "slug": "ai-context",
+      "fr": "AI — Contexte & Mémoire",
+      "en": "AI — Context & Memory"
+    },
+    "examples": [
+      {
+        "name": "Perplexity",
+        "desc": {
+          "fr": "références numérotées sur chaque affirmation, sources en sidebar",
+          "en": "références numérotées sur chaque affirmation, sources en sidebar"
+        }
+      },
+      {
+        "name": "Bing Copilot",
+        "desc": {
+          "fr": "citations inline avec hover preview de la source",
+          "en": "citations inline avec hover preview de la source"
+        }
+      },
+      {
+        "name": "Notion AI Q&A",
+        "desc": {
+          "fr": "réponses ancrées dans le workspace avec lien vers la page source",
+          "en": "réponses ancrées dans le workspace avec lien vers la page source"
+        }
+      },
+      {
+        "name": "Glean",
+        "desc": {
+          "fr": "enterprise search avec sources d'entreprise citées",
+          "en": "enterprise search avec sources d'entreprise citées"
+        }
+      }
+    ],
+    "guide": [
+      "**Format de citation** : numérotation `[1]`, `[2]` inline dans le texte + liste de sources en bas. Chaque source cliquable.",
+      "**Hover preview** : au survol d'une citation, afficher un extrait de la source dans un tooltip.",
+      "**Prompt engineering** : instruire le modèle à citer ses sources avec un format structuré (JSON ou XML) pour un parsing fiable.",
+      "**RAG** : utiliser Retrieval-Augmented Generation — récupérer les chunks pertinents, les injecter dans le contexte, et demander au modèle de citer les IDs de chunks.",
+      "**Confiance** : si aucune source ne couvre la question, l'AI doit l'indiquer explicitement plutôt que d'improviser."
+    ],
+    "pitfalls": [
+      "❌ Citations inventées (hallucination de sources) — pire que l'absence de citation",
+      "❌ Sources non cliquables ou introuvables",
+      "❌ Citer des sources non pertinentes pour paraître \"sourcé\"",
+      "❌ Trop de citations pour une seule phrase — dégrade la lisibilité",
+      "--",
+      "--",
+      "--"
+    ],
+    "what": {
+      "fr": "Chaque affirmation factuelle de l'AI est liée à une source dans le contexte (document, page web, entrée de base de données), affichée sous forme de référence cliquable.",
+      "en": "[EN] Chaque affirmation factuelle de l'AI est liée à une source dans le contexte (document, page web, ent..."
+    },
+    "why": {
+      "fr": "Les hallucinations sont le principal frein à l'adoption de l'AI en entreprise. Citer les sources permet à l'utilisateur de vérifier, renforce la confiance, et déplace la responsabilité : l'AI ne \"sait\" pas, elle \"cite\". Les réponses ancrées sont perçues comme plus fiables même si le contenu est identique.",
+      "en": "[EN] Les hallucinations sont le principal frein à l'adoption de l'AI en entreprise. Citer les sources per..."
+    },
+    "demo": {
+      "fr": "```\n🤖 Le délai de livraison standard est de 5 jours ouvrés [1].\n   Les commandes express sont livrées en 24h [2].\n\n   Sources :\n   [1] Conditions générales de vente, section 4.2\n   [2] FAQ Livraison Express → voir page\n```",
+      "en": "[EN] ```\n🤖 Le délai de livraison standard est de 5 jours ouvrés [1].\n   Les commandes express sont livré..."
+    }
+  },
+  {
+    "id": 33,
+    "slug": "thinking-reasoning-visible",
+    "category": "ai-feedback",
+    "title": {
+      "fr": "Thinking / reasoning visible",
+      "en": "Visible Thinking / Reasoning"
+    },
+    "categoryLabel": {
+      "slug": "ai-feedback",
+      "fr": "AI — Feedback & Contrôle",
+      "en": "AI — Feedback & Control"
+    },
+    "examples": [
+      {
+        "name": "Claude",
+        "desc": {
+          "fr": "`<thinking>` blocks avec reasoning visible avant la réponse",
+          "en": "`<thinking>` blocks avec reasoning visible avant la réponse"
+        }
+      },
+      {
+        "name": "ChatGPT o1",
+        "desc": {
+          "fr": "\"Thinking\" collapsable avec durée estimée",
+          "en": "\"Thinking\" collapsable avec durée estimée"
+        }
+      },
+      {
+        "name": "Perplexity",
+        "desc": {
+          "fr": "étapes de recherche et de raisonnement visibles",
+          "en": "étapes de recherche et de raisonnement visibles"
+        }
+      },
+      {
+        "name": "Gemini 2.0 Flash Thinking",
+        "desc": {
+          "fr": "reasoning steps affichés",
+          "en": "reasoning steps affichés"
+        }
+      }
+    ],
+    "guide": [
+      "**Collapsable par défaut** : le thinking est replié par défaut pour ne pas noyer la réponse finale. L'utilisateur l'ouvre s'il veut inspecter.",
+      "**Streaming du thinking** : streamer le thinking en temps réel (même pattern que la réponse) pour donner le sentiment de \"voir l'AI penser\".",
+      "**Séparation visuelle** : le thinking doit être visuellement distinct de la réponse (fond différent, italique, icône différente).",
+      "**Durée** : afficher la durée du raisonnement (\"Réfléchi 8 secondes\") — informe sur l'effort fourni.",
+      "**Ne pas exposer sur les requêtes simples** : le thinking n'a de valeur que sur les questions complexes. Sur les requêtes simples, le masquer entièrement."
+    ],
+    "pitfalls": [
+      "❌ Thinking trop long qui noie la réponse",
+      "❌ Thinking ouvert par défaut — la réponse est ce que l'utilisateur cherche, pas le raisonnement",
+      "❌ Thinking identique visuellement à la réponse — confusion entre les deux",
+      "❌ Afficher le thinking sur toutes les réponses y compris les plus triviales",
+      "--"
+    ],
+    "what": {
+      "fr": "Le raisonnement intermédiaire du modèle (chain-of-thought) est affiché dans une zone collapsable avant la réponse finale, montrant les étapes de réflexion de l'AI.",
+      "en": "[EN] Le raisonnement intermédiaire du modèle (chain-of-thought) est affiché dans une zone collapsable ava..."
+    },
+    "why": {
+      "fr": "Augmente massivement la confiance dans les réponses complexes. L'utilisateur peut voir si l'AI a bien compris la question, identifié les bons paramètres, et suivi une logique cohérente. Un raisonnement transparent est aussi plus facile à débugger et corriger.",
+      "en": "[EN] Augmente massivement la confiance dans les réponses complexes. L'utilisateur peut voir si l'AI a bie..."
+    },
+    "demo": {
+      "fr": "```\n🤖 [Réflexion en cours...]                ← collapsable\n┌─────────────────────────────────────┐\n│ Je dois analyser les ventes Q3.     │\n│ Paramètres : période juillet-sept,  │\n│ comparaison avec Q3 2023...         │\n│ Je vois que les revenus ont crû de  │\n│ 23% mais les marges ont baissé...   │\n└─────────────────────────────────────┘\n\n**Analyse des ventes Q3** : La croissance du\nchiffre d'affaires (+23%) masque une pression\nsur les marges due à...\n```",
+      "en": "[EN] ```\n🤖 [Réflexion en cours...]                ← collapsable\n┌─────────────────────────────────────┐\n..."
+    }
+  },
+  {
+    "id": 34,
+    "slug": "regenerate-variantes",
+    "category": "ai-feedback",
+    "title": {
+      "fr": "Regenerate + variantes",
+      "en": "Regenerate + Variants"
+    },
+    "categoryLabel": {
+      "slug": "ai-feedback",
+      "fr": "AI — Feedback & Contrôle",
+      "en": "AI — Feedback & Control"
+    },
+    "examples": [
+      {
+        "name": "ChatGPT",
+        "desc": {
+          "fr": "bouton regenerate natif, navigation entre versions",
+          "en": "bouton regenerate natif, navigation entre versions"
+        }
+      },
+      {
+        "name": "Claude",
+        "desc": {
+          "fr": "regenerate avec navigation ←/→ entre les générations",
+          "en": "regenerate avec navigation ←/→ entre les générations"
+        }
+      },
+      {
+        "name": "Midjourney",
+        "desc": {
+          "fr": "4 variantes systématiques, U/V buttons pour upscale/vary",
+          "en": "4 variantes systématiques, U/V buttons pour upscale/vary"
+        }
+      },
+      {
+        "name": "v0",
+        "desc": {
+          "fr": "3 variantes de composant UI en parallèle",
+          "en": "3 variantes de composant UI en parallèle"
+        }
+      }
+    ],
+    "guide": [
+      "**Navigation entre versions** : conserver toutes les versions générées (1/3, 2/3, 3/3) avec navigation ←/→.",
+      "**Variantes** : limiter à 2–4 variantes simultanées. Plus = difficile à comparer.",
+      "**Paramètre de variante** : pour guider la variante, permettre d'ajouter une instruction (\"Plus formel\", \"Plus concis\").",
+      "**Coût visible** : si l'application a un modèle de crédit, indiquer le coût d'un regenerate avant de l'exécuter.",
+      "**Conserver le contexte** : le regenerate utilise exactement le même prompt et contexte — il ne \"repose pas la question\"."
+    ],
+    "pitfalls": [
+      "❌ Regenerate qui efface la réponse précédente sans possibilité de la retrouver",
+      "❌ Variantes affichées sans possibilité de les comparer côte à côte",
+      "❌ Pas de way d'indiquer pourquoi on regénère (la prochaine génération devrait être différente)",
+      "❌ Regenerate gratuit illimité sur des modèles coûteux sans rate limiting",
+      "--"
+    ],
+    "what": {
+      "fr": "Après une réponse AI, l'utilisateur peut relancer la génération (même prompt, seed différente) ou demander plusieurs variantes affichées en parallèle pour choisir.",
+      "en": "[EN] Après une réponse AI, l'utilisateur peut relancer la génération (même prompt, seed différente) ou de..."
+    },
+    "why": {
+      "fr": "La génération AI est non déterministe. Une réponse insatisfaisante n'est pas forcément la \"bonne\" réponse — une autre seed peut donner quelque chose de bien meilleur. Le regenerate offre une seconde chance sans effort. Les variantes parallèles permettent une comparaison rapide pour les décisions créatives.",
+      "en": "[EN] La génération AI est non déterministe. Une réponse insatisfaisante n'est pas forcément la \"bonne\" ré..."
+    },
+    "demo": {
+      "fr": "```\n🤖 [Première réponse générée]\n\n[↺ Régénérer]  [⊞ 3 variantes]  [👍]  [👎]\n\n─────────────────────────────────────────\n\nVariante A          Variante B          Variante C\n──────────          ──────────          ──────────\nTon formel          Ton direct          Ton amical\n[Utiliser]          [Utiliser]          [Utiliser]\n```",
+      "en": "[EN] ```\n🤖 [Première réponse générée]\n\n[↺ Régénérer]  [⊞ 3 variantes]  [👍]  [👎]\n\n─────────────────────..."
+    }
+  },
+  {
+    "id": 35,
+    "slug": "agentic-step-tracker",
+    "category": "ai-feedback",
+    "title": {
+      "fr": "Agentic step tracker",
+      "en": "Agentic Step Tracker"
+    },
+    "categoryLabel": {
+      "slug": "ai-feedback",
+      "fr": "AI — Feedback & Contrôle",
+      "en": "AI — Feedback & Control"
+    },
+    "examples": [
+      {
+        "name": "Devin",
+        "desc": {
+          "fr": "step tracker complet avec logs détaillés par étape",
+          "en": "step tracker complet avec logs détaillés par étape"
+        }
+      },
+      {
+        "name": "Claude Code",
+        "desc": {
+          "fr": "affichage des outils utilisés (read, write, bash) en temps réel",
+          "en": "affichage des outils utilisés (read, write, bash) en temps réel"
+        }
+      },
+      {
+        "name": "Replit Agent",
+        "desc": {
+          "fr": "steps avec détail des fichiers modifiés",
+          "en": "steps avec détail des fichiers modifiés"
+        }
+      },
+      {
+        "name": "OpenAI Operator",
+        "desc": {
+          "fr": "actions navigateur affichées étape par étape",
+          "en": "actions navigateur affichées étape par étape"
+        }
+      }
+    ],
+    "guide": [
+      "**Granularité** : afficher des étapes métier (Lecture du ticket, Analyse, Rédaction) plutôt que des étapes techniques (HTTP GET /api/issues/1234). L'utilisateur n'est pas un développeur.",
+      "**États des étapes** : ✅ Terminé / ⚙️ En cours / ⏳ En attente / ❌ Erreur.",
+      "**Stop immédiat** : le bouton Stop doit interrompre l'agent sans délai. Utiliser des abort controllers ou des signaux d'annulation.",
+      "**Rollback sur stop** : définir clairement ce qui se passe si l'utilisateur arrête — les actions déjà effectuées sont-elles annulées ? L'informer.",
+      "**Logs détaillés** : les étapes techniques complètes disponibles dans un panneau collapsable pour les utilisateurs avancés."
+    ],
+    "pitfalls": [
+      "❌ Pas de bouton Stop — l'utilisateur est captif",
+      "❌ Steps trop granulaires (log de chaque appel HTTP) — illisible",
+      "❌ Progress bar sans estimation de temps — l'utilisateur ne sait pas combien de temps attendre",
+      "❌ Agent qui modifie des données en production sans confirmation préalable",
+      "--"
+    ],
+    "what": {
+      "fr": "Pour les tâches longues exécutées par un agent autonome, un fil d'étapes affiche en temps réel ce que l'agent est en train de faire, avec un bouton Stop accessible à tout moment.",
+      "en": "[EN] Pour les tâches longues exécutées par un agent autonome, un fil d'étapes affiche en temps réel ce qu..."
+    },
+    "why": {
+      "fr": "Un agent autonome qui \"disparaît\" pendant 30 secondes est anxiogène. L'utilisateur ne sait pas si c'est en train de fonctionner, bloqué, ou en train de faire quelque chose d'indésirable. Le step tracker maintient la confiance par la transparence totale sur les actions en cours.",
+      "en": "[EN] Un agent autonome qui \"disparaît\" pendant 30 secondes est anxiogène. L'utilisateur ne sait pas si c'..."
+    },
+    "demo": {
+      "fr": "```\n🤖 Agent en cours...                    [⏹ Arrêter]\n\n✅ Lecture du ticket #1234              2s\n✅ Analyse des issues similaires        5s\n⚙️  Rédaction de la solution...        ← en cours\n⏳ Tests unitaires                      en attente\n⏳ Création du PR                       en attente\n\n[██████████░░░░░░░░░░] 45%\n```",
+      "en": "[EN] ```\n🤖 Agent en cours...                    [⏹ Arrêter]\n\n✅ Lecture du ticket #1234              2s\n✅..."
+    }
+  },
+  {
+    "id": 36,
+    "slug": "confidence-uncertainty-signal",
+    "category": "ai-feedback",
+    "title": {
+      "fr": "Confidence / uncertainty signal",
+      "en": "Confidence / Uncertainty Signal"
+    },
+    "categoryLabel": {
+      "slug": "ai-feedback",
+      "fr": "AI — Feedback & Contrôle",
+      "en": "AI — Feedback & Control"
+    },
+    "examples": [
+      {
+        "name": "Perplexity",
+        "desc": {
+          "fr": "distinction claire entre informations sourcées et inférences",
+          "en": "distinction claire entre informations sourcées et inférences"
+        }
+      },
+      {
+        "name": "Bing Copilot",
+        "desc": {
+          "fr": "disclaimer sur les informations non vérifiables",
+          "en": "disclaimer sur les informations non vérifiables"
+        }
+      },
+      {
+        "name": "Harvey AI",
+        "desc": {
+          "fr": "niveaux de confiance sur les analyses juridiques",
+          "en": "niveaux de confiance sur les analyses juridiques"
+        }
+      },
+      {
+        "name": "Glean",
+        "desc": {
+          "fr": "score de pertinence des sources enterprise",
+          "en": "score de pertinence des sources enterprise"
+        }
+      }
+    ],
+    "guide": [
+      "**Niveaux de confiance** : définir 3 niveaux (Haute / Moyenne / Faible) avec représentation visuelle distincte pour chacun.",
+      "**Détection** : côté modèle, utiliser le log-probability des tokens ou demander explicitement au modèle d'évaluer sa confiance dans le prompt.",
+      "**Ton** : sur les réponses incertaines, changer le ton linguistique (\"je pense que\", \"il me semble\") en plus du signal visuel.",
+      "**Redirection** : toujours proposer une alternative (lien vers la doc, suggestion de vérifier, contact humain) sur les réponses incertaines.",
+      "**Pas de confiance par défaut** : ne pas afficher un badge \"Haute confiance\" systématiquement — c'est aussi trompeur que pas de signal du tout."
+    ],
+    "pitfalls": [
+      "❌ Signaler la faible confiance mais quand même donner la \"réponse\" de manière assertive",
+      "❌ Trop de warnings — si tout est marqué incertain, le signal perd sa valeur",
+      "❌ Confidence score affiché en chiffre (72%) sans calibration — les utilisateurs surinterpètent les chiffres précis",
+      "❌ Pas de lien vers une source plus fiable sur les réponses incertaines",
+      "--",
+      "--",
+      "--"
+    ],
+    "what": {
+      "fr": "L'interface signale visuellement quand l'AI est peu confiante dans sa réponse — badge, nuance de couleur, disclaimer inline — au lieu d'afficher toutes les réponses avec la même assurance visuelle.",
+      "en": "[EN] L'interface signale visuellement quand l'AI est peu confiante dans sa réponse — badge, nuance de cou..."
+    },
+    "why": {
+      "fr": "Une AI qui présente ses incertitudes avec la même confiance que ses certitudes est dangereuse. Signaler l'incertitude permet à l'utilisateur d'adapter son niveau de vérification. C'est aussi plus honnête — et la transparence sur les limites augmente la confiance globale dans le système.",
+      "en": "[EN] Une AI qui présente ses incertitudes avec la même confiance que ses certitudes est dangereuse. Signa..."
+    },
+    "demo": {
+      "fr": "```\nConfiance élevée :\n🤖 Le prix standard est 29€/mois. [📄 Grille tarifaire]\n\nConfiance faible :\n🤖 ⚠️ Je ne suis pas certain, mais je pense que\n   la fonctionnalité X est disponible en plan Pro.\n   [Vérifier dans la documentation]\n   \nHors contexte :\n🤖 ℹ️ Cette question dépasse mon contexte actuel.\n   Je ne peux pas y répondre de manière fiable.\n```",
+      "en": "[EN] ```\nConfiance élevée :\n🤖 Le prix standard est 29€/mois. [📄 Grille tarifaire]\n\nConfiance faible :\n\ud83e..."
+    }
+  },
+  {
+    "id": 37,
+    "slug": "suggested-prompts-quick-actions",
+    "category": "ai-prompt",
+    "title": {
+      "fr": "Suggested prompts / quick actions",
+      "en": "Suggested Prompts / Quick Actions"
+    },
+    "categoryLabel": {
+      "slug": "ai-prompt",
+      "fr": "AI — Prompt UX",
+      "en": "AI — Prompt UX"
+    },
+    "examples": [
+      {
+        "name": "ChatGPT",
+        "desc": {
+          "fr": "suggestions contextuelles renouvelées à chaque session",
+          "en": "suggestions contextuelles renouvelées à chaque session"
+        }
+      },
+      {
+        "name": "Claude",
+        "desc": {
+          "fr": "suggestions adaptées au type de conversation",
+          "en": "suggestions adaptées au type de conversation"
+        }
+      },
+      {
+        "name": "Copilot Chat",
+        "desc": {
+          "fr": "suggestions liées au fichier ouvert dans VS Code",
+          "en": "suggestions liées au fichier ouvert dans VS Code"
+        }
+      },
+      {
+        "name": "Notion AI",
+        "desc": {
+          "fr": "suggestions liées au type de document",
+          "en": "suggestions liées au type de document"
+        }
+      }
+    ],
+    "guide": [
+      "**Contextualisation** : les suggestions doivent changer selon l'objet actif (ticket, document, contact, code). Pas les mêmes 4 suggestions partout.",
+      "**Nombre** : 3–6 suggestions. Trop peu = pas assez de choix, trop = paralysie de décision.",
+      "**Format** : icône + label court (5–7 mots max). Le label doit être un verbe d'action.",
+      "**Clic = prompt exécuté** : cliquer sur une suggestion doit directement lancer la requête, pas remplir le champ de saisie.",
+      "**Refresh** : bouton \"Autres suggestions\" pour voir des alternatives si aucune ne convient."
+    ],
+    "pitfalls": [
+      "❌ Suggestions génériques identiques dans tous les contextes",
+      "❌ Suggestions trop longues qui ne rentrent pas dans le bouton",
+      "❌ Clic qui remplit le champ mais ne soumet pas — étape supplémentaire inutile",
+      "❌ Suggestions disparaissant après le premier message — les réafficher quand le champ est vide",
+      "--"
+    ],
+    "what": {
+      "fr": "L'état vide de l'interface chat est rempli de suggestions contextuelles cliquables, adaptées à l'objet de travail actuel, qui permettent de démarrer sans effort.",
+      "en": "[EN] L'état vide de l'interface chat est rempli de suggestions contextuelles cliquables, adaptées à l'obj..."
+    },
+    "why": {
+      "fr": "La page blanche est le principal obstacle à l'adoption. \"Comment est-ce que je commence ?\" est la question que pose chaque nouvel utilisateur. Les suggestions contextuelles répondent directement à cette question avec des actions immédiatement utiles — pas des exemples génériques.",
+      "en": "[EN] La page blanche est le principal obstacle à l'adoption. \"Comment est-ce que je commence ?\" est la qu..."
+    },
+    "demo": {
+      "fr": "```\n[Interface AI vide, contexte : ticket de bug]\n\n                   ✨ AI Assistant\n\n    Que puis-je faire pour vous ?\n\n    ┌──────────────────────────────────────┐\n    │ 📝 Rédiger les étapes de reproduc.  │\n    │ 🔍 Trouver des issues similaires    │\n    │ ✅ Générer des critères d'acceptance │\n    │ 🧪 Écrire des cas de test          │\n    └──────────────────────────────────────┘\n\n    [Écrire une instruction...          ↑]\n```",
+      "en": "[EN] ```\n[Interface AI vide, contexte : ticket de bug]\n\n                   ✨ AI Assistant\n\n    Que puis-j..."
+    }
+  },
+  {
+    "id": 38,
+    "slug": "prompt-templates",
+    "category": "ai-prompt",
+    "title": {
+      "fr": "Prompt templates",
+      "en": "Prompt Templates"
+    },
+    "categoryLabel": {
+      "slug": "ai-prompt",
+      "fr": "AI — Prompt UX",
+      "en": "AI — Prompt UX"
+    },
+    "examples": [
+      {
+        "name": "HubSpot",
+        "desc": {
+          "fr": "templates AI par équipe (Sales, Marketing, Support)",
+          "en": "templates AI par équipe (Sales, Marketing, Support)"
+        }
+      },
+      {
+        "name": "Salesforce Einstein",
+        "desc": {
+          "fr": "prompt templates par rôle métier",
+          "en": "prompt templates par rôle métier"
+        }
+      },
+      {
+        "name": "PromptLayer",
+        "desc": {
+          "fr": "gestion et versioning de templates en équipe",
+          "en": "gestion et versioning de templates en équipe"
+        }
+      },
+      {
+        "name": "Dust",
+        "desc": {
+          "fr": "templates avec variables et workflows",
+          "en": "templates avec variables et workflows"
+        }
+      }
+    ],
+    "guide": [
+      "**Variables** : supporter des variables `{{variable}}` que l'utilisateur remplit avant l'envoi.",
+      "**Scope** : templates personnels vs partagés par équipe vs globaux (admin).",
+      "**Versioning** : historique des modifications d'un template avec possibilité de rollback.",
+      "**Catégorisation** : dossiers ou tags pour organiser les templates par équipe ou cas d'usage.",
+      "**Métriques** : tracking d'utilisation — quels templates sont les plus utilisés, quels résultats."
+    ],
+    "pitfalls": [
+      "❌ Templates sans variables — l'utilisateur doit tout réécrire à la main",
+      "❌ Templates uniquement personnels — la valeur est dans le partage d'équipe",
+      "❌ Pas de possibilité de prévisualiser le template avant utilisation",
+      "❌ Templates trop longs et complexes — les plus utilisés sont les plus simples",
+      "--"
+    ],
+    "what": {
+      "fr": "Bibliothèque de prompts pré-écrits, personnalisables et partageables, que l'utilisateur ou l'équipe peut créer pour standardiser les usages récurrents de l'AI.",
+      "en": "[EN] Bibliothèque de prompts pré-écrits, personnalisables et partageables, que l'utilisateur ou l'équipe ..."
+    },
+    "why": {
+      "fr": "Le prompt engineering est une compétence rare. Les templates permettent aux utilisateurs avancés de créer des prompts efficaces une fois, et à tout le monde de les utiliser ensuite. Standardise les usages, maintient la qualité, et réduit le temps par tâche.",
+      "en": "[EN] Le prompt engineering est une compétence rare. Les templates permettent aux utilisateurs avancés de ..."
+    },
+    "demo": {
+      "fr": "```\nBibliothèque de templates (partagée par équipe) :\n\n📁 Commercial\n   └ Email de relance client        [Utiliser] [Modifier]\n   └ Synthèse d'appel de vente      [Utiliser] [Modifier]\n\n📁 Produit  \n   └ Rédaction de user story        [Utiliser] [Modifier]\n   └ Analyse de feedback utilisateur[Utiliser] [Modifier]\n\n[+ Créer un template]\n\n─────────────────────────────\n\nTemplate \"Rédaction de user story\" :\nEn tant que {{persona}}, je veux {{action}}\nafin de {{bénéfice}}.\n\nContexte : {{contexte_du_ticket}}\n\nVariables à remplir avant envoi :\n[persona      ] [action       ] [bénéfice      ]\n```",
+      "en": "[EN] ```\nBibliothèque de templates (partagée par équipe) :\n\n📁 Commercial\n   └ Email de relance client   ..."
+    }
+  },
+  {
+    "id": 39,
+    "slug": "multimodal-drop-zone",
+    "category": "ai-prompt",
+    "title": {
+      "fr": "Multimodal drop zone",
+      "en": "Multimodal Drop Zone"
+    },
+    "categoryLabel": {
+      "slug": "ai-prompt",
+      "fr": "AI — Prompt UX",
+      "en": "AI — Prompt UX"
+    },
+    "examples": [
+      {
+        "name": "ChatGPT",
+        "desc": {
+          "fr": "images, PDF, CSV, code files",
+          "en": "images, PDF, CSV, code files"
+        }
+      },
+      {
+        "name": "Claude",
+        "desc": {
+          "fr": "images, PDF, documents texte",
+          "en": "images, PDF, documents texte"
+        }
+      },
+      {
+        "name": "Gemini",
+        "desc": {
+          "fr": "images, vidéo, audio, PDF",
+          "en": "images, vidéo, audio, PDF"
+        }
+      },
+      {
+        "name": "Copilot",
+        "desc": {
+          "fr": "images et documents Office",
+          "en": "images et documents Office"
+        }
+      }
+    ],
+    "guide": [
+      "**Drag & drop** : écouter `dragover` et `drop` sur toute la zone de chat, pas seulement l'input.",
+      "**Types supportés** : définir clairement les types MIME acceptés et afficher un message d'erreur clair pour les types non supportés.",
+      "**Preview** : thumbnail pour les images, icône + nom + taille pour les autres fichiers.",
+      "**Limite de taille** : définir une limite et l'afficher avant upload. Message d'erreur clair si dépassée.",
+      "**Multiple files** : permettre plusieurs fichiers simultanément avec possibilité de supprimer individuellement.",
+      "**Traitement côté serveur** : les fichiers sont uploadés vers un storage sécurisé, pas envoyés directement à l'API du modèle en base64 (trop lent, trop lourd)."
+    ],
+    "pitfalls": [
+      "❌ Types de fichiers acceptés non indiqués avant l'upload",
+      "❌ Erreur générique \"Fichier non supporté\" sans préciser pourquoi",
+      "❌ Upload bloquant l'interface pendant le transfert",
+      "❌ Fichiers conservés indéfiniment sans politique de rétention",
+      "--"
+    ],
+    "what": {
+      "fr": "La zone de saisie du chat accepte texte, images, PDF, audio, et autres fichiers — avec indication claire des types acceptés, prévisualisation des fichiers joints, et traitement adapté à chaque type.",
+      "en": "[EN] La zone de saisie du chat accepte texte, images, PDF, audio, et autres fichiers — avec indication cl..."
+    },
+    "why": {
+      "fr": "Les utilisateurs pensent en termes de problème, pas de type de données. \"Regarde ce screenshot et dis-moi ce qui ne va pas\" est plus naturel que \"voici du texte décrivant un screenshot\". La multimodalité supprime la traduction mentale et permet des requêtes plus directes.",
+      "en": "[EN] Les utilisateurs pensent en termes de problème, pas de type de données. \"Regarde ce screenshot et di..."
+    },
+    "demo": {
+      "fr": "```\n┌─────────────────────────────────────────┐\n│                                         │\n│         Glissez vos fichiers ici        │\n│    ou cliquez pour parcourir            │\n│                                         │\n│    📷 Images  📄 PDF  🎵 Audio  📊 CSV  │\n│                                         │\n└─────────────────────────────────────────┘\n\nAprès upload :\n┌─────────────────────────────────────────┐\n│ 🖼️ screenshot-bug.png  ×               │\n│ 📄 rapport-q3.pdf      ×               │\n│ ─────────────────────────────────────  │\n│ [Que vois-tu dans ces fichiers ?    ↑] │\n└─────────────────────────────────────────┘\n```",
+      "en": "[EN] ```\n┌─────────────────────────────────────────┐\n│                                         │\n│       ..."
+    }
+  },
+  {
+    "id": 40,
+    "slug": "mode-voix-natif",
+    "category": "ai-prompt",
+    "title": {
+      "fr": "Mode voix natif",
+      "en": "Native Voice Mode"
+    },
+    "categoryLabel": {
+      "slug": "ai-prompt",
+      "fr": "AI — Prompt UX",
+      "en": "AI — Prompt UX"
+    },
+    "examples": [
+      {
+        "name": "ChatGPT Advanced Voice",
+        "desc": {
+          "fr": "référence : voix naturelle, interruption possible, émotions",
+          "en": "référence : voix naturelle, interruption possible, émotions"
+        }
+      },
+      {
+        "name": "Claude",
+        "desc": {
+          "fr": "mode voix avec réponse audio naturelle",
+          "en": "mode voix avec réponse audio naturelle"
+        }
+      },
+      {
+        "name": "Gemini Live",
+        "desc": {
+          "fr": "voix temps réel avec multimodalité (peut voir l'écran)",
+          "en": "voix temps réel avec multimodalité (peut voir l'écran)"
+        }
+      },
+      {
+        "name": "Pi (Inflection)",
+        "desc": {
+          "fr": "voix comme mode d'interaction principal",
+          "en": "voix comme mode d'interaction principal"
+        }
+      }
+    ],
+    "guide": [
+      "**VAD (Voice Activity Detection)** : détecter automatiquement la fin de la phrase plutôt que d'utiliser un bouton \"Arrêter\". Librairies : `@ricky0123/vad-web`, Silero VAD.",
+      "**Streaming audio** : la réponse audio commence à jouer pendant que l'AI génère encore — même principe que le streaming texte.",
+      "**Interruption** : l'utilisateur peut interrompre l'AI en parlant. Détecter la voix pendant la lecture audio et couper.",
+      "**Transcription visible** : toujours afficher la transcription texte en parallèle (accessibilité + vérification).",
+      "**Bascule voix/texte** : permettre de passer du mode voix au mode texte sans perdre l'historique de conversation.",
+      "**WebRTC ou WebAudio API** : pour les applications browser. Gérer les permissions micro avec un fallback gracieux si refusé."
+    ],
+    "pitfalls": [
+      "❌ Simple bouton \"Enregistrer → Envoyer\" sans streaming — perçu comme basique et lent",
+      "❌ Pas de VAD — l'utilisateur doit appuyer sur un bouton pour terminer sa phrase",
+      "❌ Réponse audio sans transcription — inaccessible",
+      "❌ Pas de gestion du bruit ambiant — performances dégradées dans les open spaces",
+      "❌ Mode voix qui coupe la voix de l'AI quand l'utilisateur commence à parler sans transition douce",
+      "--",
+      "--",
+      "*Persistance** — Les préférences, états, filtres et historiques doivent survivre au refresh et être retrouvés sur n'importe quel appareil. La perte d'état est la source de frustration la plus fréquente.",
+      "*Accessibilité clavier** — Chaque pattern doit fonctionner intégralement au clavier. Tab, Échap, Enter, et les raccourcis standards sont des contrats avec l'utilisateur.",
+      "*Performance perçue** — Skeleton screens, optimistic UI, streaming : l'objectif n'est pas d'être rapide, c'est d'*être perçu* comme rapide. Les deux ne sont pas identiques.",
+      "*Transparence de l'AI** — Pour les patterns AI, la règle d'or est : l'utilisateur doit toujours savoir ce que l'AI fait, avec quelles données, et avec quelle confiance. L'opacité génère de la méfiance.",
+      "*Contrôle utilisateur** — Stop buttons, undo, diff view, reject : chaque pattern AI doit donner à l'utilisateur le dernier mot. L'AI propose, l'humain dispose.",
+      "--",
+      "Guide maintenu par la communauté — contributions bienvenues.*"
+    ],
+    "what": {
+      "fr": "Interface conversationnelle vocale intégrée nativement : l'utilisateur parle, l'AI répond à voix haute, avec visualisation de la parole, détection de fin de phrase, et streaming audio de la réponse.",
+      "en": "[EN] Interface conversationnelle vocale intégrée nativement : l'utilisateur parle, l'AI répond à voix hau..."
+    },
+    "why": {
+      "fr": "Certains contextes sont incompatibles avec la frappe : mains occupées, déplacement, pensée à voix haute. Le mode voix natif n'est pas un simple STT (Speech-to-Text) converti en texte — c'est un mode d'interaction complet avec ses propres conventions. Il ouvre l'AI à des cas d'usage impossibles en texte.",
+      "en": "[EN] Certains contextes sont incompatibles avec la frappe : mains occupées, déplacement, pensée à voix ha..."
+    },
+    "demo": {
+      "fr": "```\n[Mode voix actif]\n\n     🎤\n   ╭─────╮\n   │ ~~~ │  ← visualisation de la voix (waveform)\n   ╰─────╯\n\nVous : \"Résume les points clés du dernier meeting\"\n\n          ●●● [AI réfléchit]\n\nAI : [audio streamé] \"Lors du dernier meeting,\n      trois points principaux ont été abordés...\"\n\n[Retranscription visible en sous-texte]\n[⏸ Pause]  [🔁 Rejouer]  [📝 Voir en texte]\n```",
+      "en": "[EN] ```\n[Mode voix actif]\n\n     🎤\n   ╭─────╮\n   │ ~~~ │  ← visualisation de la voix (waveform)\n   ╰────..."
+    }
+  }
+]

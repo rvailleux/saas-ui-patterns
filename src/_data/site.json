@@ -1,0 +1,15 @@
+{
+  "name": {
+    "fr": "SaaS UI Design Patterns",
+    "en": "SaaS UI Design Patterns"
+  },
+  "description": {
+    "fr": "Guide de référence pour designers produit et développeurs front-end",
+    "en": "Reference guide for product designers and front-end developers"
+  },
+  "locales": [
+    "fr",
+    "en"
+  ],
+  "defaultLocale": "fr"
+}

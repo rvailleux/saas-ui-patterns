@@ -1,0 +1,21 @@
+{
+  "name": "saas-design-patterns",
+  "version": "1.0.0",
+  "description": "Multilingual reference site for modern SaaS UI design patterns",
+  "scripts": {
+    "dev": "npx @11ty/eleventy --serve",
+    "build": "NODE_ENV=production npx @11ty/eleventy",
+    "deploy": "npm run build && npx gh-pages -d _site",
+    "parse": "node scripts/parse-content.js"
+  },
+  "license": "MIT",
+  "type": "commonjs",
+  "devDependencies": {
+    "@11ty/eleventy": "^2.0.1",
+    "@tailwindcss/typography": "^0.5.19",
+    "autoprefixer": "^10.5.0",
+    "fuse.js": "^7.3.0",
+    "postcss": "^8.5.10",
+    "tailwindcss": "^3.4.19"
+  }
+}

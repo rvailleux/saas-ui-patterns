@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="{{ locale }}" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title }} | {{ site.name[locale] }}</title>
+  <meta name="description" content="{{ site.description[locale] }}">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | url }}">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎨</text></svg>">
+</head>
+<body class="min-h-screen">
+  <!-- Mobile Overlay -->
+  <div id="mobile-overlay" class="fixed inset-0 bg-black/50 z-30 hidden lg:hidden" onclick="closeSidebar()"></div>
+
+  <!-- Sidebar -->
+  <aside id="sidebar" class="sidebar">
+    <div class="flex flex-col h-full">
+      <!-- Logo Area -->
+      <div class="flex items-center gap-3 p-4 border-b border-border">
+        <div class="w-8 h-8 rounded-lg bg-accent flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
+          UI
+        </div>
+        <span class="font-semibold text-text-primary sidebar-text">{{ site.name[locale] }}</span>
+        <button id="sidebar-toggle" class="ml-auto p-1.5 rounded-lg hover:bg-surface-hover text-text-muted hover:text-text-primary transition-colors" aria-label="Toggle sidebar">
+          <svg viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+            <path fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z" clip-rule="evenodd"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Navigation -->
+      <nav class="flex-1 overflow-y-auto py-4 px-2" aria-label="Categories">
+        {% for cat in categories %}
+        <a href="#{{ cat.slug }}" class="sidebar-item {% if currentCategory == cat.slug %}active{% endif %}" data-category="{{ cat.slug }}">
+          <span class="text-accent-light">{{ cat.slug | categoryIcon | safe }}</span>
+          <span class="sidebar-text text-sm font-medium">{{ cat[locale] }}</span>
+        </a>
+        {% endfor %}
+      </nav>
+
+      <!-- Footer -->
+      <div class="p-4 border-t border-border">
+        <div class="flex items-center justify-between">
+          <a href="https://github.com" target="_blank" rel="noopener" class="p-2 rounded-lg hover:bg-surface-hover text-text-muted hover:text-text-primary transition-colors" title="GitHub">
+            <svg viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+              <path fill-rule="evenodd" d="M10 0C4.477 0 0 4.484 0 10.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0110 4.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.308.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0020 10.017C20 4.484 15.522 0 10 0z" clip-rule="evenodd"/>
+            </svg>
+          </a>
+          <button id="theme-toggle" class="p-2 rounded-lg hover:bg-surface-hover text-text-muted hover:text-text-primary transition-colors" title="Toggle theme">
+            <svg id="theme-icon-dark" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 hidden">
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
+            </svg>
+            <svg id="theme-icon-light" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+              <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="transition-all duration-200 ease-in-out lg:ml-[var(--sidebar-width)]">
+    <!-- Top Bar -->
+    <header class="sticky top-0 z-20 bg-bg/80 backdrop-blur-md border-b border-border">
+      <div class="flex items-center justify-between px-4 py-3 max-w-7xl mx-auto">
+        <div class="flex items-center gap-4">
+          <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg hover:bg-surface-hover text-text-muted">
+            <svg viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+              <path fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z" clip-rule="evenodd"/>
+            </svg>
+          </button>
+
+          <!-- Breadcrumb -->
+          <nav aria-label="Breadcrumb" class="hidden sm:flex items-center gap-2 text-sm">
+            <a href="/" class="text-text-muted hover:text-text-primary transition-colors">{{ site.name[locale] }}</a>
+            {% if currentCategory %}
+            <span class="text-text-muted">›</span>
+            <span class="text-text-primary">{{ categories | find("slug", currentCategory) | getProp(locale) }}</span>
+            {% endif %}
+          </nav>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <!-- Search Trigger -->
+          <button id="search-trigger" class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-surface border border-border text-text-muted hover:text-text-primary hover:border-border-strong transition-all text-sm">
+            <svg viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4">
+              <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"/>
+            </svg>
+            <span class="hidden sm:inline">{{ i18n.search[locale] }}</span>
+            <kbd class="hidden md:inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded bg-surface-elevated text-xs font-mono text-text-muted">
+              <span id="kbd-cmd">⌘</span>K
+            </kbd>
+          </button>
+
+          <!-- Language Switcher -->
+          <div class="lang-switcher">
+            <a href="/fr/" class="{% if locale == 'fr' %}active{% endif %}">FR</a>
+            <a href="/en/" class="{% if locale == 'en' %}active{% endif %}">EN</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Page Content -->
+    <div class="px-4 py-6 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      {{ content | safe }}
+    </div>
+  </main>
+
+  <!-- Command Palette -->
+  <div id="command-palette" class="command-palette hidden" role="dialog" aria-modal="true" aria-label="Command palette">
+    <div class="command-palette-modal">
+      <div class="flex items-center gap-3 px-4 border-b border-border">
+        <svg viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 text-text-muted">
+          <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"/>
+        </svg>
+        <input type="text" id="command-input" class="command-input" placeholder="{{ i18n.search_placeholder[locale] }}" autocomplete="off">
+        <kbd class="px-2 py-1 rounded bg-surface-elevated text-xs font-mono text-text-muted">ESC</kbd>
+      </div>
+      <div id="command-results" class="max-h-[50vh] overflow-y-auto py-2">
+        <!-- Results populated by JS -->
+      </div>
+      <div class="flex items-center justify-between px-4 py-2 border-t border-border text-xs text-text-muted">
+        <div class="flex items-center gap-4">
+          <span class="flex items-center gap-1"><kbd class="px-1.5 py-0.5 rounded bg-surface-elevated">↑↓</kbd> {{ i18n.navigate[locale] }}</span>
+          <span class="flex items-center gap-1"><kbd class="px-1.5 py-0.5 rounded bg-surface-elevated">↵</kbd> {{ i18n.select[locale] }}</span>
+        </div>
+        <span>{{ patterns.length }} {{ i18n.patterns[locale] }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toast-container" class="fixed bottom-4 right-4 z-50 flex flex-col gap-2"></div>
+
+  <!-- Scripts -->
+  <script src="{{ '/assets/js/fuse.min.js' | url }}"></script>
+  <script src="{{ '/assets/js/app.js' | url }}"></script>
+  <script>
+    // Initialize app with data
+    window.APP_DATA = {
+      locale: '{{ locale }}',
+      patterns: {{ patterns | dump | safe }},
+      categories: {{ categories | dump | safe }},
+      i18n: {{ i18n | dump | safe }}
+    };
+  </script>
+</body>
+</html>
