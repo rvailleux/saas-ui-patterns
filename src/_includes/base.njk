@@ -4,7 +4,42 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ title }} | {{ site.name[locale] }}</title>
-  <meta name="description" content="{{ site.description[locale] }}">
+  <meta name="description" content="{{ pageDescription if pageDescription else site.description[locale] }}">
+  <meta name="author" content="Romain Vailleux">
+  <meta name="theme-color" content="#7c3aed">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://rvailleux.github.io/saas-ui-patterns{{ page.url }}">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{{ site.name[locale] }}">
+  <meta property="og:title" content="{{ title }} | {{ site.name[locale] }}">
+  <meta property="og:description" content="{{ pageDescription if pageDescription else site.description[locale] }}">
+  <meta property="og:url" content="https://rvailleux.github.io/saas-ui-patterns{{ page.url }}">
+  <meta property="og:image" content="https://rvailleux.github.io/saas-ui-patterns/assets/images/og-card.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="{{ locale }}_{{ locale | upper }}">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ title }} | {{ site.name[locale] }}">
+  <meta name="twitter:description" content="{{ pageDescription if pageDescription else site.description[locale] }}">
+  <meta name="twitter:image" content="https://rvailleux.github.io/saas-ui-patterns/assets/images/twitter-card.png">
+
+  <!-- Favicon set -->
+  <link rel="icon" type="image/svg+xml" href="{{ '/assets/icons/favicon.svg' | url }}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ '/assets/icons/favicon-32x32.png' | url }}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ '/assets/icons/favicon-16x16.png' | url }}">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ '/assets/icons/apple-touch-icon.png' | url }}">
+
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="{{ '/assets/manifest.webmanifest' | url }}">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="SaaS UI">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,10 +49,7 @@
   <!-- Styles -->
   <link rel="stylesheet" href="{{ '/assets/css/main.css' | url }}">
 
-  <!-- Favicon -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎨</text></svg>">
-
-  <!-- Prevent theme flash: light is default, dark only if explicitly saved -->
+  <!-- Prevent theme flash -->
   <script>
     if (localStorage.getItem('theme') === 'dark') {
       document.documentElement.classList.add('dark');
@@ -32,12 +64,12 @@
   <aside id="sidebar" class="sidebar">
     <div class="flex flex-col h-full">
       <!-- Logo Area -->
-      <div class="flex items-center gap-3 p-4 border-b border-border">
-        <div class="w-8 h-8 rounded-lg bg-accent flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
+      <div class="flex items-center gap-3 p-4 border-b border-border min-h-[60px]">
+        <a href="/{{ locale }}/" class="w-8 h-8 rounded-lg bg-accent flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
           UI
-        </div>
-        <span class="font-semibold text-text-primary sidebar-text">{{ site.name[locale] }}</span>
-        <button id="sidebar-toggle" class="ml-auto p-1.5 rounded-lg hover:bg-surface-hover text-text-muted hover:text-text-primary transition-colors" aria-label="Toggle sidebar">
+        </a>
+        <span class="font-semibold text-text-primary sidebar-text truncate">{{ site.name[locale] }}</span>
+        <button id="sidebar-toggle" class="toggle-expand ml-auto p-1.5 rounded-lg hover:bg-surface-hover text-text-muted hover:text-text-primary transition-colors flex-shrink-0" aria-label="Toggle sidebar">
           <svg viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
             <path fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z" clip-rule="evenodd"/>
           </svg>
@@ -47,12 +79,24 @@
       <!-- Navigation -->
       <nav class="flex-1 overflow-y-auto py-4 px-2" aria-label="Categories">
         {% for cat in categories %}
-        <a href="/{{ locale }}/#{{ cat.slug }}" class="sidebar-item {% if currentCategory == cat.slug %}active{% endif %}" data-category="{{ cat.slug }}">
-          <span class="text-accent-light">{{ cat.slug | categoryIcon | safe }}</span>
+        <a href="/{{ locale }}/#{{ cat.slug }}"
+           class="sidebar-item {% if currentCategory == cat.slug %}active{% endif %}"
+           data-category="{{ cat.slug }}"
+           title="{{ cat[locale] }}">
+          <span class="text-accent-light flex-shrink-0">{{ cat.slug | categoryIcon | safe }}</span>
           <span class="sidebar-text text-sm font-medium">{{ cat[locale] }}</span>
         </a>
         {% endfor %}
       </nav>
+
+      <!-- Collapsed re-expand button (only visible when collapsed) -->
+      <div class="sidebar-text-toggle items-center justify-center py-3 border-b border-border">
+        <button id="sidebar-expand" class="p-1.5 rounded-lg hover:bg-surface-hover text-text-muted hover:text-text-primary transition-colors" aria-label="Expand sidebar" title="Expand sidebar">
+          <svg viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+            <path fill-rule="evenodd" d="M3 4.75A.75.75 0 013.75 4h12.5a.75.75 0 010 1.5H3.75A.75.75 0 013 4.75zm0 10.5a.75.75 0 01.75-.75h12.5a.75.75 0 010 1.5H3.75a.75.75 0 01-.75-.75zM3 10a.75.75 0 01.75-.75h12.5a.75.75 0 010 1.5H3.75A.75.75 0 013 10z" clip-rule="evenodd"/>
+          </svg>
+        </button>
+      </div>
 
       <!-- Footer -->
       <div class="p-4 border-t border-border">
@@ -160,6 +204,16 @@
   <!-- Scripts -->
   <script src="{{ '/assets/js/fuse.min.js' | url }}"></script>
   <script src="{{ '/assets/js/app.js' | url }}"></script>
+
+  <!-- PWA Service Worker -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/assets/sw.js', { scope: '/' })
+          .catch(() => {});
+      });
+    }
+  </script>
   <script>
     // Initialize app with data
     window.APP_DATA = {

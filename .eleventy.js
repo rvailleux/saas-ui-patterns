@@ -19,6 +19,10 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addWatchTarget("src/assets/js/");
 
   eleventyConfig.addPassthroughCopy({ "src/assets/js": "assets/js" });
+  eleventyConfig.addPassthroughCopy({ "src/assets/icons": "assets/icons" });
+  eleventyConfig.addPassthroughCopy({ "src/assets/images": "assets/images" });
+  eleventyConfig.addPassthroughCopy({ "src/assets/manifest.webmanifest": "assets/manifest.webmanifest" });
+  eleventyConfig.addPassthroughCopy({ "src/assets/sw.js": "assets/sw.js" });
   eleventyConfig.addPassthroughCopy({
     "node_modules/fuse.js/dist/fuse.min.js": "assets/js/fuse.min.js",
   });

@@ -1,0 +1,54 @@
+{
+  "name": "SaaS UI Design Patterns",
+  "short_name": "SaaS UI",
+  "description": "Guide de référence pour designers produit et développeurs front-end — 40 patterns modernes",
+  "start_url": "/fr/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0f0f1a",
+  "theme_color": "#7c3aed",
+  "lang": "fr",
+  "categories": ["design", "developer", "productivity"],
+  "icons": [
+    {
+      "src": "/assets/icons/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icons/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icons/android-chrome-512x512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/assets/images/og-card.png",
+      "sizes": "1200x630",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "SaaS UI Design Patterns homepage"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Navigation & Structure",
+      "url": "/fr/#navigation",
+      "icons": [{ "src": "/assets/icons/android-chrome-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "AI Patterns",
+      "url": "/fr/#ai-access",
+      "icons": [{ "src": "/assets/icons/android-chrome-192x192.png", "sizes": "192x192" }]
+    }
+  ]
+}

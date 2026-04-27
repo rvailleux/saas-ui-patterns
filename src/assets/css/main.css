@@ -103,6 +103,16 @@
     width: var(--sidebar-collapsed);
   }
 
+  /* Hide text labels (both logo and nav) when collapsed */
+  .sidebar.collapsed .sidebar-text {
+    @apply hidden;
+  }
+
+  /* Hide the expand toggle when collapsed, show collapse toggle */
+  .sidebar.collapsed .toggle-expand { @apply hidden; }
+  .sidebar-text-toggle { @apply hidden; }
+  .sidebar.collapsed .sidebar-text-toggle { @apply flex; }
+
   .sidebar-item {
     @apply flex items-center gap-3 px-4 py-2.5 text-text-secondary hover:text-text-primary hover:bg-surface-hover rounded-lg transition-colors cursor-pointer;
   }
@@ -111,13 +121,14 @@
     @apply bg-accent/10 text-accent-light border-r-2 border-accent;
   }
 
+  /* Collapsed: center icons, remove gap & padding */
   .sidebar.collapsed .sidebar-item {
-    @apply justify-center px-2;
+    @apply justify-center px-0 py-2.5;
+    gap: 0;
   }
 
-  .sidebar.collapsed .sidebar-item span {
-    @apply hidden;
-  }
+  /* Collapsed: keep icons visible (only hide .sidebar-text labels) */
+  /* No rule needed — icons are never .sidebar-text */
 
   /* Pattern card styles */
   .pattern-card {

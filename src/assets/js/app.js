@@ -57,6 +57,9 @@ function initFuse() {
 }
 
 // Sidebar Functions
+const mainContent = document.querySelector("main");
+const sidebarExpand = document.getElementById("sidebar-expand");
+
 function initSidebar() {
   // Load saved state
   const saved = localStorage.getItem("sidebarCollapsed");
@@ -66,6 +69,7 @@ function initSidebar() {
   }
 
   sidebarToggle?.addEventListener("click", toggleSidebar);
+  sidebarExpand?.addEventListener("click", toggleSidebar);
   mobileMenuBtn?.addEventListener("click", openMobileSidebar);
 }
 
@@ -78,8 +82,12 @@ function toggleSidebar() {
 function updateSidebarState() {
   if (state.sidebarCollapsed) {
     sidebar?.classList.add("collapsed");
+    // Shrink main content margin to match collapsed sidebar
+    document.documentElement.style.setProperty("--sidebar-width", "var(--sidebar-collapsed)");
   } else {
     sidebar?.classList.remove("collapsed");
+    // Restore full sidebar width
+    document.documentElement.style.setProperty("--sidebar-width", "240px");
   }
 }
 
