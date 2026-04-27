@@ -1,0 +1,49 @@
+
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,-apple-system,sans-serif;background:#0f0f1a;color:#e2e8f0;height:100vh;overflow:hidden;font-size:13px;line-height:1.5;padding:24px}
+.answer{margin-bottom:20px;line-height:1.6}
+.confidence{background:#16162a;border:1px solid #2d2d52;border-radius:8px;padding:16px}
+.conf-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.conf-label{font-size:12px;color:#94a3b8}
+.conf-value{font-weight:600}
+.conf-bar{height:8px;background:#2d2d52;border-radius:4px;overflow:hidden}
+.conf-fill{height:100%;transition:width 300ms,background 300ms}
+.conf-desc{margin-top:12px;font-size:13px;color:#94a3b8}
+.toggle-btn{background:#7c3aed;border:none;color:#fff;padding:8px 16px;border-radius:6px;cursor:pointer;margin-top:16px}
+</style>
+</head>
+<body>
+<div class="answer">
+The Earth orbits the Sun at an average distance of approximately 93 million miles.
+</div>
+<div class="confidence">
+<div class="conf-header">
+<span class="conf-label">Confidence</span>
+<span class="conf-value" id="confValue">High</span>
+</div>
+<div class="conf-bar"><div class="conf-fill" id="confFill" style="width:92%;background:#10b981"></div></div>
+<div class="conf-desc" id="confDesc">This is well-established scientific fact.</div>
+</div>
+<button class="toggle-btn" onclick="toggleConfidence()">Toggle confidence level</button>
+<script>
+const levels = [
+  {value:'High',pct:'92%',color:'#10b981',desc:'This is well-established scientific fact.'},
+  {value:'Medium',pct:'61%',color:'#f59e0b',desc:'This is generally accurate but some details may vary.'},
+  {value:'Low',pct:'28%',color:'#ef4444',desc:'Please verify this information independently.'}
+];
+let current = 0;
+function toggleConfidence() {
+  current = (current + 1) % levels.length;
+  const l = levels[current];
+  document.getElementById('confValue').textContent = l.value;
+  document.getElementById('confFill').style.width = l.pct;
+  document.getElementById('confFill').style.background = l.color;
+  document.getElementById('confDesc').textContent = l.desc;
+}
+</script>
+</body>
+</html>

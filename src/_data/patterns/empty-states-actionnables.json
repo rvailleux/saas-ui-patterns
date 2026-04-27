@@ -1,0 +1,87 @@
+{
+  "id": 19,
+  "slug": "empty-states-actionnables",
+  "category": "feedback",
+  "title": {
+    "fr": "Empty states actionnables",
+    "en": "Actionable Empty States"
+  },
+  "categoryLabel": {
+    "slug": "feedback",
+    "fr": "Feedback & États",
+    "en": "Feedback & States"
+  },
+  "examples": [
+    {
+      "name": "Notion",
+      "desc": {
+        "fr": "empty states avec templates suggérés et exemples cliquables",
+        "en": "empty states with suggested templates and clickable examples"
+      }
+    },
+    {
+      "name": "Linear",
+      "desc": {
+        "fr": "empty states distincts selon le contexte (premier projet, filtre sans résultat, recherche vide)",
+        "en": "distinct empty states per context (first project, no filter results, empty search)"
+      }
+    },
+    {
+      "name": "Mailchimp",
+      "desc": {
+        "fr": "empty states avec illustrations custom et guides d'action",
+        "en": "empty states with custom illustrations and action guides"
+      }
+    },
+    {
+      "name": "Stripe Dashboard",
+      "desc": {
+        "fr": "empty states avec données de test pour explorer",
+        "en": "empty states with test data to explore"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Distinguer les types d'empty state** :",
+      "**Hiérarchie visuelle** : illustration ou icône → titre → description courte → CTA principal → CTA secondaire optionnel.",
+      "**Ton** : positif et orienté action. Éviter \"Aucun X trouvé.\" Préférer \"Commencez par créer votre premier X.\"",
+      "**Illustrations** : optionnel mais efficace — cohérent avec le design system, pas trop complexe.",
+      "**CTA unique** : un seul bouton principal. Deux maximum si les deux actions sont vraiment distinctes."
+    ],
+    "en": [
+      "**Context-specific**: tailor the empty state to the feature (empty inbox ≠ empty project). Generic \"No data\" messages waste an opportunity.",
+      "**Primary CTA**: one clear action that directly addresses the emptiness (\"Create your first project\", \"Invite a teammate\").",
+      "**Illustration**: a small, relevant illustration increases emotional appeal — but keep it simple and do not use it for error states.",
+      "**Educational content**: the empty state is a prime spot to explain the value of the feature (\"Projects help you group tasks by client\").",
+      "**Filter reset**: if the empty state is caused by an active filter, show a \"Clear filters\" button instead of a creation CTA."
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ \"Aucun résultat.\" sans plus d'information",
+      "❌ Même empty state pour tous les contextes — l'état post-filtre n'est pas l'état first-use",
+      "❌ Illustration trop grande qui pousse le CTA hors du viewport",
+      "❌ Empty state qui disparaît et réapparaît pendant le chargement — gérer l'ordre loading → data → empty",
+      "--"
+    ],
+    "en": [
+      "❌ Generic \"No results found\" without any guidance",
+      "❌ An empty state that looks like an error — make it feel intentional and welcoming",
+      "❌ A CTA that navigates away from the current page — the user should complete the action without losing context",
+      "❌ No empty state at all — a blank white area is disorienting"
+    ]
+  },
+  "what": {
+    "fr": "Quand une liste ou une vue est vide, afficher un état vide qui guide vers une action concrète plutôt qu'un message générique \"Aucun résultat\".",
+    "en": "When a list or view is empty, display a state that guides toward a concrete action rather than a generic \"No results\" message."
+  },
+  "why": {
+    "fr": "Un état vide est une opportunité d'onboarding. L'utilisateur est exactement là où il a besoin d'être pour commencer. Un bon empty state répond à \"qu'est-ce que je fais maintenant ?\" avec une action immédiate.",
+    "en": "An empty state is an onboarding opportunity. The user is exactly where they need to be to get started. A good empty state answers \"what do I do now?\" with an immediate action."
+  },
+  "demo": {
+    "fr": "```\nVue \"Mes projets\" sans projet :\n\n     ┌──────────────────────────┐\n     │                          │\n     │    🗂️                    │\n     │                          │\n     │  Aucun projet pour l'    │\n     │  instant                 │\n     │                          │\n     │  Organisez votre travail │\n     │  en projets pour mieux   │\n     │  collaborer.             │\n     │                          │\n     │  [+ Créer un projet]     │\n     │  [Importer depuis Jira]  │\n     │                          │\n     └──────────────────────────┘\n```",
+    "en": "```\n\"My projects\" view with no projects:\n\n     ┌──────────────────────────┐\n     │                          │\n     │    🗂️                    │\n     │                          │\n     │  No projects yet         │\n     │                          │\n     │  Organise your work into │\n     │  projects to collaborate │\n     │  more effectively.       │\n     │                          │\n     │  [+ Create a project]    │\n     │  [Import from Jira]      │\n     │                          │\n     └──────────────────────────┘\n```"
+  }
+}

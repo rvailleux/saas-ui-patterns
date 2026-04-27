@@ -1,0 +1,87 @@
+{
+  "id": 6,
+  "slug": "split-view-panneau-dual",
+  "category": "layout",
+  "title": {
+    "fr": "Split view / panneau dual",
+    "en": "Split View / Dual Panel"
+  },
+  "categoryLabel": {
+    "slug": "layout",
+    "fr": "Layout & Workspace",
+    "en": "Layout & Workspace"
+  },
+  "examples": [
+    {
+      "name": "Notion",
+      "desc": {
+        "fr": "split de pages en colonnes (drag & drop de blocs)",
+        "en": "page split into columns (drag & drop blocks)"
+      }
+    },
+    {
+      "name": "GitHub",
+      "desc": {
+        "fr": "split diff (changes side-by-side vs unified)",
+        "en": "split diff (changes side-by-side vs unified)"
+      }
+    },
+    {
+      "name": "Obsidian",
+      "desc": {
+        "fr": "split de notes, horizontal et vertical, emboîtables",
+        "en": "note split, horizontal and vertical, nestable"
+      }
+    },
+    {
+      "name": "Raycast",
+      "desc": {
+        "fr": "split list+preview dans les résultats de recherche",
+        "en": "split list+preview in search results"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Poignée** : zone de 8px avec curseur `col-resize`. Highlight au hover. Double-clic → reset à 50/50.",
+      "**Tailles min** : définir `min-width` sur chaque panneau (ex: 240px) pour éviter l'effondrement.",
+      "**Persistance** : sauvegarder le ratio en localStorage par contexte.",
+      "**Synchronisation** : si les deux panneaux affichent le même document (source/preview), le scroll peut être synchronisé — avec option pour désactiver.",
+      "**Collapse** : permettre de réduire un panneau à 0 (= fermer le split) en double-cliquant sur la poignée ou via un bouton."
+    ],
+    "en": [
+      "**Resize handle**: 4–8 px wide, cursor `col-resize` or `row-resize`. Show a visual drag indicator on hover.",
+      "**Minimum sizes**: each pane should have a minimum width/height (e.g. 20%) to prevent accidental full collapse.",
+      "**Persistence**: save pane sizes in `localStorage` so they survive a refresh.",
+      "**Keyboard resize**: support `Alt+Arrow` to resize with the keyboard for accessibility.",
+      "**Overflow**: each pane scrolls independently — `overflow: auto` on each pane container."
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Poignée trop fine (< 4px) — difficile à attraper",
+      "❌ Pas de minimum width — un panneau peut devenir invisible",
+      "❌ Split imposé sans possibilité de revenir en vue simple",
+      "❌ Les deux panneaux se scrollent ensemble sans option de désolidariser",
+      "--"
+    ],
+    "en": [
+      "❌ A resize handle too thin to click reliably (< 4 px)",
+      "❌ Panes with no minimum size — one pane can be crushed to 0",
+      "❌ Resizing that causes layout reflow in both panes simultaneously — causes jitter",
+      "❌ Forgetting keyboard users — always add keyboard resize support"
+    ]
+  },
+  "what": {
+    "fr": "Deux zones de travail côte à côte, redimensionnables par une poignée centrale, affichant deux vues du même contenu ou deux contenus différents.",
+    "en": "Two side-by-side workspaces, resizable via a central drag handle, showing two views of the same content or two different contents."
+  },
+  "why": {
+    "fr": "Certains workflows nécessitent une comparaison simultanée (markdown source + preview, code + résultat, deux documents). Le split view élimine le alt-tab constant et donne les deux contextes en permanence.",
+    "en": "Some workflows require simultaneous comparison (markdown source + preview, code + output, two documents). Split view eliminates constant alt-tabbing and keeps both contexts permanently visible."
+  },
+  "demo": {
+    "fr": "```\n┌───────────────────┬─┬───────────────────┐\n│ # Mon document    │ │ Mon document       │\n│                   │◄►│                  │\n│ Voici un **titre**│ │ Voici un **titre** │\n│ et du texte.      │ │ et du texte.       │\n│                   │ │                   │\n└───────────────────┴─┴───────────────────┘\n         ▲           ▲\n       Source    Poignée    Preview rendu\n                drag pour resize\n```",
+    "en": "```\n┌───────────────────┬─┬───────────────────┐\n│ # My document     │ │ My document        │\n│                   │◄►│                  │\n│ Here is a **title**│ │ Here is a title   │\n│ and some text.    │ │ and some text.     │\n│                   │ │                   │\n└───────────────────┴─┴───────────────────┘\n         ▲           ▲\n       Source    Handle    Rendered preview\n                drag to resize\n```"
+  }
+}

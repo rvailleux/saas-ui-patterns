@@ -1,0 +1,41 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,-apple-system,sans-serif;background:#0f0f1a;color:#e2e8f0;height:100vh;overflow:hidden;font-size:13px;line-height:1.5}
+.tab-bar{display:flex;align-items:center;background:#16162a;border-bottom:1px solid #2d2d52;padding:8px 8px 0;gap:4px}
+.tab{display:flex;align-items:center;gap:6px;padding:8px 12px;background:#1e1e35;border:1px solid #2d2d52;border-bottom:none;border-radius:6px 6px 0 0;cursor:pointer;max-width:140px;min-width:80px}
+.tab.active{background:#0f0f1a;border-color:#7c3aed}
+.tab.pinned{min-width:auto;padding:8px}
+.tab.pinned .tab-title{display:none}
+.tab-title{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tab-close{width:16px;height:16px;display:flex;align-items:center;justify-content:center;border-radius:4px;color:#94a3b8}
+.tab-close:hover{background:#ef4444;color:#fff}
+.tab-pin{width:16px;height:16px;display:flex;align-items:center;justify-content:center;border-radius:4px;color:#94a3b8;opacity:0}
+.tab:hover .tab-pin{opacity:1}
+.tab.pinned .tab-pin{opacity:1;color:#7c3aed}
+.add-tab{width:28px;height:28px;display:flex;align-items:center;justify-content:center;background:#1e1e35;border:1px solid #2d2d52;border-radius:6px;cursor:pointer;color:#94a3b8;margin-left:4px;margin-bottom:8px}
+.add-tab:hover{background:#2d2d52}
+.content{padding:24px}
+</style></head><body>
+<div class="tab-bar" id="tabBar"></div>
+<button class="add-tab" onclick="addTab()">+</button>
+<div class="content" id="content"><h3>Welcome</h3><p style="color:#94a3b8;margin-top:12px">Click + to add tabs. Hover a tab to pin/unpin. Click × to close (pinned tabs cannot be closed).</p></div>
+<script>
+let tabs = [{id: 1, title: 'index.html', pinned: false, active: true},{id: 2, title: 'styles.css', pinned: true, active: false},{id: 3, title: 'app.js', pinned: false, active: false}];
+let nextId = 4;
+function render() {
+  document.getElementById('tabBar').innerHTML = tabs.map(t =>
+    '<div class="tab '+(t.active?'active':'')+(t.pinned?' pinned':'')+'" onclick="activateTab('+t.id+')">'+
+    '<span class="tab-pin" onclick="event.stopPropagation();togglePin('+t.id+')">📌</span>'+
+    '<span class="tab-title">'+t.title+'</span>'+
+    (t.pinned?'':'<span class="tab-close" onclick="event.stopPropagation();closeTab('+t.id+')">×</span>')+
+    '</div>'
+  ).join('');
+  const active = tabs.find(t => t.active);
+  if(active) document.getElementById('content').innerHTML = '<h3>'+active.title+'</h3><p style="color:#94a3b8;margin-top:12px">Editing '+active.title+'</p>';
+}
+function activateTab(id) { tabs.forEach(t => t.active = t.id === id); render(); }
+function togglePin(id) { const t = tabs.find(x => x.id === id); if(t) t.pinned = !t.pinned; render(); }
+function closeTab(id) { tabs = tabs.filter(t => t.id !== id); if(tabs.length && !tabs.some(t => t.active)) tabs[0].active = true; render(); }
+function addTab() { tabs.forEach(t => t.active = false); tabs.push({id: nextId++, title: 'untitled-'+nextId+'.txt', pinned: false, active: true}); render(); }
+render();
+</script>
+</body></html>

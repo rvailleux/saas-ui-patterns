@@ -1,0 +1,87 @@
+{
+  "id": 31,
+  "slug": "memory-pr-f-rences-utilisateur",
+  "category": "ai-context",
+  "title": {
+    "fr": "Memory / préférences utilisateur",
+    "en": "Memory / User Preferences"
+  },
+  "categoryLabel": {
+    "slug": "ai-context",
+    "fr": "AI — Contexte & Mémoire",
+    "en": "AI — Context & Memory"
+  },
+  "examples": [
+    {
+      "name": "ChatGPT Memory",
+      "desc": {
+        "fr": "mémoire explicite avec liste visible et éditable",
+        "en": "memory across Claude conversations"
+      }
+    },
+    {
+      "name": "Claude",
+      "desc": {
+        "fr": "mémoire avec projets et instructions personnalisées",
+        "en": "custom instructions persistent across sessions"
+      }
+    },
+    {
+      "name": "Rewind",
+      "desc": {
+        "fr": "mémoire basée sur l'historique de l'ordinateur",
+        "en": "\"my tone\" preferences per user"
+      }
+    },
+    {
+      "name": "Mem.ai",
+      "desc": {
+        "fr": "notes transformées en mémoire structurée",
+        "en": "preferences injected per workspace"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Transparence** : toujours montrer à l'utilisateur ce qui est mémorisé. Une page \"Mes mémoires\" avec liste éditable est obligatoire.",
+      "**Contrôle** : l'utilisateur peut ajouter, modifier, supprimer des mémoires manuellement.",
+      "**Mémorisation** : deux modes possibles — automatique (l'AI détecte ce qui mérite d'être retenu) ou explicite (\"Souviens-toi que...\").",
+      "**Injection** : les mémoires pertinentes sont injectées dans le system prompt de chaque conversation.",
+      "**RGPD** : droit à l'effacement de toutes les mémoires, export en JSON, pas de partage entre utilisateurs."
+    ],
+    "en": [
+      "**Explicit + implicit**: allow both explicit memory saves (\"Remember that I prefer dark mode\") and implicit ones learned from behavior.",
+      "**Visibility**: show the user a list of all stored memories so they understand what the AI knows about them.",
+      "**Edit/delete**: allow the user to edit or delete individual memories.",
+      "**Context injection**: prepend relevant memories to every AI prompt as a system message, not as user messages.",
+      "**Scoped vs global**: distinguish between app-wide preferences and project-specific memory."
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Mémoire invisible — l'utilisateur ne sait pas ce que l'AI \"sait\" sur lui",
+      "❌ Mémorisation de données sensibles (passwords, numéros de carte) sans protection",
+      "❌ Mémoires qui influencent les réponses sans rapport avec la question",
+      "❌ Pas de moyen d'effacer toutes les mémoires d'un coup",
+      "--"
+    ],
+    "en": [
+      "❌ Hidden memory — users must always be able to see what is stored about them",
+      "❌ Unlimited memory growth — implement a soft cap and a \"clear all\" option",
+      "❌ Injecting all memories into every prompt — select only relevant memories for each context",
+      "❌ Memory that is not portable — consider allowing export/import"
+    ]
+  },
+  "what": {
+    "fr": "L'AI retient des faits sur l'utilisateur (préférences de style, contexte professionnel, informations récurrentes) entre sessions et les réutilise proactivement dans les réponses suivantes.",
+    "en": "The AI learns and stores explicit user preferences (\"always respond in English\", \"I prefer bullet points\", \"I'm a senior developer\") and applies them automatically to future requests."
+  },
+  "why": {
+    "fr": "Élimine la répétition. L'utilisateur ne devrait pas avoir à réexpliquer son rôle, son style préféré, ou ses conventions à chaque conversation. La mémoire transforme l'AI d'un outil générique en assistant personnel.",
+    "en": "Eliminates repetitive context-setting instructions. The user stops having to repeat themselves. Personalised responses are more immediately useful. Memory is the foundation of a genuinely helpful AI assistant — one that knows its user."
+  },
+  "demo": {
+    "fr": "```\nSession 1 :\n👤 Je suis CPO dans une startup SaaS B2B.\n🤖 [mémorisation silencieuse]\n\nSession 2 (semaine suivante) :\n👤 Aide-moi à rédiger un email de relance client\n🤖 [sans que l'user ait réexpliqué] Voici un email \n   adapté à un contexte B2B SaaS, avec un ton\n   professionnel mais accessible...\n```",
+    "en": "```\nUser sets preference:\n\"Always reply in a concise format with code examples\"\n\nFuture requests — without memory:   With memory:\n👤 Explain async/await              👤 Explain async/await\n🤖 [long explanation,               🤖 async/await pauses execution\n   no code example]                    until a promise resolves:\n                                        async function foo() {\n                                          const x = await bar();\n                                        }\n```"
+  }
+}

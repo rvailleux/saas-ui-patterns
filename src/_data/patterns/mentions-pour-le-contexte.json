@@ -1,0 +1,87 @@
+{
+  "id": 29,
+  "slug": "mentions-pour-le-contexte",
+  "category": "ai-context",
+  "title": {
+    "fr": "@-mentions pour le contexte",
+    "en": "@-mentions for Context"
+  },
+  "categoryLabel": {
+    "slug": "ai-context",
+    "fr": "AI — Contexte & Mémoire",
+    "en": "AI — Context & Memory"
+  },
+  "examples": [
+    {
+      "name": "GitHub Copilot",
+      "desc": {
+        "fr": "`@workspace`, `@file`, `#selection` dans Copilot Chat",
+        "en": "`@workspace`, `@file`, `#selection` in Copilot Chat"
+      }
+    },
+    {
+      "name": "Cursor",
+      "desc": {
+        "fr": "`@file`, `@folder`, `@code`, `@docs` dans le prompt",
+        "en": "`@file`, `@folder`, `@code`, `@docs` in the prompt"
+      }
+    },
+    {
+      "name": "Notion AI",
+      "desc": {
+        "fr": "`@page` pour référencer d'autres documents",
+        "en": "`@page` to reference other documents"
+      }
+    },
+    {
+      "name": "Linear",
+      "desc": {
+        "fr": "`@issue` dans les commentaires avec preview inline",
+        "en": "`@issue` in comments with inline preview"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Déclencheur** : `@` ouvre un autocomplete de sélection. Fuzzy search sur les noms.",
+      "**Types supportés** : définir les types mentionnables (fichiers, pages, utilisateurs, issues) avec des icônes distinctes.",
+      "**Preview inline** : au hover sur une mention résolue, afficher un preview du contenu référencé.",
+      "**Limite de contexte** : calculer la taille du contenu injecté et avertir si la fenêtre de contexte est dépassée.",
+      "**Rendu** : les mentions résolues s'affichent comme des chips (badge coloré avec nom) dans le champ de saisie."
+    ],
+    "en": [
+      "**Trigger**: `@` character, optionally followed by search text. Show the picker after a brief delay (100 ms).",
+      "**Search**: fuzzy search on name, username, and role. Rank by recency of collaboration.",
+      "**Mentionable types**: people, teams, documents, issues — each with a distinct visual style in the picker.",
+      "**Insertion**: replace the `@text` with a styled mention tag that is non-editable (treated as an atomic token).",
+      "**Notification**: send a notification to the mentioned entity when the message is sent."
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Injection silencieuse sans que l'utilisateur sache ce qui est envoyé à l'API",
+      "❌ Pas de limite sur la taille du contexte injecté — dépasser la fenêtre de contexte casse la réponse",
+      "❌ Mentions qui ne se résolvent pas (affichent `@fichier` en texte brut) sans indication d'erreur",
+      "❌ Pas d'autocomplete — l'utilisateur doit connaître l'exact nom du fichier",
+      "--"
+    ],
+    "en": [
+      "❌ A mention picker with no search — forces the user to scroll through all users",
+      "❌ Mentions that are plain text — once typed they cannot be corrected without retyping",
+      "❌ No keyboard navigation in the picker — mouse-only is inaccessible",
+      "❌ No avatar or team badge — makes it hard to distinguish people from documents in the list"
+    ]
+  },
+  "what": {
+    "fr": "Mentionner `@fichier`, `@page`, `@utilisateur`, `@ticket` dans le prompt injecte le contenu référencé dans le contexte de la requête AI, de manière explicite et auditable.",
+    "en": "Mentioning `@file`, `@page`, `@user`, `@ticket` in the prompt injects the referenced content into the AI request's context, in an explicit and auditable way."
+  },
+  "why": {
+    "fr": "Résout le problème du contexte de l'AI de manière transparente. L'utilisateur contrôle exactement quelles données sont envoyées. L'AI a le bon contexte sans que l'utilisateur copie-colle. La mention est visible dans le prompt — ce qui est injecté est connu.",
+    "en": "Solves the AI context problem transparently. The user controls exactly which data is sent. The AI has the right context without the user copy-pasting. The mention is visible in the prompt — what's injected is known."
+  },
+  "demo": {
+    "fr": "```\n[Prompt de l'utilisateur]\n\nRésume les blocages de @Sprint-12 et\nassigne les tâches critiques à @Alice\n\n          ↓ résolution avant envoi à l'AI\n\n[Prompt réel envoyé à l'API]\nRésume les blocages de [contenu complet du Sprint 12]\net assigne les tâches critiques à [Alice Martin, alice@company.com]\n```",
+    "en": "```\n[User prompt]\n\nSummarise the blockers in @Sprint-12 and\nassign the critical tasks to @Alice\n\n          ↓ resolution before sending to AI\n\n[Actual prompt sent to API]\nSummarise the blockers in [full Sprint 12 content]\nand assign the critical tasks to [Alice Martin, alice@company.com]\n```"
+  }
+}

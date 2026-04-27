@@ -1,0 +1,88 @@
+{
+  "id": 10,
+  "slug": "omnibox-unified-search",
+  "category": "commands",
+  "title": {
+    "fr": "Omnibox / unified search",
+    "en": "Omnibox / Unified Search"
+  },
+  "categoryLabel": {
+    "slug": "commands",
+    "fr": "Commandes & Recherche",
+    "en": "Commands & Search"
+  },
+  "examples": [
+    {
+      "name": "Slack",
+      "desc": {
+        "fr": "search unifié messages + channels + personnes + fichiers",
+        "en": "unified search: messages + channels + people + files"
+      }
+    },
+    {
+      "name": "HubSpot",
+      "desc": {
+        "fr": "contacts + deals + companies + activités dans une barre",
+        "en": "contacts + deals + companies + activities in one bar"
+      }
+    },
+    {
+      "name": "Intercom",
+      "desc": {
+        "fr": "conversations + contacts + articles dans une recherche",
+        "en": "conversations + contacts + articles in one search"
+      }
+    },
+    {
+      "name": "Glean",
+      "desc": {
+        "fr": "enterprise search unifié cross-apps (Confluence, Jira, Drive...)",
+        "en": "enterprise cross-app unified search (Confluence, Jira, Drive...)"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Debounce** : déclencher la recherche après 200–300ms sans frappe pour éviter les requêtes à chaque caractère.",
+      "**Minimum 2 caractères** avant de lancer une recherche réseau.",
+      "**Résultats groupés** : header par catégorie, max 3–4 résultats par catégorie avant \"Voir tout\".",
+      "**Highlighting** : mettre en gras le terme recherché dans les résultats.",
+      "**Recherche vide** : afficher les récents et les favoris quand la query est vide.",
+      "**Indexation** : côté serveur, utiliser ElasticSearch ou Typesense pour la recherche full-text avec ranking."
+    ],
+    "en": [
+      "**Debounce**: wait 150–200 ms after the last keystroke before querying the server — avoid hammering the API.",
+      "**Grouped results**: show results in named categories (People, Files, Pages) with clear visual separation.",
+      "**Keyboard nav**: arrow keys navigate within and across groups. `Tab` moves to next group.",
+      "**Loading state**: show a spinner or skeleton in the results area while the query is in flight.",
+      "**Recent + suggested**: pre-populate with recent searches and suggested items before the user types."
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Recherche qui ne couvre qu'un seul type d'objet (ex: que les contacts)",
+      "❌ Résultats non triés par pertinence — les correspondances exactes d'abord",
+      "❌ Pas de résultat vide géré — toujours afficher \"Aucun résultat pour X\" avec suggestion",
+      "❌ Recherche qui bloque l'UI pendant la requête — toujours asynchrone avec skeleton",
+      "--"
+    ],
+    "en": [
+      "❌ Mixing all result types in a flat list — grouping is essential for scanability",
+      "❌ A minimum of 3 characters before searching — 1 character is the right threshold for most datasets",
+      "❌ Results that load in one big batch — stream partial results as they arrive",
+      "❌ Forgetting to highlight the matched portion of each result"
+    ]
+  },
+  "what": {
+    "fr": "Une barre de recherche globale qui interroge simultanément plusieurs types de données (pages, objets, utilisateurs, actions) et présente les résultats groupés par type.",
+    "en": "A global search bar that simultaneously queries multiple types of data (pages, objects, users, actions) and presents results grouped by type."
+  },
+  "why": {
+    "fr": "Dans les applications complexes, l'utilisateur ne sait souvent pas exactement où chercher. L'omnibox centralise toutes les sources et laisse les résultats guider. C'est le Google de votre application.",
+    "en": "In complex applications, users often don't know exactly where to look. The omnibox centralises all sources and lets results guide the way. It's the Google of your application."
+  },
+  "demo": {
+    "fr": "```\n┌─────────────────────────────────────────┐\n│ 🔍  \"alice\"                         ✕  │\n├─────────────────────────────────────────┤\n│ PERSONNES                               │\n│ 👤 Alice Martin  — Engineering         │\n│ 👤 Alice Dupont  — Marketing           │\n├─────────────────────────────────────────┤\n│ TICKETS                                │\n│ 🎫 #1201 Assigné à Alice               │\n│ 🎫 #987  Créé par Alice                │\n├─────────────────────────────────────────┤\n│ DOCUMENTS                              │\n│ 📄 Rapport Alice Q3                    │\n└─────────────────────────────────────────┘\n```",
+    "en": "```\n┌─────────────────────────────────────────┐\n│ 🔍  \"alice\"                         ✕  │\n├─────────────────────────────────────────┤\n│ PEOPLE                                  │\n│ 👤 Alice Martin  — Engineering         │\n│ 👤 Alice Dupont  — Marketing           │\n├─────────────────────────────────────────┤\n│ TICKETS                                 │\n│ 🎫 #1201 Assigned to Alice             │\n│ 🎫 #987  Created by Alice              │\n├─────────────────────────────────────────┤\n│ DOCUMENTS                               │\n│ 📄 Alice Q3 Report                     │\n└─────────────────────────────────────────┘\n```"
+  }
+}

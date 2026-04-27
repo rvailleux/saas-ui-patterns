@@ -1,0 +1,31 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,-apple-system,sans-serif;background:#0f0f1a;color:#e2e8f0;height:100vh;overflow:hidden;font-size:13px;line-height:1.5;padding:24px}
+.skeleton-card{background:#16162a;border:1px solid #2d2d52;border-radius:8px;padding:16px;margin-bottom:12px}
+.skeleton-line{height:16px;background:linear-gradient(90deg,#1e1e35 25%,#2d2d52 50%,#1e1e35 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:4px;margin-bottom:12px}
+.skeleton-line:last-child{margin-bottom:0;width:60%}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.real-card{background:#16162a;border:1px solid #2d2d52;border-radius:8px;padding:16px;margin-bottom:12px;display:none}
+.real-title{font-weight:600;margin-bottom:8px}
+.real-desc{color:#94a3b8;font-size:13px}
+.load-btn{background:#7c3aed;border:none;color:#fff;padding:10px 20px;border-radius:8px;cursor:pointer;margin-bottom:16px}
+</style></head><body>
+<button class="load-btn" onclick="loadContent()">Load content</button>
+<div id="skeletons">
+<div class="skeleton-card"><div class="skeleton-line"></div><div class="skeleton-line"></div><div class="skeleton-line"></div></div>
+<div class="skeleton-card"><div class="skeleton-line"></div><div class="skeleton-line"></div><div class="skeleton-line"></div></div>
+</div>
+<div id="realContent">
+<div class="real-card"><div class="real-title">Project Alpha</div><div class="real-desc">A new way to manage your tasks</div></div>
+<div class="real-card"><div class="real-title">Project Beta</div><div class="real-desc">Collaboration made simple</div></div>
+</div>
+<script>
+function loadContent() {
+  document.getElementById('skeletons').style.display = 'none';
+  document.getElementById('realContent').style.display = 'block';
+  setTimeout(() => {
+    document.getElementById('skeletons').style.display = 'block';
+    document.getElementById('realContent').style.display = 'none';
+  }, 3000);
+}
+</script>
+</body></html>

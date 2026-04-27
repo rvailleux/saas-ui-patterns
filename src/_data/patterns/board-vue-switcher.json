@@ -1,0 +1,88 @@
+{
+  "id": 8,
+  "slug": "board-vue-switcher",
+  "category": "layout",
+  "title": {
+    "fr": "Board & vue switcher",
+    "en": "Board & View Switcher"
+  },
+  "categoryLabel": {
+    "slug": "layout",
+    "fr": "Layout & Workspace",
+    "en": "Layout & Workspace"
+  },
+  "examples": [
+    {
+      "name": "Linear",
+      "desc": {
+        "fr": "board/list/timeline, switcher en haut, préférence par project",
+        "en": "board/list/timeline, switcher at top, preference per project"
+      }
+    },
+    {
+      "name": "Notion",
+      "desc": {
+        "fr": "database views (board, table, gallery, calendar, list, timeline)",
+        "en": "database views (board, table, gallery, calendar, list, timeline)"
+      }
+    },
+    {
+      "name": "ClickUp",
+      "desc": {
+        "fr": "15+ vues, dont Gantt, Workload, Map",
+        "en": "15+ views including Gantt, Workload, Map"
+      }
+    },
+    {
+      "name": "Airtable",
+      "desc": {
+        "fr": "grid/gallery/kanban/calendar avec configs indépendantes par vue",
+        "en": "grid/gallery/kanban/calendar with independent configs per view"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Persistance** : mémoriser la vue active par section et par utilisateur (pas globalement).",
+      "**URL** : encoder la vue dans l'URL (`?view=board`) pour le partage.",
+      "**Filtres indépendants** : chaque vue peut avoir ses propres filtres et groupements — ne pas forcer un filtre global qui casse certaines vues.",
+      "**Icônes + labels** : le switcher doit avoir icône ET label — les icônes seules ne sont pas suffisamment distinctives (board vs timeline sont souvent confondus).",
+      "**Transitions** : un fade rapide (100ms) entre les vues évite le flash de contenu."
+    ],
+    "en": [
+      "**Persistence**: save the active view in `localStorage` so the user always returns to their preferred view.",
+      "**Seamless transition**: switching views should not reload the data — just re-render the same dataset with a different component.",
+      "**Icons + labels**: use both icon and label in the switcher — icon alone is often ambiguous between Board and Table.",
+      "**Mobile default**: on small screens default to List view — Board (Kanban) and Table require too much horizontal space.",
+      "**URL param**: encode the active view in the URL (`?view=board`) so links can target a specific view."
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Données qui changent selon la vue (ex: certains champs invisibles en board) sans indication",
+      "❌ Vue par défaut identique pour tous les utilisateurs sans possibilité de changer",
+      "❌ Drag & drop disponible seulement en board — les autres vues se sentent \"dégradées\"",
+      "❌ Trop de vues disponibles (> 6) sans hiérarchie — surcharge de choix",
+      "--",
+      "--",
+      "--"
+    ],
+    "en": [
+      "❌ Reloading data on every view switch — cache and reuse the fetched dataset",
+      "❌ A view switcher that appears in a different position depending on the view",
+      "❌ Not persisting the active view — the user must re-select it on every visit"
+    ]
+  },
+  "what": {
+    "fr": "Le même dataset affiché dans plusieurs représentations (board kanban, liste, tableau, calendrier, timeline), switchable via un sélecteur de vue persistant par utilisateur.",
+    "en": "The same dataset displayed in multiple representations (kanban board, list, table, calendar, timeline), switchable via a persistent per-user view selector."
+  },
+  "why": {
+    "fr": "Différents utilisateurs ont des modèles mentaux différents. Le développeur veut la liste, le PM veut le board, le manager veut la timeline. Proposer plusieurs vues sur les mêmes données évite de dupliquer l'information et permet à chaque profil de travailler avec son paradigme.",
+    "en": "Different users have different mental models. Developers want the list, PMs want the board, managers want the timeline. Offering multiple views on the same data avoids duplicating information and lets each profile work in their own paradigm."
+  },
+  "demo": {
+    "fr": "```\n[Board] [Liste] [Tableau] [Calendrier]   ← Switcher\n   ▲\nVue active\n\nBoard view:\n┌─────────┐  ┌──────────┐  ┌──────────┐\n│ To do   │  │ In prog. │  │ Done     │\n│ ─────── │  │ ──────── │  │ ──────── │\n│ Task A  │  │ Task C   │  │ Task E   │\n│ Task B  │  │ Task D   │  │          │\n└─────────┘  └──────────┘  └──────────┘\n```",
+    "en": "```\n[Board] [List] [Table] [Calendar]   ← Switcher\n   ▲\nActive view\n\nBoard view:\n┌─────────┐  ┌──────────┐  ┌──────────┐\n│ To do   │  │ In prog. │  │ Done     │\n│ ─────── │  │ ──────── │  │ ──────── │\n│ Task A  │  │ Task C   │  │ Task E   │\n│ Task B  │  │ Task D   │  │          │\n└─────────┘  └──────────┘  └──────────┘\n```"
+  }
+}

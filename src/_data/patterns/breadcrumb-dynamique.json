@@ -1,0 +1,87 @@
+{
+  "id": 3,
+  "slug": "breadcrumb-dynamique",
+  "category": "navigation",
+  "title": {
+    "fr": "Breadcrumb dynamique",
+    "en": "Dynamic Breadcrumb"
+  },
+  "categoryLabel": {
+    "slug": "navigation",
+    "fr": "Navigation & Structure",
+    "en": "Navigation & Structure"
+  },
+  "examples": [
+    {
+      "name": "Notion",
+      "desc": {
+        "fr": "breadcrumb avec hover dropdown sur chaque segment, éditable inline",
+        "en": "breadcrumb with hover dropdown on each segment, inline editable"
+      }
+    },
+    {
+      "name": "Confluence",
+      "desc": {
+        "fr": "breadcrumb avec espaces, sections, pages imbriquées",
+        "en": "breadcrumb across spaces, sections, and nested pages"
+      }
+    },
+    {
+      "name": "AWS Console",
+      "desc": {
+        "fr": "breadcrumb technique avec ARN raccourci, essentiel pour naviguer entre resources",
+        "en": "technical breadcrumb with shortened ARN, essential for navigating between resources"
+      }
+    },
+    {
+      "name": "Figma",
+      "desc": {
+        "fr": "breadcrumb de fichier dans la top bar, clic = retour au project",
+        "en": "file breadcrumb in the top bar, click = back to project"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Troncature** : sur les chemins longs, tronquer les segments du milieu avec `…` cliquable qui révèle le chemin complet. Toujours afficher le premier et le dernier segment.",
+      "**Dernier segment** : le segment actuel (dernier) ne doit pas être un lien — c'est là où on est. Le styliser différemment (plus sombre, non souligné).",
+      "**Hover dropdown** : délai de 150ms avant ouverture pour éviter les ouvertures accidentelles. Max 8–10 items, avec scroll si plus.",
+      "**URL** : chaque segment doit correspondre à une URL propre et partageable.",
+      "**Accessibilité** : wrapper dans `<nav aria-label=\"Breadcrumb\">` + `<ol>` avec `aria-current=\"page\"` sur le dernier item."
+    ],
+    "en": [
+      "**Separator**: use `›` or `/`, avoid `>` (too aggressive). A subtle color on the separator reduces visual noise.",
+      "**Last item**: non-clickable and slightly bolder or differently colored to signal \"current location\".",
+      "**Long paths**: truncate the middle section (home › … › parent › current) rather than the beginning or end.",
+      "**Dynamic update**: on SPA navigation update the breadcrumb without a full reload — use history events or a routing hook.",
+      "**Structured data**: add `JSON-LD BreadcrumbList` schema to every page for Google rich results."
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Breadcrumb qui ne reflète pas l'URL réelle — crée une désorientation totale",
+      "❌ Trop de niveaux sans troncature (6+ segments) — illisible",
+      "❌ Breadcrumb statique non interactif — perd 80% de sa valeur",
+      "❌ Séparateur `>` sans espace — `›` ou `/` avec padding est plus lisible",
+      "--"
+    ],
+    "en": [
+      "❌ Showing the breadcrumb on the home page (it adds nothing there)",
+      "❌ Truncating the last segment — the user must always see where they are",
+      "❌ A breadcrumb that lags behind the URL (SPA routing update missed)",
+      "❌ Using the breadcrumb as the sole navigation — it complements, it does not replace the menu"
+    ]
+  },
+  "what": {
+    "fr": "Un fil d'Ariane mis à jour en temps réel qui reflète la position exacte de l'utilisateur dans la hiérarchie, avec des segments interactifs (clic, sous-menu au hover).",
+    "en": "A real-time breadcrumb trail that reflects the user's exact position in the hierarchy, with interactive segments (clickable, hover dropdown)."
+  },
+  "why": {
+    "fr": "Dans les applications avec une hiérarchie profonde (espace de travail > projet > dossier > document), le breadcrumb est le seul moyen de maintenir l'orientation sans occuper d'espace permanent. Le rendre cliquable et avec des sous-menus transforme un indicateur passif en outil de navigation rapide.",
+    "en": "In apps with deep hierarchies (workspace > project > folder > document), the breadcrumb is the only way to maintain orientation without taking up permanent space. Making it clickable with sub-menus transforms a passive indicator into a fast navigation tool."
+  },
+  "demo": {
+    "fr": "```\nAcme Corp  ›  Produit  ›  Q4 2025  ›  Sprint 12\n    ▲              ▲\n    Clic → retour  Hover → dropdown des autres projets\n    à l'accueil    ┌──────────────────┐\n                   │ ✓ Produit        │\n                   │   Marketing      │\n                   │   Engineering    │\n                   │ + Nouveau projet │\n                   └──────────────────┘\n```",
+    "en": "```\nAcme Corp  ›  Product  ›  Q4 2025  ›  Sprint 12\n    ▲              ▲\n    Click → back   Hover → dropdown of other projects\n    to home         ┌──────────────────┐\n                    │ ✓ Product        │\n                    │   Marketing      │\n                    │   Engineering    │\n                    │ + New project    │\n                    └──────────────────┘\n```"
+  }
+}

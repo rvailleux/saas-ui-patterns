@@ -1,0 +1,32 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,-apple-system,sans-serif;background:#0f0f1a;color:#e2e8f0;height:100vh;overflow:hidden;font-size:13px;line-height:1.5;padding:24px}
+.viewport{height:240px;overflow:auto;background:#16162a;border:1px solid #2d2d52;border-radius:8px;position:relative}
+.content{position:relative}
+.row{position:absolute;height:40px;display:flex;align-items:center;padding:0 16px;border-bottom:1px solid #2d2d52;width:100%}
+.row:hover{background:#1e1e35}
+.status{color:#94a3b8;font-size:12px;margin-top:8px}
+</style></head><body>
+<div class="viewport" id="viewport">
+<div class="content" id="content"></div>
+</div>
+<div class="status" id="status">Showing items 1-8 of 1000</div>
+<script>
+const total = 1000, rowH = 40, viewportH = 240;
+const content = document.getElementById('content');
+content.style.height = (total * rowH) + 'px';
+const viewport = document.getElementById('viewport');
+function render() {
+  const scrollTop = viewport.scrollTop;
+  const start = Math.floor(scrollTop / rowH);
+  const count = Math.ceil(viewportH / rowH) + 1;
+  const visible = [];
+  for(let i = start; i < Math.min(start + count, total); i++) {
+    visible.push('<div class="row" style="top:'+(i*rowH)+'px">Item '+(i+1)+'</div>');
+  }
+  content.innerHTML = visible.join('');
+  document.getElementById('status').textContent = 'Showing items '+(start+1)+'-'+(Math.min(start+count,total))+' of '+total;
+}
+viewport.addEventListener('scroll', render);
+render();
+</script>
+</body></html>

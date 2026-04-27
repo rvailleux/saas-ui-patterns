@@ -1,0 +1,38 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,-apple-system,sans-serif;background:#0f0f1a;color:#e2e8f0;height:100vh;overflow:hidden;font-size:13px;line-height:1.5;padding:24px}
+.breadcrumb{display:flex;align-items:center;gap:8px;margin-bottom:24px;color:#94a3b8}
+.breadcrumb a{color:#a78bfa;text-decoration:none}
+.breadcrumb a:hover{text-decoration:underline}
+.folder-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.folder-item{background:#16162a;border:1px solid #2d2d52;border-radius:8px;padding:16px;cursor:pointer;transition:all 150ms;text-align:center}
+.folder-item:hover{background:#1e1e35;border-color:#7c3aed}
+.folder-icon{font-size:32px;margin-bottom:8px}
+</style></head><body>
+<div class="breadcrumb" id="breadcrumb"><a href="#" onclick="goHome()">Home</a></div>
+<div class="folder-grid" id="grid"></div>
+<script>
+const structure = {
+  home: {name: 'Home', items: [{id: 'projects', name: 'Projects', icon: '📁'},{id: 'documents', name: 'Documents', icon: '📄'},{id: 'images', name: 'Images', icon: '🖼️'}]},
+  projects: {name: 'Projects', parent: 'home', items: [{id: 'webapp', name: 'Web App', icon: '🌐'},{id: 'mobile', name: 'Mobile App', icon: '📱'},{id: 'api', name: 'API Server', icon: '⚙️'}]},
+  documents: {name: 'Documents', parent: 'home', items: [{id: 'specs', name: 'Specs', icon: '📋'},{id: 'reports', name: 'Reports', icon: '📊'}]},
+  images: {name: 'Images', parent: 'home', items: [{id: 'logos', name: 'Logos', icon: '🎨'},{id: 'screenshots', name: 'Screenshots', icon: '📸'}]}
+};
+let current = 'home';
+function render() {
+  const loc = structure[current];
+  const path = [];
+  let node = current;
+  while(node !== 'home') { path.unshift(structure[node].name); node = structure[node].parent; }
+  let bc = '<a href="#" onclick="goHome()">Home</a>';
+  path.forEach(p => bc += ' <span>›</span> <span>'+p+'</span>');
+  document.getElementById('breadcrumb').innerHTML = bc;
+  document.getElementById('grid').innerHTML = loc.items.map(i =>
+    '<div class="folder-item" onclick="openFolder(''+i.id+'')">'+
+    '<div class="folder-icon">'+i.icon+'</div><div>'+i.name+'</div></div>'
+  ).join('');
+}
+function openFolder(id) { if(structure[id]) { current = id; render(); } }
+function goHome() { current = 'home'; render(); }
+render();
+</script>
+</body></html>

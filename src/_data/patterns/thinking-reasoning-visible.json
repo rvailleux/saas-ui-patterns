@@ -1,0 +1,87 @@
+{
+  "id": 33,
+  "slug": "thinking-reasoning-visible",
+  "category": "ai-feedback",
+  "title": {
+    "fr": "Thinking / reasoning visible",
+    "en": "Visible Thinking / Reasoning"
+  },
+  "categoryLabel": {
+    "slug": "ai-feedback",
+    "fr": "AI — Feedback & Contrôle",
+    "en": "AI — Feedback & Control"
+  },
+  "examples": [
+    {
+      "name": "Claude",
+      "desc": {
+        "fr": "`<thinking>` blocks avec reasoning visible avant la réponse",
+        "en": "extended thinking with collapsible reasoning"
+      }
+    },
+    {
+      "name": "ChatGPT o1",
+      "desc": {
+        "fr": "\"Thinking\" collapsable avec durée estimée",
+        "en": "visible reasoning steps in complex responses"
+      }
+    },
+    {
+      "name": "Perplexity",
+      "desc": {
+        "fr": "étapes de recherche et de raisonnement visibles",
+        "en": "agent reasoning trace in the UI"
+      }
+    },
+    {
+      "name": "Gemini 2.0 Flash Thinking",
+      "desc": {
+        "fr": "reasoning steps affichés",
+        "en": "thinking mode with expandable thought process"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Collapsable par défaut** : le thinking est replié par défaut pour ne pas noyer la réponse finale. L'utilisateur l'ouvre s'il veut inspecter.",
+      "**Streaming du thinking** : streamer le thinking en temps réel (même pattern que la réponse) pour donner le sentiment de \"voir l'AI penser\".",
+      "**Séparation visuelle** : le thinking doit être visuellement distinct de la réponse (fond différent, italique, icône différente).",
+      "**Durée** : afficher la durée du raisonnement (\"Réfléchi 8 secondes\") — informe sur l'effort fourni.",
+      "**Ne pas exposer sur les requêtes simples** : le thinking n'a de valeur que sur les questions complexes. Sur les requêtes simples, le masquer entièrement."
+    ],
+    "en": [
+      "**Collapsible**: the thinking section is collapsed by default, with a \"Thinking…\" / \"View reasoning\" toggle.",
+      "**Visual distinction**: use a different background (subtle grey/purple tint) for the thinking block vs the final answer.",
+      "**Stream the thinking**: if possible, stream the thinking tokens alongside the final answer — it builds trust in real-time.",
+      "**Summary header**: display a one-line summary of what the model is thinking about (\"Checking arithmetic…\", \"Searching for relevant context…\").",
+      "**Not for every response**: only show visible thinking for complex, multi-step tasks where the reasoning adds value."
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Thinking trop long qui noie la réponse",
+      "❌ Thinking ouvert par défaut — la réponse est ce que l'utilisateur cherche, pas le raisonnement",
+      "❌ Thinking identique visuellement à la réponse — confusion entre les deux",
+      "❌ Afficher le thinking sur toutes les réponses y compris les plus triviales",
+      "--"
+    ],
+    "en": [
+      "❌ Thinking block that is always expanded — it adds noise for simple queries",
+      "❌ Showing raw token output without formatting — thinking is only useful when readable",
+      "❌ Using thinking blocks to hide uncertainty — show uncertainty signals separately",
+      "❌ Thinking that contradicts the final answer without explanation"
+    ]
+  },
+  "what": {
+    "fr": "Le raisonnement intermédiaire du modèle (chain-of-thought) est affiché dans une zone collapsable avant la réponse finale, montrant les étapes de réflexion de l'AI.",
+    "en": "The AI's reasoning process is partially visible to the user: what it is searching for, what hypotheses it is testing, what it has found — before displaying the final response."
+  },
+  "why": {
+    "fr": "Augmente massivement la confiance dans les réponses complexes. L'utilisateur peut voir si l'AI a bien compris la question, identifié les bons paramètres, et suivi une logique cohérente. Un raisonnement transparent est aussi plus facile à débugger et corriger.",
+    "en": "Reduces the \"black box\" effect. The user understands why the AI arrives at a particular answer. Visible reasoning enables verification of the thought process and builds long-term trust. It also reduces anxiety during long thinking phases."
+  },
+  "demo": {
+    "fr": "```\n🤖 [Réflexion en cours...]                ← collapsable\n┌─────────────────────────────────────┐\n│ Je dois analyser les ventes Q3.     │\n│ Paramètres : période juillet-sept,  │\n│ comparaison avec Q3 2023...         │\n│ Je vois que les revenus ont crû de  │\n│ 23% mais les marges ont baissé...   │\n└─────────────────────────────────────┘\n\n**Analyse des ventes Q3** : La croissance du\nchiffre d'affaires (+23%) masque une pression\nsur les marges due à...\n```",
+    "en": "```\n🤖 [Thinking...]\n\n┌─ Reasoning (expandable) ────────────────────────┐\n│ • Analysing the request...                      │\n│ • Searching for relevant patterns...            │\n│ • Considering 3 possible approaches...          │\n│ • Selecting the most appropriate one...         │\n└─────────────────────────────────────────────────┘\n\nFinal answer:\n\"Here is the recommended implementation...\"\n```"
+  }
+}

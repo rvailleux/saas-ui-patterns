@@ -1,0 +1,87 @@
+{
+  "id": 26,
+  "slug": "diff-view-accept-reject",
+  "category": "ai-generation",
+  "title": {
+    "fr": "Diff view accept/reject",
+    "en": "Diff View Accept/Reject"
+  },
+  "categoryLabel": {
+    "slug": "ai-generation",
+    "fr": "AI — Génération & Édition",
+    "en": "AI — Generation & Editing"
+  },
+  "examples": [
+    {
+      "name": "GitHub Copilot",
+      "desc": {
+        "fr": "diff view dans l'éditeur pour les suggestions de code",
+        "en": "diff view in the editor for code suggestions"
+      }
+    },
+    {
+      "name": "Cursor",
+      "desc": {
+        "fr": "diff view avec accept/reject par hunk de code",
+        "en": "diff view with accept/reject per code hunk"
+      }
+    },
+    {
+      "name": "Devin",
+      "desc": {
+        "fr": "diff view sur les modifications de fichiers par l'agent",
+        "en": "diff view on file modifications by the agent"
+      }
+    },
+    {
+      "name": "Windsurf",
+      "desc": {
+        "fr": "diff view avec inline accept sur chaque ligne",
+        "en": "diff view with inline accept on each line"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Niveau de granularité** : accept/reject global + accept/reject par bloc de changement (hunk). Le line-by-line est optionnel.",
+      "**Couleurs** : vert pour les ajouts (`#dcfce7` bg, `#16a34a` texte), rouge pour les suppressions (`#fee2e2` bg, `#dc2626` texte). Gris neutre pour l'inchangé.",
+      "**Lib de diff** : utiliser `diff` (npm) pour calculer le diff, `react-diff-viewer` ou équivalent pour l'affichage.",
+      "**Édition post-accept** : après acceptation, le contenu doit être éditable normalement.",
+      "**Raccourcis** : `Tab` pour naviguer entre les hunks, `Y` pour accepter, `N` pour rejeter (convention Git)."
+    ],
+    "en": [
+      "**Inline diff**: show added lines in green, removed in red, unchanged in neutral. Use a word-level diff for short changes.",
+      "**Per-hunk controls**: each diff hunk (block of related changes) should have its own Accept/Reject button.",
+      "**\"Accept all\" / \"Reject all\"**: provide bulk controls in the toolbar above the diff.",
+      "**Undo**: accepting or rejecting a change should be undoable in the document history.",
+      "**Context lines**: show 2–3 unchanged context lines above and below each hunk to help the user understand the change."
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Diff illisible sur les changements de formatage purs (espaces, retours à la ligne)",
+      "❌ Pas de moyen d'accepter partiellement (seulement global accept/reject)",
+      "❌ Diff qui ne gère pas les déplacements de blocs (texte déplacé = tout supprimé + tout ajouté)",
+      "❌ Accept qui ne peut pas être annulé (⌘Z doit fonctionner)",
+      "--"
+    ],
+    "en": [
+      "❌ Showing a diff without context lines — isolated changes are hard to evaluate",
+      "❌ No per-hunk controls — forcing the user to accept or reject everything at once",
+      "❌ A diff view that is read-only (no accept/reject) — it is then just documentation, not a workflow",
+      "❌ Word-wrap differences making the diff hard to read — always use a monospace font"
+    ]
+  },
+  "what": {
+    "fr": "Les modifications suggérées par l'AI sont présentées en mode diff (ajouts en vert, suppressions en rouge), et l'utilisateur peut accepter ou rejeter globalement ou bloc par bloc.",
+    "en": "AI-suggested changes are presented in diff mode (additions in green, deletions in red), and the user can accept or reject globally or chunk by chunk."
+  },
+  "why": {
+    "fr": "Donne le contrôle total à l'utilisateur. Il voit exactement ce que l'AI veut changer avant que ça soit appliqué. La granularité (accepter ligne par ligne) permet de prendre le meilleur de la suggestion sans accepter l'entier. C'est le pattern qui convertit la méfiance envers l'AI en confiance.",
+    "en": "Gives the user full control. They see exactly what the AI wants to change before it's applied. Granularity (accepting line by line) lets them take the best of a suggestion without accepting everything. This pattern converts distrust of AI into confidence."
+  },
+  "demo": {
+    "fr": "```\n┌─────────────────────────────────────────────────┐\n│ - L'utilisateur peut modifier les paramètres.   │  ← rouge : supprimé\n│ + L'utilisateur peut personnaliser les          │  ← vert : ajouté\n│ + paramètres selon ses préférences.             │\n│                                                 │\n│   Le système enregistre les changements.        │  ← gris : inchangé\n├─────────────────────────────────────────────────┤\n│  [✓ Accepter tout]  [✗ Rejeter tout]  [Modifier]│\n└─────────────────────────────────────────────────┘\n```",
+    "en": "```\n┌─────────────────────────────────────────────────┐\n│ - The user can modify the settings.             │  ← red: deleted\n│ + The user can personalise the                  │  ← green: added\n│ + settings to their preferences.                │\n│                                                 │\n│   The system saves the changes.                 │  ← grey: unchanged\n├─────────────────────────────────────────────────┤\n│  [✓ Accept all]  [✗ Reject all]  [Edit]         │\n└─────────────────────────────────────────────────┘\n```"
+  }
+}

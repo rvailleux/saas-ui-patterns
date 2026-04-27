@@ -1,0 +1,87 @@
+{
+  "id": 38,
+  "slug": "prompt-templates",
+  "category": "ai-prompt",
+  "title": {
+    "fr": "Prompt templates",
+    "en": "Prompt Templates"
+  },
+  "categoryLabel": {
+    "slug": "ai-prompt",
+    "fr": "AI — Prompt UX",
+    "en": "AI — Prompt UX"
+  },
+  "examples": [
+    {
+      "name": "HubSpot",
+      "desc": {
+        "fr": "templates AI par équipe (Sales, Marketing, Support)",
+        "en": "reusable prompt templates per use case"
+      }
+    },
+    {
+      "name": "Salesforce Einstein",
+      "desc": {
+        "fr": "prompt templates par rôle métier",
+        "en": "team-shared prompt library"
+      }
+    },
+    {
+      "name": "PromptLayer",
+      "desc": {
+        "fr": "gestion et versioning de templates en équipe",
+        "en": "parameterised templates with form fields"
+      }
+    },
+    {
+      "name": "Dust",
+      "desc": {
+        "fr": "templates avec variables et workflows",
+        "en": "template gallery with categorised prompts"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Variables** : supporter des variables `{{variable}}` que l'utilisateur remplit avant l'envoi.",
+      "**Scope** : templates personnels vs partagés par équipe vs globaux (admin).",
+      "**Versioning** : historique des modifications d'un template avec possibilité de rollback.",
+      "**Catégorisation** : dossiers ou tags pour organiser les templates par équipe ou cas d'usage.",
+      "**Métriques** : tracking d'utilisation — quels templates sont les plus utilisés, quels résultats."
+    ],
+    "en": [
+      "**Variable slots**: templates must have editable variable slots (highlighted placeholders) so the user can fill in specific values.",
+      "**Categories**: organize templates by use case (Writing, Analysis, Code, Research) with icons.",
+      "**Search**: provide a search bar to find templates by name or category.",
+      "**User templates**: allow users to save and name their own templates.",
+      "**One-click insert**: clicking a template fills the input immediately — no intermediate step."
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Templates sans variables — l'utilisateur doit tout réécrire à la main",
+      "❌ Templates uniquement personnels — la valeur est dans le partage d'équipe",
+      "❌ Pas de possibilité de prévisualiser le template avant utilisation",
+      "❌ Templates trop longs et complexes — les plus utilisés sont les plus simples",
+      "--"
+    ],
+    "en": [
+      "❌ Templates with no variable placeholders — they are just boilerplate text the user must fully rewrite",
+      "❌ Templates that are too long to read at a glance in the picker",
+      "❌ No categorization — a flat list of 30+ templates is impossible to browse",
+      "❌ Templates that cannot be edited or deleted by the user"
+    ]
+  },
+  "what": {
+    "fr": "Bibliothèque de prompts pré-écrits, personnalisables et partageables, que l'utilisateur ou l'équipe peut créer pour standardiser les usages récurrents de l'AI.",
+    "en": "Pre-defined, parameterised prompt structures that the user fills in (like form fields), reducing a complex prompt to a guided interaction."
+  },
+  "why": {
+    "fr": "Le prompt engineering est une compétence rare. Les templates permettent aux utilisateurs avancés de créer des prompts efficaces une fois, et à tout le monde de les utiliser ensuite. Standardise les usages, maintient la qualité, et réduit le temps par tâche.",
+    "en": "Not all users know how to write effective prompts. Templates codify best practices and transfer that knowledge to everyone. They also standardise AI usage within a team (same template = reproducible outputs)."
+  },
+  "demo": {
+    "fr": "```\nBibliothèque de templates (partagée par équipe) :\n\n📁 Commercial\n   └ Email de relance client        [Utiliser] [Modifier]\n   └ Synthèse d'appel de vente      [Utiliser] [Modifier]\n\n📁 Produit  \n   └ Rédaction de user story        [Utiliser] [Modifier]\n   └ Analyse de feedback utilisateur[Utiliser] [Modifier]\n\n[+ Créer un template]\n\n─────────────────────────────\n\nTemplate \"Rédaction de user story\" :\nEn tant que {{persona}}, je veux {{action}}\nafin de {{bénéfice}}.\n\nContexte : {{contexte_du_ticket}}\n\nVariables à remplir avant envoi :\n[persona      ] [action       ] [bénéfice      ]\n```",
+    "en": "```\nTemplate: \"Analyse user feedback\"\n\n┌────────────────────────────────────────────────┐\n│ Source: [Intercom conversations ▼]             │\n│ Period: [Last 30 days            ]             │\n│ Focus:  [Feature requests        ]             │\n│ Format: [Numbered list ▼]                      │\n│                                                │\n│                          [▶ Run this template] │\n└────────────────────────────────────────────────┘\n```"
+  }
+}

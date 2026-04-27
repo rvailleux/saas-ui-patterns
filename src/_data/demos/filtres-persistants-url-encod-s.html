@@ -1,0 +1,50 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,-apple-system,sans-serif;background:#0f0f1a;color:#e2e8f0;height:100vh;overflow:hidden;font-size:13px;line-height:1.5;padding:24px}
+.filter-bar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.chip{display:flex;align-items:center;gap:6px;background:#1e1e35;border:1px solid #2d2d52;padding:6px 12px;border-radius:20px;font-size:13px}
+.chip-close{width:16px;height:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;border-radius:50%}
+.chip-close:hover{background:#ef4444}
+.add-btn{background:#7c3aed;border:none;color:#fff;padding:6px 12px;border-radius:20px;cursor:pointer;font-size:13px}
+.add-btn:hover{background:#6d28d9}
+.count{color:#94a3b8;font-size:13px}
+.dropdown{display:none;position:absolute;background:#1e1e35;border:1px solid #2d2d52;border-radius:8px;overflow:hidden;margin-top:8px}
+.dropdown.show{display:block}
+.dropdown-item{padding:10px 16px;cursor:pointer;font-size:13px}
+.dropdown-item:hover{background:#2d2d52}
+.results{background:#16162a;border:1px solid #2d2d52;border-radius:8px;padding:16px}
+.item{padding:8px 0;border-bottom:1px solid #2d2d52}
+.item:last-child{border-bottom:none}
+</style></head><body>
+<div class="filter-bar">
+<span class="count" id="count">0 filters active</span>
+<div id="chips"></div>
+<div style="position:relative">
+<button class="add-btn" onclick="toggleDropdown()">+ Add Filter</button>
+<div class="dropdown" id="dropdown">
+<div class="dropdown-item" onclick="addFilter('Status', 'Open')">Status: Open</div>
+<div class="dropdown-item" onclick="addFilter('Priority', 'High')">Priority: High</div>
+<div class="dropdown-item" onclick="addFilter('Assignee', 'You')">Assignee: You</div>
+<div class="dropdown-item" onclick="addFilter('Type', 'Bug')">Type: Bug</div>
+</div>
+</div>
+</div>
+<div class="results" id="results">
+<div class="item">Issue #123 - Login broken</div>
+<div class="item">Issue #124 - Button color wrong</div>
+<div class="item">Issue #125 - API timeout</div>
+</div>
+<script>
+let filters = [];
+function render() {
+  document.getElementById('chips').innerHTML = filters.map((f,i) =>
+    '<div class="chip"><span>'+f.key+': '+f.val+'</span><span class="chip-close" onclick="removeFilter('+i+')">×</span></div>'
+  ).join('');
+  document.getElementById('count').textContent = filters.length + ' filter' + (filters.length!==1?'s':'') + ' active';
+}
+function addFilter(k,v) { filters.push({key:k,val:v}); render(); toggleDropdown(); }
+function removeFilter(i) { filters.splice(i,1); render(); }
+function toggleDropdown() { document.getElementById('dropdown').classList.toggle('show'); }
+document.addEventListener('click', (e) => { if(!e.target.closest('.add-btn') && !e.target.closest('.dropdown')) document.getElementById('dropdown').classList.remove('show'); });
+render();
+</script>
+</body></html>

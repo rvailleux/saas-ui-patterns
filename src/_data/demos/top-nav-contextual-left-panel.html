@@ -1,0 +1,45 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,-apple-system,sans-serif;background:#0f0f1a;color:#e2e8f0;height:100vh;overflow:hidden;font-size:13px;line-height:1.5}
+.top-nav{height:48px;background:#16162a;border-bottom:1px solid #2d2d52;display:flex;align-items:center;padding:0 16px;gap:4px}
+.top-tab{padding:8px 16px;border-radius:6px;color:#94a3b8;cursor:pointer;transition:all 150ms}
+.top-tab:hover{color:#e2e8f0;background:#1e1e35}
+.top-tab.active{background:#7c3aed;color:#fff}
+.container{display:flex;height:calc(100vh - 48px)}
+.left-panel{width:180px;background:#16162a;border-right:1px solid #2d2d52;padding:16px}
+.left-item{padding:8px 12px;border-radius:6px;color:#94a3b8;cursor:pointer;margin-bottom:4px}
+.left-item:hover{background:#1e1e35;color:#e2e8f0}
+.main-content{flex:1;padding:24px}
+.section-title{font-size:18px;font-weight:600;margin-bottom:12px}
+</style></head><body>
+<div class="top-nav">
+<div class="top-tab active" onclick="switchTab('code', this)">Code</div>
+<div class="top-tab" onclick="switchTab('issues', this)">Issues</div>
+<div class="top-tab" onclick="switchTab('settings', this)">Settings</div>
+</div>
+<div class="container">
+<div class="left-panel" id="leftPanel">
+<div class="left-item">src/</div>
+<div class="left-item">components/</div>
+<div class="left-item">utils/</div>
+<div class="left-item">tests/</div>
+</div>
+<div class="main-content" id="mainContent">
+<div class="section-title">Repository Files</div>
+<p style="color:#94a3b8">Browse source code, components, and test files.</p>
+</div>
+</div>
+<script>
+const panels = {
+  code: {items: ['src/','components/','utils/','tests/'], title: 'Repository Files', desc: 'Browse source code, components, and test files.'},
+  issues: {items: ['Open','Closed','Labels','Milestones'], title: 'Issues', desc: 'Track bugs and feature requests.'},
+  settings: {items: ['General','Security','Integrations','Notifications'], title: 'Project Settings', desc: 'Configure repository settings and integrations.'}
+};
+function switchTab(tab, el) {
+  document.querySelectorAll('.top-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  const p = panels[tab];
+  document.getElementById('leftPanel').innerHTML = p.items.map(i => '<div class="left-item">'+i+'</div>').join('');
+  document.getElementById('mainContent').innerHTML = '<div class="section-title">'+p.title+'</div><p style="color:#94a3b8">'+p.desc+'</p>';
+}
+</script>
+</body></html>

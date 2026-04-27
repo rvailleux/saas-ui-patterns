@@ -1,0 +1,33 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,-apple-system,sans-serif;background:#0f0f1a;color:#e2e8f0;height:100vh;overflow:hidden;font-size:13px;line-height:1.5;padding:24px}
+.item{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:#16162a;border:1px solid #2d2d52;border-radius:8px;margin-bottom:8px}
+.item.archived{opacity:0.5}
+.archive-btn{background:#7c3aed;border:none;color:#fff;padding:6px 12px;border-radius:6px;cursor:pointer;font-size:12px}
+.toast{position:fixed;bottom:24px;right:24px;background:#1e1e35;border:1px solid #2d2d52;border-radius:8px;padding:12px 16px;display:flex;align-items:center;gap:12px;box-shadow:0 4px 12px rgba(0,0,0,0.3);transform:translateY(100px);transition:transform 200ms}
+.toast.show{transform:translateY(0)}
+.undo{color:#a78bfa;cursor:pointer;font-weight:500}
+.undo:hover{text-decoration:underline}
+.progress{position:absolute;bottom:0;left:0;height:3px;background:#7c3aed;transition:width 3s linear}
+</style></head><body>
+<div class="item" id="item1"><span>Important Document.pdf</span><button class="archive-btn" onclick="archive()">Archive</button></div>
+<div class="toast" id="toast"><span>Item archived</span><span class="undo" onclick="undo()">Undo</span><div class="progress" id="progress"></div></div>
+<script>
+let archived = false, timeout;
+function archive() {
+  archived = true;
+  document.getElementById('item1').classList.add('archived');
+  const toast = document.getElementById('toast');
+  const prog = document.getElementById('progress');
+  toast.classList.add('show');
+  prog.style.width = '100%';
+  setTimeout(() => prog.style.width = '0%', 10);
+  timeout = setTimeout(() => { toast.classList.remove('show'); }, 3000);
+}
+function undo() {
+  clearTimeout(timeout);
+  archived = false;
+  document.getElementById('item1').classList.remove('archived');
+  document.getElementById('toast').classList.remove('show');
+}
+</script>
+</body></html>

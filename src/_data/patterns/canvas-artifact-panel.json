@@ -1,0 +1,89 @@
+{
+  "id": 28,
+  "slug": "canvas-artifact-panel",
+  "category": "ai-generation",
+  "title": {
+    "fr": "Canvas / artifact panel",
+    "en": "Canvas / Artifact Panel"
+  },
+  "categoryLabel": {
+    "slug": "ai-generation",
+    "fr": "AI — Génération & Édition",
+    "en": "AI — Generation & Editing"
+  },
+  "examples": [
+    {
+      "name": "Claude Artifacts",
+      "desc": {
+        "fr": "canvas pour code, HTML, SVG, React, Markdown",
+        "en": "canvas for code, HTML, SVG, React, Markdown"
+      }
+    },
+    {
+      "name": "ChatGPT Canvas",
+      "desc": {
+        "fr": "canvas pour documents et code avec edition collaborative",
+        "en": "canvas for documents and code with collaborative editing"
+      }
+    },
+    {
+      "name": "v0 (Vercel)",
+      "desc": {
+        "fr": "canvas pour composants React avec preview live",
+        "en": "canvas for React components with live preview"
+      }
+    },
+    {
+      "name": "Gemini Docs",
+      "desc": {
+        "fr": "génération dans Google Docs directement",
+        "en": "generation directly into Google Docs"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Types d'artefacts** : définir les types supportés (Markdown, Code, HTML, JSON, Tableau) et les rendre extensibles.",
+      "**Iframe sandboxé** : pour les artefacts HTML/JS, utiliser un iframe sandbox pour l'isolation de sécurité.",
+      "**Synchronisation** : les modifications manuelles dans le canvas doivent être reflétées dans les échanges suivants (injection dans le contexte de conversation).",
+      "**Version history** : chaque génération/modification crée une version — permettre de revenir à une version précédente.",
+      "**Export** : toujours proposer copier dans le presse-papier + télécharger en format natif."
+    ],
+    "en": [
+      "**Split layout**: code/source on the left, rendered output on the right. Draggable divider between the two.",
+      "**Auto-update**: re-render the preview as the user types (debounced 300 ms) — not just on save.",
+      "**Artifact types**: support code (syntax-highlighted), Markdown (rendered), HTML/React (iframe preview), and images.",
+      "**Version history**: save previous artifact versions so the user can navigate back through the conversation.",
+      "**Export**: provide a copy/download button on the artifact panel for the raw content."
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Canvas qui réinitialise à chaque message — l'artefact doit persister",
+      "❌ Pas de moyen d'éditer manuellement l'artefact — la génération AI ne peut pas être parfaite",
+      "❌ Canvas sans version history — les modifications accidentelles ne peuvent pas être annulées",
+      "❌ Sécurité insuffisante sur les artefacts exécutables (XSS si pas de sandbox)",
+      "--",
+      "--",
+      "--"
+    ],
+    "en": [
+      "❌ A preview that only updates on explicit save — breaks the live feedback loop",
+      "❌ Rendering untrusted HTML in the same origin — always use a sandboxed iframe for HTML artifacts",
+      "❌ No syntax highlighting in the code view — even a simple highlight improves readability",
+      "❌ Artifact panel that cannot be resized or maximized — some artifacts need more space"
+    ]
+  },
+  "what": {
+    "fr": "La réponse AI génère un objet riche (document, code, tableau, composant UI) dans un panneau séparé du chat, éditable directement, persistant entre les échanges.",
+    "en": "The AI response generates a rich object (document, code, table, UI component) in a panel separate from the chat, directly editable, persisting across exchanges."
+  },
+  "why": {
+    "fr": "Sort du paradigme \"réponse texte dans le chat\" pour créer un objet de travail réel. L'utilisateur peut itérer sur l'artefact (\"rends ce tableau plus formel\", \"ajoute une colonne Total\") sans perdre l'objet entre les échanges. Le chat devient un outil de manipulation de l'artefact, pas juste de réponse à des questions.",
+    "en": "Moves beyond the \"text response in chat\" paradigm to create a real working object. The user can iterate on the artefact (\"make this table more formal\", \"add a Total column\") without losing the object between exchanges. The chat becomes a manipulation tool, not just a Q&A interface."
+  },
+  "demo": {
+    "fr": "```\n┌────────────────────────┬──────────────────────┐\n│ CHAT                   │ CANVAS               │\n│ ─────────────────────  │ ──────────────────── │\n│ 👤 Génère un tableau   │ | Produit | Prix | Q │\n│    des ventes Q3       │ | ─────── | ─── | ─ │\n│                        │ | Widget  | 29€ | 42 │\n│ 🤖 Voici le tableau.   │ | Gadget  | 49€ | 28 │\n│    [Voir dans canvas→] │ | Truc    | 19€ | 67 │\n│                        │ ──────────────────── │\n│ 👤 Ajoute une colonne  │ Éditable directement │\n│    Total               │ ──────────────────── │\n│                        │ [Exporter] [Copier]  │\n└────────────────────────┴──────────────────────┘\n```",
+    "en": "```\n┌────────────────────────┬──────────────────────┐\n│ CHAT                   │ CANVAS               │\n│ ─────────────────────  │ ──────────────────── │\n│ 👤 Generate a Q3       │ | Product | Price | Q │\n│    sales table         │ | ─────── | ───── | ─ │\n│                        │ | Widget  | $29   | 42 │\n│ 🤖 Here's the table.   │ | Gadget  | $49   | 28 │\n│    [View in canvas →]  │ | Thing   | $19   | 67 │\n│                        │ ──────────────────── │\n│ 👤 Add a Total column  │ Directly editable    │\n│                        │ ──────────────────── │\n│                        │ [Export] [Copy]      │\n└────────────────────────┴──────────────────────┘\n```"
+  }
+}

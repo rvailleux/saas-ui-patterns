@@ -1,0 +1,25 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,-apple-system,sans-serif;background:#0f0f1a;color:#e2e8f0;height:100vh;overflow:hidden;font-size:13px;line-height:1.5;padding:24px}
+.response-card{background:#16162a;border:1px solid #2d2d52;border-radius:12px;padding:20px;margin-bottom:16px;line-height:1.6}
+.variants{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.variant-btn{background:#1e1e35;border:1px solid #2d2d52;color:#e2e8f0;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:12px}
+.variant-btn:hover{background:#2d2d52}
+.regen-btn{background:#7c3aed;border:none;color:#fff;padding:10px 20px;border-radius:6px;cursor:pointer}
+</style></head><body>
+<div class="response-card" id="response">The project implementation should prioritize user feedback and iterative development cycles to ensure product-market fit.</div>
+<div class="variants">
+<button class="variant-btn" onclick="changeVariant('shorter')">↺ Shorter</button>
+<button class="variant-btn" onclick="changeVariant('formal')">↺ More formal</button>
+<button class="variant-btn" onclick="changeVariant('casual')">↺ More casual</button>
+</div>
+<button class="regen-btn" onclick="regenerate()">↺ Regenerate</button>
+<script>
+const variants = {
+  shorter: 'Prioritize user feedback and iterate quickly for product-market fit.',
+  formal: 'The implementation strategy ought to emphasize user feedback acquisition and iterative developmental methodologies to ascertain optimal product-market alignment.',
+  casual: 'Focus on what users say and keep iterating until you find the sweet spot!'
+};
+function changeVariant(type) { document.getElementById('response').textContent = variants[type]; }
+function regenerate() { document.getElementById('response').textContent = 'Here is a fresh take on the project approach with new insights and perspectives.'; }
+</script>
+</body></html>

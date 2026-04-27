@@ -1,0 +1,35 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,-apple-system,sans-serif;background:#0f0f1a;color:#e2e8f0;height:100vh;overflow:hidden;font-size:13px;line-height:1.5;padding:24px}
+.input-row{display:flex;gap:8px;margin-bottom:16px}
+input{flex:1;background:#16162a;border:1px solid #2d2d52;border-radius:8px;padding:10px 14px;color:#e2e8f0;outline:none}
+button{background:#7c3aed;border:none;color:#fff;padding:10px 20px;border-radius:8px;cursor:pointer}
+button:disabled{opacity:0.5}
+.output{background:#16162a;border:1px solid #2d2d52;border-radius:8px;padding:16px;min-height:100px;line-height:1.6}
+.cursor{display:inline-block;width:8px;height:16px;background:#a78bfa;animation:blink 1s infinite;margin-left:2px}
+@keyframes blink{0%,50%{opacity:1}51%,100%{opacity:0}}
+</style></head><body>
+<div class="input-row"><input type="text" id="prompt" placeholder="Ask something..." value="Explain quantum computing"><button id="btn" onclick="generate()">Generate</button></div>
+<div class="output" id="output"></div>
+<script>
+let interval;
+function generate() {
+  const btn = document.getElementById('btn');
+  const out = document.getElementById('output');
+  btn.disabled = true;
+  out.innerHTML = '';
+  const text = 'Quantum computing leverages quantum mechanics to process information in ways classical computers cannot. Using qubits that can exist in superposition, quantum computers perform certain calculations exponentially faster.';
+  let i = 0;
+  interval = setInterval(() => {
+    out.innerHTML += text[i];
+    i++;
+    if(i >= text.length) {
+      clearInterval(interval);
+      out.innerHTML += '<span class="cursor"></span>';
+      btn.disabled = false;
+      btn.textContent = 'Stop';
+      btn.onclick = () => { clearInterval(interval); btn.textContent = 'Generate'; btn.onclick = generate; };
+    }
+  }, 30);
+}
+</script>
+</body></html>

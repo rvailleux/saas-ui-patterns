@@ -1,0 +1,45 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,-apple-system,sans-serif;background:#0f0f1a;color:#e2e8f0;height:100vh;overflow:hidden;font-size:13px;line-height:1.5}
+.container{display:flex;height:100vh;width:100vw}
+.pane{overflow:auto;padding:16px}
+.pane-left{background:#16162a;width:50%}
+.pane-right{background:#0f0f1a;flex:1}
+.resizer{width:8px;background:#2d2d52;cursor:col-resize;display:flex;align-items:center;justify-content:center}
+.resizer:hover{background:#7c3aed}
+.resizer::after{content:"";width:2px;height:24px;background:#4a4a6a;border-radius:1px}
+.file-tree{list-style:none}
+.file-tree li{padding:6px 0;color:#94a3b8}
+.file-tree li::before{content:"📄 "}
+.file-tree li.folder::before{content:"📁 "}
+.preview-box{background:#16162a;border:1px solid #2d2d52;border-radius:8px;padding:20px}
+</style></head><body>
+<div class="container" id="container">
+<div class="pane pane-left" id="leftPane">
+<ul class="file-tree">
+<li class="folder">src</li>
+<li style="padding-left:20px">components</li>
+<li style="padding-left:20px">utils</li>
+<li class="folder">public</li>
+<li>package.json</li>
+<li>README.md</li>
+</ul>
+</div>
+<div class="resizer" id="resizer"></div>
+<div class="pane pane-right"><div class="preview-box"><h4>Preview</h4><p style="color:#94a3b8;margin-top:12px">Drag the divider to resize panels.</p></div></div>
+</div>
+<script>
+let isResizing = false;
+const resizer = document.getElementById('resizer');
+const leftPane = document.getElementById('leftPane');
+const container = document.getElementById('container');
+resizer.addEventListener('mousedown', () => isResizing = true);
+document.addEventListener('mouseup', () => isResizing = false);
+document.addEventListener('mousemove', (e) => {
+  if(!isResizing) return;
+  const rect = container.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const pct = (x / rect.width) * 100;
+  if(pct > 20 && pct < 80) leftPane.style.width = pct + '%';
+});
+</script>
+</body></html>

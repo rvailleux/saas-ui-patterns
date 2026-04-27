@@ -1,0 +1,49 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,-apple-system,sans-serif;background:#0f0f1a;color:#e2e8f0;height:100vh;overflow:hidden;font-size:13px;line-height:1.5;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px}
+.mic-btn{width:72px;height:72px;border-radius:50%;background:#7c3aed;border:none;color:#fff;font-size:32px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 200ms;position:relative}
+.mic-btn:hover{transform:scale(1.05)}
+.mic-btn.recording{background:#ef4444;animation:pulse-ring 2s infinite}
+@keyframes pulse-ring{0%{box-shadow:0 0 0 0 rgba(239,68,68,0.4)}70%{box-shadow:0 0 0 20px rgba(239,68,68,0)}100%{box-shadow:0 0 0 0 rgba(239,68,68,0)}}
+.waveform{display:flex;align-items:center;gap:4px;height:40px;margin:24px 0;opacity:0;transition:opacity 200ms}
+.waveform.show{opacity:1}
+.bar{width:4px;background:#7c3aed;border-radius:2px;animation:wave 1s ease-in-out infinite}
+.bar:nth-child(2){animation-delay:0.1s}
+.bar:nth-child(3){animation-delay:0.2s}
+.bar:nth-child(4){animation-delay:0.3s}
+.bar:nth-child(5){animation-delay:0.4s}
+@keyframes wave{0%,100%{height:20%}50%{height:100%}}
+.transcript{max-width:300px;text-align:center;color:#cbd5e1;min-height:60px}
+.processing{color:#94a3b8;font-size:12px;margin-top:16px;opacity:0}
+.processing.show{opacity:1}
+</style></head><body>
+<button class="mic-btn" id="micBtn" onclick="toggleRecording()">🎤</button>
+<div class="waveform" id="waveform"><div class="bar" style="height:40%"></div><div class="bar" style="height:70%"></div><div class="bar" style="height:100%"></div><div class="bar" style="height:60%"></div><div class="bar" style="height:80%"></div></div>
+<div class="transcript" id="transcript">Tap the microphone to start</div>
+<div class="processing" id="processing">Processing...</div>
+<script>
+let recording = false, interval;
+const texts = ['The','quick','brown','fox','jumps','over','the','lazy','dog'];
+function toggleRecording() {
+  recording = !recording;
+  document.getElementById('micBtn').classList.toggle('recording', recording);
+  document.getElementById('waveform').classList.toggle('show', recording);
+  if(recording) {
+    document.getElementById('transcript').textContent = '';
+    document.getElementById('processing').classList.remove('show');
+    let i = 0;
+    interval = setInterval(() => {
+      if(i < texts.length) {
+        document.getElementById('transcript').textContent += (i>0?' ':'') + texts[i];
+        i++;
+      } else {
+        clearInterval(interval);
+        document.getElementById('processing').classList.add('show');
+      }
+    }, 400);
+  } else {
+    clearInterval(interval);
+    document.getElementById('processing').classList.remove('show');
+  }
+}
+</script>
+</body></html>

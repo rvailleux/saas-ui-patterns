@@ -1,0 +1,39 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,-apple-system,sans-serif;background:#0f0f1a;color:#e2e8f0;height:100vh;overflow:hidden;font-size:13px;line-height:1.5;padding:20px}
+.view-toggle{display:flex;gap:8px;margin-bottom:20px;background:#16162a;padding:4px;border-radius:8px;width:fit-content}
+.view-btn{padding:8px 16px;border-radius:6px;border:none;background:transparent;color:#94a3b8;cursor:pointer;display:flex;align-items:center;gap:6px}
+.view-btn.active{background:#7c3aed;color:#fff}
+.board{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.column{background:#16162a;border-radius:8px;padding:12px}
+.column-header{font-weight:600;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid #2d2d52}
+.card{background:#1e1e35;border:1px solid #2d2d52;border-radius:6px;padding:12px;margin-bottom:8px}
+.list{display:none}
+.list-item{background:#16162a;border:1px solid #2d2d52;border-radius:6px;padding:12px;margin-bottom:8px;display:flex;justify-content:space-between}
+.list-item .tag{font-size:11px;padding:2px 8px;background:#7c3aed20;color:#a78bfa;border-radius:4px}
+</style></head><body>
+<div class="view-toggle">
+<button class="view-btn active" onclick="setView('board', this)">▦ Board</button>
+<button class="view-btn" onclick="setView('list', this)">≡ List</button>
+</div>
+<div class="board" id="boardView">
+<div class="column"><div class="column-header">Todo</div><div class="card">Fix login bug</div><div class="card">Update docs</div></div>
+<div class="column"><div class="column-header">Doing</div><div class="card">Redesign homepage</div><div class="card">API integration</div></div>
+<div class="column"><div class="column-header">Done</div><div class="card">Setup CI/CD</div><div class="card">Write tests</div></div>
+</div>
+<div class="list" id="listView">
+<div class="list-item"><span>Fix login bug</span><span class="tag">Todo</span></div>
+<div class="list-item"><span>Update docs</span><span class="tag">Todo</span></div>
+<div class="list-item"><span>Redesign homepage</span><span class="tag">Doing</span></div>
+<div class="list-item"><span>API integration</span><span class="tag">Doing</span></div>
+<div class="list-item"><span>Setup CI/CD</span><span class="tag">Done</span></div>
+<div class="list-item"><span>Write tests</span><span class="tag">Done</span></div>
+</div>
+<script>
+function setView(view, btn) {
+  document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('boardView').style.display = view === 'board' ? 'grid' : 'none';
+  document.getElementById('listView').style.display = view === 'list' ? 'block' : 'none';
+}
+</script>
+</body></html>

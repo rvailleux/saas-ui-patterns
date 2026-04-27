@@ -1,0 +1,88 @@
+{
+  "id": 11,
+  "slug": "inline-slash-commands",
+  "category": "commands",
+  "title": {
+    "fr": "Inline slash commands",
+    "en": "Inline Slash Commands"
+  },
+  "categoryLabel": {
+    "slug": "commands",
+    "fr": "Commandes & Recherche",
+    "en": "Commands & Search"
+  },
+  "examples": [
+    {
+      "name": "Notion",
+      "desc": {
+        "fr": "référence fondatrice, 50+ types de blocs",
+        "en": "foundational reference, 50+ block types"
+      }
+    },
+    {
+      "name": "Linear",
+      "desc": {
+        "fr": "slash commands dans les descriptions de tickets",
+        "en": "slash commands in ticket descriptions"
+      }
+    },
+    {
+      "name": "Coda",
+      "desc": {
+        "fr": "slash commands pour formules, tables, boutons",
+        "en": "slash commands for formulas, tables, buttons"
+      }
+    },
+    {
+      "name": "Slack",
+      "desc": {
+        "fr": "`/remind`, `/poll`, `/giphy` — commandes d'application",
+        "en": "`/remind`, `/poll`, `/giphy` — app commands"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Déclencheur** : `/` en début de ligne ou après un espace. Ne pas déclencher au milieu d'un mot.",
+      "**Filtrage** : fuzzy match sur le texte tapé après `/`. Fermer le menu si aucun résultat.",
+      "**Fermeture** : Échap ferme sans insérer. Backspace jusqu'au `/` ferme le menu.",
+      "**Position** : ancrer le menu au curseur, pas au coin de l'écran. Gérer l'overflow si le curseur est en bas de page.",
+      "**Catégories** : grouper les commandes (Texte, Médias, Structure, AI) avec headers.",
+      "**Raccourcis directs** : permettre `/h1`, `/h2`, `/table` pour les blocs fréquents — skip le menu."
+    ],
+    "en": [
+      "**Trigger**: `/` at the start of a new line or after a space. Do not trigger mid-word.",
+      "**Menu position**: anchor the menu below the cursor position, with screen-edge detection to flip upward when near the bottom.",
+      "**Fuzzy filter**: filter the command list as the user types after `/` — supports both `/h` → heading and `/heading`.",
+      "**Keyboard nav**: `↑↓` to navigate, `Enter` to execute, `Escape` to cancel (and leave the typed `/` in place).",
+      "**Categories**: group commands by type (Text, Media, Embed, AI) with visual dividers."
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Menu qui ne se ferme pas si l'utilisateur continue à écrire sans sélectionner",
+      "❌ Trop de commandes sans filtre (> 20 items) — la liste devient inutilisable",
+      "❌ Menu qui sort des limites de l'écran sans repositionnement",
+      "❌ Pas de preview du bloc au hover dans le menu",
+      "--"
+    ],
+    "en": [
+      "❌ Triggering the menu when the user types `/` in the middle of a URL",
+      "❌ A command menu that cannot be dismissed with Escape",
+      "❌ Not supporting keyboard navigation — mouse-only menus are inaccessible",
+      "❌ Commands that insert content without showing a preview or undo option"
+    ]
+  },
+  "what": {
+    "fr": "Taper `/` dans un éditeur de texte déclenche un menu contextuel d'insertion de blocs, de mise en forme, ou d'exécution d'actions — sans quitter le clavier.",
+    "en": "Typing `/` in a text editor triggers a contextual menu for inserting blocks, applying formatting, or executing actions — without leaving the keyboard."
+  },
+  "why": {
+    "fr": "Élimine le besoin de barres d'outils encombrantes. L'utilisateur reste dans son flux d'écriture. Le menu est contextuel (déclenché à la position du curseur) et filtrable par frappe, ce qui le rend rapide même avec une grande liste d'options.",
+    "en": "Eliminates the need for cluttered toolbars. The user stays in their writing flow. The menu is contextual (triggered at cursor position) and filterable by typing, making it fast even with a large list of options."
+  },
+  "demo": {
+    "fr": "```\nJ'écris mon document et je veux insérer...\n\n/tab                   ← filtrage en temps réel\n┌──────────────────────────────┐\n│ 📊 Tableau           ↵       │\n│ 📋 Template                  │\n│ 📑 Table des matières        │\n└──────────────────────────────┘\n```",
+    "en": "```\nI'm writing my document and want to insert...\n\n/tab                   ← real-time filtering\n┌──────────────────────────────┐\n│ 📊 Table             ↵       │\n│ 📋 Template                  │\n│ 📑 Table of contents         │\n└──────────────────────────────┘\n```"
+  }
+}

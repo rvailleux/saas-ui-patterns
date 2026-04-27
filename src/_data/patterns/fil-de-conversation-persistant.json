@@ -1,0 +1,87 @@
+{
+  "id": 30,
+  "slug": "fil-de-conversation-persistant",
+  "category": "ai-context",
+  "title": {
+    "fr": "Fil de conversation persistant",
+    "en": "Persistent Conversation Thread"
+  },
+  "categoryLabel": {
+    "slug": "ai-context",
+    "fr": "AI — Contexte & Mémoire",
+    "en": "AI — Context & Memory"
+  },
+  "examples": [
+    {
+      "name": "Linear AI",
+      "desc": {
+        "fr": "fil par ticket, persistant entre sessions",
+        "en": "thread per ticket, persisted across sessions"
+      }
+    },
+    {
+      "name": "Intercom Fin",
+      "desc": {
+        "fr": "historique de conversation par contact client",
+        "en": "conversation history per customer contact"
+      }
+    },
+    {
+      "name": "HubSpot Breeze",
+      "desc": {
+        "fr": "fil AI par deal/contact dans le CRM",
+        "en": "AI thread per deal/contact in the CRM"
+      }
+    },
+    {
+      "name": "Notion AI",
+      "desc": {
+        "fr": "historique par page de document",
+        "en": "history per document page"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Scope du fil** : définir l'unité de contexte (par document, par ticket, par utilisateur) selon les usages métier.",
+      "**Injection dans le contexte** : les N derniers messages du fil sont injectés en context dans chaque nouvelle requête (fenêtre glissante).",
+      "**Résumé automatique** : pour les longs fils, générer un résumé automatique à intégrer au contexte plutôt que les messages bruts (économie de tokens).",
+      "**Visibilité** : afficher l'historique avec timestamps et noms d'utilisateurs. Multi-utilisateurs si la collaboration est supportée.",
+      "**Effacement** : permettre d'effacer le fil pour repartir d'un contexte vierge."
+    ],
+    "en": [
+      "**Persistence**: store the conversation server-side keyed to the user + context (not just in memory).",
+      "**Resumption**: when the user reopens the context (page, document, object), restore the last conversation automatically.",
+      "**Thread branching**: allow the user to start a new thread without losing the existing one.",
+      "**Context summary**: after ~20 messages, show a collapsible summary of earlier conversation to keep the thread readable.",
+      "**Export**: allow the user to export the full thread as Markdown or PDF."
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Fil qui s'efface à la fermeture de la session",
+      "❌ Injecter tout l'historique sans limite — dépasse la fenêtre de contexte pour les longs fils",
+      "❌ Fil partagé entre utilisateurs sans contrôle d'accès",
+      "❌ Pas de moyen de voir ce qui a été injecté dans le contexte",
+      "--"
+    ],
+    "en": [
+      "❌ Conversation that resets on page reload — defeats the purpose of persistence",
+      "❌ No \"start new conversation\" option — users should not be trapped in a long thread",
+      "❌ No timestamp on messages — makes it hard to understand when decisions were made",
+      "❌ Thread that grows without a way to collapse older messages"
+    ]
+  },
+  "what": {
+    "fr": "L'historique des échanges AI est sauvegardé par objet de travail (document, ticket, projet) et reste accessible à la reprise, sans avoir à redonner le contexte.",
+    "en": "The history of AI exchanges is saved per work object (document, ticket, project) and remains accessible on return, without needing to re-establish context."
+  },
+  "why": {
+    "fr": "Le contexte est une ressource précieuse. Reconstruire le contexte à chaque session est un coût cognitif et temporel. Les fils persistants permettent des workflows itératifs sur plusieurs jours — \"reprends notre discussion d'hier sur la spec\".",
+    "en": "Context is a precious resource. Rebuilding context each session is a cognitive and time cost. Persistent threads enable iterative workflows spanning multiple days — \"pick up our discussion from yesterday about the spec\"."
+  },
+  "demo": {
+    "fr": "```\nLundi :\n👤 Aide-moi à rédiger la spec de ce ticket\n🤖 Voici une première version...\n\nMercredi (retour sur le même ticket) :\n[Historique visible en grisé]\n\n👤 Reprends la spec et ajoute une section erreurs\n🤖 [En utilisant le contexte de lundi...] Voici la version mise à jour...\n```",
+    "en": "```\nMonday:\n👤 Help me draft the spec for this ticket\n🤖 Here is a first version...\n\nWednesday (returning to the same ticket):\n[History visible in grey]\n\n👤 Revise the spec and add an error handling section\n🤖 [Using Monday's context...] Here is the updated version...\n```"
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "id": 34,
+  "slug": "regenerate-variantes",
+  "category": "ai-feedback",
+  "title": {
+    "fr": "Regenerate + variantes",
+    "en": "Regenerate + Variants"
+  },
+  "categoryLabel": {
+    "slug": "ai-feedback",
+    "fr": "AI — Feedback & Contrôle",
+    "en": "AI — Feedback & Control"
+  },
+  "examples": [
+    {
+      "name": "ChatGPT",
+      "desc": {
+        "fr": "bouton regenerate natif, navigation entre versions",
+        "en": "regenerate with variations in tone and style"
+      }
+    },
+    {
+      "name": "Claude",
+      "desc": {
+        "fr": "regenerate avec navigation ←/→ entre les générations",
+        "en": "image generation with multiple variants"
+      }
+    },
+    {
+      "name": "Midjourney",
+      "desc": {
+        "fr": "4 variantes systématiques, U/V buttons pour upscale/vary",
+        "en": "code variant generation with different approaches"
+      }
+    },
+    {
+      "name": "v0",
+      "desc": {
+        "fr": "3 variantes de composant UI en parallèle",
+        "en": "A/B content generation for marketing"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Navigation entre versions** : conserver toutes les versions générées (1/3, 2/3, 3/3) avec navigation ←/→.",
+      "**Variantes** : limiter à 2–4 variantes simultanées. Plus = difficile à comparer.",
+      "**Paramètre de variante** : pour guider la variante, permettre d'ajouter une instruction (\"Plus formel\", \"Plus concis\").",
+      "**Coût visible** : si l'application a un modèle de crédit, indiquer le coût d'un regenerate avant de l'exécuter.",
+      "**Conserver le contexte** : le regenerate utilise exactement le même prompt et contexte — il ne \"repose pas la question\"."
+    ],
+    "en": [
+      "**Variant axes**: offer variants along meaningful axes: tone (formal/casual), length (shorter/longer), style (technical/plain).",
+      "**Preview**: show a short preview of each variant before the user selects one.",
+      "**In-place replacement**: selecting a variant replaces the current response in the thread, not creates a new message.",
+      "**History**: allow the user to navigate back to the original response and previous variants.",
+      "**Keyboard shortcut**: `Cmd+Shift+R` to regenerate the last response."
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Regenerate qui efface la réponse précédente sans possibilité de la retrouver",
+      "❌ Variantes affichées sans possibilité de les comparer côte à côte",
+      "❌ Pas de way d'indiquer pourquoi on regénère (la prochaine génération devrait être différente)",
+      "❌ Regenerate gratuit illimité sur des modèles coûteux sans rate limiting",
+      "--"
+    ],
+    "en": [
+      "❌ Regenerating with the same parameters — variants must meaningfully differ from each other",
+      "❌ More than 4 variants at once — choice overload",
+      "❌ No way to return to the original if the variant is worse",
+      "❌ Variants that reload the full page or conversation instead of replacing just the response"
+    ]
+  },
+  "what": {
+    "fr": "Après une réponse AI, l'utilisateur peut relancer la génération (même prompt, seed différente) ou demander plusieurs variantes affichées en parallèle pour choisir.",
+    "en": "After an AI response, the user can regenerate it (new version) or request variants (several alternatives simultaneously) without repeating the prompt."
+  },
+  "why": {
+    "fr": "La génération AI est non déterministe. Une réponse insatisfaisante n'est pas forcément la \"bonne\" réponse — une autre seed peut donner quelque chose de bien meilleur. Le regenerate offre une seconde chance sans effort. Les variantes parallèles permettent une comparaison rapide pour les décisions créatives.",
+    "en": "AI generation is probabilistic — the first response is not necessarily the best. Giving the ability to regenerate or compare variants transforms a one-shot interaction into an iterative one. Comparison between variants helps calibrate expectations."
+  },
+  "demo": {
+    "fr": "```\n🤖 [Première réponse générée]\n\n[↺ Régénérer]  [⊞ 3 variantes]  [👍]  [👎]\n\n─────────────────────────────────────────\n\nVariante A          Variante B          Variante C\n──────────          ──────────          ──────────\nTon formel          Ton direct          Ton amical\n[Utiliser]          [Utiliser]          [Utiliser]\n```",
+    "en": "```\n🤖 First response: \"Here is a version of your email...\"\n\n┌──────────────────────────────────────────┐\n│ [↺ Regenerate]  [≡ See 3 variants]      │\n└──────────────────────────────────────────┘\n\nVariants view:\n┌──────────────┬──────────────┬──────────────┐\n│ Variant A    │ Variant B    │ Variant C    │\n│ Formal tone  │ Casual tone  │ Concise      │\n│ [Use this]   │ [Use this]   │ [Use this]   │\n└──────────────┴──────────────┴──────────────┘\n```"
+  }
+}

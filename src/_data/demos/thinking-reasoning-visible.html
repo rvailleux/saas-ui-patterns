@@ -1,0 +1,36 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,-apple-system,sans-serif;background:#0f0f1a;color:#e2e8f0;height:100vh;overflow:hidden;font-size:13px;line-height:1.5;padding:24px}
+.ask-btn{background:#7c3aed;border:none;color:#fff;padding:12px 24px;border-radius:8px;cursor:pointer;font-size:14px;margin-bottom:16px}
+.ask-btn:disabled{opacity:0.5}
+.thinking{background:#16162a;border:1px solid #2d2d52;border-radius:8px;padding:16px;margin-bottom:16px;display:none}
+.thinking.show{display:block}
+.thinking-header{color:#94a3b8;font-size:12px;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.dot{width:8px;height:8px;background:#7c3aed;border-radius:50%;animation:pulse 1.4s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+.toggle{color:#a78bfa;cursor:pointer;font-size:12px;margin-top:8px}
+.reasoning{display:none;margin-top:12px;padding-top:12px;border-top:1px solid #2d2d52;color:#94a3b8}
+.reasoning.show{display:block}
+.answer{display:none;line-height:1.6}
+.answer.show{display:block}
+</style></head><body>
+<button class="ask-btn" id="askBtn" onclick="ask()">Ask</button>
+<div class="thinking" id="thinking">
+<div class="thinking-header"><div class="dot"></div>Thinking...</div>
+<div class="toggle" onclick="toggleReasoning()">▶ View reasoning</div>
+<div class="reasoning" id="reasoning">1. Analyzing the question... 2. Retrieving relevant facts... 3. Formulating response...</div>
+</div>
+<div class="answer" id="answer">Here is the answer after careful consideration of all relevant factors.</div>
+<script>
+function ask() {
+  document.getElementById('askBtn').disabled = true;
+  document.getElementById('thinking').classList.add('show');
+  document.getElementById('answer').classList.remove('show');
+  setTimeout(() => {
+    document.getElementById('thinking').classList.remove('show');
+    document.getElementById('answer').classList.add('show');
+    document.getElementById('askBtn').disabled = false;
+  }, 2000);
+}
+function toggleReasoning() { document.getElementById('reasoning').classList.toggle('show'); }
+</script>
+</body></html>

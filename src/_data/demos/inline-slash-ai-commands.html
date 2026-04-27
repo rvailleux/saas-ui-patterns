@@ -1,0 +1,42 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,-apple-system,sans-serif;background:#0f0f1a;color:#e2e8f0;height:100vh;overflow:hidden;font-size:13px;line-height:1.5;padding:24px}
+.editor{background:#16162a;border:1px solid #2d2d52;border-radius:8px;padding:16px;min-height:120px;outline:none;position:relative}
+.menu{position:absolute;background:#1e1e35;border:1px solid #2d2d52;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.3);display:none;overflow:hidden}
+.menu-item{padding:10px 16px;display:flex;align-items:center;gap:12px;cursor:pointer}
+.menu-item:hover{background:#2d2d52}
+.ai-icon{color:#a78bfa;font-weight:bold}
+</style></head><body>
+<p style="color:#94a3b8;margin-bottom:12px">Type /ai at the start of a line</p>
+<div class="editor" id="editor" contenteditable oninput="checkSlash()"></div>
+<div class="menu" id="menu">
+<div class="menu-item" onclick="insertAI('summarize')"><span class="ai-icon">✦</span><span>Summarize</span></div>
+<div class="menu-item" onclick="insertAI('translate')"><span class="ai-icon">✦</span><span>Translate to English</span></div>
+<div class="menu-item" onclick="insertAI('improve')"><span class="ai-icon">✦</span><span>Improve writing</span></div>
+</div>
+<script>
+function checkSlash() {
+  const text = document.getElementById('editor').innerText;
+  const menu = document.getElementById('menu');
+  if(text.endsWith('/ai')) {
+    const sel = window.getSelection();
+    const rect = sel.getRangeAt(0).getBoundingClientRect();
+    menu.style.display = 'block';
+    menu.style.left = rect.left + 'px';
+    menu.style.top = (rect.bottom + 8) + 'px';
+  }
+}
+function insertAI(type) {
+  const ed = document.getElementById('editor');
+  const texts = {summarize:'This is a concise summary of your document.',translate:'This is the translated text.',improve:'This is the improved version with better clarity.'};
+  let i = 0;
+  const txt = texts[type];
+  ed.innerText = ed.innerText.replace('/ai', '');
+  document.getElementById('menu').style.display = 'none';
+  const interval = setInterval(() => {
+    ed.innerText += txt[i];
+    i++;
+    if(i >= txt.length) clearInterval(interval);
+  }, 30);
+}
+</script>
+</body></html>

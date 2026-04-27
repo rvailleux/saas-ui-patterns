@@ -1,0 +1,81 @@
+{
+  "id": 7,
+  "slug": "floating-action-button-fab",
+  "category": "layout",
+  "title": {
+    "fr": "Floating Action Button (FAB)",
+    "en": "Floating Action Button (FAB)"
+  },
+  "categoryLabel": {
+    "slug": "layout",
+    "fr": "Layout & Workspace",
+    "en": "Layout & Workspace"
+  },
+  "examples": [
+    {
+      "name": "Gmail mobile",
+      "desc": {
+        "fr": "FAB compose, s'étend en options au long-press",
+        "en": "FAB compose, expands to options on long-press"
+      }
+    },
+    {
+      "name": "Trello",
+      "desc": {
+        "fr": "FAB contextuel selon la vue (board, timeline)",
+        "en": "contextual FAB per view (board, timeline)"
+      }
+    },
+    {
+      "name": "Monday.com",
+      "desc": {
+        "fr": "FAB avec menu radial d'actions",
+        "en": "FAB with radial action menu"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Position** : `position: fixed; bottom: 24px; right: 24px`. Prévoir un offset si une bottom navigation bar est présente.",
+      "**Taille** : 56px de diamètre (Material Design spec), 48px minimum.",
+      "**Ombre** : légère, sans être criarde. `box-shadow: 0 4px 12px rgba(0,0,0,0.15)`.",
+      "**Une seule action principale** : si le FAB ouvre un menu, limiter à 4–5 options max.",
+      "**Label au hover** : un tooltip ou label étendu (FAB étendu) améliore la découvrabilité.",
+      "**Masquer au scroll** : sur mobile, masquer le FAB quand l'utilisateur scrolle vers le bas, réafficher quand il remonte."
+    ],
+    "en": [
+      "**Position**: bottom-right corner, 16–24 px from edges. On mobile keep it above the bottom nav bar.",
+      "**Size**: primary FAB 56 px, mini FAB 40 px. Never go below 40 px.",
+      "**Actions**: expand to max 5 sub-actions. Beyond that, use a modal sheet instead.",
+      "**Label**: add a text label to the right of the FAB in contexts where the icon alone is ambiguous.",
+      "**Scroll hide**: hide the FAB when the user scrolls down a content list to avoid obscuring items."
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ FAB qui couvre du contenu important (colonnes de tableau, dernière ligne de liste)",
+      "❌ Plusieurs FAB sur la même page — un seul par vue",
+      "❌ Icon ambigu (ex: étoile, cœur) — l'action principale doit être évidente",
+      "❌ FAB sur desktop sans équivalent dans la navigation principale",
+      "--"
+    ],
+    "en": [
+      "❌ More than one primary FAB per screen — it becomes unclear what the main action is",
+      "❌ A FAB that covers important content and cannot be dismissed",
+      "❌ Using a FAB for destructive actions (delete, logout) — reserve it for creation/positive actions",
+      "❌ No keyboard access to the FAB sub-actions"
+    ]
+  },
+  "what": {
+    "fr": "Un bouton d'action principal flottant, généralement en bas à droite de l'interface, qui déclenche l'action la plus fréquente ou ouvre un menu d'actions rapides.",
+    "en": "A primary floating action button, typically in the bottom-right of the interface, that triggers the most frequent action or opens a quick actions menu."
+  },
+  "why": {
+    "fr": "Le FAB matérialise la loi de Fitts : zone de grand bouton, positionnée proche du pouce sur mobile, toujours accessible quel que soit le scroll. Il signale clairement \"voilà ce que tu peux faire maintenant\".",
+    "en": "The FAB embodies Fitts's Law: a large button zone positioned close to the thumb on mobile, always accessible regardless of scroll position. It clearly signals \"here's what you can do right now\"."
+  },
+  "demo": {
+    "fr": "```\n┌────────────────────────────────┐\n│                                │\n│   Liste de tâches...           │\n│                                │\n│                                │\n│                          ╭───╮ │  ← Hover / tap\n│                          │ + │ │     ↓\n│                          ╰───╯ │  ╭─────────────╮\n└────────────────────────────────┘  │ 📝 Nouvelle  │\n                                    │ 📁 Dossier   │\n                                    │ 📥 Importer  │\n                                    ╰─────────────╯\n```",
+    "en": "```\n┌────────────────────────────────┐\n│                                │\n│   Task list...                 │\n│                                │\n│                                │\n│                          ╭───╮ │  ← Hover / tap\n│                          │ + │ │     ↓\n│                          ╰───╯ │  ╭─────────────╮\n└────────────────────────────────┘  │ 📝 New task  │\n                                    │ 📁 Folder    │\n                                    │ 📥 Import    │\n                                    ╰─────────────╯\n```"
+  }
+}

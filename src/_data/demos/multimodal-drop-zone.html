@@ -1,0 +1,46 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,-apple-system,sans-serif;background:#0f0f1a;color:#e2e8f0;height:100vh;overflow:hidden;font-size:13px;line-height:1.5;padding:24px}
+.dropzone{border:2px dashed #2d2d52;border-radius:12px;padding:40px;text-align:center;transition:all 200ms}
+.dropzone.dragover{border-color:#7c3aed;background:#7c3aed10}
+.dropzone-icon{font-size:48px;margin-bottom:12px}
+.dropzone-text{color:#94a3b8;margin-bottom:16px}
+.browse-btn{background:#7c3aed;border:none;color:#fff;padding:10px 20px;border-radius:6px;cursor:pointer}
+.file-list{margin-top:16px}
+.file-item{display:flex;align-items:center;justify-content:space-between;background:#16162a;border:1px solid #2d2d52;border-radius:8px;padding:12px 16px;margin-bottom:8px}
+.file-info{display:flex;align-items:center;gap:12px}
+.remove{color:#64748b;cursor:pointer}
+.remove:hover{color:#ef4444}
+</style></head><body>
+<div class="dropzone" id="dropzone">
+<div class="dropzone-icon">☁️</div>
+<div class="dropzone-text">Drop files here or click to browse</div>
+<button class="browse-btn" onclick="addFile()">Browse</button>
+</div>
+<div class="file-list" id="fileList"></div>
+<script>
+const dropzone = document.getElementById('dropzone');
+const files = [{name:'document.pdf',size:'2.3 MB'},{name:'image.png',size:'1.1 MB'}];
+['dragenter','dragover','dragleave','drop'].forEach(e => {
+  dropzone.addEventListener(e, (ev) => {
+    ev.preventDefault();
+    if(e === 'dragenter' || e === 'dragover') dropzone.classList.add('dragover');
+    else dropzone.classList.remove('dragover');
+  });
+});
+dropzone.addEventListener('drop', (e) => {
+  addFile('dropped-file.txt','0.5 MB');
+});
+function renderFiles() {
+  document.getElementById('fileList').innerHTML = files.map((f,i) =>
+    '<div class="file-item"><div class="file-info">📄 '+f.name+' <span style="color:#64748b">· '+f.size+'</span></div>'+
+    '<span class="remove" onclick="removeFile('+i+')">×</span></div>'
+  ).join('');
+}
+function addFile(name,size) {
+  files.push({name:name||'new-file-'+files.length+'.txt',size:size||'0.8 MB'});
+  renderFiles();
+}
+function removeFile(i) { files.splice(i,1); renderFiles(); }
+renderFiles();
+</script>
+</body></html>

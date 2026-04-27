@@ -1,0 +1,87 @@
+{
+  "id": 25,
+  "slug": "streaming-text-typewriter",
+  "category": "ai-generation",
+  "title": {
+    "fr": "Streaming text (typewriter)",
+    "en": "Streaming Text (Typewriter)"
+  },
+  "categoryLabel": {
+    "slug": "ai-generation",
+    "fr": "AI — Génération & Édition",
+    "en": "AI — Generation & Editing"
+  },
+  "examples": [
+    {
+      "name": "Claude",
+      "desc": {
+        "fr": "streaming avec affichage progressif du markdown rendu",
+        "en": "streaming with progressive rendering of rendered markdown"
+      }
+    },
+    {
+      "name": "ChatGPT",
+      "desc": {
+        "fr": "streaming avec rendu progressif du markdown",
+        "en": "streaming with progressive markdown rendering"
+      }
+    },
+    {
+      "name": "Notion AI",
+      "desc": {
+        "fr": "streaming dans l'éditeur de document",
+        "en": "streaming in the document editor"
+      }
+    },
+    {
+      "name": "GitHub Copilot Chat",
+      "desc": {
+        "fr": "streaming dans la sidebar VS Code",
+        "en": "streaming in the VS Code sidebar"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**SSE ou WebSocket** : utiliser Server-Sent Events (`EventSource`) pour les réponses unidirectionnelles. WebSocket si la bidirectionnalité est nécessaire.",
+      "**Rendu du markdown** : éviter de re-render tout le markdown à chaque token (coûteux). Stratégie : accumuler dans un buffer, re-render par chunks de 50–100ms.",
+      "**Curseur clignotant** : ajouter un curseur animé à la fin du texte en cours de streaming pour indiquer que l'écriture continue.",
+      "**Stop button** : toujours afficher un bouton d'arrêt pendant le streaming — l'utilisateur doit pouvoir interrompre.",
+      "**Scroll automatique** : faire scroller le conteneur pour suivre le dernier token généré, mais stopper si l'utilisateur scrolle manuellement vers le haut."
+    ],
+    "en": [
+      "**SSE or WebSocket**: use Server-Sent Events (`EventSource`) for one-way streaming, WebSocket for bidirectional.",
+      "**Chunk rendering**: append each incoming token to the DOM immediately — do not buffer before rendering.",
+      "**Cursor**: show a blinking cursor at the end of the streamed text while generation is in progress.",
+      "**Scroll lock**: auto-scroll to the bottom of the response area as new tokens arrive, unless the user has manually scrolled up.",
+      "**Stop button**: always offer a way to stop generation mid-stream."
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Re-render complet à chaque token — le scroll saute, l'UI tremble",
+      "❌ Pas de stop button — l'utilisateur est captif d'une mauvaise génération",
+      "❌ Cacher la réponse partielle derrière un skeleton pendant le streaming",
+      "❌ Scroll forcé qui ramène l'utilisateur en bas alors qu'il lisait plus haut",
+      "--"
+    ],
+    "en": [
+      "❌ Blocking the UI while waiting for the full response — streaming is the fix for this",
+      "❌ Flickering caused by re-rendering the entire text on each token — append, do not replace",
+      "❌ No stop button — trapped users will simply close the page",
+      "❌ Streaming that stops abruptly without a final state indicator (done/error)"
+    ]
+  },
+  "what": {
+    "fr": "La réponse de l'AI s'affiche progressivement, token par token, au lieu d'apparaître d'un bloc après un temps d'attente — donnant l'impression que l'AI \"écrit\" en temps réel.",
+    "en": "The AI response appears progressively, token by token, instead of appearing all at once after a wait — giving the impression that the AI is \"writing\" in real time."
+  },
+  "why": {
+    "fr": "Réduit massivement la perception de latence. L'utilisateur commence à lire pendant que la génération se poursuit. Le mouvement du texte signale que le système est actif. Psychologiquement, attendre une réponse partielle est moins frustrant qu'attendre une réponse complète.",
+    "en": "Massively reduces perceived latency. The user starts reading while generation continues. The movement of text signals the system is active. Psychologically, waiting for a partial response is less frustrating than waiting for a complete one."
+  },
+  "demo": {
+    "fr": "```\n[Requête envoyée]\n\nSans streaming :            Avec streaming :\n                            Voici▌\n[······ 3s ······]          Voici une▌\n                            Voici une réponse▌\nVoici une réponse           Voici une réponse complète▌\ncomplète avec tous          Voici une réponse complète\nles détails.                avec tous les détails.\n```",
+    "en": "```\n[Request sent]\n\nWithout streaming:          With streaming:\n                            Here▌\n[······ 3s ······]          Here is▌\n                            Here is a response▌\nHere is a complete          Here is a complete response▌\nresponse with all           Here is a complete response\nthe details.                with all the details.\n```"
+  }
+}

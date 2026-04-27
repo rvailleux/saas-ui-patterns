@@ -1,0 +1,41 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,-apple-system,sans-serif;background:#0f0f1a;color:#e2e8f0;height:100vh;overflow:hidden;font-size:13px;line-height:1.5}
+.container{display:flex;height:100vh}
+.main-content{flex:1;padding:24px}
+.sidebar{width:280px;background:#16162a;border-left:1px solid #2d2d52;display:flex;flex-direction:column}
+.sidebar-header{padding:16px;border-bottom:1px solid #2d2d52;display:flex;align-items:center;gap:8px}
+.sidebar-header .star{color:#a78bfa}
+.messages{flex:1;overflow:auto;padding:16px;display:flex;flex-direction:column;gap:12px}
+.message{max-width:85%;padding:10px 14px;border-radius:12px;font-size:13px}
+.message.user{align-self:flex-end;background:#7c3aed;color:#fff}
+.message.ai{align-self:flex-start;background:#1e1e35}
+.input-area{padding:16px;border-top:1px solid #2d2d52;display:flex;gap:8px}
+.input-area input{flex:1;background:#0f0f1a;border:1px solid #2d2d52;border-radius:8px;padding:10px 14px;color:#e2e8f0;outline:none}
+.input-area button{background:#7c3aed;border:none;color:#fff;padding:10px 16px;border-radius:8px;cursor:pointer}
+</style></head><body>
+<div class="container">
+<div class="main-content"><h3>Document Editor</h3><p style="color:#94a3b8;margin-top:12px">Your main content here. The AI sidebar persists across navigation.</p></div>
+<div class="sidebar">
+<div class="sidebar-header"><span class="star">✦</span><span>AI Assistant</span></div>
+<div class="messages" id="messages">
+<div class="message user">Summarize this doc</div>
+<div class="message ai">This document covers project planning, implementation strategies, and deployment timelines.</div>
+</div>
+<div class="input-area"><input type="text" id="msgInput" placeholder="Ask anything..."><button onclick="send()">Send</button></div>
+</div>
+</div>
+<script>
+function send() {
+  const input = document.getElementById('msgInput');
+  const text = input.value.trim();
+  if(!text) return;
+  const msgs = document.getElementById('messages');
+  msgs.innerHTML += '<div class="message user">'+text+'</div>';
+  input.value = '';
+  setTimeout(() => {
+    msgs.innerHTML += '<div class="message ai">Here is a helpful response about: '+text.substring(0,30)+'...</div>';
+    msgs.scrollTop = msgs.scrollHeight;
+  }, 600);
+}
+</script>
+</body></html>

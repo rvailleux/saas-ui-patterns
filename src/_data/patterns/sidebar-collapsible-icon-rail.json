@@ -1,0 +1,99 @@
+{
+  "id": 1,
+  "slug": "sidebar-collapsible-icon-rail",
+  "category": "navigation",
+  "title": {
+    "fr": "Sidebar collapsible icon-rail",
+    "en": "Sidebar Collapsible Icon Rail"
+  },
+  "categoryLabel": {
+    "slug": "navigation",
+    "fr": "Navigation & Structure",
+    "en": "Navigation & Structure"
+  },
+  "examples": [
+    {
+      "name": "Obsidian",
+      "desc": {
+        "fr": "transition fluide, état mémorisé par vault",
+        "en": "smooth transition, state persisted per vault"
+      }
+    },
+    {
+      "name": "Linear",
+      "desc": {
+        "fr": "icône rail avec flyout de sous-navigation au hover",
+        "en": "icon rail with hover flyout for sub-navigation"
+      }
+    },
+    {
+      "name": "Jira",
+      "desc": {
+        "fr": "collapse partiel (icônes) + collapse total (rail invisible)",
+        "en": "partial collapse (icons) + full collapse (invisible rail)"
+      }
+    },
+    {
+      "name": "VS Code",
+      "desc": {
+        "fr": "référence fondatrice du pattern dans les IDEs",
+        "en": "the foundational IDE reference for this pattern"
+      }
+    },
+    {
+      "name": "SharePoint",
+      "desc": {
+        "fr": "implémentation enterprise avec états persistants par user",
+        "en": "enterprise implementation with per-user persistent state"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Largeur** : ouverte entre 200–260px, réduite entre 40–56px. Ne pas descendre sous 40px (zone de clic trop petite).",
+      "**Transition** : `transition: width 200ms ease-in-out` suffit. Éviter les animations de contenu (opacité des labels séparément) qui retardent l'affichage.",
+      "**État persistant** : sauvegarder l'état (ouvert/fermé) en `localStorage` ou côté serveur par utilisateur. Ne jamais reset à chaque visite.",
+      "**Tooltip** : en état réduit, un tooltip au hover est obligatoire — `title` HTML ou composant dédié avec delay de 300ms.",
+      "**Sous-navigation** : en état réduit, les sections avec sous-menus s'ouvrent en flyout (panneau flottant ancré sur l'icône), pas en accordion.",
+      "**Breakpoints** : sur mobile, la sidebar devient un drawer (overlay) plutôt qu'un icon-rail — le rail est un pattern desktop uniquement."
+    ],
+    "en": [
+      "**Width**: open state 200–260 px, collapsed 40–56 px. Never go below 40 px (click targets too small).",
+      "**Transition**: `transition: width 200ms ease-in-out` is enough. Avoid animating label opacity separately — it delays readability.",
+      "**Persistent state**: save open/closed in `localStorage` or server-side per user. Never reset on every visit.",
+      "**Tooltip**: in collapsed mode, a hover tooltip is mandatory — use the HTML `title` attribute or a dedicated component with a 300 ms delay.",
+      "**Sub-navigation**: in collapsed mode, sections with sub-menus open as flyouts (floating panel anchored to the icon), not as accordions.",
+      "**Breakpoints**: on mobile the sidebar becomes a drawer (overlay) rather than an icon rail — the rail is a desktop-only pattern."
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Masquer les icônes en état réduit — les icônes sont l'élément navigable, pas les labels",
+      "❌ Oublier le focus clavier — Tab doit traverser les icônes avec un outline visible",
+      "❌ Icônes trop génériques (étoile, point) qui perdent leur sens sans label — choisir des icônes sémantiquement fortes",
+      "❌ Déclencher le collapse au hover (sans clic) — crée des fermetures involontaires lors des déplacements de souris",
+      "❌ Animer width ET opacity en même temps — la surcharge d'animation perturbe la lecture",
+      "--"
+    ],
+    "en": [
+      "❌ Hiding icons in collapsed mode — icons are the navigable element, not labels",
+      "❌ Forgetting keyboard focus — Tab must traverse icons with a visible outline",
+      "❌ Generic icons (star, dot) that lose meaning without labels — choose semantically strong icons",
+      "❌ Triggering collapse on hover — causes accidental closures during mouse movements",
+      "❌ Animating width AND opacity simultaneously — animation overload disrupts readability",
+      "--"
+    ]
+  },
+  "what": {
+    "fr": "La sidebar de navigation se réduit à une colonne d'icônes lorsqu'elle est fermée. Au survol ou au clic sur une icône, le label et les sous-éléments réapparaissent.",
+    "en": "The navigation sidebar collapses to an icon-only column when closed. Hovering or clicking an icon reveals the label and sub-items."
+  },
+  "why": {
+    "fr": "L'espace de travail est le bien le plus précieux d'une interface. La sidebar réduite libère de la largeur pour le contenu tout en maintenant la navigation accessible à tout moment. Les icônes seules suffisent aux utilisateurs réguliers ; les labels restent disponibles pour les nouveaux. C'est le meilleur compromis entre affordance et densité.",
+    "en": "Workspace real estate is the most valuable resource in any interface. A collapsed sidebar frees up width for content while keeping navigation accessible at all times. Icons alone are enough for experienced users; labels remain available for newcomers. It's the best compromise between affordance and density."
+  },
+  "demo": {
+    "fr": "```\nÉtat ouvert (240px)          État réduit (48px)\n┌──────────────────┐         ┌────┐\n│ 📁  Projets      │         │ 📁 │\n│ 📋  Tâches       │  ───►   │ 📋 │\n│ 📊  Rapports     │         │ 📊 │\n│ ⚙️  Paramètres   │         │ ⚙️ │\n└──────────────────┘         └────┘\n                               ▲\n                         Hover → tooltip \"Projets\"\n                         ou flyout avec sous-menu\n```",
+    "en": "```\nOpen state (240px)           Collapsed state (48px)\n┌──────────────────┐         ┌────┐\n│ 📁  Projects     │         │ 📁 │\n│ 📋  Tasks        │  ───►   │ 📋 │\n│ 📊  Reports      │         │ 📊 │\n│ ⚙️  Settings     │         │ ⚙️ │\n└──────────────────┘         └────┘\n                               ▲\n                         Hover → tooltip \"Projects\"\n                         or flyout with sub-menu\n```"
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "id": 4,
+  "slug": "tabs-persistants-pinnable",
+  "category": "navigation",
+  "title": {
+    "fr": "Tabs persistants / pinnable",
+    "en": "Persistent / Pinnable Tabs"
+  },
+  "categoryLabel": {
+    "slug": "navigation",
+    "fr": "Navigation & Structure",
+    "en": "Navigation & Structure"
+  },
+  "examples": [
+    {
+      "name": "VS Code",
+      "desc": {
+        "fr": "référence : tabs dot (non sauvegardé), preview tab en italique",
+        "en": "reference: unsaved dot indicator, preview tab in italic"
+      }
+    },
+    {
+      "name": "Linear",
+      "desc": {
+        "fr": "tabs par vue dans un projet, mémorisés",
+        "en": "per-view tabs in a project, persisted"
+      }
+    },
+    {
+      "name": "Penpot",
+      "desc": {
+        "fr": "tabs de pages dans un fichier de design",
+        "en": "page tabs in a design file"
+      }
+    },
+    {
+      "name": "Zed",
+      "desc": {
+        "fr": "tabs avec preview mode (italique) avant édition réelle",
+        "en": "tabs with preview mode (italic) before actual editing"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Preview tab** : ouvrir un item en \"preview\" (italique) par défaut. Il devient un vrai tab dès que l'utilisateur l'édite ou double-clique. Évite la prolifération de tabs.",
+      "**Dot indicateur** : afficher un point sur le tab si des modifications non sauvegardées existent.",
+      "**Overflow** : quand les tabs dépassent la largeur, utiliser un scroll horizontal ou un dropdown `+N autres` — ne jamais tronquer le titre sans indicateur.",
+      "**Clic droit** : menu contextuel avec au minimum : Épingler / Fermer / Fermer les autres.",
+      "**Drag & drop** : réorganisation par drag est attendue — utiliser une lib type `dnd-kit` ou équivalent.",
+      "**Persistance** : sauvegarder l'ordre et l'état épinglé côté serveur, pas seulement localStorage."
+    ],
+    "en": [
+      "**Persistence**: save the open tab list in `localStorage` (order, pinned state, scroll position per tab).",
+      "**Maximum**: beyond 10–12 tabs, offer a search or \"recently closed\" panel. Avoid horizontal scroll — prefer a dropdown overflow.",
+      "**Pinning**: pinned tabs lose their label and are displayed as a compact icon-only tab at the start of the row.",
+      "**Close gesture**: middle-click to close is standard on the web — support it with `pointerdown` + `button === 1`.",
+      "**Visual indication**: active tab = strong contrast; pinned tab = small lock or pin icon."
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Tabs qui se ferment sans confirmation quand des modifications existent",
+      "❌ Plus de 8–10 tabs ouverts sans overflow géré — l'UI s'effondre",
+      "❌ Tabs identiques (même titre) sans différenciateur (chemin, icône)",
+      "❌ Oublier le raccourci `Ctrl+W` / `Cmd+W` pour fermer le tab actif",
+      "--",
+      "--",
+      "--"
+    ],
+    "en": [
+      "❌ Tabs that close on accidental click — always require explicit close (× button, not the tab itself)",
+      "❌ Unlimited pinned tabs — cap at 5–6 to avoid a cluttered rail",
+      "❌ Tab state lost on refresh — persistence is the whole point of the pattern",
+      "❌ No visual distinction between pinned and regular tabs"
+    ]
+  },
+  "what": {
+    "fr": "Des onglets dans l'espace de travail qui persistent entre sessions, peuvent être réorganisés, épinglés ou fermés — inspirés des onglets de navigateur ou d'IDE.",
+    "en": "Workspace tabs that persist across sessions, can be reordered, pinned, or closed — inspired by browser or IDE tabs."
+  },
+  "why": {
+    "fr": "Les utilisateurs avancés travaillent simultanément sur plusieurs contextes. Les tabs persistants éliminent le coût cognitif de retrouver et rouvrir les mêmes éléments à chaque session. L'épinglage signale l'importance sans encombrer.",
+    "en": "Power users work on multiple contexts simultaneously. Persistent tabs eliminate the cognitive cost of finding and reopening the same items each session. Pinning signals importance without cluttering."
+  },
+  "demo": {
+    "fr": "```\n┌──────────┬────────────┬──────────────┬───┐\n│ 📌 Home  │ #1234 Bug  │ Sprint Plan  │ + │\n└──────────┴────────────┴──────────────┴───┘\n    ▲              ▲\n    Épinglé,     Clic droit → Pin / Close /\n    non fermable  Close others / Close all\n```",
+    "en": "```\n┌──────────┬────────────┬──────────────┬───┐\n│ 📌 Home  │ #1234 Bug  │ Sprint Plan  │ + │\n└──────────┴────────────┴──────────────┴───┘\n    ▲              ▲\n    Pinned,      Right-click → Pin / Close /\n    not closable  Close others / Close all\n```"
+  }
+}

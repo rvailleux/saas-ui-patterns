@@ -1,0 +1,89 @@
+{
+  "id": 32,
+  "slug": "sources-cit-es-grounding",
+  "category": "ai-context",
+  "title": {
+    "fr": "Sources citées / grounding",
+    "en": "Cited Sources / Grounding"
+  },
+  "categoryLabel": {
+    "slug": "ai-context",
+    "fr": "AI — Contexte & Mémoire",
+    "en": "AI — Context & Memory"
+  },
+  "examples": [
+    {
+      "name": "Perplexity",
+      "desc": {
+        "fr": "références numérotées sur chaque affirmation, sources en sidebar",
+        "en": "citations with links to sources"
+      }
+    },
+    {
+      "name": "Bing Copilot",
+      "desc": {
+        "fr": "citations inline avec hover preview de la source",
+        "en": "numbered references on all factual statements"
+      }
+    },
+    {
+      "name": "Notion AI Q&A",
+      "desc": {
+        "fr": "réponses ancrées dans le workspace avec lien vers la page source",
+        "en": "source grounding in research assistant"
+      }
+    },
+    {
+      "name": "Glean",
+      "desc": {
+        "fr": "enterprise search avec sources d'entreprise citées",
+        "en": "linked references in AI summaries"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Format de citation** : numérotation `[1]`, `[2]` inline dans le texte + liste de sources en bas. Chaque source cliquable.",
+      "**Hover preview** : au survol d'une citation, afficher un extrait de la source dans un tooltip.",
+      "**Prompt engineering** : instruire le modèle à citer ses sources avec un format structuré (JSON ou XML) pour un parsing fiable.",
+      "**RAG** : utiliser Retrieval-Augmented Generation — récupérer les chunks pertinents, les injecter dans le contexte, et demander au modèle de citer les IDs de chunks.",
+      "**Confiance** : si aucune source ne couvre la question, l'AI doit l'indiquer explicitement plutôt que d'improviser."
+    ],
+    "en": [
+      "**Inline markers**: number citations `[1]`, `[2]` inline in the text, at the sentence or claim level.",
+      "**Reference list**: always show the full list of sources at the bottom of the response with title, URL, and access date.",
+      "**Hover preview**: on hover over a citation marker, show a popover with the source title and snippet.",
+      "**Truthfulness**: only cite real, checkable sources. If a source cannot be verified, omit the citation.",
+      "**Highlight in source**: where possible, link directly to the specific paragraph in the source document (anchor link or highlight fragment)."
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Citations inventées (hallucination de sources) — pire que l'absence de citation",
+      "❌ Sources non cliquables ou introuvables",
+      "❌ Citer des sources non pertinentes pour paraître \"sourcé\"",
+      "❌ Trop de citations pour une seule phrase — dégrade la lisibilité",
+      "--",
+      "--",
+      "--"
+    ],
+    "en": [
+      "❌ Hallucinated citations — fabricated sources are worse than no citations",
+      "❌ Citing sources that do not support the claim — citation mismatch erodes trust",
+      "❌ Citation markers without a reference list — the user cannot check the source",
+      "❌ Dead links — validate source URLs before including them"
+    ]
+  },
+  "what": {
+    "fr": "Chaque affirmation factuelle de l'AI est liée à une source dans le contexte (document, page web, entrée de base de données), affichée sous forme de référence cliquable.",
+    "en": "The AI response includes numbered references to its sources, and clicking a reference shows the exact excerpt used — linking the claim to its origin."
+  },
+  "why": {
+    "fr": "Les hallucinations sont le principal frein à l'adoption de l'AI en entreprise. Citer les sources permet à l'utilisateur de vérifier, renforce la confiance, et déplace la responsabilité : l'AI ne \"sait\" pas, elle \"cite\". Les réponses ancrées sont perçues comme plus fiables même si le contenu est identique.",
+    "en": "Allows verification of AI-generated information. Transforms an opaque black box into a transparent reasoning process. In professional contexts (legal, medical, financial), source grounding is not optional — it's the foundation of trust."
+  },
+  "demo": {
+    "fr": "```\n🤖 Le délai de livraison standard est de 5 jours ouvrés [1].\n   Les commandes express sont livrées en 24h [2].\n\n   Sources :\n   [1] Conditions générales de vente, section 4.2\n   [2] FAQ Livraison Express → voir page\n```",
+    "en": "```\n🤖 Response from the AI:\n\n\"The average conversion rate for SaaS is 2–5% [1].\nThe best practices recommend A/B testing [2].\"\n\n References:\n[1] SaaS Metrics Report 2024 — p. 14 ──► [View excerpt]\n[2] Growth Handbook — Chapter 3    ──► [View excerpt]\n```"
+  }
+}

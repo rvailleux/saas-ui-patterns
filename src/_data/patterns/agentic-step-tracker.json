@@ -1,0 +1,87 @@
+{
+  "id": 35,
+  "slug": "agentic-step-tracker",
+  "category": "ai-feedback",
+  "title": {
+    "fr": "Agentic step tracker",
+    "en": "Agentic Step Tracker"
+  },
+  "categoryLabel": {
+    "slug": "ai-feedback",
+    "fr": "AI — Feedback & Contrôle",
+    "en": "AI — Feedback & Control"
+  },
+  "examples": [
+    {
+      "name": "Devin",
+      "desc": {
+        "fr": "step tracker complet avec logs détaillés par étape",
+        "en": "task execution steps with real-time status"
+      }
+    },
+    {
+      "name": "Claude Code",
+      "desc": {
+        "fr": "affichage des outils utilisés (read, write, bash) en temps réel",
+        "en": "agent plan visible before execution"
+      }
+    },
+    {
+      "name": "Replit Agent",
+      "desc": {
+        "fr": "steps avec détail des fichiers modifiés",
+        "en": "multi-step workflow tracker"
+      }
+    },
+    {
+      "name": "OpenAI Operator",
+      "desc": {
+        "fr": "actions navigateur affichées étape par étape",
+        "en": "agentic loop visibility in the UI"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Granularité** : afficher des étapes métier (Lecture du ticket, Analyse, Rédaction) plutôt que des étapes techniques (HTTP GET /api/issues/1234). L'utilisateur n'est pas un développeur.",
+      "**États des étapes** : ✅ Terminé / ⚙️ En cours / ⏳ En attente / ❌ Erreur.",
+      "**Stop immédiat** : le bouton Stop doit interrompre l'agent sans délai. Utiliser des abort controllers ou des signaux d'annulation.",
+      "**Rollback sur stop** : définir clairement ce qui se passe si l'utilisateur arrête — les actions déjà effectuées sont-elles annulées ? L'informer.",
+      "**Logs détaillés** : les étapes techniques complètes disponibles dans un panneau collapsable pour les utilisateurs avancés."
+    ],
+    "en": [
+      "**Step names**: use plain-language step names (\"Searching the web\", \"Reading documents\") not internal code names.",
+      "**Current step indicator**: highlight the in-progress step with a spinner and a subtle animated color.",
+      "**Collapsible**: allow the user to collapse the step tracker to a single-line summary.",
+      "**Error state**: if a step fails, show it in red with a retry button and a plain-language error message.",
+      "**Estimated time**: where possible, show an estimated duration per step (useful for long-running agents)."
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Pas de bouton Stop — l'utilisateur est captif",
+      "❌ Steps trop granulaires (log de chaque appel HTTP) — illisible",
+      "❌ Progress bar sans estimation de temps — l'utilisateur ne sait pas combien de temps attendre",
+      "❌ Agent qui modifie des données en production sans confirmation préalable",
+      "--"
+    ],
+    "en": [
+      "❌ Step tracker that disappears when the task is complete — it is useful to review what happened",
+      "❌ Steps that are too granular (> 10 steps) — group related micro-steps into higher-level steps",
+      "❌ No error recovery — a failed step should offer retry, not just show a red cross",
+      "❌ Steps described in technical jargon the user does not understand"
+    ]
+  },
+  "what": {
+    "fr": "Pour les tâches longues exécutées par un agent autonome, un fil d'étapes affiche en temps réel ce que l'agent est en train de faire, avec un bouton Stop accessible à tout moment.",
+    "en": "For long AI tasks (multi-step agent, research, complex generation), a visual tracker shows each step: completed, in progress, pending — with the ability to intervene."
+  },
+  "why": {
+    "fr": "Un agent autonome qui \"disparaît\" pendant 30 secondes est anxiogène. L'utilisateur ne sait pas si c'est en train de fonctionner, bloqué, ou en train de faire quelque chose d'indésirable. Le step tracker maintient la confiance par la transparence totale sur les actions en cours.",
+    "en": "Transforms opaque waiting into a transparent process. The user knows where the agent is, what it has done, what remains. Reduces anxiety. Enables intervention (cancel, redirect) when the agent takes a wrong direction."
+  },
+  "demo": {
+    "fr": "```\n🤖 Agent en cours...                    [⏹ Arrêter]\n\n✅ Lecture du ticket #1234              2s\n✅ Analyse des issues similaires        5s\n⚙️  Rédaction de la solution...        ← en cours\n⏳ Tests unitaires                      en attente\n⏳ Création du PR                       en attente\n\n[██████████░░░░░░░░░░] 45%\n```",
+    "en": "```\n🤖 Agent executing your request...\n\n✅ Step 1: Analysed the requirements\n✅ Step 2: Searched existing codebase\n⏳ Step 3: Generating the component... (in progress)\n⏸  Step 4: Writing tests\n⏸  Step 5: Updating documentation\n\n[⏹ Stop]  [↩ Rollback to step 2]\n```"
+  }
+}

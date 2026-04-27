@@ -1,0 +1,89 @@
+{
+  "id": 24,
+  "slug": "inline-slash-ai-commands",
+  "category": "ai-access",
+  "title": {
+    "fr": "Inline slash AI commands",
+    "en": "Inline Slash AI Commands"
+  },
+  "categoryLabel": {
+    "slug": "ai-access",
+    "fr": "AI — Accès & Invocation",
+    "en": "AI — Access & Invocation"
+  },
+  "examples": [
+    {
+      "name": "Notion AI",
+      "desc": {
+        "fr": "`/ai` ouvre un prompt inline avec contexte du document",
+        "en": "`/ai` opens an inline prompt with document context"
+      }
+    },
+    {
+      "name": "Coda AI",
+      "desc": {
+        "fr": "commandes AI intégrées dans l'éditeur de doc",
+        "en": "AI commands integrated in the doc editor"
+      }
+    },
+    {
+      "name": "Linear",
+      "desc": {
+        "fr": "`/summarize` dans les commentaires de ticket",
+        "en": "`/summarize` in ticket comments"
+      }
+    },
+    {
+      "name": "Confluence AI",
+      "desc": {
+        "fr": "commandes AI dans l'éditeur de page",
+        "en": "AI commands in the page editor"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Prompt inline** : après la commande slash, afficher un champ de saisie pour les instructions supplémentaires.",
+      "**Contexte** : injecter automatiquement le contenu environnant (paragraphe précédent, titre de section) dans le prompt.",
+      "**Streaming** : afficher le texte généré en streaming directement dans l'éditeur avec un curseur clignotant ou un fond de couleur distinct.",
+      "**Accept/reject** : toujours proposer d'accepter, modifier, ou annuler avant de committer le contenu généré.",
+      "**Annulation** : Échap annule la génération en cours et supprime le contenu partiellement généré."
+    ],
+    "en": [
+      "**Trigger**: `/ai` as a dedicated prefix, or integrate AI commands into the general `/` menu under an \"AI\" group.",
+      "**Context awareness**: pass the surrounding paragraph text as context when executing the command.",
+      "**Preview before insert**: show a diff preview of what will be inserted/replaced before confirming.",
+      "**Streaming insert**: stream the AI-generated content into the document character by character.",
+      "**Undo**: always make the AI insertion reversible with a single `Cmd+Z`."
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Génération qui remplace immédiatement le contenu existant sans confirmation",
+      "❌ Pas d'indicateur de chargement pendant la génération",
+      "❌ Commandes AI qui ne fonctionnent qu'à certains endroits (début de ligne uniquement)",
+      "❌ Résultat non éditable après génération",
+      "--",
+      "--",
+      "--"
+    ],
+    "en": [
+      "❌ AI commands that replace content without showing a preview",
+      "❌ Not passing surrounding context — AI suggestions that are generic and not adapted to the document",
+      "❌ Streaming insertion that cannot be stopped mid-stream",
+      "❌ No error handling when the AI call fails — the user is left with a partial insert"
+    ]
+  },
+  "what": {
+    "fr": "Extension du pattern slash commands (pattern #11) avec des commandes dédiées à l'AI : `/ai`, `/generate`, `/improve`, `/summarize` — qui déclenchent une génération inline dans l'éditeur.",
+    "en": "An extension of the slash commands pattern (pattern #11) with AI-dedicated commands: `/ai`, `/generate`, `/improve`, `/summarize` — triggering inline generation directly in the editor."
+  },
+  "why": {
+    "fr": "Intègre l'AI directement dans le flux d'écriture sans sortir de l'éditeur. L'utilisateur reste dans son contexte cognitif. La génération se fait à la position du curseur, exactement là où le contenu est attendu.",
+    "en": "Integrates AI directly into the writing flow without leaving the editor. The user stays in their cognitive context. Generation happens at cursor position, exactly where the content is expected."
+  },
+  "demo": {
+    "fr": "```\n# Mon rapport Q3\n\n/améliore ce paragraphe\n\n┌─────────────────────────────────────────┐\n│ ✨ Améliorer le paragraphe ci-dessus... │\n│ [Écrire des instructions...          ]  │\n│                                [Générer]│\n└─────────────────────────────────────────┘\n```",
+    "en": "```\n# My Q3 report\n\n/improve this paragraph\n\n┌─────────────────────────────────────────┐\n│ ✨ Improve the paragraph above...       │\n│ [Write instructions...               ]  │\n│                                [Generate]│\n└─────────────────────────────────────────┘\n```"
+  }
+}

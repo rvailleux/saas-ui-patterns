@@ -1,0 +1,88 @@
+{
+  "id": 2,
+  "slug": "top-nav-contextual-left-panel",
+  "category": "navigation",
+  "title": {
+    "fr": "Top nav + contextual left panel",
+    "en": "Top Nav + Contextual Left Panel"
+  },
+  "categoryLabel": {
+    "slug": "navigation",
+    "fr": "Navigation & Structure",
+    "en": "Navigation & Structure"
+  },
+  "examples": [
+    {
+      "name": "GitHub",
+      "desc": {
+        "fr": "référence absolue, top nav + left panel parfaitement coordonnés",
+        "en": "absolute reference, perfectly coordinated top nav + left panel"
+      }
+    },
+    {
+      "name": "Figma",
+      "desc": {
+        "fr": "top nav (fichiers/équipes) + left panel (pages/layers) selon le contexte",
+        "en": "top nav (files/teams) + left panel (pages/layers) by context"
+      }
+    },
+    {
+      "name": "GitLab",
+      "desc": {
+        "fr": "déclinaison plus dense avec icônes dans le left panel",
+        "en": "denser variant with icons in the left panel"
+      }
+    },
+    {
+      "name": "Salesforce",
+      "desc": {
+        "fr": "enterprise avec top nav configurable par admin",
+        "en": "enterprise with admin-configurable top nav"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Hiérarchie stricte** : top nav = sections globales (max 6–8 items), left panel = navigation interne à la section. Ne pas mélanger les deux niveaux.",
+      "**Hauteur du top nav** : 48–64px. En dessous, les zones de clic sont trop petites sur desktop avec une souris imprécise.",
+      "**Indicateur actif** : dans le top nav, l'item actif doit être visuellement distinct (underline, background, couleur). Dans le left panel, un highlight de fond suffit.",
+      "**Left panel width** : 200–240px fixe. Éviter le redimensionnable sauf si c'est une feature explicite (ex : explorateur de fichiers).",
+      "**Scroll indépendant** : le left panel doit scroller indépendamment du contenu principal (`overflow-y: auto` sur le panel)."
+    ],
+    "en": [
+      "**Strict hierarchy**: top nav = global sections (max 6–8 items), left panel = intra-section navigation. Never mix the two levels.",
+      "**Top nav height**: 48–64 px. Below that, click targets are too small on desktop with an imprecise mouse.",
+      "**Active indicator**: in the top nav the active item must be visually distinct (underline, background, color). In the left panel a background highlight is enough.",
+      "**Left panel width**: 200–240 px fixed. Avoid resizable unless it is an explicit feature (e.g. file explorer).",
+      "**Independent scroll**: the left panel must scroll independently of main content (`overflow-y: auto` on the panel)."
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Trop d'items dans le top nav — au-delà de 7–8, utiliser un menu \"Plus\" ou revoir l'architecture IA",
+      "❌ Left panel qui disparaît ou change lors du scroll — il doit rester `position: sticky`",
+      "❌ Doublon de navigation entre top nav et left panel pour le même niveau",
+      "❌ Left panel sans état actif clairement visible — l'utilisateur perd son orientation",
+      "--"
+    ],
+    "en": [
+      "❌ Too many items in the top nav — beyond 7–8, use a \"More\" menu or rethink the IA",
+      "❌ Left panel that disappears or changes on scroll — it must stay `position: sticky`",
+      "❌ Duplicating navigation between top nav and left panel for the same level",
+      "❌ Left panel with no clearly visible active state — the user loses orientation",
+      "--"
+    ]
+  },
+  "what": {
+    "fr": "Une barre de navigation horizontale fixe en haut gère la navigation globale (entre grandes sections), tandis qu'un panneau gauche contextuel affiche la navigation secondaire propre à la section active.",
+    "en": "A fixed horizontal top bar handles global navigation (between major sections), while a contextual left panel displays secondary navigation specific to the active section."
+  },
+  "why": {
+    "fr": "Sépare clairement les deux niveaux hiérarchiques de navigation. Le top nav reste stable (ancrage cognitif), le left panel change selon le contexte sans perturber l'orientation de l'utilisateur. Particulièrement adapté aux applications avec des domaines fonctionnels très différents (ex : code vs issues vs settings dans GitHub).",
+    "en": "Clearly separates the two hierarchical levels of navigation. The top nav stays stable (cognitive anchor); the left panel changes with context without disrupting the user's orientation. Especially suited to apps with very different functional domains (e.g. code vs issues vs settings in GitHub)."
+  },
+  "demo": {
+    "fr": "```\n┌─────────────────────────────────────────────┐\n│  Logo  |  Code  |  Issues  |  Actions  |  ▼ │  ← Top nav (fixe)\n├─────────┬───────────────────────────────────┤\n│ Issues  │                                   │\n│ ──────  │   #1234 Fix login bug             │\n│ Open    │   ─────────────────────────────   │\n│ Closed  │   Labels · Assignees · Milestone  │\n│ Labels  │                                   │\n│ Milest. │                                   │  ← Left panel contextuel\n└─────────┴───────────────────────────────────┘\n   ▲\n   Change quand on clique sur \"Actions\" dans le top nav\n```",
+    "en": "```\n┌─────────────────────────────────────────────┐\n│  Logo  |  Code  |  Issues  |  Actions  |  ▼ │  ← Top nav (fixed)\n├─────────┬───────────────────────────────────┤\n│ Issues  │                                   │\n│ ──────  │   #1234 Fix login bug             │\n│ Open    │   ─────────────────────────────   │\n│ Closed  │   Labels · Assignees · Milestone  │\n│ Labels  │                                   │\n│ Milest. │                                   │  ← Contextual left panel\n└─────────┴───────────────────────────────────┘\n   ▲\n   Changes when \"Actions\" is clicked in the top nav\n```"
+  }
+}

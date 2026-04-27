@@ -1,0 +1,88 @@
+{
+  "id": 13,
+  "slug": "spreadsheet-like-inline-editing",
+  "category": "data",
+  "title": {
+    "fr": "Spreadsheet-like inline editing",
+    "en": "Spreadsheet-like Inline Editing"
+  },
+  "categoryLabel": {
+    "slug": "data",
+    "fr": "Data & Tables",
+    "en": "Data & Tables"
+  },
+  "examples": [
+    {
+      "name": "Airtable",
+      "desc": {
+        "fr": "référence absolue, édition inline pour tous les types de champs",
+        "en": "absolute reference, inline editing for all field types"
+      }
+    },
+    {
+      "name": "Notion databases",
+      "desc": {
+        "fr": "inline editing avec types de champs riches",
+        "en": "inline editing with rich field types"
+      }
+    },
+    {
+      "name": "Attio",
+      "desc": {
+        "fr": "CRM avec édition inline façon spreadsheet",
+        "en": "CRM with spreadsheet-style inline editing"
+      }
+    },
+    {
+      "name": "Linear",
+      "desc": {
+        "fr": "édition inline des propriétés dans les listes",
+        "en": "inline property editing in lists"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Déclencheur** : simple clic pour les selects/dates, double-clic pour le texte long (évite les éditions accidentelles au scroll).",
+      "**Navigation clavier** : Tab → cellule suivante, Shift+Tab → précédente, Entrée → ligne suivante, Échap → annuler l'édition.",
+      "**Types de champs** : chaque type a son widget inline — text input, select dropdown, date picker, checkbox, user picker.",
+      "**Validation** : valider à la perte de focus (blur), pas seulement à Entrée.",
+      "**Indicateur d'édition** : outline colored sur la cellule active + curseur `text` ou `pointer` selon le type.",
+      "**Undo** : `⌘Z` doit annuler la dernière modification cellule par cellule."
+    ],
+    "en": [
+      "**Trigger**: single click selects the cell; double-click enters edit mode. This matches the Excel/Sheets mental model.",
+      "**Confirm/cancel**: `Enter` or `Tab` confirms and moves focus; `Escape` cancels and reverts the value.",
+      "**Validation**: show inline validation errors below the cell while editing — not a toast.",
+      "**Optimistic update**: update the UI immediately on confirm; roll back silently if the server returns an error.",
+      "**Keyboard navigation**: `Tab` moves to the next editable cell; `Shift+Tab` moves back; arrow keys navigate the grid in view mode."
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Édition déclenchée au survol — éditions accidentelles",
+      "❌ Pas de feedback visuel sur la cellule en cours d'édition",
+      "❌ Soumission uniquement via un bouton \"Sauvegarder\" — casse le flux tableur",
+      "❌ Champs texte long sans expansion de hauteur — le contenu est tronqué",
+      "--"
+    ],
+    "en": [
+      "❌ Forcing a click on a separate \"Edit\" button per row — too many clicks for frequent editing",
+      "❌ Saving on every keystroke — debounce or save on blur/Enter only",
+      "❌ No visual distinction between editable and read-only cells",
+      "❌ Validation that only fires on server round-trip — too slow for inline editing"
+    ]
+  },
+  "what": {
+    "fr": "Les cellules d'un tableau deviennent éditables au clic ou double-clic, avec des raccourcis clavier type tableur (Tab, Entrée, flèches) pour naviguer entre les champs.",
+    "en": "Table cells become editable on click or double-click, with spreadsheet-style keyboard shortcuts (Tab, Enter, arrows) for navigating between fields."
+  },
+  "why": {
+    "fr": "Élimine le round-trip modal (cliquer pour ouvrir une modale, éditer, valider, fermer). Pour les workflows de data entry intensifs, la différence de vitesse est radicale. Les utilisateurs habitués à Excel/Sheets adoptent le pattern instantanément.",
+    "en": "Eliminates the modal round-trip (click to open a modal, edit, confirm, close). For data-intensive workflows, the speed difference is dramatic. Users familiar with Excel/Sheets adopt this pattern instantly."
+  },
+  "demo": {
+    "fr": "```\n┌──────────────┬───────────┬────────────┐\n│ Nom          │ Statut    │ Priorité   │\n├──────────────┼───────────┼────────────┤\n│ Bug login    │ [In prog▼]│ High       │  ← clic → dropdown inline\n│ Fix CSS      │ Done      │[Medium   ▼]│  ← Tab navigue à la cellule suivante\n│ [Nouvelle...│           │            │  ← Entrée en bas = nouvelle ligne\n└──────────────┴───────────┴────────────┘\n```",
+    "en": "```\n┌──────────────┬───────────┬────────────┐\n│ Name         │ Status    │ Priority   │\n├──────────────┼───────────┼────────────┤\n│ Bug login    │ [In prog▼]│ High       │  ← click → inline dropdown\n│ Fix CSS      │ Done      │[Medium   ▼]│  ← Tab navigates to next cell\n│ [New...      │           │            │  ← Enter at bottom = new row\n└──────────────┴───────────┴────────────┘\n```"
+  }
+}

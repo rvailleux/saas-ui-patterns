@@ -1,0 +1,87 @@
+{
+  "id": 18,
+  "slug": "optimistic-ui",
+  "category": "feedback",
+  "title": {
+    "fr": "Optimistic UI",
+    "en": "Optimistic UI"
+  },
+  "categoryLabel": {
+    "slug": "feedback",
+    "fr": "Feedback & États",
+    "en": "Feedback & States"
+  },
+  "examples": [
+    {
+      "name": "Linear",
+      "desc": {
+        "fr": "toutes les actions de statut, assignation, priorité",
+        "en": "all status, assignment, priority actions"
+      }
+    },
+    {
+      "name": "Figma",
+      "desc": {
+        "fr": "déplacement d'objets, changement de propriétés",
+        "en": "object movement, property changes"
+      }
+    },
+    {
+      "name": "Superhuman",
+      "desc": {
+        "fr": "archive, snooze, labels instantanés",
+        "en": "instant archive, snooze, labels"
+      }
+    },
+    {
+      "name": "Twitter/X",
+      "desc": {
+        "fr": "likes, retweets (avec rollback visible si erreur réseau)",
+        "en": "likes, retweets (with visible rollback on network error)"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Mutation locale d'abord** : mettre à jour le store/state local immédiatement, puis lancer la requête réseau en parallèle.",
+      "**Rollback sur erreur** : en cas d'erreur serveur, restaurer l'état précédent et afficher un toast d'erreur.",
+      "**Idempotence** : s'assurer que les actions sont idempotentes côté serveur — en cas de double soumission, le résultat doit être identique.",
+      "**Conflits** : gérer le cas où l'utilisateur effectue une deuxième action avant la confirmation de la première (queue ou annulation de la première).",
+      "**Librairies** : `react-query` / `TanStack Query` et `SWR` ont un support natif des mutations optimistes."
+    ],
+    "en": [
+      "**Apply immediately**: update the UI synchronously on user action, before the server responds.",
+      "**Rollback on error**: if the server returns an error, revert the UI to its previous state and show an error toast.",
+      "**Loading indicator**: show a subtle indicator (spinner, opacity change) to signal that the action is in flight.",
+      "**Idempotent actions**: optimistic UI is safest for idempotent actions (toggle, update). For non-idempotent actions (payment, send email) show an explicit confirmation.",
+      "**Conflict detection**: if a concurrent update from another user changes the same resource, show a conflict notification rather than silently overwriting."
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Optimistic UI sur des actions avec effets secondaires importants (paiement, envoi d'email) — réserver aux mutations simples",
+      "❌ Rollback sans notification à l'utilisateur — il ne comprend pas pourquoi l'état a changé",
+      "❌ Pas de gestion de l'état \"pending\" pour les actions qui prennent du temps (> 2s)",
+      "❌ Optimistic UI avec des données dérivées complexes — la cohérence est difficile à maintenir",
+      "--"
+    ],
+    "en": [
+      "❌ Applying optimistic updates to non-reversible, high-stakes actions (payment, destructive delete)",
+      "❌ No visual feedback that an update is pending — looks like the action was ignored",
+      "❌ Silent rollback — always inform the user when an optimistic update failed",
+      "❌ Race conditions when the user triggers the same action multiple times quickly — debounce or disable the action while pending"
+    ]
+  },
+  "what": {
+    "fr": "L'interface se met à jour immédiatement après l'action de l'utilisateur, avant que le serveur confirme. Si le serveur retourne une erreur, l'UI revient à son état précédent silencieusement.",
+    "en": "The UI updates immediately after the user's action, before the server confirms. If the server returns an error, the UI silently reverts to its previous state."
+  },
+  "why": {
+    "fr": "Élimine la latence perçue. Sur une bonne connexion, l'utilisateur ne voit jamais l'état de chargement. L'interface semble instantanée. La grande majorité des actions réussissant, le rollback reste un cas rare.",
+    "en": "Eliminates perceived latency. On a good connection, the user never sees a loading state. The interface feels instant. Since the vast majority of actions succeed, rollback remains a rare edge case."
+  },
+  "demo": {
+    "fr": "```\nUtilisateur clique \"Marquer comme fait\"\n\nSans optimistic UI :            Avec optimistic UI :\n☐ Tâche A                      ✓ Tâche A  ← immédiat\n[spinner 300ms]                 (confirmation serveur arrive 300ms après,\n✓ Tâche A                        invisible pour l'user)\n```",
+    "en": "```\nUser clicks \"Mark as done\"\n\nWithout optimistic UI:          With optimistic UI:\n☐ Task A                       ✓ Task A  ← immediate\n[spinner 300ms]                 (server confirmation arrives 300ms later,\n✓ Task A                         invisible to the user)\n```"
+  }
+}

@@ -1,0 +1,37 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,-apple-system,sans-serif;background:#0f0f1a;color:#e2e8f0;height:100vh;overflow:hidden;font-size:13px;line-height:1.5;padding:24px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.chip{background:#1e1e35;border:1px solid #2d2d52;padding:10px 16px;border-radius:20px;cursor:pointer;font-size:13px;transition:all 150ms}
+.chip:hover{background:#2d2d52;border-color:#7c3aed}
+.input-area{display:flex;gap:8px}
+.input-area input{flex:1;background:#16162a;border:1px solid #2d2d52;border-radius:8px;padding:12px 16px;color:#e2e8f0;outline:none}
+.input-area button{background:#7c3aed;border:none;color:#fff;padding:12px 20px;border-radius:8px;cursor:pointer}
+</style></head><body>
+<div class="chips" id="chips">
+<div class="chip" onclick="useChip('Summarize this document')">Summarize this</div>
+<div class="chip" onclick="useChip('Find action items')">Find action items</div>
+<div class="chip" onclick="useChip('Translate to French')">Translate to French</div>
+<div class="chip" onclick="useChip('Generate report')">Generate report</div>
+</div>
+<div class="input-area">
+<input type="text" id="input" placeholder="Or type your own...">
+<button onclick="send()">Send</button>
+</div>
+<script>
+const suggestions = ['What are the key points?','Compare options','Create timeline','Draft email'];
+let sugIdx = 0;
+function useChip(text) { document.getElementById('input').value = text; }
+function send() {
+  const input = document.getElementById('input');
+  if(input.value) {
+    input.value = '';
+    const chips = document.getElementById('chips');
+    const chipDivs = chips.querySelectorAll('.chip');
+    chipDivs.forEach((c,i) => {
+      c.textContent = suggestions[(sugIdx + i) % suggestions.length];
+    });
+    sugIdx = (sugIdx + 1) % suggestions.length;
+  }
+}
+</script>
+</body></html>

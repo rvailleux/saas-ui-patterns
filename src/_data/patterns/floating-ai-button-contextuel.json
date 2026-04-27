@@ -1,0 +1,87 @@
+{
+  "id": 23,
+  "slug": "floating-ai-button-contextuel",
+  "category": "ai-access",
+  "title": {
+    "fr": "Floating AI button contextuel",
+    "en": "Contextual Floating AI Button"
+  },
+  "categoryLabel": {
+    "slug": "ai-access",
+    "fr": "AI — Accès & Invocation",
+    "en": "AI — Access & Invocation"
+  },
+  "examples": [
+    {
+      "name": "Notion AI",
+      "desc": {
+        "fr": "toolbar AI sur sélection de texte",
+        "en": "AI toolbar on text selection"
+      }
+    },
+    {
+      "name": "Google Docs",
+      "desc": {
+        "fr": "\"Help me write\" sur sélection",
+        "en": "\"Help me write\" on selection"
+      }
+    },
+    {
+      "name": "Grammarly",
+      "desc": {
+        "fr": "suggestions sur sélection dans tout champ texte",
+        "en": "suggestions on selection in any text field"
+      }
+    },
+    {
+      "name": "Superhuman",
+      "desc": {
+        "fr": "actions AI sur sélection d'email",
+        "en": "AI actions on email selection"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Déclencheur** : écouter l'event `mouseup` / `selectionchange`. N'afficher qu'après que la sélection est stable (debounce 100ms).",
+      "**Position** : au-dessus de la sélection par défaut, en dessous si la sélection est trop proche du haut du viewport.",
+      "**Actions** : limiter à 4–6 actions. Les plus fréquentes en icônes directes, les autres dans un \"...\" menu.",
+      "**Fermeture** : disparaît si la sélection est désélectionnée (click en dehors), si Échap est pressé.",
+      "**Résultat** : remplacer la sélection par le résultat AI, ou l'afficher dans un panel séparé avec accept/reject (pattern #26)."
+    ],
+    "en": [
+      "**Trigger**: appear on text selection (debounced 200 ms) and on right-click. Disappear on scroll or outside click.",
+      "**Position**: anchor to the selection end, not the start. Detect viewport edges and flip accordingly.",
+      "**Actions**: offer 3–5 focused actions (Explain, Rewrite, Translate, Summarize, Fix). More = decision fatigue.",
+      "**Inline result**: show the AI response inline near the selection rather than navigating away.",
+      "**Undo**: always offer an Undo after an AI edit is applied to the document."
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Toolbar qui apparaît sur des sélections accidentelles d'un mot",
+      "❌ Position fixe (coin de l'écran) non ancrée sur la sélection",
+      "❌ Actions trop génériques sans lien avec le type de contenu sélectionné",
+      "❌ Toolbar qui bloque le texte sélectionné",
+      "--"
+    ],
+    "en": [
+      "❌ Button that appears on every single click, not just on text selection",
+      "❌ Button that blocks the selected text from being read",
+      "❌ No way to dismiss the button with the keyboard (Escape)",
+      "❌ AI edits applied without confirmation for long or complex replacements"
+    ]
+  },
+  "what": {
+    "fr": "Un bouton ou menu AI qui apparaît à la sélection de texte ou d'un objet, ancré sur la sélection, proposant des actions contextuelles (améliorer, résumer, traduire, expliquer).",
+    "en": "A button or AI menu that appears on text or object selection, anchored to the selection, offering contextual actions (improve, summarise, translate, explain)."
+  },
+  "why": {
+    "fr": "Le moment de sélection est le signal d'intention le plus fort : l'utilisateur a identifié un contenu sur lequel il veut agir. Proposer des actions AI exactement à ce moment, sans déplacement vers une autre interface, est le plus court chemin vers la valeur.",
+    "en": "The moment of selection is the strongest intent signal: the user has identified content they want to act on. Offering AI actions exactly at that moment, without switching to another interface, is the shortest path to value."
+  },
+  "demo": {
+    "fr": "```\nL'utilisateur sélectionne du texte :\n\n\"Cette fonctionnalité permettra aux utilisateurs de...\"\n ═══════════════════════════════════════\n              ┌───────────────────────────┐\n              │ ✨ Améliorer  📝 Résumer  │\n              │ 🌍 Traduire  💬 Expliquer │\n              └───────────────────────────┘\n```",
+    "en": "```\nUser selects text:\n\n\"This feature will allow users to...\"\n ═══════════════════════════════════\n              ┌───────────────────────────┐\n              │ ✨ Improve  📝 Summarise  │\n              │ 🌍 Translate  💬 Explain  │\n              └───────────────────────────┘\n```"
+  }
+}

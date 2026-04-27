@@ -1,0 +1,34 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,-apple-system,sans-serif;background:#0f0f1a;color:#e2e8f0;height:100vh;overflow:hidden;font-size:13px;line-height:1.5;padding:16px}
+.toolbar{display:flex;gap:8px;margin-bottom:12px}
+.toolbar button{background:#1e1e35;border:1px solid #2d2d52;color:#e2e8f0;padding:6px 12px;border-radius:6px;cursor:pointer;font-size:12px}
+.toolbar button:hover{background:#2d2d52}
+.diff{background:#16162a;border:1px solid #2d2d52;border-radius:8px;font-family:monospace;font-size:12px;line-height:1.6}
+.line{padding:6px 16px;display:flex}
+.line.ctx{color:#64748b}
+.line.rem{background:#ef444410;color:#ef4444}
+.line.add{background:#10b98110;color:#10b981}
+.line-num{width:40px;color:#64748b}
+.hunk-actions{display:flex;gap:8px;padding:8px 16px;border-bottom:1px solid #2d2d52;background:#1e1e35}
+.hunk-btn{font-size:11px;padding:4px 10px;border-radius:4px;cursor:pointer;border:none}
+.accept{background:#10b98120;color:#10b981}
+.reject{background:#ef444420;color:#ef4444}
+</style></head><body>
+<div class="toolbar">
+<button onclick="acceptAll()">Accept All</button>
+<button onclick="rejectAll()">Reject All</button>
+</div>
+<div class="diff" id="diff">
+<div class="hunk-actions"><button class="hunk-btn accept" onclick="acceptHunk(1)">✓ Accept</button><button class="hunk-btn reject" onclick="rejectHunk(1)">✗ Reject</button></div>
+<div class="line ctx"><span class="line-num">1</span>function calculateTotal(items) {</div>
+<div class="line rem" id="h1-1"><span class="line-num">-</span>  return items.reduce((a,b) => a + b.price, 0);</div>
+<div class="line add" id="h1-2"><span class="line-num">+</span>  return items.reduce((a,b) => a + (b.price * b.quantity), 0);</div>
+<div class="line ctx"><span class="line-num">4</span>}</div>
+</div>
+<script>
+function acceptHunk(n) { document.getElementById('h1-1').style.opacity='0.3'; document.getElementById('h1-1').style.textDecoration='line-through'; }
+function rejectHunk(n) { document.getElementById('h1-2').style.opacity='0.3'; document.getElementById('h1-2').style.textDecoration='line-through'; }
+function acceptAll() { acceptHunk(1); }
+function rejectAll() { rejectHunk(1); }
+</script>
+</body></html>

@@ -1,0 +1,88 @@
+{
+  "id": 14,
+  "slug": "filtres-persistants-url-encod-s",
+  "category": "data",
+  "title": {
+    "fr": "Filtres persistants & URL-encodés",
+    "en": "Persistent & URL-encoded Filters"
+  },
+  "categoryLabel": {
+    "slug": "data",
+    "fr": "Data & Tables",
+    "en": "Data & Tables"
+  },
+  "examples": [
+    {
+      "name": "Linear",
+      "desc": {
+        "fr": "filtres URL-encodés, vues sauvegardables avec nom",
+        "en": "URL-encoded filters, saveable named views"
+      }
+    },
+    {
+      "name": "GitHub Issues",
+      "desc": {
+        "fr": "query language puissant dans l'URL (`is:open assignee:alice`)",
+        "en": "powerful query language in the URL (`is:open assignee:alice`)"
+      }
+    },
+    {
+      "name": "Retool",
+      "desc": {
+        "fr": "filtres dynamiques URL-driven pour les apps internes",
+        "en": "URL-driven dynamic filters for internal apps"
+      }
+    },
+    {
+      "name": "Metabase",
+      "desc": {
+        "fr": "dashboards filtrables avec paramètres URL partageables",
+        "en": "filterable dashboards with shareable URL parameters"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Format URL** : query params standards (`?key=value&key2=value2`). Pour les valeurs multiples : `?status=open&status=in_progress` ou `?status[]=open`.",
+      "**Synchronisation** : l'état des filtres dans l'UI doit être entièrement dérivé de l'URL. L'URL est la source de vérité.",
+      "**Mise à jour URL** : utiliser `history.pushState` (nouvelle entrée d'historique) pour les changements significatifs, `history.replaceState` pour les changements de tri ou de pagination.",
+      "**Indicateur visuel** : afficher les filtres actifs sous forme de chips/tags avec bouton de suppression.",
+      "**Reset** : bouton \"Effacer les filtres\" qui remet l'URL à son état de base.",
+      "**Validation** : valider les paramètres URL à l'arrivée — des paramètres invalides ne doivent pas casser la page."
+    ],
+    "en": [
+      "**URL encoding**: serialize all active filters in the URL query string so the filtered view is shareable and bookmarkable.",
+      "**Filter chips**: each active filter displays as a removable chip with the filter name and value. `×` to remove individually.",
+      "**\"Clear all\"**: always offer a single \"Clear all filters\" button when at least one filter is active.",
+      "**Filter count**: show the number of active filters in the filter button label (\"Filters · 3\").",
+      "**Persistence on navigation**: preserve filters when the user navigates to a detail page and returns (use the URL or browser history state)."
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ État de filtre en `useState` local uniquement — perdu au refresh",
+      "❌ URL trop longue (> 2000 caractères) avec de nombreux filtres — préférer les vues sauvegardées côté serveur",
+      "❌ Pas de décompte de résultats visible avec les filtres actifs",
+      "❌ Filtres qui s'appliquent uniquement à la vue actuelle mais pas aux données exportées",
+      "--"
+    ],
+    "en": [
+      "❌ Filters that reset when the user refreshes or navigates back",
+      "❌ No visual indication that filters are active — users forget what they applied",
+      "❌ Filters that require a \"Submit\" button — apply changes instantly for a responsive feel",
+      "❌ URL with non-human-readable filter encoding — prefer `?status=open&priority=high` over base64 blobs"
+    ]
+  },
+  "what": {
+    "fr": "Les filtres actifs sont encodés dans l'URL, persistants entre sessions, et partageables — un lien filtré envoie le destinataire à la même vue filtrée.",
+    "en": "Active filters are encoded in the URL, persistent across sessions, and shareable — a filtered link sends the recipient to the exact same filtered view."
+  },
+  "why": {
+    "fr": "Les vues filtrées sont souvent des \"vues de travail\" récurrentes. Les encoder dans l'URL permet : partager une vue précise par lien, sauvegarder une URL comme bookmark, et naviguer avec le bouton retour sans perdre ses filtres.",
+    "en": "Filtered views are often recurring \"work views\". URL-encoding them allows: sharing a precise view via link, bookmarking a URL, and navigating back without losing filters."
+  },
+  "demo": {
+    "fr": "```\nURL : /issues?status=open&assignee=alice&priority=high&sort=updated\n\n┌──────────────────────────────────────────────────┐\n│ Filtres actifs :  [Ouvert ✕]  [Alice ✕]  [High ✕]│\n│                   + Ajouter un filtre             │\n├──────────────────────────────────────────────────┤\n│ Résultats (12)                         ↕ Récents  │\n│ ...                                               │\n└──────────────────────────────────────────────────┘\n```",
+    "en": "```\nURL: /issues?status=open&assignee=alice&priority=high&sort=updated\n\n┌──────────────────────────────────────────────────┐\n│ Active filters: [Open ✕]  [Alice ✕]  [High ✕]   │\n│                 + Add filter                      │\n├──────────────────────────────────────────────────┤\n│ Results (12)                           ↕ Recent  │\n│ ...                                               │\n└──────────────────────────────────────────────────┘\n```"
+  }
+}

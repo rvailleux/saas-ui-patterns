@@ -1,0 +1,89 @@
+{
+  "id": 16,
+  "slug": "column-resizing-reordering",
+  "category": "data",
+  "title": {
+    "fr": "Column resizing & reordering",
+    "en": "Column Resizing & Reordering"
+  },
+  "categoryLabel": {
+    "slug": "data",
+    "fr": "Data & Tables",
+    "en": "Data & Tables"
+  },
+  "examples": [
+    {
+      "name": "Airtable",
+      "desc": {
+        "fr": "resize + reorder + hide/show colonnes",
+        "en": "resize + reorder + hide/show columns"
+      }
+    },
+    {
+      "name": "Notion tables",
+      "desc": {
+        "fr": "resize des colonnes, réorganisation par drag",
+        "en": "column resize, drag-and-drop reordering"
+      }
+    },
+    {
+      "name": "HubSpot CRM",
+      "desc": {
+        "fr": "colonnes configurables avec état mémorisé par user",
+        "en": "configurable columns with per-user state persistence"
+      }
+    },
+    {
+      "name": "Attio",
+      "desc": {
+        "fr": "configuration avancée des colonnes par vue",
+        "en": "advanced column configuration per view"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Resize** : zone de 6–8px sur la bordure droite du header, curseur `col-resize`. Largeur minimum par colonne (ex: 80px).",
+      "**Reorder** : drag sur le corps du header (pas la zone resize). Indicateur visuel de drop position (ligne verticale entre colonnes).",
+      "**Persistance** : sauvegarder largeurs et ordre en base côté serveur (pas seulement localStorage) — l'utilisateur retrouve sa config sur tous ses appareils.",
+      "**Colonnes fixes** : permettre d'épingler des colonnes à gauche (comme Excel freeze panes). Séparateur visuel entre colonnes fixes et scrollables.",
+      "**Menu de colonne** : clic sur header → dropdown avec Trier, Filtrer, Masquer, Épingler, Redimensionner à l'auto."
+    ],
+    "en": [
+      "**Resize handle**: a 4–8 px zone on the right edge of each header cell. Cursor changes to `col-resize` on hover.",
+      "**Minimum column width**: set a floor (e.g. 60 px) so a column cannot be resized below readable size.",
+      "**Persist**: save column widths and order in `localStorage` keyed by the table identifier.",
+      "**Drag-to-reorder**: use a drag handle (⠿ icon) in the header, not the full header, to avoid conflict with column sorting.",
+      "**Overflow columns**: if columns overflow the container, show a horizontal scroll on the table — do not hide columns silently."
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Resize qui affecte toutes les colonnes suivantes au lieu de juste celle ciblée",
+      "❌ Pas de largeur minimum — les colonnes peuvent disparaître",
+      "❌ Reorder qui se déclenche accidentellement pendant un clic simple sur le header (pour trier)",
+      "❌ Préférences perdues au refresh car uniquement en mémoire",
+      "--",
+      "--",
+      "--"
+    ],
+    "en": [
+      "❌ Resize handles that are invisible until hover — provide at least a subtle visual hint",
+      "❌ Resize that changes the layout of other columns unexpectedly (table-layout: fixed solves this)",
+      "❌ No persistence — users must re-configure on every visit",
+      "❌ Drag-to-reorder that also triggers a sort — separate the two interactions clearly"
+    ]
+  },
+  "what": {
+    "fr": "Les colonnes d'un tableau peuvent être redimensionnées par drag sur la bordure et réorganisées par drag & drop sur le header. Ces préférences sont mémorisées par utilisateur.",
+    "en": "Table columns can be resized by dragging their border and reordered via drag-and-drop on the header. These preferences are persisted per user."
+  },
+  "why": {
+    "fr": "Les utilisateurs ont des workflows différents et valorisent des colonnes différentes. Donner le contrôle sur la disposition est un gage de respect de leur workflow. C'est la personnalisation minimale attendue de tout tableau de données professionnel.",
+    "en": "Users have different workflows and value different columns. Giving control over layout is a sign of respect for their workflow. It's the minimum personalisation expected from any professional data table."
+  },
+  "demo": {
+    "fr": "```\n         Poignée de resize\n               ↓\n┌──────────────╫──────────┬──────────────┐\n│ Nom          ║ Statut   │ Date         │  ← drag header pour réordonner\n├──────────────╫──────────┼──────────────┤\n│              ║          │              │\n│   drag →→→  ║          │              │\n│              ║          │              │\n└──────────────╫──────────┴──────────────┘\n        curseur col-resize\n```",
+    "en": "```\nResize handle\n               ↓\n┌──────────────╫──────────┬──────────────┐\n│ Name         ║ Status   │ Date         │  ← drag header to reorder\n├──────────────╫──────────┼──────────────┤\n│              ║          │              │\n│   drag →→→  ║          │              │\n│              ║          │              │\n└──────────────╫──────────┴──────────────┘\n        col-resize cursor\n```"
+  }
+}

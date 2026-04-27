@@ -1,0 +1,87 @@
+{
+  "id": 37,
+  "slug": "suggested-prompts-quick-actions",
+  "category": "ai-prompt",
+  "title": {
+    "fr": "Suggested prompts / quick actions",
+    "en": "Suggested Prompts / Quick Actions"
+  },
+  "categoryLabel": {
+    "slug": "ai-prompt",
+    "fr": "AI — Prompt UX",
+    "en": "AI — Prompt UX"
+  },
+  "examples": [
+    {
+      "name": "ChatGPT",
+      "desc": {
+        "fr": "suggestions contextuelles renouvelées à chaque session",
+        "en": "contextual prompt suggestions based on the current page"
+      }
+    },
+    {
+      "name": "Claude",
+      "desc": {
+        "fr": "suggestions adaptées au type de conversation",
+        "en": "quick actions pre-populated by context"
+      }
+    },
+    {
+      "name": "Copilot Chat",
+      "desc": {
+        "fr": "suggestions liées au fichier ouvert dans VS Code",
+        "en": "starter prompts in the empty state"
+      }
+    },
+    {
+      "name": "Notion AI",
+      "desc": {
+        "fr": "suggestions liées au type de document",
+        "en": "suggested next actions based on history"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Contextualisation** : les suggestions doivent changer selon l'objet actif (ticket, document, contact, code). Pas les mêmes 4 suggestions partout.",
+      "**Nombre** : 3–6 suggestions. Trop peu = pas assez de choix, trop = paralysie de décision.",
+      "**Format** : icône + label court (5–7 mots max). Le label doit être un verbe d'action.",
+      "**Clic = prompt exécuté** : cliquer sur une suggestion doit directement lancer la requête, pas remplir le champ de saisie.",
+      "**Refresh** : bouton \"Autres suggestions\" pour voir des alternatives si aucune ne convient."
+    ],
+    "en": [
+      "**Context-aware**: show prompts relevant to the current context — not generic ones. A project view should suggest \"Summarize this project\", not \"Tell me a joke\".",
+      "**Refresh**: rotate suggestions after each response so they do not stale.",
+      "**Max 4**: limit to 4 suggestions to avoid choice overload. Fewer is better.",
+      "**Editable after insert**: when the user clicks a suggestion, it fills the input as editable text — not as a locked chip.",
+      "**Learn from history**: weight suggestions toward topics the user has queried before."
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Suggestions génériques identiques dans tous les contextes",
+      "❌ Suggestions trop longues qui ne rentrent pas dans le bouton",
+      "❌ Clic qui remplit le champ mais ne soumet pas — étape supplémentaire inutile",
+      "❌ Suggestions disparaissant après le premier message — les réafficher quand le champ est vide",
+      "--"
+    ],
+    "en": [
+      "❌ Generic, non-contextual suggestions (\"How can I help you today?\")",
+      "❌ Suggestions that are too long — they should be short enough to read at a glance",
+      "❌ Locked chips that cannot be edited before sending",
+      "❌ Suggestions that never change across sessions"
+    ]
+  },
+  "what": {
+    "fr": "L'état vide de l'interface chat est rempli de suggestions contextuelles cliquables, adaptées à l'objet de travail actuel, qui permettent de démarrer sans effort.",
+    "en": "When the AI input is empty or the session is new, suggest contextual prompts specific to the current view, the user's recent activity, or common use cases."
+  },
+  "why": {
+    "fr": "La page blanche est le principal obstacle à l'adoption. \"Comment est-ce que je commence ?\" est la question que pose chaque nouvel utilisateur. Les suggestions contextuelles répondent directement à cette question avec des actions immédiatement utiles — pas des exemples génériques.",
+    "en": "Resolves the blank page problem. New users don't know what to ask; experienced users don't always have time to think. Contextual suggestions lower the barrier to AI engagement and demonstrate the product's value instantly."
+  },
+  "demo": {
+    "fr": "```\n[Interface AI vide, contexte : ticket de bug]\n\n                   ✨ AI Assistant\n\n    Que puis-je faire pour vous ?\n\n    ┌──────────────────────────────────────┐\n    │ 📝 Rédiger les étapes de reproduc.  │\n    │ 🔍 Trouver des issues similaires    │\n    │ ✅ Générer des critères d'acceptance │\n    │ 🧪 Écrire des cas de test          │\n    └──────────────────────────────────────┘\n\n    [Écrire une instruction...          ↑]\n```",
+    "en": "```\nEmpty AI input on a ticket view:\n\n┌────────────────────────────────────────┐\n│                                        │\n│  💡 Suggested actions:                 │\n│                                        │\n│  [Summarise this ticket]               │\n│  [Suggest acceptance criteria]         │\n│  [Draft a reply to the last comment]   │\n│  [Estimate effort in story points]     │\n│                                        │\n└────────────────────────────────────────┘\n```"
+  }
+}

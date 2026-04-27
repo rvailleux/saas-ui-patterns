@@ -1,0 +1,54 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,-apple-system,sans-serif;background:#0f0f1a;color:#e2e8f0;height:100vh;overflow:hidden;font-size:13px;line-height:1.5;padding:24px}
+.palette{background:#16162a;border:1px solid #2d2d52;border-radius:12px;overflow:hidden;max-width:400px;margin:0 auto}
+.input-row{display:flex;align-items:center;padding:12px 16px;border-bottom:1px solid #2d2d52}
+.input-row input{flex:1;background:transparent;border:none;color:#e2e8f0;font-size:14px;outline:none}
+.input-row input::placeholder{color:#64748b}
+.cmd-badge{background:#1e1e35;padding:2px 8px;border-radius:4px;font-size:12px;color:#94a3b8}
+.results{max-height:240px;overflow:auto}
+.result-item{display:flex;align-items:center;gap:12px;padding:10px 16px;cursor:pointer}
+.result-item:hover,.result-item.selected{background:#1e1e35}
+.result-item.selected .shortcut{opacity:1}
+.icon{width:28px;height:28px;background:#7c3aed20;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#a78bfa;font-size:12px}
+.info{flex:1}
+.name{font-size:13px}
+.desc{font-size:11px;color:#64748b}
+.shortcut{opacity:0;color:#94a3b8;font-size:11px}
+.status{padding:12px 16px;color:#a78bfa;font-size:13px;border-top:1px solid #2d2d52}
+</style></head><body>
+<div class="palette">
+<div class="input-row"><input type="text" id="input" placeholder="Search commands..." oninput="filter()" onkeydown="nav(event)"><span class="cmd-badge">⌘K</span></div>
+<div class="results" id="results"></div>
+<div class="status" id="status">↑↓ to navigate, ↵ to select</div>
+</div>
+<script>
+const cmds = [
+  {id:1,name:'Open File',desc:'Quick open any file',key:'⌘P'},
+  {id:2,name:'Command Palette',desc:'Access all commands',key:'⌘⇧P'},
+  {id:3,name:'Go to Symbol',desc:'Navigate to any symbol',key:'⌘⇧O'},
+  {id:4,name:'Find in Files',desc:'Search across workspace',key:'⌘⇧F'},
+  {id:5,name:'Settings',desc:'Open settings',key:'⌘,'}
+];
+let sel = 0;
+function render(items) {
+  document.getElementById('results').innerHTML = items.map((c,i) =>
+    '<div class="result-item '+(i===sel?'selected':'')+'" onclick="select('+c.id+')">'+
+    '<div class="icon">'+c.id+'</div><div class="info"><div class="name">'+c.name+'</div>'+
+    '<div class="desc">'+c.desc+'</div></div><div class="shortcut">'+c.key+'</div></div>'
+  ).join('');
+}
+function filter() {
+  const q = document.getElementById('input').value.toLowerCase();
+  const items = cmds.filter(c => c.name.toLowerCase().includes(q));
+  sel = 0; render(items);
+}
+function nav(e) {
+  const items = document.querySelectorAll('.result-item');
+  if(e.key === 'ArrowDown') { sel = Math.min(sel+1,items.length-1); filter(); }
+  if(e.key === 'ArrowUp') { sel = Math.max(sel-1,0); filter(); }
+  if(e.key === 'Enter') select(cmds[sel]?.id);
+}
+function select(id) { if(id) document.getElementById('status').textContent = 'Navigating to: ' + cmds.find(c=>c.id===id)?.name; }
+render(cmds);
+</script>
+</body></html>

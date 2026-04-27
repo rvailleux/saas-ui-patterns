@@ -1,0 +1,87 @@
+{
+  "id": 15,
+  "slug": "virtual-scrolling",
+  "category": "data",
+  "title": {
+    "fr": "Virtual scrolling",
+    "en": "Virtual Scrolling"
+  },
+  "categoryLabel": {
+    "slug": "data",
+    "fr": "Data & Tables",
+    "en": "Data & Tables"
+  },
+  "examples": [
+    {
+      "name": "Slack",
+      "desc": {
+        "fr": "messages history avec virtual scroll + sticky date headers",
+        "en": "message history with virtual scroll + sticky date headers"
+      }
+    },
+    {
+      "name": "Gmail",
+      "desc": {
+        "fr": "liste d'emails (milliers de threads sans lag)",
+        "en": "email list (thousands of threads without lag)"
+      }
+    },
+    {
+      "name": "Airtable",
+      "desc": {
+        "fr": "grilles avec des dizaines de milliers de lignes",
+        "en": "grids with tens of thousands of rows"
+      }
+    },
+    {
+      "name": "Figma",
+      "desc": {
+        "fr": "panneau Layers avec virtual scroll sur les designs complexes",
+        "en": "Layers panel with virtual scroll on complex designs"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Librairies** : `react-window`, `react-virtual` (TanStack Virtual), `vue-virtual-scroller`. Ne pas réimplémenter from scratch.",
+      "**Hauteur fixe vs variable** : hauteur fixe par item = simple et performant. Hauteur variable = nécessite une estimation initiale et mesure au rendu.",
+      "**Overscan** : rendre 3–5 items supplémentaires au-delà du viewport (en haut et en bas) pour éviter le flash au scroll rapide.",
+      "**Sticky headers** : compatibles avec le virtual scroll si implémentés séparément (position sticky sur un container wrappant le virtual list).",
+      "**Focus clavier** : le virtual scroll peut casser la navigation clavier — s'assurer que Tab et les flèches déclenchent le scroll vers les items non rendus."
+    ],
+    "en": [
+      "**When to use**: virtual scrolling pays off above ~500 DOM nodes. Below that, the complexity cost exceeds the performance gain.",
+      "**Item height**: fixed item height is simpler (calculate rendered range from scroll position). Variable height requires a size cache.",
+      "**Overscan**: render 3–5 items above and below the visible area to prevent blank flashes during fast scrolling.",
+      "**Scroll restoration**: save the scroll offset in history state or session storage; restore it on back-navigation.",
+      "**Accessible**: ensure screen readers can announce list items correctly — some virtual scroll libraries break ARIA roles."
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Implémenter le virtual scroll pour des listes < 200 items — overhead inutile",
+      "❌ Animer les items au scroll (entrée/sortie) — crée des artifacts visuels",
+      "❌ `innerHTML` pour le recycling — toujours utiliser le virtual DOM du framework",
+      "❌ Oublier le `scrollRestoration` — l'utilisateur revient en haut après navigation",
+      "--"
+    ],
+    "en": [
+      "❌ Using virtual scrolling for lists of < 200 items — the complexity is not justified",
+      "❌ Missing overscan — causes blank areas when scrolling quickly",
+      "❌ Breaking CMD+F (browser find) — virtualized lists hide non-rendered nodes from the browser search",
+      "❌ Forgetting scroll restoration — users lose their position when returning from a detail view"
+    ]
+  },
+  "what": {
+    "fr": "Technique de rendu qui n'affiche que les éléments de liste visibles dans le viewport, même si la liste contient des milliers d'entrées.",
+    "en": "A rendering technique that only displays list items visible in the viewport, even if the list contains thousands of entries."
+  },
+  "why": {
+    "fr": "Sans virtual scrolling, une liste de 10 000 items crée 10 000 nœuds DOM — le navigateur s'effondre. Avec le virtual scroll, seuls 20–50 nœuds existent à tout moment. L'utilisateur ne voit pas la différence mais les performances sont radicalement meilleures.",
+    "en": "Without virtual scrolling, a list of 10,000 items creates 10,000 DOM nodes — the browser grinds to a halt. With virtual scroll, only 20–50 nodes exist at any moment. Users see no difference, but performance is radically better."
+  },
+  "demo": {
+    "fr": "```\n┌─────────────────────┐\n│ Item 1              │  ← rendu\n│ Item 2              │  ← rendu\n│ Item 3              │  ← rendu\n│ ...                 │\n│ Item 20             │  ← rendu (dernier visible)\n└─────────────────────┘\n   │                     Items 21–10000 : non rendus,\n   ▼ scroll              remplacés par un spacer div de\n                         hauteur calculée\n┌─────────────────────┐\n│ Item 21             │  ← rendu (recycling du DOM)\n│ Item 22             │\n...\n```",
+    "en": "```\n┌─────────────────────┐\n│ Item 1              │  ← rendered\n│ Item 2              │  ← rendered\n│ Item 3              │  ← rendered\n│ ...                 │\n│ Item 20             │  ← rendered (last visible)\n└─────────────────────┘\n   │                     Items 21–10000: not rendered,\n   ▼ scroll              replaced by a spacer div of\n                         calculated height\n┌─────────────────────┐\n│ Item 21             │  ← rendered (DOM recycling)\n│ Item 22             │\n...\n```"
+  }
+}

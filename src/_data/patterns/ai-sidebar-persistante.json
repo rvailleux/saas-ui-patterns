@@ -1,0 +1,87 @@
+{
+  "id": 21,
+  "slug": "ai-sidebar-persistante",
+  "category": "ai-access",
+  "title": {
+    "fr": "AI sidebar persistante",
+    "en": "Persistent AI Sidebar"
+  },
+  "categoryLabel": {
+    "slug": "ai-access",
+    "fr": "AI — Accès & Invocation",
+    "en": "AI — Access & Invocation"
+  },
+  "examples": [
+    {
+      "name": "GitHub Copilot Chat",
+      "desc": {
+        "fr": "sidebar contextuelle au fichier ouvert dans VS Code",
+        "en": "sidebar contextual to the open file in VS Code"
+      }
+    },
+    {
+      "name": "Notion AI",
+      "desc": {
+        "fr": "sidebar qui connaît le document en cours",
+        "en": "sidebar aware of the current document"
+      }
+    },
+    {
+      "name": "HubSpot Breeze",
+      "desc": {
+        "fr": "AI sidebar dans le CRM, accès aux données contact",
+        "en": "AI sidebar in the CRM with contact data access"
+      }
+    },
+    {
+      "name": "Salesforce Einstein",
+      "desc": {
+        "fr": "sidebar avec contexte CRM injecté automatiquement",
+        "en": "sidebar with automatically injected CRM context"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Largeur** : 320–400px. Rétractable avec le même pattern icon-rail (pattern #1).",
+      "**Contexte automatique** : injecter silencieusement dans le system prompt le contexte de la vue active (titre du document, statut du ticket, données du contact) sans que l'utilisateur ait à le préciser.",
+      "**Historique** : persister l'historique par session de travail (document, ticket, etc.) — idéalement côté serveur.",
+      "**Indicateur de contexte** : afficher visuellement quel contexte est injecté (\"Je vois : Ticket #1234\") pour la transparence.",
+      "**Actions rapides** : proposer des actions en un clic selon le contexte (Résumer, Améliorer, Traduire)."
+    ],
+    "en": [
+      "**Persistent context**: the AI sidebar should maintain conversation history for the session so the user can refer back to earlier exchanges.",
+      "**Context injection**: automatically inject the current page/item context into every query (\"You are looking at Invoice #1234, created on...\").",
+      "**Width**: 320–400 px on desktop. On tablet use a sheet/drawer. On mobile use a full-screen modal.",
+      "**Streaming responses**: stream the AI response token by token rather than showing a loading state then the full answer.",
+      "**Input height**: the input should auto-grow up to 3–4 lines; beyond that add a scrollbar."
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Sidebar qui perd son historique à chaque navigation",
+      "❌ Contexte injecté mais non visible — l'utilisateur ne comprend pas pourquoi l'AI \"sait\" des choses",
+      "❌ Largeur fixe non rétractable sur les petits écrans",
+      "❌ Sidebar qui ralentit le chargement de la page principale",
+      "--"
+    ],
+    "en": [
+      "❌ A sidebar that resets its history when the user navigates — persistence is the core value proposition",
+      "❌ No context injection — AI responses that ignore the current page are unhelpful",
+      "❌ Blocking the main content with the sidebar — it should overlay or push; user must be able to interact with both",
+      "❌ No way to clear the conversation history"
+    ]
+  },
+  "what": {
+    "fr": "Un panneau latéral dédié à l'IA, accessible depuis n'importe quelle vue de l'application, rétractable, qui maintient l'historique de conversation dans le contexte de la session de travail.",
+    "en": "A dedicated AI panel, accessible from any view of the application, collapsible, that maintains conversation history within the working session context."
+  },
+  "why": {
+    "fr": "Évite de quitter l'application pour accéder à un outil AI externe. L'AI a accès au contexte de la vue courante (document ouvert, ticket sélectionné) sans que l'utilisateur ait à copier-coller. La persistance du fil permet de construire sur les échanges précédents.",
+    "en": "Avoids leaving the application to access an external AI tool. The AI has access to the current view's context (open document, selected ticket) without the user having to copy-paste. Persistent history allows building on previous exchanges."
+  },
+  "demo": {
+    "fr": "```\n┌──────────────────────┬───────────────────┐\n│ CONTENU PRINCIPAL    │ AI Assistant      │\n│                      │ ─────────────── │\n│ # Mon ticket         │ 👤 Comment        │\n│ Description...       │ améliorer cette   │\n│                      │ description ?     │\n│                      │                   │\n│                      │ 🤖 Voici 3        │\n│                      │ suggestions...    │\n│                      │                   │\n│                      │ ────────────────  │\n│                      │ [Écrire...    ↑] │\n└──────────────────────┴───────────────────┘\n```",
+    "en": "```\n┌──────────────────────┬───────────────────┐\n│ MAIN CONTENT         │ AI Assistant      │\n│                      │ ─────────────── │\n│ # My ticket          │ 👤 How can I      │\n│ Description...       │ improve this      │\n│                      │ description?      │\n│                      │                   │\n│                      │ 🤖 Here are 3     │\n│                      │ suggestions...    │\n│                      │                   │\n│                      │ ────────────────  │\n│                      │ [Write...     ↑] │\n└──────────────────────┴───────────────────┘\n```"
+  }
+}

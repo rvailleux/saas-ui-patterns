@@ -1,0 +1,90 @@
+{
+  "id": 12,
+  "slug": "contextual-right-click-menu",
+  "category": "commands",
+  "title": {
+    "fr": "Contextual right-click menu",
+    "en": "Contextual Right-Click Menu"
+  },
+  "categoryLabel": {
+    "slug": "commands",
+    "fr": "Commandes & Recherche",
+    "en": "Commands & Search"
+  },
+  "examples": [
+    {
+      "name": "Figma",
+      "desc": {
+        "fr": "contextual menu ultra-riche, différent selon le type d'objet sélectionné",
+        "en": "ultra-rich contextual menu, different per selected object type"
+      }
+    },
+    {
+      "name": "Miro",
+      "desc": {
+        "fr": "menu contextuel pour sticky notes, shapes, connexions",
+        "en": "contextual menu for sticky notes, shapes, connections"
+      }
+    },
+    {
+      "name": "Airtable",
+      "desc": {
+        "fr": "clic droit sur cellule, ligne, colonne avec actions distinctes",
+        "en": "right-click on cell, row, column with distinct actions"
+      }
+    },
+    {
+      "name": "Penpot",
+      "desc": {
+        "fr": "menu contextuel design avec raccourcis clavier affichés",
+        "en": "design contextual menu with displayed keyboard shortcuts"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Contextualité** : les actions doivent changer selon l'objet ciblé (cellule vs header de colonne vs row dans un tableau).",
+      "**Séparateurs** : grouper les actions par famille (clipboard, organisation, suppression) avec des séparateurs.",
+      "**Raccourcis affichés** : toujours afficher les raccourcis keyboard à droite — renforce l'apprentissage.",
+      "**Sous-menus** : max 1 niveau de sous-menu. Au-delà, revoir l'architecture.",
+      "**Position** : calculer si le menu sort de l'écran et le repositionner (flip vertical ou horizontal).",
+      "**Fermeture** : clic en dehors, Échap, ou sélection d'une action."
+    ],
+    "en": [
+      "**Position**: open at cursor position; flip left if it would overflow the right edge, flip up if it would overflow the bottom.",
+      "**Content**: show only contextually relevant actions — a context menu on a file should differ from one on an empty area.",
+      "**Keyboard trigger**: `Shift+F10` or `Menu key` must also open the context menu for accessibility.",
+      "**Dismiss**: click outside, `Escape`, or any action closes it. Navigating focus out should also close it.",
+      "**Icons**: icons in context menus are optional but improve scannability — keep them consistent across the app."
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Menu identique quelle que soit la sélection — perd toute la valeur contextuelle",
+      "❌ Actions destructives (Supprimer) sans confirmation ou sans undo disponible",
+      "❌ Menu trop long (> 12 items) sans séparateurs ni sous-menus",
+      "❌ Remplacer le menu natif du browser sur des éléments où le menu natif est utile (input texte)",
+      "--",
+      "--",
+      "--"
+    ],
+    "en": [
+      "❌ Context menus with more than 10 items — split into a submenu or remove rarely used items",
+      "❌ Using the browser default context menu for content the user might want to copy — respect native behavior",
+      "❌ A context menu that appears behind other content (z-index issues)",
+      "❌ No keyboard trigger support"
+    ]
+  },
+  "what": {
+    "fr": "Un menu contextuel riche et cohérent déclenché par clic droit (ou long-press sur mobile), présentant les actions disponibles pour l'élément ciblé.",
+    "en": "A rich, coherent context menu triggered by right-click (or long-press on mobile), presenting available actions for the targeted element."
+  },
+  "why": {
+    "fr": "Remplace les barres d'outils toujours visibles par des actions disponibles à la demande. Réduit le bruit visuel tout en maintenant l'accessibilité des actions. Les utilisateurs expérimentés préfèrent le clic droit aux boutons dans la toolbar.",
+    "en": "Replaces always-visible toolbars with on-demand actions. Reduces visual noise while keeping actions accessible. Experienced users prefer right-click to toolbar buttons."
+  },
+  "demo": {
+    "fr": "```\n[Clic droit sur un calque dans Figma]\n\n┌────────────────────────────┐\n│ Copier                ⌘C   │\n│ Coller ici            ⌘V   │\n│ Dupliquer             ⌘D   │\n├────────────────────────────┤\n│ Grouper               ⌘G   │\n│ Créer un composant         │\n├────────────────────────────┤\n│ Renommer              ⌘R   │\n│ Supprimer             ⌫    │\n└────────────────────────────┘\n```",
+    "en": "```\n[Right-click on a layer in Figma]\n\n┌────────────────────────────┐\n│ Copy                  ⌘C   │\n│ Paste here            ⌘V   │\n│ Duplicate             ⌘D   │\n├────────────────────────────┤\n│ Group                 ⌘G   │\n│ Create component           │\n├────────────────────────────┤\n│ Rename                ⌘R   │\n│ Delete                ⌫    │\n└────────────────────────────┘\n```"
+  }
+}

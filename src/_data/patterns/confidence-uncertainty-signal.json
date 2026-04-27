@@ -1,0 +1,89 @@
+{
+  "id": 36,
+  "slug": "confidence-uncertainty-signal",
+  "category": "ai-feedback",
+  "title": {
+    "fr": "Confidence / uncertainty signal",
+    "en": "Confidence / Uncertainty Signal"
+  },
+  "categoryLabel": {
+    "slug": "ai-feedback",
+    "fr": "AI — Feedback & Contrôle",
+    "en": "AI — Feedback & Control"
+  },
+  "examples": [
+    {
+      "name": "Perplexity",
+      "desc": {
+        "fr": "distinction claire entre informations sourcées et inférences",
+        "en": "confidence level display on AI suggestions"
+      }
+    },
+    {
+      "name": "Bing Copilot",
+      "desc": {
+        "fr": "disclaimer sur les informations non vérifiables",
+        "en": "uncertainty signals on factual claims"
+      }
+    },
+    {
+      "name": "Harvey AI",
+      "desc": {
+        "fr": "niveaux de confiance sur les analyses juridiques",
+        "en": "calibrated confidence in research assistants"
+      }
+    },
+    {
+      "name": "Glean",
+      "desc": {
+        "fr": "score de pertinence des sources enterprise",
+        "en": "confidence indicators on code suggestions"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Niveaux de confiance** : définir 3 niveaux (Haute / Moyenne / Faible) avec représentation visuelle distincte pour chacun.",
+      "**Détection** : côté modèle, utiliser le log-probability des tokens ou demander explicitement au modèle d'évaluer sa confiance dans le prompt.",
+      "**Ton** : sur les réponses incertaines, changer le ton linguistique (\"je pense que\", \"il me semble\") en plus du signal visuel.",
+      "**Redirection** : toujours proposer une alternative (lien vers la doc, suggestion de vérifier, contact humain) sur les réponses incertaines.",
+      "**Pas de confiance par défaut** : ne pas afficher un badge \"Haute confiance\" systématiquement — c'est aussi trompeur que pas de signal du tout."
+    ],
+    "en": [
+      "**Calibration**: only show high confidence when the model is truly confident. Under-confident responses destroy trust as much as hallucinations.",
+      "**Visual encoding**: use color (green/yellow/red), a bar, or a label — never rely on a single signal alone.",
+      "**Explain uncertainty**: when confidence is low, briefly state why (\"This is based on limited data\" or \"I may be wrong about the date\").",
+      "**Threshold**: only show the confidence signal when it is relevant — do not display it for every single sentence.",
+      "**Actionable**: low confidence should trigger an action suggestion (\"Please verify this with an official source\")."
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Signaler la faible confiance mais quand même donner la \"réponse\" de manière assertive",
+      "❌ Trop de warnings — si tout est marqué incertain, le signal perd sa valeur",
+      "❌ Confidence score affiché en chiffre (72%) sans calibration — les utilisateurs surinterpètent les chiffres précis",
+      "❌ Pas de lien vers une source plus fiable sur les réponses incertaines",
+      "--",
+      "--",
+      "--"
+    ],
+    "en": [
+      "❌ Showing \"100% confident\" — no model is ever 100% confident on factual claims",
+      "❌ Confidence signals that are decorative but not calibrated to actual model output",
+      "❌ Low confidence without explanation — the signal is useless without context",
+      "❌ Confidence bar that is always in the same color — variance is what makes it informative"
+    ]
+  },
+  "what": {
+    "fr": "L'interface signale visuellement quand l'AI est peu confiante dans sa réponse — badge, nuance de couleur, disclaimer inline — au lieu d'afficher toutes les réponses avec la même assurance visuelle.",
+    "en": "The AI signals its level of confidence in its response: high confidence is stated directly, medium confidence is qualified, low confidence is explicitly flagged with an invitation to verify."
+  },
+  "why": {
+    "fr": "Une AI qui présente ses incertitudes avec la même confiance que ses certitudes est dangereuse. Signaler l'incertitude permet à l'utilisateur d'adapter son niveau de vérification. C'est aussi plus honnête — et la transparence sur les limites augmente la confiance globale dans le système.",
+    "en": "AI hallucinations are real. A model that communicates its uncertainty is more trustworthy than one that asserts everything with the same confidence. The user learns to calibrate their trust based on these signals."
+  },
+  "demo": {
+    "fr": "```\nConfiance élevée :\n🤖 Le prix standard est 29€/mois. [📄 Grille tarifaire]\n\nConfiance faible :\n🤖 ⚠️ Je ne suis pas certain, mais je pense que\n   la fonctionnalité X est disponible en plan Pro.\n   [Vérifier dans la documentation]\n   \nHors contexte :\n🤖 ℹ️ Cette question dépasse mon contexte actuel.\n   Je ne peux pas y répondre de manière fiable.\n```",
+    "en": "```\n🤖 Responses with confidence levels:\n\n✅ High confidence:\n\"React 18 introduced concurrent features in March 2022.\"\n\n⚠️  Medium confidence:\n\"I believe the default timeout is 30s, but verify in the docs.\"\n\n❓ Low confidence:\n\"I'm not sure about this API — I recommend checking\nthe official documentation before using it.\"\n```"
+  }
+}

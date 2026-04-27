@@ -1,0 +1,88 @@
+{
+  "id": 17,
+  "slug": "toast-notification-undo",
+  "category": "feedback",
+  "title": {
+    "fr": "Toast notification + undo",
+    "en": "Toast Notification + Undo"
+  },
+  "categoryLabel": {
+    "slug": "feedback",
+    "fr": "Feedback & États",
+    "en": "Feedback & States"
+  },
+  "examples": [
+    {
+      "name": "Gmail",
+      "desc": {
+        "fr": "référence absolue, archive/suppression avec undo",
+        "en": "absolute reference, archive/delete with undo"
+      }
+    },
+    {
+      "name": "Linear",
+      "desc": {
+        "fr": "toast sur toutes les actions de modification",
+        "en": "toast on all edit actions"
+      }
+    },
+    {
+      "name": "Notion",
+      "desc": {
+        "fr": "toast sur suppression de blocs avec undo",
+        "en": "toast on block deletion with undo"
+      }
+    },
+    {
+      "name": "Slack",
+      "desc": {
+        "fr": "toast sur archivage de channel",
+        "en": "toast on channel archiving"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Durée** : 4–6 secondes. Suffisant pour lire et réagir, pas assez long pour gêner.",
+      "**Position** : bas gauche ou bas centre de l'écran. Jamais en haut (couvre le contenu d'action).",
+      "**Stack** : si plusieurs toasts apparaissent en séquence, les empiler verticalement (le plus récent en bas).",
+      "**Pause au hover** : le timer de disparition se met en pause quand la souris est sur le toast.",
+      "**Action undo côté serveur** : l'undo doit fonctionner côté serveur si l'action a déjà été persistée (soft delete + restore, pas seulement côté client).",
+      "**Types** : success (vert), error (rouge), info (bleu), warning (orange) — avec icône correspondante."
+    ],
+    "en": [
+      "**Duration**: 4–6 seconds for informational toasts; 8–10 seconds for toasts with an undo action.",
+      "**Undo**: the undo action must be instantly reversible — do the destructive action server-side only when the toast disappears.",
+      "**Stack**: show a maximum of 3 toasts at once. Queue additional ones and show them in sequence.",
+      "**Position**: bottom-right (desktop), bottom-center (mobile). Avoid top-right — it competes with system notifications.",
+      "**Pause on hover**: pause the auto-dismiss timer while the user hovers over the toast."
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Toast sans undo pour les actions destructives irréversibles",
+      "❌ Toast qui disparaît en < 3 secondes — trop court pour lire et réagir",
+      "❌ Empiler plus de 3 toasts simultanément — les regrouper",
+      "❌ Toast positionné devant un bouton d'action fréquent",
+      "--"
+    ],
+    "en": [
+      "❌ A toast with no undo for a destructive action (delete, archive) — always offer undo for irreversible actions",
+      "❌ Toasts that stack without a queue limit — can pile up and obscure content",
+      "❌ An undo button that does a server round-trip before undoing the UI — feel the undo immediately",
+      "❌ Toasts that disappear before the user can click Undo (< 4 s)"
+    ]
+  },
+  "what": {
+    "fr": "Une notification éphémère (toast) qui apparaît en bas de l'écran après une action, avec un bouton \"Annuler\" accessible pendant quelques secondes — remplaçant les modales de confirmation.",
+    "en": "An ephemeral notification (toast) that appears at the bottom of the screen after an action, with an \"Undo\" button accessible for a few seconds — replacing confirmation dialogs."
+  },
+  "why": {
+    "fr": "\"Êtes-vous sûr ?\" est le pattern UX le plus détesté : il interrompt, demande un effort cognitif, et n'empêche pas les erreurs (les utilisateurs cliquent \"Oui\" par réflexe). Le toast + undo est moins intrusif, aussi sûr, et plus rapide.",
+    "en": "\"Are you sure?\" is the most hated UX pattern: it interrupts, demands cognitive effort, and doesn't prevent mistakes (users click \"Yes\" reflexively). Toast + undo is less intrusive, equally safe, and faster."
+  },
+  "demo": {
+    "fr": "```\nAction : supprimer un email\n\n[Aucune modale de confirmation]\n\n┌──────────────────────────────────┐\n│  Email archivé    [Annuler]   ✕  │  ← toast, disparaît après 5s\n└──────────────────────────────────┘\n          ▲\n    Clic \"Annuler\" → action reversée\n    Laisser disparaître → action confirmée\n```",
+    "en": "```\nAction: delete an email\n\n[No confirmation dialog]\n\n┌──────────────────────────────────┐\n│  Email archived    [Undo]     ✕  │  ← toast, disappears after 5s\n└──────────────────────────────────┘\n          ▲\n    Click \"Undo\" → action reversed\n    Let it disappear → action confirmed\n```"
+  }
+}

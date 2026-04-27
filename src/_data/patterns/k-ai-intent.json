@@ -1,0 +1,86 @@
+{
+  "id": 22,
+  "slug": "k-ai-intent",
+  "category": "ai-access",
+  "title": {
+    "fr": "⌘K → AI intent",
+    "en": "⌘K → AI Intent"
+  },
+  "categoryLabel": {
+    "slug": "ai-access",
+    "fr": "AI — Accès & Invocation",
+    "en": "AI — Access & Invocation"
+  },
+  "examples": [
+    {
+      "name": "Linear",
+      "desc": {
+        "fr": "`⌘K` détecte les questions et propose une réponse AI",
+        "en": "`⌘K` detects questions and proposes an AI response"
+      }
+    },
+    {
+      "name": "Raycast AI",
+      "desc": {
+        "fr": "extension AI native dans la palette Raycast",
+        "en": "native AI extension in the Raycast palette"
+      }
+    },
+    {
+      "name": "Vercel v0",
+      "desc": {
+        "fr": "prompt natural language → génération de composant",
+        "en": "natural language prompt → component generation"
+      }
+    },
+    {
+      "name": "Coda",
+      "desc": {
+        "fr": "`/` + question naturelle → AI response inline",
+        "en": "`/` + natural question → inline AI response"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Détection d'intention** : heuristiques simples — query commençant par un verbe (Résume, Génère, Explique), contenant \"?\" ou \"comment\", dépassant 4 mots. Pas besoin de ML côté client.",
+      "**Indicateur visuel** : changer l'icône de loupe en icône sparkle/AI quand le mode bascule.",
+      "**Transition douce** : ne pas changer l'UI brutalement — animer la transition entre mode recherche et mode AI.",
+      "**Fallback** : si l'AI ne comprend pas, retomber sur la recherche classique.",
+      "**Raccourci explicite** : permettre aussi de forcer le mode AI avec un préfixe (ex: `?` ou `ai:`)."
+    ],
+    "en": [
+      "**Intent detection**: if the query is a question or a sentence (not a command name), route it to the AI instead of the command list.",
+      "**Visual distinction**: show an \"Ask AI\" option at the top of results with a distinctive icon (✦, ✱, or a model logo).",
+      "**Progressive disclosure**: open the AI response inline in the palette or navigate to a dedicated chat view, depending on answer length.",
+      "**Hybrid results**: show matching commands alongside the AI option — do not hide commands when AI is active.",
+      "**History**: save recent AI queries in the command palette \"recents\" list."
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Basculer en mode AI trop agressivement (dès 2 mots) — perturbe la recherche normale",
+      "❌ Pas de moyen de forcer la recherche classique quand le mode AI est activé",
+      "❌ Latence visible lors du basculement de mode",
+      "❌ Réponse AI dans la palette qui nécessite un scroll — la palette doit rester compacte",
+      "--"
+    ],
+    "en": [
+      "❌ Triggering AI for every query including exact command matches — show AI option only when no exact match exists",
+      "❌ Making the AI option indistinguishable from regular commands — it must stand out visually",
+      "❌ AI that responds with a wall of text inside the palette — summarize and offer \"See full answer\""
+    ]
+  },
+  "what": {
+    "fr": "La command palette (pattern #9) détecte quand l'utilisateur saisit une question ou une commande en langage naturel plutôt qu'un terme de recherche, et bascule automatiquement vers un mode AI.",
+    "en": "The command palette (pattern #9) detects when the user is typing a question or natural-language command rather than a search term, and automatically switches to an AI mode."
+  },
+  "why": {
+    "fr": "Un seul point d'entrée pour tout. L'utilisateur n'a pas besoin de choisir entre \"rechercher\" et \"demander à l'AI\" — la palette fait la distinction automatiquement. Réduit la friction d'adoption de l'AI en l'intégrant dans un pattern déjà familier.",
+    "en": "One entry point for everything. The user doesn't need to choose between \"search\" and \"ask the AI\" — the palette makes the distinction automatically. Reduces the friction of AI adoption by integrating it into an already-familiar pattern."
+  },
+  "demo": {
+    "fr": "```\n⌘K →\n\nMode recherche :          Mode AI (détection automatique) :\n┌──────────────────┐      ┌──────────────────────────────┐\n│ 🔍 sprint 12     │      │ ✨ Résume les tickets ouverts │\n│ ─────────────    │  vs  │ ─────────────────────────────│\n│ 📋 Sprint 12     │      │ Appuyez sur Entrée pour      │\n│ 🔍 Voir tout...  │      │ demander à l'AI              │\n└──────────────────┘      └──────────────────────────────┘\n```",
+    "en": "```\n⌘K →\n\nSearch mode:              AI mode (auto-detected):\n┌──────────────────┐      ┌──────────────────────────────┐\n│ 🔍 sprint 12     │      │ ✨ Summarise open tickets     │\n│ ─────────────    │  vs  │ ─────────────────────────────│\n│ 📋 Sprint 12     │      │ Press Enter to ask the AI    │\n│ 🔍 See all...    │      │                              │\n└──────────────────┘      └──────────────────────────────┘\n```"
+  }
+}

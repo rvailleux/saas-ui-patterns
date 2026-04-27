@@ -1,0 +1,97 @@
+{
+  "id": 40,
+  "slug": "mode-voix-natif",
+  "category": "ai-prompt",
+  "title": {
+    "fr": "Mode voix natif",
+    "en": "Native Voice Mode"
+  },
+  "categoryLabel": {
+    "slug": "ai-prompt",
+    "fr": "AI — Prompt UX",
+    "en": "AI — Prompt UX"
+  },
+  "examples": [
+    {
+      "name": "ChatGPT Advanced Voice",
+      "desc": {
+        "fr": "référence : voix naturelle, interruption possible, émotions",
+        "en": "native voice mode with real-time conversation"
+      }
+    },
+    {
+      "name": "Claude",
+      "desc": {
+        "fr": "mode voix avec réponse audio naturelle",
+        "en": "push-to-talk voice input"
+      }
+    },
+    {
+      "name": "Gemini Live",
+      "desc": {
+        "fr": "voix temps réel avec multimodalité (peut voir l'écran)",
+        "en": "voice-to-text with editing before sending"
+      }
+    },
+    {
+      "name": "Pi (Inflection)",
+      "desc": {
+        "fr": "voix comme mode d'interaction principal",
+        "en": "audio output with playback controls"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**VAD (Voice Activity Detection)** : détecter automatiquement la fin de la phrase plutôt que d'utiliser un bouton \"Arrêter\". Librairies : `@ricky0123/vad-web`, Silero VAD.",
+      "**Streaming audio** : la réponse audio commence à jouer pendant que l'AI génère encore — même principe que le streaming texte.",
+      "**Interruption** : l'utilisateur peut interrompre l'AI en parlant. Détecter la voix pendant la lecture audio et couper.",
+      "**Transcription visible** : toujours afficher la transcription texte en parallèle (accessibilité + vérification).",
+      "**Bascule voix/texte** : permettre de passer du mode voix au mode texte sans perdre l'historique de conversation.",
+      "**WebRTC ou WebAudio API** : pour les applications browser. Gérer les permissions micro avec un fallback gracieux si refusé."
+    ],
+    "en": [
+      "**Permission prompt**: request microphone permission only when the user explicitly activates voice mode — not on page load.",
+      "**Waveform**: show a live audio waveform to confirm the microphone is active and picking up sound.",
+      "**Transcript**: display the live transcript as the user speaks so they can monitor speech recognition accuracy.",
+      "**Push-to-talk option**: offer both \"always listening\" and \"push-to-talk\" modes — PTT is preferred in noisy environments.",
+      "**Wake word**: for ambient voice mode, support a configurable wake word so the mic is not always transmitting."
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Simple bouton \"Enregistrer → Envoyer\" sans streaming — perçu comme basique et lent",
+      "❌ Pas de VAD — l'utilisateur doit appuyer sur un bouton pour terminer sa phrase",
+      "❌ Réponse audio sans transcription — inaccessible",
+      "❌ Pas de gestion du bruit ambiant — performances dégradées dans les open spaces",
+      "❌ Mode voix qui coupe la voix de l'AI quand l'utilisateur commence à parler sans transition douce",
+      "--",
+      "--",
+      "*Persistance** — Les préférences, états, filtres et historiques doivent survivre au refresh et être retrouvés sur n'importe quel appareil. La perte d'état est la source de frustration la plus fréquente.",
+      "*Accessibilité clavier** — Chaque pattern doit fonctionner intégralement au clavier. Tab, Échap, Enter, et les raccourcis standards sont des contrats avec l'utilisateur.",
+      "*Performance perçue** — Skeleton screens, optimistic UI, streaming : l'objectif n'est pas d'être rapide, c'est d'*être perçu* comme rapide. Les deux ne sont pas identiques.",
+      "*Transparence de l'AI** — Pour les patterns AI, la règle d'or est : l'utilisateur doit toujours savoir ce que l'AI fait, avec quelles données, et avec quelle confiance. L'opacité génère de la méfiance.",
+      "*Contrôle utilisateur** — Stop buttons, undo, diff view, reject : chaque pattern AI doit donner à l'utilisateur le dernier mot. L'AI propose, l'humain dispose.",
+      "--",
+      "Guide maintenu par la communauté — contributions bienvenues.*"
+    ],
+    "en": [
+      "❌ No visual feedback that the microphone is active — users cannot tell if they are being heard",
+      "❌ Microphone that stays on after the user has finished speaking — always provide a clear off switch",
+      "❌ No transcript — users cannot correct misrecognitions",
+      "❌ Voice input that does not work without network connectivity — local speech recognition is preferable for short commands"
+    ]
+  },
+  "what": {
+    "fr": "Interface conversationnelle vocale intégrée nativement : l'utilisateur parle, l'AI répond à voix haute, avec visualisation de la parole, détection de fin de phrase, et streaming audio de la réponse.",
+    "en": "The AI interface supports audio input (voice recording) and audio output (text-to-speech), enabling a conversation without typing."
+  },
+  "why": {
+    "fr": "Certains contextes sont incompatibles avec la frappe : mains occupées, déplacement, pensée à voix haute. Le mode voix natif n'est pas un simple STT (Speech-to-Text) converti en texte — c'est un mode d'interaction complet avec ses propres conventions. Il ouvre l'AI à des cas d'usage impossibles en texte.",
+    "en": "Opens AI to mobile use cases, hands-free workflows, and accessibility needs. Voice is faster than typing for long inputs. Audio output allows consuming AI responses without reading. Real-time conversation changes the nature of the interaction."
+  },
+  "demo": {
+    "fr": "```\n[Mode voix actif]\n\n     🎤\n   ╭─────╮\n   │ ~~~ │  ← visualisation de la voix (waveform)\n   ╰─────╯\n\nVous : \"Résume les points clés du dernier meeting\"\n\n          ●●● [AI réfléchit]\n\nAI : [audio streamé] \"Lors du dernier meeting,\n      trois points principaux ont été abordés...\"\n\n[Retranscription visible en sous-texte]\n[⏸ Pause]  [🔁 Rejouer]  [📝 Voir en texte]\n```",
+    "en": "```\n┌────────────────────────────────────────┐\n│                                        │\n│            🎙️                          │\n│     Listening...                       │\n│                                        │\n│  ████████████░░░░░░░░░░  0:04         │\n│                                        │\n│  [⏹ Stop]  [✓ Send]  [✗ Cancel]       │\n│                                        │\n│  Or type your message below ↓          │\n└────────────────────────────────────────┘\n```"
+  }
+}

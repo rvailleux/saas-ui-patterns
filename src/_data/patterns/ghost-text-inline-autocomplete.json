@@ -1,0 +1,88 @@
+{
+  "id": 27,
+  "slug": "ghost-text-inline-autocomplete",
+  "category": "ai-generation",
+  "title": {
+    "fr": "Ghost text / inline autocomplete",
+    "en": "Ghost Text / Inline Autocomplete"
+  },
+  "categoryLabel": {
+    "slug": "ai-generation",
+    "fr": "AI — Génération & Édition",
+    "en": "AI — Generation & Editing"
+  },
+  "examples": [
+    {
+      "name": "GitHub Copilot",
+      "desc": {
+        "fr": "référence fondatrice dans VS Code",
+        "en": "foundational reference in VS Code"
+      }
+    },
+    {
+      "name": "Cursor",
+      "desc": {
+        "fr": "ghost text sur tous les fichiers de code",
+        "en": "ghost text on all code files"
+      }
+    },
+    {
+      "name": "Superhuman",
+      "desc": {
+        "fr": "ghost text pour la complétion d'emails",
+        "en": "ghost text for email completion"
+      }
+    },
+    {
+      "name": "Notion",
+      "desc": {
+        "fr": "ghost text dans l'éditeur après quelques mots",
+        "en": "ghost text in the editor after a few words"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Déclencheur** : après une pause de frappe (300–500ms). Annuler et relancer à chaque frappe.",
+      "**Affichage** : couleur `--color-text-tertiary` (gris clair) pour la suggestion. Ne jamais la rendre aussi visible que le texte réel.",
+      "**Acceptance** : Tab accepte la suggestion complète. ⌘→ peut accepter mot par mot.",
+      "**Rejection** : Échap supprime la suggestion. Toute autre touche que Tab continue la saisie et ignore la suggestion.",
+      "**Longueur** : limiter la suggestion à 1–3 phrases. Les suggestions très longues ont un taux d'acceptation plus faible.",
+      "**Debounce + cancel** : annuler la requête en cours si l'utilisateur tape avant que la suggestion arrive."
+    ],
+    "en": [
+      "**Trigger**: show ghost text after a typing pause of 300–500 ms. Do not show on every keystroke — too distracting.",
+      "**Accept**: `Tab` accepts the full suggestion. `→` (right arrow) accepts word by word.",
+      "**Dismiss**: any other keypress dismisses the ghost text without affecting the typed content.",
+      "**Contrast**: use `color: rgba(text, 0.35)` for the ghost text — visible but clearly distinct from typed text.",
+      "**Context**: send the full current input (or last paragraph) as context for the completion, not just the last word."
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Ghost text de même couleur que le texte réel — impossible à distinguer",
+      "❌ Suggestion qui remplace le texte existant au lieu de s'ajouter après",
+      "❌ Pas d'annulation quand l'utilisateur tape avant la fin de génération",
+      "❌ Tab qui accepte la suggestion et insère aussi une tabulation",
+      "--"
+    ],
+    "en": [
+      "❌ Ghost text that overlaps the cursor position — it must always start after the last typed character",
+      "❌ Suggestions that are too long (> 1 sentence) — short, high-confidence completions work best",
+      "❌ No dismiss mechanism — the ghost text should not be permanent",
+      "❌ Triggering completion on every keystroke — too noisy and burns API credits"
+    ]
+  },
+  "what": {
+    "fr": "Une suggestion de complétion grisée s'affiche dans le champ de saisie, après le curseur. L'utilisateur l'accepte en appuyant sur Tab, ou continue à taper pour l'ignorer.",
+    "en": "A greyed-out completion suggestion appears in the input field, after the cursor. The user accepts it by pressing Tab, or continues typing to ignore it."
+  },
+  "why": {
+    "fr": "Zéro friction : la suggestion est là, visible, acceptée en une touche. Pas de menu à ouvrir, pas de dialogue. Réduit considérablement le temps de saisie pour les utilisateurs qui trouvent les suggestions pertinentes. La touche Tab est le contrat universel — connu de tous depuis les IDEs.",
+    "en": "Zero friction: the suggestion is there, visible, accepted in one keystroke. No menu to open, no dialog. Significantly reduces typing time for users who find the suggestions relevant. Tab is the universal contract — known to everyone from IDEs."
+  },
+  "demo": {
+    "fr": "```\nUtilisateur tape : \"Rédigez un email pour\"\nSuggestion AI  : \" confirmer le rendez-vous du 15 janvier\"\n\n[Rédigez un email pour confirmer le rendez-vous du 15 janvier]\n                      ↑ grisé, transparent\n                      Tab → accepté\n                      Toute autre touche → ignoré\n```",
+    "en": "```\nUser types:   \"Draft an email to\"\nAI suggestion: \" confirm the meeting on January 15th\"\n\n[Draft an email to confirm the meeting on January 15th]\n                      ↑ greyed out, transparent\n                      Tab → accepted\n                      Any other key → ignored\n```"
+  }
+}

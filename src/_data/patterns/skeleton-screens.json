@@ -1,0 +1,89 @@
+{
+  "id": 20,
+  "slug": "skeleton-screens",
+  "category": "feedback",
+  "title": {
+    "fr": "Skeleton screens",
+    "en": "Skeleton Screens"
+  },
+  "categoryLabel": {
+    "slug": "feedback",
+    "fr": "Feedback & États",
+    "en": "Feedback & States"
+  },
+  "examples": [
+    {
+      "name": "LinkedIn",
+      "desc": {
+        "fr": "skeleton parfaitement calqué sur la structure du feed",
+        "en": "skeleton perfectly mirroring the feed structure"
+      }
+    },
+    {
+      "name": "Slack",
+      "desc": {
+        "fr": "skeleton de la liste de messages et du panneau de channels",
+        "en": "skeleton of the message list and channels panel"
+      }
+    },
+    {
+      "name": "GitHub",
+      "desc": {
+        "fr": "skeleton sur les listes d'issues et pull requests",
+        "en": "skeleton on issues and pull request lists"
+      }
+    },
+    {
+      "name": "Stripe",
+      "desc": {
+        "fr": "skeleton sur les tableaux du dashboard",
+        "en": "skeleton on dashboard tables"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Structure fidèle** : le skeleton doit approximer la structure réelle (nombre de lignes, hauteurs relatives). Pas un rectangle unique.",
+      "**Animation shimmer** : gradient qui se déplace de gauche à droite en boucle. `@keyframes` sur `background-position`.",
+      "**Couleur** : `--color-background-secondary` pour les blocks, légèrement plus clair pour le shimmer. S'adapter au dark mode.",
+      "**Durée** : afficher le skeleton après 150–200ms (évite le flash pour les chargements rapides). Si les données arrivent en < 150ms, ne pas afficher le skeleton du tout.",
+      "**Transition** : fade out du skeleton (100ms) avant d'afficher le contenu pour éviter un flash brutal."
+    ],
+    "en": [
+      "**Shape matching**: skeleton blocks must match the exact shape of the final content (width, height, border-radius) — mismatched skeletons cause layout shift on load.",
+      "**Animation**: a left-to-right shimmer (`@keyframes shimmer`) is the standard. Use `animation-duration: 1.5 s` for a natural feel.",
+      "**Progressive reveal**: fade out skeleton and fade in real content, not a hard swap — reduces perceived load time.",
+      "**Timeout**: if content takes > 10 s to load, replace the skeleton with an error state — do not leave a skeleton indefinitely.",
+      "**Not for errors**: skeleton screens communicate \"loading\", not \"failed\" — switch to an error state if the request fails."
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Skeleton qui ne ressemble pas à la structure réelle — le layout shift reste présent",
+      "❌ Skeleton affiché indéfiniment si la requête échoue — prévoir un état d'erreur",
+      "❌ Animation trop rapide (< 1s) ou trop lente (> 2s) — 1.5s est le sweet spot",
+      "❌ Skeleton sur des composants à chargement instantané (< 100ms) — ajoute de la complexité sans bénéfice",
+      "--",
+      "--",
+      "--"
+    ],
+    "en": [
+      "❌ Skeletons that do not match the layout of the real content — causes jarring layout shift",
+      "❌ Using a spinner instead of skeletons for large content areas — skeletons feel faster",
+      "❌ Skeleton left visible after an error — no content will ever appear",
+      "❌ Overly complex skeletons that take longer to render than the real content"
+    ]
+  },
+  "what": {
+    "fr": "Pendant le chargement des données, afficher des silhouettes grises animées qui reproduisent la structure du contenu à venir, plutôt qu'un spinner centré.",
+    "en": "While data is loading, display animated grey silhouettes that mirror the structure of the incoming content, rather than a centred spinner."
+  },
+  "why": {
+    "fr": "Les skeleton screens réduisent la perception de latence en montrant que quelque chose arrive. Ils préviennent le layout shift (le contenu n'arrive pas en déplaçant l'UI) et maintiennent l'orientation spatiale de l'utilisateur pendant le chargement.",
+    "en": "Skeleton screens reduce perceived latency by showing that something is coming. They prevent layout shift (content doesn't arrive and displace the UI) and maintain the user's spatial orientation during loading."
+  },
+  "demo": {
+    "fr": "```\nChargement d'une liste de contacts :\n\n┌────────────────────────────────────┐\n│ ████  ████████████████  ████████   │  ← animation shimmer\n│ ████  █████████  ████   ████       │    de gauche à droite\n│ ████  ████████████████  ████████   │\n│ ████  █████  ████████   █████      │\n└────────────────────────────────────┘\n```",
+    "en": "```\nLoading a contact list:\n\n┌────────────────────────────────────┐\n│ ████  ████████████████  ████████   │  ← shimmer animation\n│ ████  █████████  ████   ████       │    moving left to right\n│ ████  ████████████████  ████████   │\n│ ████  █████  ████████   █████      │\n└────────────────────────────────────┘\n```"
+  }
+}

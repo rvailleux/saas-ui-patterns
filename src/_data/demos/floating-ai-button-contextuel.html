@@ -1,0 +1,35 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,-apple-system,sans-serif;background:#0f0f1a;color:#e2e8f0;height:100vh;overflow:hidden;font-size:13px;line-height:1.5;padding:32px}
+.content{line-height:1.8;color:#cbd5e1}
+.highlight{background:#7c3aed30;padding:2px 4px;border-radius:4px}
+.float-toolbar{position:absolute;display:none;gap:8px;background:#1e1e35;border:1px solid #2d2d52;border-radius:8px;padding:8px;box-shadow:0 4px 12px rgba(0,0,0,0.3)}
+.float-btn{background:#7c3aed;border:none;color:#fff;padding:6px 12px;border-radius:6px;cursor:pointer;font-size:12px}
+.result-card{display:none;background:#16162a;border:1px solid #2d2d52;border-radius:12px;padding:16px;margin-top:16px;position:relative}
+.result-card.show{display:block}
+.close-x{position:absolute;top:12px;right:12px;cursor:pointer;color:#64748b}
+</style></head><body>
+<p class="content" id="text">Select any text in this paragraph to see the floating AI toolbar appear. The <span class="highlight">quick brown fox</span> jumps over the lazy dog. This is a demonstration of contextual AI assistance that appears when you select text, offering options to explain, rewrite, or translate.</p>
+<div class="float-toolbar" id="toolbar">
+<button class="float-btn" onclick="explain()">Explain</button>
+<button class="float-btn" onclick="rewrite()">Rewrite</button>
+<button class="float-btn" onclick="translate()">Translate</button>
+</div>
+<div class="result-card" id="result"><span class="close-x" onclick="closeResult()">×</span><div id="resultText"></div></div>
+<script>
+document.addEventListener('mouseup', () => {
+  const sel = window.getSelection();
+  const toolbar = document.getElementById('toolbar');
+  if(sel.toString().length > 0) {
+    const r = sel.getRangeAt(0).getBoundingClientRect();
+    toolbar.style.display = 'flex';
+    toolbar.style.left = (r.left + r.width/2 - 60) + 'px';
+    toolbar.style.top = (r.top - 50) + 'px';
+  } else { toolbar.style.display = 'none'; }
+});
+function explain() { showResult('Explanation: This phrase is a pangram containing every letter of the alphabet.'); }
+function rewrite() { showResult('Rewritten: The speedy auburn fox leaps across the indolent canine.'); }
+function translate() { showResult('French: Le renard brun rapide saute par-dessus le chien paresseux.'); }
+function showResult(t) { document.getElementById('resultText').textContent = t; document.getElementById('result').classList.add('show'); document.getElementById('toolbar').style.display = 'none'; }
+function closeResult() { document.getElementById('result').classList.remove('show'); }
+</script>
+</body></html>

@@ -1,0 +1,88 @@
+{
+  "id": 5,
+  "slug": "right-panel-contextuel-d-tail",
+  "category": "layout",
+  "title": {
+    "fr": "Right panel contextuel (détail)",
+    "en": "Contextual Right Panel (Detail)"
+  },
+  "categoryLabel": {
+    "slug": "layout",
+    "fr": "Layout & Workspace",
+    "en": "Layout & Workspace"
+  },
+  "examples": [
+    {
+      "name": "Linear",
+      "desc": {
+        "fr": "right panel avec édition complète inline, largeur ajustable",
+        "en": "right panel with full inline editing, adjustable width"
+      }
+    },
+    {
+      "name": "Jira",
+      "desc": {
+        "fr": "\"detail view\" sur les issues en board et list",
+        "en": "\"detail view\" on issues in board and list"
+      }
+    },
+    {
+      "name": "Asana",
+      "desc": {
+        "fr": "right panel avec sous-tâches, commentaires, pièces jointes",
+        "en": "right panel with subtasks, comments, attachments"
+      }
+    },
+    {
+      "name": "HubSpot",
+      "desc": {
+        "fr": "détail de contact/deal sans quitter la liste CRM",
+        "en": "contact/deal detail without leaving the CRM list"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Largeur** : 360–480px fixe ou redimensionnable. Fixer un minimum (320px) et un maximum (50% de l'écran).",
+      "**Animation** : slide-in depuis la droite, `transform: translateX(100%)` → `translateX(0)`, durée 200ms. Éviter les fades purs.",
+      "**Fermeture** : toujours possible via Échap, clic sur X, et clic en dehors du panneau (ou non — à définir selon le flux).",
+      "**Item actif** : mettre en évidence l'item sélectionné dans la liste (background, border-left colorée).",
+      "**URL** : l'ouverture du panneau doit idéalement mettre à jour l'URL (`?item=1234`) pour permettre le partage.",
+      "**Mobile** : sur mobile, le right panel devient une page entière ou un bottom sheet — jamais un panneau superposé."
+    ],
+    "en": [
+      "**Width**: 320–480 px on desktop. On tablet use a full-screen modal instead.",
+      "**Animation**: slide in from the right (`translateX(100%)` → `0`) in 200 ms — fast enough not to feel sluggish.",
+      "**Keyboard shortcut**: `Escape` closes the panel; `F` (or a dedicated shortcut) focuses the panel.",
+      "**Content area**: the main content area shrinks to accommodate the panel (push layout), or the panel overlays it — push is preferable to avoid content jumping.",
+      "**Loading state**: show a skeleton immediately while the content loads, not a blank panel."
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Panneau qui couvre toute la liste sur les écrans < 1280px sans adaptation",
+      "❌ Pas de raccourci clavier pour naviguer entre items (↑/↓) depuis le panneau",
+      "❌ Panneau sans scroll interne — le contenu déborde",
+      "❌ Fermeture involontaire au clic en dehors sans confirmation si des modifications existent",
+      "--"
+    ],
+    "en": [
+      "❌ A panel that opens full-screen on desktop — reserve full-screen for mobile",
+      "❌ Not restoring the previous scroll position when the panel is closed",
+      "❌ Panel content that reloads on every open — cache it",
+      "❌ No accessible close button visible without scrolling"
+    ]
+  },
+  "what": {
+    "fr": "Un panneau qui s'ouvre sur la droite de l'interface lorsque l'utilisateur sélectionne un élément dans une liste ou un board, affichant le détail et les actions sans changer de page.",
+    "en": "A panel that slides open on the right side of the interface when the user selects an item in a list or board, showing details and actions without navigating away."
+  },
+  "why": {
+    "fr": "Évite le coût de navigation aller-retour (liste → détail → retour à la liste). L'utilisateur garde le contexte de la liste tout en accédant aux détails. Particulièrement puissant pour les workflows de triage (issues, tickets, emails).",
+    "en": "Avoids the round-trip navigation cost (list → detail → back to list). The user keeps the list context while accessing details. Especially powerful for triage workflows (issues, tickets, emails)."
+  },
+  "demo": {
+    "fr": "```\n┌─────────────────────┬──────────────────────┐\n│ LISTE               │ DÉTAIL               │\n│ ──────────────────  │ ──────────────────   │\n│ ▶ Bug login #1234   │ Bug login #1234      │\n│   Task A            │ ─────────────────    │\n│   Task B            │ Assigné : Alice      │\n│                     │ Statut : In progress │\n│                     │ Description...       │\n│                     │ [Edit]  [Close]      │\n└─────────────────────┴──────────────────────┘\n                        ▲\n              S'ouvre au clic sur un item,\n              se ferme avec Échap ou X\n```",
+    "en": "```\n┌─────────────────────┬──────────────────────┐\n│ LIST                │ DETAIL               │\n│ ──────────────────  │ ──────────────────   │\n│ ▶ Bug login #1234   │ Bug login #1234      │\n│   Task A            │ ─────────────────    │\n│   Task B            │ Assignee: Alice      │\n│                     │ Status: In progress  │\n│                     │ Description...       │\n│                     │ [Edit]  [Close]      │\n└─────────────────────┴──────────────────────┘\n                        ▲\n              Opens on item click,\n              closes with Esc or X\n```"
+  }
+}

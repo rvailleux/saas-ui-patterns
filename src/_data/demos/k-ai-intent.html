@@ -1,0 +1,41 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,-apple-system,sans-serif;background:#0f0f1a;color:#e2e8f0;height:100vh;overflow:hidden;font-size:13px;line-height:1.5;padding:24px}
+.palette{background:#16162a;border:1px solid #2d2d52;border-radius:12px;overflow:hidden;max-width:400px;margin:0 auto}
+.input-row{display:flex;align-items:center;padding:12px 16px;border-bottom:1px solid #2d2d52}
+.input-row input{flex:1;background:transparent;border:none;color:#e2e8f0;font-size:14px;outline:none}
+.results{max-height:200px;overflow:auto}
+.result-item{display:flex;align-items:center;gap:12px;padding:10px 16px;cursor:pointer}
+.result-item:hover,.result-item.selected{background:#1e1e35}
+.result-item.ai-first{background:#7c3aed15;border-left:3px solid #7c3aed}
+.icon{width:28px;height:28px;background:#7c3aed20;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#a78bfa;font-size:12px}
+.name{font-size:13px}
+.desc{font-size:11px;color:#64748b}
+.ai-badge{font-size:10px;background:#7c3aed;color:#fff;padding:2px 6px;border-radius:4px;margin-left:8px}
+</style></head><body>
+<div class="palette">
+<div class="input-row"><input type="text" id="input" placeholder="Type a command or question..." oninput="filter()"></div>
+<div class="results" id="results"></div>
+</div>
+<p style="text-align:center;color:#94a3b8;margin-top:16px;font-size:12px">Try typing "how to" or a question with "?"</p>
+<script>
+const cmds = [
+  {name:'Open File',key:'⌘P'},
+  {name:'Go to Symbol',key:'⌘⇧O'},
+  {name:'Command Palette',key:'⌘⇧P'},
+  {name:'Find in Files',key:'⌘⇧F'}
+];
+function filter() {
+  const q = document.getElementById('input').value.toLowerCase();
+  const isQuestion = q.includes('?') || q.includes('how') || q.includes('what') || q.includes('why');
+  let html = '';
+  if(q.length > 0 && isQuestion) {
+    html += '<div class="result-item ai-first"><div class="icon">✦</div><div><div class="name">Ask AI: "'+q+'"<span class="ai-badge">AI</span></div></div></div>';
+  }
+  cmds.filter(c => c.name.toLowerCase().includes(q)).forEach(c => {
+    html += '<div class="result-item"><div class="icon">⌘</div><div><div class="name">'+c.name+'</div><div class="desc">'+c.key+'</div></div></div>';
+  });
+  document.getElementById('results').innerHTML = html;
+}
+filter();
+</script>
+</body></html>

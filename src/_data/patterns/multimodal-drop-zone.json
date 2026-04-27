@@ -1,0 +1,88 @@
+{
+  "id": 39,
+  "slug": "multimodal-drop-zone",
+  "category": "ai-prompt",
+  "title": {
+    "fr": "Multimodal drop zone",
+    "en": "Multimodal Drop Zone"
+  },
+  "categoryLabel": {
+    "slug": "ai-prompt",
+    "fr": "AI — Prompt UX",
+    "en": "AI — Prompt UX"
+  },
+  "examples": [
+    {
+      "name": "ChatGPT",
+      "desc": {
+        "fr": "images, PDF, CSV, code files",
+        "en": "image + prompt input in multimodal chat"
+      }
+    },
+    {
+      "name": "Claude",
+      "desc": {
+        "fr": "images, PDF, documents texte",
+        "en": "PDF upload for document analysis"
+      }
+    },
+    {
+      "name": "Gemini",
+      "desc": {
+        "fr": "images, vidéo, audio, PDF",
+        "en": "file drop zone for code review context"
+      }
+    },
+    {
+      "name": "Copilot",
+      "desc": {
+        "fr": "images et documents Office",
+        "en": "screenshot attachment for UI feedback"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Drag & drop** : écouter `dragover` et `drop` sur toute la zone de chat, pas seulement l'input.",
+      "**Types supportés** : définir clairement les types MIME acceptés et afficher un message d'erreur clair pour les types non supportés.",
+      "**Preview** : thumbnail pour les images, icône + nom + taille pour les autres fichiers.",
+      "**Limite de taille** : définir une limite et l'afficher avant upload. Message d'erreur clair si dépassée.",
+      "**Multiple files** : permettre plusieurs fichiers simultanément avec possibilité de supprimer individuellement.",
+      "**Traitement côté serveur** : les fichiers sont uploadés vers un storage sécurisé, pas envoyés directement à l'API du modèle en base64 (trop lent, trop lourd)."
+    ],
+    "en": [
+      "**Visual affordance**: the drop zone should look like a drop zone — dashed border, upload icon, and hint text.",
+      "**Drag highlight**: change the border color and background on `dragover` to confirm the drop target is active.",
+      "**File type validation**: validate file type and size on the client before uploading. Show a clear error for unsupported types.",
+      "**Progress**: for large files, show an upload progress bar per file.",
+      "**Multiple files**: support multi-file upload — show each file as a preview card in the drop zone."
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Types de fichiers acceptés non indiqués avant l'upload",
+      "❌ Erreur générique \"Fichier non supporté\" sans préciser pourquoi",
+      "❌ Upload bloquant l'interface pendant le transfert",
+      "❌ Fichiers conservés indéfiniment sans politique de rétention",
+      "--"
+    ],
+    "en": [
+      "❌ A drop zone that accepts any file type silently — then rejects it on the server",
+      "❌ No progress feedback for uploads — the user cannot tell if anything is happening",
+      "❌ Drop zone that covers the full screen on drag-enter — it should only highlight the relevant zone",
+      "❌ No click-to-browse fallback for users who do not know about drag-and-drop"
+    ]
+  },
+  "what": {
+    "fr": "La zone de saisie du chat accepte texte, images, PDF, audio, et autres fichiers — avec indication claire des types acceptés, prévisualisation des fichiers joints, et traitement adapté à chaque type.",
+    "en": "A dedicated zone in the AI interface allows the user to drag-and-drop files, images, or audio, which are automatically attached to the next prompt as context."
+  },
+  "why": {
+    "fr": "Les utilisateurs pensent en termes de problème, pas de type de données. \"Regarde ce screenshot et dis-moi ce qui ne va pas\" est plus naturel que \"voici du texte décrivant un screenshot\". La multimodalité supprime la traduction mentale et permet des requêtes plus directes.",
+    "en": "Multimodal AI can process images, PDFs, audio. The interaction model must match: dropping a file is more natural than attaching it via a file picker dialog. The drop zone makes multi-modal capability immediately discoverable."
+  },
+  "demo": {
+    "fr": "```\n┌─────────────────────────────────────────┐\n│                                         │\n│         Glissez vos fichiers ici        │\n│    ou cliquez pour parcourir            │\n│                                         │\n│    📷 Images  📄 PDF  🎵 Audio  📊 CSV  │\n│                                         │\n└─────────────────────────────────────────┘\n\nAprès upload :\n┌─────────────────────────────────────────┐\n│ 🖼️ screenshot-bug.png  ×               │\n│ 📄 rapport-q3.pdf      ×               │\n│ ─────────────────────────────────────  │\n│ [Que vois-tu dans ces fichiers ?    ↑] │\n└─────────────────────────────────────────┘\n```",
+    "en": "```\n┌────────────────────────────────────────┐\n│                                        │\n│     ┌─────────────────────────┐        │\n│     │                         │        │\n│     │   📎 Drop files here    │        │\n│     │   or click to browse    │        │\n│     │                         │        │\n│     │  Supports: PDF, PNG,    │        │\n│     │  JPG, MP3, MP4          │        │\n│     └─────────────────────────┘        │\n│                                        │\n└────────────────────────────────────────┘\n```"
+  }
+}

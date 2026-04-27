@@ -1,0 +1,97 @@
+{
+  "id": 9,
+  "slug": "command-palette-k",
+  "category": "commands",
+  "title": {
+    "fr": "Command palette (⌘K)",
+    "en": "Command Palette (⌘K)"
+  },
+  "categoryLabel": {
+    "slug": "commands",
+    "fr": "Commandes & Recherche",
+    "en": "Commands & Search"
+  },
+  "examples": [
+    {
+      "name": "Linear",
+      "desc": {
+        "fr": "référence UX : fuzzy search, actions contextuelles, raccourcis affichés",
+        "en": "UX reference: fuzzy search, contextual actions, displayed shortcuts"
+      }
+    },
+    {
+      "name": "Raycast",
+      "desc": {
+        "fr": "la command palette comme produit entier, avec extensions",
+        "en": "the command palette as an entire product, with extensions"
+      }
+    },
+    {
+      "name": "Figma",
+      "desc": {
+        "fr": "`⌘/` pour les actions, `⌘K` pour la navigation",
+        "en": "`⌘/` for actions, `⌘K` for navigation"
+      }
+    },
+    {
+      "name": "Vercel",
+      "desc": {
+        "fr": "navigation + déploiements + actions dans une palette unifiée",
+        "en": "navigation + deployments + actions in a unified palette"
+      }
+    },
+    {
+      "name": "Notion",
+      "desc": {
+        "fr": "`⌘K` avec recherche full-text et navigation imbriquée",
+        "en": "`⌘K` with full-text search and nested navigation"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Raccourci** : `⌘K` sur Mac, `Ctrl+K` sur Windows/Linux. Documenter les deux. Ne pas utiliser un raccourci non standard.",
+      "**Fuzzy search** : utiliser une lib comme `fuse.js` ou `cmdk`. La recherche doit tolérer les fautes et les abréviations.",
+      "**Groupes** : organiser les résultats en sections (Récents, Navigation, Actions, Contenu) avec headers.",
+      "**Raccourcis affichés** : montrer les raccourcis keyboard à droite des actions — renforce l'apprentissage.",
+      "**Actions contextuelles** : les premières suggestions doivent être contextuelles (page actuelle, projet actif).",
+      "**Performance** : la palette doit s'ouvrir en < 50ms et les résultats apparaître en < 100ms.",
+      "**Fermeture** : Échap ferme, clic en dehors ferme, Enter exécute la première action."
+    ],
+    "en": [
+      "**Trigger**: `Cmd/Ctrl+K` is the universal shortcut. Show it visually in the search trigger button in the header.",
+      "**Fuzzy search**: use a library like Fuse.js for fuzzy matching — exact prefix matching feels too rigid.",
+      "**Keyboard nav**: `↑↓` to select, `Enter` to execute, `Escape` to close. Auto-select the first result on open.",
+      "**Grouping**: if results span multiple types (pages, actions, files), show group headers inside the palette.",
+      "**Recent items**: show the 5 most recently visited items by default when the query is empty."
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Recherche qui ne couvre pas les actions, seulement les contenus (ou vice-versa)",
+      "❌ Résultats sans score de pertinence — les items les plus récents/fréquents doivent remonter",
+      "❌ Palette trop large ou trop haute — max 600px de large, max 400px de haut avec scroll",
+      "❌ Pas de mode clavier pur (↑/↓/Enter) — la palette doit fonctionner sans souris",
+      "❌ Ouvrir une modale au-dessus d'une autre modale existante",
+      "--"
+    ],
+    "en": [
+      "❌ Opening the palette but not auto-focusing the input",
+      "❌ Showing more than 8 results at once — overwhelming and hard to scan",
+      "❌ No empty state message when no results are found",
+      "❌ Command palette that only searches routes but not actions (e.g. \"toggle dark mode\")"
+    ]
+  },
+  "what": {
+    "fr": "Une palette de commandes universelle, accessible par raccourci clavier, qui permet de déclencher n'importe quelle action, naviguer vers n'importe quelle page, ou rechercher n'importe quel contenu — sans souris.",
+    "en": "A universal command palette, accessible via keyboard shortcut, that lets you trigger any action, navigate to any page, or search any content — without a mouse."
+  },
+  "why": {
+    "fr": "C'est l'interface la plus efficace possible pour les utilisateurs avancés : une seule entrée pour tout. Élimine le besoin de connaître l'emplacement exact d'une feature dans l'UI. La recherche floue rend l'accès aux commandes rarement utilisées aussi rapide qu'aux commandes fréquentes.",
+    "en": "It's the most efficient interface possible for power users: a single entry point for everything. Eliminates the need to know exactly where a feature lives in the UI. Fuzzy search makes rarely-used commands as fast to reach as frequent ones."
+  },
+  "demo": {
+    "fr": "```\n         ┌────────────────────────────────────┐\n         │ 🔍  Rechercher ou taper une commande│\n         ├────────────────────────────────────┤\n         │ 🕐 Récents                         │\n         │    Sprint 12 Planning              │\n         │    #1234 Bug login                 │\n         ├────────────────────────────────────┤\n         │ ⚡ Actions                          │\n         │    Créer une tâche          ⌘N     │\n         │    Changer de projet        ⌘P     │\n         │    Inviter un membre               │\n         └────────────────────────────────────┘\n```",
+    "en": "```\n┌────────────────────────────────────┐\n         │ 🔍  Search or type a command       │\n         ├────────────────────────────────────┤\n         │ 🕐 Recent                          │\n         │    Sprint 12 Planning              │\n         │    #1234 Bug login                 │\n         ├────────────────────────────────────┤\n         │ ⚡ Actions                          │\n         │    Create task              ⌘N     │\n         │    Switch project           ⌘P     │\n         │    Invite a member                 │\n         └────────────────────────────────────┘\n```"
+  }
+}
