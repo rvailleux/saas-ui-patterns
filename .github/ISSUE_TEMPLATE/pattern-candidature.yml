@@ -1,0 +1,83 @@
+name: Pattern candidature
+description: Propose a new UI pattern for the library (use this before opening a PR)
+title: "[Pattern] "
+labels: ["pattern-candidature", "needs-review"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form to gauge interest before building the full PR.
+        **Check [existing patterns](https://rvailleux.github.io/saas-ui-patterns/fr/) and [open PRs](https://github.com/rvailleux/saas-ui-patterns/pulls) first.**
+
+  - type: input
+    id: pattern-name
+    attributes:
+      label: Pattern name
+      placeholder: e.g. Sticky column header
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - Navigation & Structure
+        - Layout & Workspace
+        - Commandes & Recherche
+        - Data & Tables
+        - Feedback & États
+        - AI — Accès & Invocation
+        - AI — Génération & Édition
+        - AI — Contexte & Mémoire
+        - AI — Feedback & Contrôle
+        - AI — Prompt UX
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does it solve?
+      placeholder: 2–3 sentences describing the user need or product challenge.
+    validations:
+      required: true
+
+  - type: input
+    id: first-seen
+    attributes:
+      label: First seen on
+      placeholder: Product name + URL (e.g. Notion — https://notion.so)
+    validations:
+      required: true
+
+  - type: textarea
+    id: examples
+    attributes:
+      label: Other examples in the wild
+      placeholder: |
+        1. Linear — description
+        2. Figma — description
+      description: At least 2 other products using this pattern.
+    validations:
+      required: true
+
+  - type: textarea
+    id: why
+    attributes:
+      label: Why it belongs here
+      placeholder: What makes this repeatable across different products?
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Pre-submission checklist
+      options:
+        - label: I searched existing patterns and this is not a duplicate
+          required: true
+        - label: I searched open PRs and issues for this pattern
+          required: true
+        - label: This pattern has been observed in at least one real production product
+          required: true

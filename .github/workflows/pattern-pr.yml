@@ -1,0 +1,108 @@
+name: Pattern PR — validate & open vote
+
+on:
+  pull_request:
+    types: [opened, reopened]
+    branches: [main]
+
+permissions:
+  pull-requests: write
+  issues: write
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check branch naming
+        id: branch-check
+        run: |
+          BRANCH="${{ github.head_ref }}"
+          if [[ "$BRANCH" == pattern/* ]]; then
+            echo "valid=true" >> $GITHUB_OUTPUT
+            SLUG="${BRANCH#pattern/}"
+            echo "slug=$SLUG" >> $GITHUB_OUTPUT
+          else
+            echo "valid=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Close PR if branch name is wrong
+        if: steps.branch-check.outputs.valid == 'false'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: `## ❌ Invalid branch name\n\nPattern PRs must use the branch naming convention:\n\`\`\`\npattern/{slug}\n\`\`\`\nFor example: \`pattern/sticky-column-header\`\n\nPlease close this PR, rename your branch, and reopen. See [CONTRIBUTING.md](../blob/main/CONTRIBUTING.md) for details.`
+            });
+            await github.rest.pulls.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number,
+              state: 'closed'
+            });
+
+      - name: Validate required files
+        if: steps.branch-check.outputs.valid == 'true'
+        id: file-check
+        run: |
+          SLUG="${{ steps.branch-check.outputs.slug }}"
+          MISSING=""
+          [ ! -f "src/_data/patterns/${SLUG}.json" ] && MISSING="${MISSING}\n- \`src/_data/patterns/${SLUG}.json\`"
+          [ ! -f "src/_data/demos/${SLUG}.html" ]    && MISSING="${MISSING}\n- \`src/_data/demos/${SLUG}.html\`"
+          [ ! -f "src/_data/demos/${SLUG}.json" ]    && MISSING="${MISSING}\n- \`src/_data/demos/${SLUG}.json\`"
+          echo "missing=$MISSING" >> $GITHUB_OUTPUT
+          if [ -z "$MISSING" ]; then
+            echo "files_ok=true" >> $GITHUB_OUTPUT
+          else
+            echo "files_ok=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Comment missing files
+        if: steps.branch-check.outputs.valid == 'true' && steps.file-check.outputs.files_ok == 'false'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const missing = `${{ steps.file-check.outputs.missing }}`;
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: `## ⚠️ Missing required files\n\nThis PR is missing the following required files:\n${missing}\n\nSee [CONTRIBUTING.md](../blob/main/CONTRIBUTING.md#2-create-the-three-pattern-files) for the exact format and templates. Please push the missing files to this branch.`
+            });
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              labels: ['incomplete']
+            });
+
+      - name: Label and open vote period
+        if: steps.branch-check.outputs.valid == 'true' && steps.file-check.outputs.files_ok == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const slug = '${{ steps.branch-check.outputs.slug }}';
+            const now = new Date();
+            const deadline = new Date(now.getTime() + 15 * 24 * 60 * 60 * 1000);
+            const deadlineStr = deadline.toISOString().split('T')[0];
+
+            // Add label
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              labels: ['vote-open']
+            });
+
+            // Post vote announcement comment
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: `## 🗳️ Vote open — pattern \`${slug}\`\n\nAll required files are present. The **15-day community vote period** is now open.\n\n| | |\n|---|---|\n| **Vote deadline** | ${deadlineStr} |\n| **Decision** | After ${deadlineStr}, the repository owner will merge, request changes, or close |\n\n**How to vote:**\n- 👍 on this PR = in favour\n- 👎 on this PR = against\n- Leave a comment with specific feedback, missing examples, or implementation notes\n\nVotes are advisory — the final decision rests with the maintainer.\n\n> This is an automated message. See [CONTRIBUTING.md](../blob/main/CONTRIBUTING.md#review-process) for the full process.`
+            });

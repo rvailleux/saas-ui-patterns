@@ -1,0 +1,17 @@
+name: Question
+description: Ask a question about a pattern, the contribution process, or the site
+title: "[Question] "
+labels: ["question"]
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: Your question
+    validations:
+      required: true
+
+  - type: input
+    id: pattern
+    attributes:
+      label: Related pattern (if any)
+      placeholder: e.g. sidebar-collapsible-icon-rail

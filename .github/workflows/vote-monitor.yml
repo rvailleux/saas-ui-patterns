@@ -1,0 +1,106 @@
+name: Vote monitor — close expired vote periods
+
+on:
+  schedule:
+    - cron: '0 9 * * *'   # runs every day at 09:00 UTC
+  workflow_dispatch:        # also triggerable manually from the Actions tab
+
+permissions:
+  pull-requests: write
+  issues: write
+
+jobs:
+  close-expired-votes:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Find and close expired vote periods
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const VOTE_DAYS = 15;
+            const now = new Date();
+
+            // Fetch all open PRs with vote-open label
+            const { data: prs } = await github.rest.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              per_page: 100
+            });
+
+            for (const pr of prs) {
+              // Check if this PR has the vote-open label
+              const labels = pr.labels.map(l => l.name);
+              if (!labels.includes('vote-open')) continue;
+
+              // Find the vote-open comment to get the start date
+              const { data: comments } = await github.rest.issues.listComments({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: pr.number,
+                per_page: 100
+              });
+
+              const voteComment = comments.find(c =>
+                c.body.includes('🗳️ Vote open') && c.user.type === 'Bot'
+              );
+
+              // Use comment date if found, else PR creation date
+              const voteStart = voteComment
+                ? new Date(voteComment.created_at)
+                : new Date(pr.created_at);
+
+              const daysElapsed = (now - voteStart) / (1000 * 60 * 60 * 24);
+
+              if (daysElapsed < VOTE_DAYS) continue;
+
+              // Count reactions on the PR
+              const { data: reactions } = await github.rest.reactions.listForIssue({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: pr.number,
+                per_page: 100
+              });
+
+              const thumbsUp   = reactions.filter(r => r.content === '+1').length;
+              const thumbsDown = reactions.filter(r => r.content === '-1').length;
+
+              const slug = pr.head.ref.replace('pattern/', '');
+              const startStr = voteStart.toISOString().split('T')[0];
+              const endStr   = now.toISOString().split('T')[0];
+
+              // Swap labels
+              await github.rest.issues.removeLabel({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: pr.number,
+                name: 'vote-open'
+              }).catch(() => {});
+
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: pr.number,
+                labels: ['vote-closed', 'needs-decision']
+              });
+
+              // Post summary comment tagging the owner
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: pr.number,
+                body: `## ⏱️ Vote period closed — pattern \`${slug}\`\n\n` +
+                  `The 15-day community vote period ended on **${endStr}**.\n\n` +
+                  `| | |\n|---|---|\n` +
+                  `| 👍 In favour | **${thumbsUp}** |\n` +
+                  `| 👎 Against | **${thumbsDown}** |\n` +
+                  `| Vote period | ${startStr} → ${endStr} |\n\n` +
+                  `@rvailleux — this PR is ready for your decision.\n\n` +
+                  `- ✅ **Merge** if the pattern meets quality standards\n` +
+                  `- 🔁 **Request changes** if the submission needs work\n` +
+                  `- ❌ **Close** if the pattern doesn't fit the library\n\n` +
+                  `> This is an automated message from the vote monitor workflow.`
+              });
+
+              console.log(`Closed vote for PR #${pr.number} (${slug}) — ${thumbsUp}👍 ${thumbsDown}👎`);
+            }

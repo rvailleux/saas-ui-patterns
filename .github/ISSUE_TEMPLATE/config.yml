@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Browse existing patterns
+    url: https://rvailleux.github.io/saas-ui-patterns/fr/
+    about: Check if your pattern already exists before submitting
+  - name: Contributing guide
+    url: https://github.com/rvailleux/saas-ui-patterns/blob/main/CONTRIBUTING.md
+    about: Read the full contribution guide before opening a PR

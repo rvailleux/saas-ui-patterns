@@ -1,0 +1,48 @@
+name: Setup repository labels
+
+on:
+  workflow_dispatch:   # Run manually once after pushing this file
+
+permissions:
+  issues: write
+
+jobs:
+  labels:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create labels
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const labels = [
+              { name: 'pattern-candidature', color: '7c3aed', description: 'New pattern proposal' },
+              { name: 'vote-open',            color: '2563eb', description: '15-day community vote in progress' },
+              { name: 'vote-closed',          color: '64748b', description: 'Vote period ended' },
+              { name: 'needs-decision',       color: 'f59e0b', description: 'Awaiting maintainer decision' },
+              { name: 'needs-review',         color: 'ec4899', description: 'Awaiting maintainer review' },
+              { name: 'incomplete',           color: 'ef4444', description: 'Missing required files or fields' },
+              { name: 'changes-requested',    color: 'f97316', description: 'Author must address feedback' },
+              { name: 'question',             color: '0ea5e9', description: 'Question about a pattern or process' },
+              { name: 'accepted',             color: '22c55e', description: 'Pattern approved and merged' },
+            ];
+
+            for (const label of labels) {
+              try {
+                await github.rest.issues.createLabel({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  ...label
+                });
+                console.log(`Created: ${label.name}`);
+              } catch (e) {
+                if (e.status === 422) {
+                  // Label exists, update it
+                  await github.rest.issues.updateLabel({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    ...label
+                  });
+                  console.log(`Updated: ${label.name}`);
+                }
+              }
+            }
