@@ -151,4 +151,23 @@
   <div id="toast-container" class="fixed bottom-4 right-4 z-50 flex flex-col gap-2"></div>
 
   <!-- Back to top FAB -->
-  <button id="back-to-top" class="back-to-top" aria-label="Back
+  <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+    <svg viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+      <path fill-rule="evenodd" d="M14.77 12.79a.75.75 0 01-1.06-.02L10 8.832 6.29 12.77a.75.75 0 11-1.08-1.04l4.25-4.5a.75.75 0 011.08 0l4.25 4.5a.75.75 0 01-.02 1.06z" clip-rule="evenodd"/>
+    </svg>
+  </button>
+
+  <!-- Scripts -->
+  <script src="{{ '/assets/js/fuse.min.js' | url }}"></script>
+  <script src="{{ '/assets/js/app.js' | url }}"></script>
+  <script>
+    // Initialize app with data
+    window.APP_DATA = {
+      locale: '{{ locale }}',
+      patterns: {{ patterns | dump | safe }},
+      categories: {{ categories | dump | safe }},
+      i18n: {{ i18n | dump | safe }}
+    };
+  </script>
+</body>
+</html>

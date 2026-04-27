@@ -379,4 +379,73 @@ function showToast(message) {
   if (!container) return;
 
   const toast = document.createElement("div");
-  toast.classNam
+  toast.className = "toast";
+  toast.innerHTML = `
+    <svg viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 text-success">
+      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+    </svg>
+    <span class="text-sm text-text-primary">${message}</span>
+  `;
+
+  container.appendChild(toast);
+  setTimeout(() => toast.remove(), 3000);
+}
+
+// Category Navigation
+function scrollToCategory(slug) {
+  if (!slug) return;
+  const element = document.getElementById(slug);
+  if (element) scrollWithOffset(element);
+}
+
+// Back-to-top FAB
+function initBackToTop() {
+  const fab = document.getElementById("back-to-top");
+  if (!fab) return;
+  window.addEventListener("scroll", () => {
+    fab.classList.toggle("visible", window.scrollY > 400);
+  }, { passive: true });
+  fab.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+}
+
+// Sidebar active link tracking via IntersectionObserver
+function initSidebarActiveTracking() {
+  const sections = document.querySelectorAll("section[id]");
+  if (!sections.length) return;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          document.querySelectorAll(".sidebar-item").forEach((link) => {
+            const href = link.getAttribute("href") || "";
+            const isActive = href.endsWith(`#${entry.target.id}`);
+            link.classList.toggle("active", isActive);
+          });
+        }
+      });
+    },
+    { rootMargin: "-20% 0px -70% 0px" }
+  );
+
+  sections.forEach((section) => observer.observe(section));
+}
+
+// Close mobile sidebar on resize
+window.addEventListener("resize", () => {
+  if (window.innerWidth >= 1024) {
+    mobileOverlay?.classList.add("hidden");
+    document.body.style.overflow = "";
+  }
+});
+
+// Expose functions globally for inline event handlers
+window.toggleSection = toggleSection;
+window.expandAll = expandAll;
+window.collapseAll = collapseAll;
+window.copyToClipboard = copyToClipboard;
+window.copyCode = copyCode;
+window.closeSidebar = closeSidebar;
+window.scrollToCategory = scrollToCategory;
+window.navigateToPattern = navigateToPattern;
+window.openMobileSidebar = openMobileSidebar;
