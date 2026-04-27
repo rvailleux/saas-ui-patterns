@@ -1,0 +1,25 @@
+---
+pagination:
+  data: patterns
+  size: 1
+  alias: pattern
+  addAllPagesToCollections: true
+permalink: "/en/patterns/{{ pattern.slug }}/"
+layout: base.njk
+locale: en
+eleventyComputed:
+  title: "{{ pattern.title.en }}"
+---
+
+{# Calculate prev/next based on array index #}
+{% set patternIndex = -1 %}
+{% for p in patterns %}
+  {% if p.slug == pattern.slug %}{% set patternIndex = loop.index0 %}{% endif %}
+{% endfor %}
+
+{% set prevPat = null %}
+{% set nextPat = null %}
+{% if patternIndex > 0 %}{% set prevPat = patterns[patternIndex - 1] %}{% endif %}
+{% if patternIndex < patterns.length - 1 %}{% set nextPat = patterns[patternIndex + 1] %}{% endif %}
+
+{% include "pattern-detail.njk" %}

@@ -86,5 +86,45 @@
   "of": {
     "fr": "sur",
     "en": "of"
+  },
+  "what_is": {
+    "fr": "Ce que c'est",
+    "en": "What it is"
+  },
+  "why_works": {
+    "fr": "Pourquoi ça marche",
+    "en": "Why it works"
+  },
+  "interactive_demo": {
+    "fr": "Démo interactive",
+    "en": "Interactive demo"
+  },
+  "back_to_patterns": {
+    "fr": "← Retour aux patterns",
+    "en": "← Back to patterns"
+  },
+  "view_pattern": {
+    "fr": "Voir le pattern →",
+    "en": "View pattern →"
+  },
+  "prev_pattern": {
+    "fr": "Pattern précédent",
+    "en": "Previous pattern"
+  },
+  "next_pattern": {
+    "fr": "Pattern suivant",
+    "en": "Next pattern"
+  },
+  "implementation_guide": {
+    "fr": "Guide d'implémentation",
+    "en": "Implementation guide"
+  },
+  "pitfalls_title": {
+    "fr": "Pièges à éviter",
+    "en": "Pitfalls to avoid"
+  },
+  "examples_title": {
+    "fr": "Exemples concrets",
+    "en": "Real-world examples"
   }
 }

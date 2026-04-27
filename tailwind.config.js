@@ -5,33 +5,32 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Custom dark theme tokens
         bg: {
-          DEFAULT: "#0a0a0f",
-          secondary: "#111118",
+          DEFAULT: "rgb(var(--color-bg) / <alpha-value>)",
+          secondary: "rgb(var(--color-bg-secondary) / <alpha-value>)",
         },
         surface: {
-          DEFAULT: "#111118",
-          hover: "#1a1a25",
-          elevated: "#1e1e2e",
+          DEFAULT: "rgb(var(--color-surface) / <alpha-value>)",
+          hover: "rgb(var(--color-surface-hover) / <alpha-value>)",
+          elevated: "rgb(var(--color-surface-elevated) / <alpha-value>)",
         },
         border: {
-          DEFAULT: "#1e1e30",
-          strong: "#2d2d44",
+          DEFAULT: "rgb(var(--color-border) / <alpha-value>)",
+          strong: "rgb(var(--color-border-strong) / <alpha-value>)",
         },
         accent: {
-          DEFAULT: "#7c3aed",
-          hover: "#8b5cf6",
-          light: "#a78bfa",
+          DEFAULT: "rgb(var(--color-accent) / <alpha-value>)",
+          hover: "rgb(var(--color-accent-hover) / <alpha-value>)",
+          light: "rgb(var(--color-accent-light) / <alpha-value>)",
         },
         text: {
-          primary: "#e2e8f0",
-          secondary: "#94a3b8",
-          muted: "#64748b",
+          primary: "rgb(var(--color-text-primary) / <alpha-value>)",
+          secondary: "rgb(var(--color-text-secondary) / <alpha-value>)",
+          muted: "rgb(var(--color-text-muted) / <alpha-value>)",
         },
-        success: "#10b981",
-        danger: "#ef4444",
-        warning: "#f59e0b",
+        success: "rgb(var(--color-success) / <alpha-value>)",
+        danger: "rgb(var(--color-danger) / <alpha-value>)",
+        warning: "rgb(var(--color-warning) / <alpha-value>)",
       },
       fontFamily: {
         sans: [

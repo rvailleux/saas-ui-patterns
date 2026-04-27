@@ -62,6 +62,17 @@ module.exports = function (eleventyConfig) {
     return obj?.[prop];
   });
 
+  // Previous/Next pattern filters
+  eleventyConfig.addFilter("prevPattern", (patterns, slug) => {
+    const idx = patterns.findIndex((p) => p.slug === slug);
+    return idx > 0 ? patterns[idx - 1] : null;
+  });
+
+  eleventyConfig.addFilter("nextPattern", (patterns, slug) => {
+    const idx = patterns.findIndex((p) => p.slug === slug);
+    return idx < patterns.length - 1 ? patterns[idx + 1] : null;
+  });
+
   return {
     dir: {
       input: "src",

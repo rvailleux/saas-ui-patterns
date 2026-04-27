@@ -4,9 +4,50 @@
 
 /* Custom base styles */
 @layer base {
+  /* Layout tokens — theme-independent */
   :root {
     --sidebar-width: 240px;
     --sidebar-collapsed: 56px;
+  }
+
+  /* Light theme (default) */
+  :root {
+    --color-bg: 248 250 252;
+    --color-bg-secondary: 241 245 249;
+    --color-surface: 255 255 255;
+    --color-surface-hover: 241 245 249;
+    --color-surface-elevated: 226 232 240;
+    --color-border: 226 232 240;
+    --color-border-strong: 203 213 225;
+    --color-accent: 124 58 237;
+    --color-accent-hover: 109 40 217;
+    --color-accent-light: 109 40 217;
+    --color-text-primary: 15 23 42;
+    --color-text-secondary: 71 85 105;
+    --color-text-muted: 148 163 184;
+    --color-success: 5 150 105;
+    --color-danger: 220 38 38;
+    --color-warning: 217 119 6;
+  }
+
+  /* Dark theme */
+  .dark {
+    --color-bg: 10 10 15;
+    --color-bg-secondary: 17 17 24;
+    --color-surface: 17 17 24;
+    --color-surface-hover: 26 26 37;
+    --color-surface-elevated: 30 30 46;
+    --color-border: 30 30 48;
+    --color-border-strong: 45 45 68;
+    --color-accent: 124 58 237;
+    --color-accent-hover: 139 92 246;
+    --color-accent-light: 167 139 250;
+    --color-text-primary: 226 232 240;
+    --color-text-secondary: 148 163 184;
+    --color-text-muted: 100 116 139;
+    --color-success: 16 185 129;
+    --color-danger: 239 68 68;
+    --color-warning: 245 158 11;
   }
 
   html {
@@ -47,6 +88,15 @@
   .sidebar {
     @apply fixed left-0 top-0 h-full bg-surface border-r border-border transition-all duration-200 ease-in-out z-40;
     width: var(--sidebar-width);
+  }
+
+  @media (max-width: 1023px) {
+    .sidebar {
+      transform: translateX(-100%);
+    }
+    .sidebar.mobile-open {
+      transform: translateX(0);
+    }
   }
 
   .sidebar.collapsed {
@@ -167,11 +217,13 @@
     @apply flex items-center gap-1 p-1 bg-surface-elevated rounded-lg border border-border;
   }
 
-  .lang-switcher button {
-    @apply px-3 py-1 text-sm rounded-md transition-colors text-text-secondary hover:text-text-primary;
+  .lang-switcher button,
+  .lang-switcher a {
+    @apply px-3 py-1 text-sm rounded-md transition-colors text-text-secondary hover:text-text-primary no-underline;
   }
 
-  .lang-switcher button.active {
+  .lang-switcher button.active,
+  .lang-switcher a.active {
     @apply bg-accent text-white;
   }
 
@@ -213,6 +265,128 @@
 
   .pitfalls-list li strong {
     @apply text-text-primary font-semibold;
+  }
+
+  /* Back-to-top FAB */
+  .back-to-top {
+    @apply fixed bottom-6 right-6 z-40 flex items-center justify-center w-10 h-10 rounded-full bg-accent text-white shadow-lg opacity-0 pointer-events-none transition-all duration-200 hover:bg-accent-hover;
+  }
+
+  .back-to-top.visible {
+    @apply opacity-100 pointer-events-auto;
+  }
+
+  /* Section toggle hover */
+  .section {
+    @apply rounded-lg;
+  }
+
+  .section-toggle {
+    @apply rounded-lg px-3 -mx-3;
+  }
+
+  .section-toggle:hover {
+    @apply bg-surface-elevated;
+  }
+
+  /* Pattern card — category left-border accent */
+  .pattern-card {
+    border-left-width: 3px;
+    border-left-color: rgb(var(--color-accent) / 0.3);
+  }
+
+  .pattern-card:hover {
+    border-left-color: rgb(var(--color-accent) / 0.7);
+  }
+
+  /* Pattern card subtitle (always-visible what snippet) */
+  .pattern-subtitle {
+    @apply text-sm text-text-secondary leading-relaxed mt-1 line-clamp-2;
+  }
+
+  /* Pattern detail page — serif title */
+  .pattern-title-serif {
+    font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+    @apply text-4xl font-semibold text-text-primary leading-tight;
+  }
+
+  /* Section label header (uppercase small caps style) */
+  .section-label {
+    @apply text-xs font-semibold uppercase tracking-widest text-text-muted mb-3;
+  }
+
+  /* Section divider */
+  .section-divider {
+    @apply border-t border-border my-10;
+  }
+
+  /* Body prose text on detail pages */
+  .pattern-detail-prose {
+    @apply text-text-secondary text-base leading-relaxed;
+  }
+
+  /* Demo iframe container */
+  .demo-iframe-container {
+    @apply rounded-xl overflow-hidden border border-border;
+    background: #0f0f1a;
+  }
+
+  .demo-iframe-container iframe {
+    display: block;
+    width: 100%;
+    border: none;
+  }
+
+  /* Compact pattern card on index page */
+  .pattern-card-compact {
+    @apply bg-surface border border-border rounded-xl p-5 transition-all;
+    border-left-width: 3px;
+    border-left-color: rgb(var(--color-accent) / 0.25);
+  }
+
+  .pattern-card-compact:hover {
+    @apply border-border-strong;
+    border-left-color: rgb(var(--color-accent) / 0.7);
+  }
+
+  /* Guide and pitfalls lists on detail page */
+  .guide-list-detail {
+    @apply space-y-3;
+  }
+
+  .guide-list-detail li {
+    @apply relative pl-5 text-text-secondary leading-relaxed;
+  }
+
+  .guide-list-detail li::before {
+    content: "";
+    @apply absolute left-0 top-[0.55em] w-1.5 h-1.5 rounded-full bg-accent;
+  }
+
+  .pitfalls-list-detail {
+    @apply space-y-3;
+  }
+
+  .pitfalls-list-detail li {
+    @apply relative pl-5 text-text-secondary leading-relaxed;
+  }
+
+  .pitfalls-list-detail li::before {
+    content: "✕";
+    @apply absolute left-0 top-0 text-danger text-xs font-bold;
+  }
+
+  /* Examples list */
+  .examples-list {
+    @apply space-y-3;
+  }
+
+  .examples-list li {
+    @apply flex gap-2 items-baseline text-text-secondary;
+  }
+
+  .examples-list .example-name {
+    @apply font-semibold text-text-primary flex-shrink-0;
   }
 }
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ locale }}" class="dark">
+<html lang="{{ locale }}">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,13 +9,20 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 
   <!-- Styles -->
   <link rel="stylesheet" href="{{ '/assets/css/main.css' | url }}">
 
   <!-- Favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎨</text></svg>">
+
+  <!-- Prevent theme flash: light is default, dark only if explicitly saved -->
+  <script>
+    if (localStorage.getItem('theme') === 'dark') {
+      document.documentElement.classList.add('dark');
+    }
+  </script>
 </head>
 <body class="min-h-screen">
   <!-- Mobile Overlay -->
@@ -40,7 +47,7 @@
       <!-- Navigation -->
       <nav class="flex-1 overflow-y-auto py-4 px-2" aria-label="Categories">
         {% for cat in categories %}
-        <a href="#{{ cat.slug }}" class="sidebar-item {% if currentCategory == cat.slug %}active{% endif %}" data-category="{{ cat.slug }}">
+        <a href="/{{ locale }}/#{{ cat.slug }}" class="sidebar-item {% if currentCategory == cat.slug %}active{% endif %}" data-category="{{ cat.slug }}">
           <span class="text-accent-light">{{ cat.slug | categoryIcon | safe }}</span>
           <span class="sidebar-text text-sm font-medium">{{ cat[locale] }}</span>
         </a>
@@ -82,7 +89,7 @@
 
           <!-- Breadcrumb -->
           <nav aria-label="Breadcrumb" class="hidden sm:flex items-center gap-2 text-sm">
-            <a href="/" class="text-text-muted hover:text-text-primary transition-colors">{{ site.name[locale] }}</a>
+            <a href="/{{ locale }}/" class="text-text-muted hover:text-text-primary transition-colors">{{ site.name[locale] }}</a>
             {% if currentCategory %}
             <span class="text-text-muted">›</span>
             <span class="text-text-primary">{{ categories | find("slug", currentCategory) | getProp(locale) }}</span>
@@ -142,6 +149,13 @@
 
   <!-- Toast Container -->
   <div id="toast-container" class="fixed bottom-4 right-4 z-50 flex flex-col gap-2"></div>
+
+  <!-- Back to top FAB -->
+  <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+    <svg viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+      <path fill-rule="evenodd" d="M14.77 12.79a.75.75 0 01-1.06-.02L10 8.832 6.29 12.77a.75.75 0 11-1.08-1.04l4.25-4.5a.75.75 0 011.08 0l4.25 4.5a.75.75 0 01-.02 1.06z" clip-rule="evenodd"/>
+    </svg>
+  </button>
 
   <!-- Scripts -->
   <script src="{{ '/assets/js/fuse.min.js' | url }}"></script>

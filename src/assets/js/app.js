@@ -27,6 +27,9 @@ document.addEventListener("DOMContentLoaded", () => {
   initTheme();
   initKeyboardShortcuts();
   initPatternData();
+  initBackToTop();
+  initSidebarActiveTracking();
+  restoreExpandState();
 });
 
 // Initialize pattern data from window.APP_DATA
@@ -81,13 +84,14 @@ function updateSidebarState() {
 }
 
 function openMobileSidebar() {
-  sidebar?.classList.remove("collapsed");
+  sidebar?.classList.add("mobile-open");
   mobileOverlay?.classList.remove("hidden");
   document.body.style.overflow = "hidden";
 }
 
 function closeSidebar() {
   if (window.innerWidth < 1024) {
+    sidebar?.classList.remove("mobile-open");
     mobileOverlay?.classList.add("hidden");
     document.body.style.overflow = "";
   }
@@ -103,9 +107,10 @@ function initSearch() {
 }
 
 function openCommandPalette() {
+  state.selectedIndex = 0;
   commandPalette?.classList.remove("hidden");
   commandInput?.focus();
-  renderSearchResults(state.patterns.slice(0, 8)); // Show first 8 initially
+  renderSearchResults(state.patterns.slice(0, 8));
 }
 
 function closeCommandPalette() {
@@ -171,17 +176,15 @@ function renderSearchResults(results) {
   commandResults.innerHTML = html;
 }
 
+function scrollWithOffset(element) {
+  const headerH = document.querySelector("header")?.offsetHeight || 64;
+  const top = element.getBoundingClientRect().top + window.scrollY - headerH - 8;
+  window.scrollTo({ top, behavior: "smooth" });
+}
+
 function navigateToPattern(slug) {
   closeCommandPalette();
-  const element = document.getElementById(slug);
-  if (element) {
-    element.scrollIntoView({ behavior: "smooth", block: "start" });
-    // Highlight the card briefly
-    element.classList.add("ring-2", "ring-accent", "ring-offset-2", "ring-offset-bg");
-    setTimeout(() => {
-      element.classList.remove("ring-2", "ring-accent", "ring-offset-2", "ring-offset-bg");
-    }, 2000);
-  }
+  window.location.href = '/' + state.locale + '/patterns/' + slug + '/';
 }
 
 // Keyboard Shortcuts
@@ -252,13 +255,13 @@ function updateSelectedCommand() {
 
 // Theme Functions
 function initTheme() {
-  // Default to dark mode
-  const saved = localStorage.getItem("theme");
-  if (saved === "light") {
+  const isDark = localStorage.getItem("theme") === "dark";
+  if (isDark) {
+    document.documentElement.classList.add("dark");
+  } else {
     document.documentElement.classList.remove("dark");
-    updateThemeIcon(false);
   }
-
+  updateThemeIcon(isDark);
   themeToggle?.addEventListener("click", toggleTheme);
 }
 
@@ -281,6 +284,12 @@ function updateThemeIcon(isDark) {
 }
 
 // Section Toggle Functions
+function getSectionKey(button) {
+  const card = button.closest(".pattern-card");
+  const section = button.closest("[data-section]");
+  return card && section ? `${card.id}:${section.dataset.section}` : null;
+}
+
 function toggleSection(button) {
   const content = button.nextElementSibling;
   const icon = button.querySelector("svg");
@@ -293,6 +302,23 @@ function toggleSection(button) {
     content?.classList.add("hidden");
     icon?.style.setProperty("transform", "rotate(0deg)");
   }
+
+  const key = getSectionKey(button);
+  if (key) sessionStorage.setItem(`section:${key}`, isHidden ? "open" : "closed");
+}
+
+function restoreExpandState() {
+  document.querySelectorAll(".section-toggle").forEach((button) => {
+    const key = getSectionKey(button);
+    if (!key) return;
+    const saved = sessionStorage.getItem(`section:${key}`);
+    if (saved === "open") {
+      const content = button.nextElementSibling;
+      const icon = button.querySelector("svg");
+      content?.classList.remove("hidden");
+      icon?.style.setProperty("transform", "rotate(180deg)");
+    }
+  });
 }
 
 function expandAll() {
@@ -302,6 +328,10 @@ function expandAll() {
   document.querySelectorAll(".section-toggle svg").forEach((el) => {
     el.style.setProperty("transform", "rotate(180deg)");
   });
+  document.querySelectorAll(".section-toggle").forEach((button) => {
+    const key = getSectionKey(button);
+    if (key) sessionStorage.setItem(`section:${key}`, "open");
+  });
 }
 
 function collapseAll() {
@@ -310,6 +340,10 @@ function collapseAll() {
   });
   document.querySelectorAll(".section-toggle svg").forEach((el) => {
     el.style.setProperty("transform", "rotate(0deg)");
+  });
+  document.querySelectorAll(".section-toggle").forEach((button) => {
+    const key = getSectionKey(button);
+    if (key) sessionStorage.setItem(`section:${key}`, "closed");
   });
 }
 
@@ -361,9 +395,40 @@ function showToast(message) {
 function scrollToCategory(slug) {
   if (!slug) return;
   const element = document.getElementById(slug);
-  if (element) {
-    element.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
+  if (element) scrollWithOffset(element);
+}
+
+// Back-to-top FAB
+function initBackToTop() {
+  const fab = document.getElementById("back-to-top");
+  if (!fab) return;
+  window.addEventListener("scroll", () => {
+    fab.classList.toggle("visible", window.scrollY > 400);
+  }, { passive: true });
+  fab.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+}
+
+// Sidebar active link tracking via IntersectionObserver
+function initSidebarActiveTracking() {
+  const sections = document.querySelectorAll("section[id]");
+  if (!sections.length) return;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          document.querySelectorAll(".sidebar-item").forEach((link) => {
+            const href = link.getAttribute("href") || "";
+            const isActive = href.endsWith(`#${entry.target.id}`);
+            link.classList.toggle("active", isActive);
+          });
+        }
+      });
+    },
+    { rootMargin: "-20% 0px -70% 0px" }
+  );
+
+  sections.forEach((section) => observer.observe(section));
 }
 
 // Close mobile sidebar on resize
@@ -383,3 +448,4 @@ window.copyCode = copyCode;
 window.closeSidebar = closeSidebar;
 window.scrollToCategory = scrollToCategory;
 window.navigateToPattern = navigateToPattern;
+window.openMobileSidebar = openMobileSidebar;

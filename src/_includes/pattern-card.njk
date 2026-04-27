@@ -1,4 +1,4 @@
-{% macro pattern_card(pattern, locale) %}
+{% macro pattern_card(pattern, locale, i18n) %}
 <article id="{{ pattern.slug }}" class="pattern-card scroll-mt-24">
   {# Header #}
   <div class="pattern-card-header">
@@ -8,6 +8,9 @@
         <h2 class="text-lg font-semibold text-text-primary">{{ pattern.title[locale] }}</h2>
         <span class="category-badge">{{ pattern.categoryLabel[locale] }}</span>
       </div>
+      {% if pattern.what %}
+      <p class="pattern-subtitle">{{ pattern.what[locale] }}</p>
+      {% endif %}
     </div>
     <a href="#{{ pattern.slug }}" class="p-2 rounded-lg hover:bg-surface-hover text-text-muted hover:text-text-primary transition-colors" title="Copy link"
       onclick="copyToClipboard('{{ pattern.slug }}'); return false;"
@@ -62,7 +65,7 @@
       </button>
       <div class="section-content hidden">
         <div class="demo-block">
-          <pre>{{ pattern.demo.fr | replace(r/^```/, "") | replace(r/```$/, "") | trim }}</pre>
+          <pre>{{ pattern.demo[locale] | replace(r/^```/, "") | replace(r/```$/, "") | trim }}</pre>
         </div>
         <button class="mt-2 flex items-center gap-1.5 text-xs text-text-muted hover:text-text-primary transition-colors" onclick="copyCode(this)">
           <svg viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4">

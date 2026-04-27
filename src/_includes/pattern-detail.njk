@@ -1,0 +1,133 @@
+{# Pattern Detail Page Template
+   Variables expected: pattern, locale, i18n, demos, prevPat, nextPat
+#}
+
+<article class="max-w-3xl mx-auto">
+  {# Header Nav #}
+  <div class="flex items-center justify-between mb-8">
+    <a href="/{{ locale }}/" class="text-sm text-text-muted hover:text-text-primary transition-colors">
+      {{ i18n.back_to_patterns[locale] }}
+    </a>
+    <span class="text-xs text-text-muted">
+      {{ pattern.id }} / {{ patterns.length }}
+    </span>
+  </div>
+
+  {# Category Badge #}
+  <div class="mb-4">
+    <span class="inline-flex items-center gap-1.5 text-xs font-medium text-accent-light px-2.5 py-1 rounded-full bg-accent/10">
+      <span>{{ pattern.categoryLabel[locale] }}</span>
+    </span>
+  </div>
+
+  {# Title #}
+  <h1 class="pattern-title-serif mb-6">{{ pattern.title[locale] }}</h1>
+
+  <div class="section-divider"></div>
+
+  {# Interactive Demo #}
+  {% if demos and demos[pattern.slug] %}
+  <section class="mb-10">
+    <p class="section-label">{{ i18n.interactive_demo[locale] }}</p>
+    <div class="demo-iframe-container">
+      <iframe
+        srcdoc="{{ demos[pattern.slug].html | e }}"
+        sandbox="allow-scripts"
+        style="width:100%;height:{{ demos[pattern.slug].height | default(320) }}px;border:none;"
+        loading="lazy"
+      ></iframe>
+    </div>
+  </section>
+  {% endif %}
+
+  {# What it is #}
+  {% if pattern.what and pattern.what[locale] %}
+  <section class="mb-10">
+    <p class="section-label">{{ i18n.what_is[locale] }}</p>
+    <p class="pattern-detail-prose text-lg">{{ pattern.what[locale] }}</p>
+  </section>
+  {% endif %}
+
+  {# Why it works #}
+  {% if pattern.why and pattern.why[locale] %}
+  <section class="mb-10">
+    <p class="section-label">{{ i18n.why_works[locale] }}</p>
+    <p class="pattern-detail-prose">{{ pattern.why[locale] }}</p>
+  </section>
+  {% endif %}
+
+  {# Examples #}
+  {% if pattern.examples and pattern.examples.length > 0 %}
+  <section class="mb-10">
+    <p class="section-label">{{ i18n.examples_title[locale] }}</p>
+    <ul class="examples-list">
+      {% for example in pattern.examples %}
+      <li>
+        <span class="example-name">{{ example.name }}</span>
+        <span class="text-text-muted">—</span>
+        <span>{{ example.desc[locale] }}</span>
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endif %}
+
+  <div class="section-divider"></div>
+
+  {# Implementation Guide #}
+  {% if pattern.guide and pattern.guide[locale] and pattern.guide[locale].length > 0 %}
+  <section class="mb-10">
+    <p class="section-label">{{ i18n.implementation_guide[locale] }}</p>
+    <ul class="guide-list-detail">
+      {% for item in pattern.guide[locale] %}
+      <li>{{ item | replace(r/\*\*([^*]+)\*\*/, "<strong>$1</strong>") | safe }}</li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endif %}
+
+  {# Pitfalls #}
+  {% if pattern.pitfalls and pattern.pitfalls[locale] and pattern.pitfalls[locale].length > 0 %}
+  <section class="mb-10">
+    <p class="section-label">{{ i18n.pitfalls_title[locale] }}</p>
+    <ul class="pitfalls-list-detail">
+      {% for item in pattern.pitfalls[locale] %}
+      {% if item != '--' %}
+      <li>{{ item | replace("❌ ", "") | safe }}</li>
+      {% endif %}
+      {% endfor %}
+    </ul>
+  </section>
+  {% endif %}
+
+  {# Prev/Next Navigation #}
+  <nav class="flex items-center justify-between mt-16 pt-8 border-t border-border" aria-label="Pattern navigation">
+    <div>
+      {% if prevPat %}
+      <a href="/{{ locale }}/patterns/{{ prevPat.slug }}/" class="group flex items-center gap-2 text-sm text-text-muted hover:text-text-primary transition-colors">
+        <svg viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 transition-transform group-hover:-translate-x-1">
+          <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+        </svg>
+        <div class="flex flex-col">
+          <span class="text-xs text-text-muted">{{ i18n.prev_pattern[locale] }}</span>
+          <span class="font-medium text-text-primary">{{ prevPat.title[locale] }}</span>
+        </div>
+      </a>
+      {% endif %}
+    </div>
+
+    <div>
+      {% if nextPat %}
+      <a href="/{{ locale }}/patterns/{{ nextPat.slug }}/" class="group flex items-center gap-2 text-sm text-text-muted hover:text-text-primary transition-colors text-right">
+        <div class="flex flex-col">
+          <span class="text-xs text-text-muted">{{ i18n.next_pattern[locale] }}</span>
+          <span class="font-medium text-text-primary">{{ nextPat.title[locale] }}</span>
+        </div>
+        <svg viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 transition-transform group-hover:translate-x-1">
+          <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+        </svg>
+      </a>
+      {% endif %}
+    </div>
+  </nav>
+</article>
