@@ -10,6 +10,10 @@ node_modules/
 .env.local
 .env.*.local
 
+# Secrets / server-specific config
+.htpasswd
+nginx-saas-ui-patterns.conf
+
 # OS files
 .DS_Store
 Thumbs.db
