@@ -259,7 +259,7 @@ After 15 days, the repository owner reviews the vote and comments, then:
 
 There is no threshold for votes — the vote is advisory, not binding. A pattern with 1 👍 can be merged if it's excellent. A pattern with 10 👍 can be closed if it doesn't meet quality standards.
 
-**Merged patterns** are assigned their final sequential ID and deployed to the live site within 48 hours.
+**Merged patterns** are assigned their final sequential ID. The maintainer then merges `main` → `deploy` to trigger the live site update, which happens automatically via CI within minutes.
 
 ---
 
