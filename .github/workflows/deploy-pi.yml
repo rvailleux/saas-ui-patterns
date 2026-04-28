@@ -71,12 +71,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  update-version:
-    name: 2. Update Version on Pi
+  deploy:
+    name: 2. Update Version & Deploy on Pi
     needs: create-release
     runs-on: ubuntu-latest
     steps:
-      - name: SSH to Pi and update version
+      - name: SSH to Pi - Update version and deploy
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.DEPLOY_HOST }}
@@ -87,23 +87,10 @@ jobs:
             cd /home/romain/run/saas-ui-patterns
             git fetch origin deploy
             git reset --hard origin/deploy
+            # Update version
             jq --arg version "${{ needs.create-release.outputs.version }}" '. + {version: $version}' src/_data/site.json > tmp.json
             mv tmp.json src/_data/site.json
-            echo "Updated version to: ${{ needs.create-release.outputs.version }}"
-
-  deploy:
-    name: 3. Deploy on Pi
-    needs: [create-release, update-version]
-    runs-on: ubuntu-latest
-    steps:
-      - name: SSH to Pi and deploy
-        uses: appleboy/ssh-action@v1
-        with:
-          host: ${{ secrets.DEPLOY_HOST }}
-          username: ${{ secrets.DEPLOY_USER }}
-          key: ${{ secrets.DEPLOY_SSH_KEY }}
-          port: ${{ secrets.DEPLOY_PORT }}
-          script: |
-            cd /home/romain/run/saas-ui-patterns
+            echo "✅ Updated version to: ${{ needs.create-release.outputs.version }}"
+            # Deploy
             docker compose up --build -d
-            echo "Deployed: ${{ needs.create-release.outputs.version }}"
+            echo "✅ Deployed: ${{ needs.create-release.outputs.version }}"
