@@ -4,8 +4,91 @@ on:
   push:
     branches: [deploy]
 
+permissions:
+  contents: write  # Required for creating releases
+
 jobs:
+  release:
+    name: Create GitHub Release
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Need full history for tags
+
+      - name: Generate version
+        id: version
+        run: |
+          # Date-based versioning: vYYYY.MM.DD-N
+          DATE=$(date +'%Y.%m.%d')
+
+          # Check if there's already a release today
+          LATEST_TAG=$(git tag -l "v${DATE}.*" --sort=-v:refname | head -1)
+
+          if [ -n "$LATEST_TAG" ]; then
+            # Increment build number for today
+            BUILD=$(echo "$LATEST_TAG" | grep -o '[0-9]*$' || echo "0")
+            NEW_BUILD=$((BUILD + 1))
+          else
+            NEW_BUILD=1
+          fi
+
+          VERSION="v${DATE}-${NEW_BUILD}"
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Generated version: $VERSION"
+
+      - name: Get commit messages since last release
+        id: changelog
+        run: |
+          # Get the last tag or use initial commit
+          LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+
+          if [ -n "$LAST_TAG" ]; then
+            # Get commits since last tag
+            CHANGES=$(git log "$LAST_TAG..HEAD" --pretty=format:'- %s' --no-merges)
+          else
+            # Get last 10 commits if no previous tag
+            CHANGES=$(git log -10 --pretty=format:'- %s' --no-merges)
+          fi
+
+          # Escape for GitHub Actions
+          CHANGES="${CHANGES//'%'/'%25'}"
+          CHANGES="${CHANGES//$'\n'/'%0A'}"
+          CHANGES="${CHANGES//$'\r'/'%0D'}"
+
+          echo "changes<<EOF" >> $GITHUB_OUTPUT
+          echo "$CHANGES" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.version.outputs.version }}
+          name: Release ${{ steps.version.outputs.version }}
+          body: |
+            ## Deployment ${{ steps.version.outputs.version }}
+
+            ### Changes included:
+            ${{ steps.changelog.outputs.changes }}
+
+            ### Deployment target
+            - **Environment:** Production (Raspberry Pi)
+            - **Deployed at:** ${{ github.event.head_commit.timestamp }}
+            - **Commit:** ${{ github.sha }}
+
+            ---
+            *This release was automatically created by the deploy workflow.*
+          draft: false
+          prerelease: false
+          generate_release_notes: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   deploy:
+    name: Deploy to Raspberry Pi
+    needs: release
     runs-on: ubuntu-latest
     steps:
       - name: SSH deploy to Pi
@@ -15,4 +98,39 @@ jobs:
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_SSH_KEY }}
           port: ${{ secrets.DEPLOY_PORT }}
-          script: /home/romain/run/saas-ui-patterns/deploy.sh
+          script: |
+            cd /home/romain/run/saas-ui-patterns
+            git fetch origin deploy
+            git checkout deploy
+            git pull origin deploy
+            docker compose up --build -d
+            echo "Deployed version: ${{ needs.release.outputs.version }}"
+
+  update-version:
+    name: Update version in site data
+    needs: release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: deploy
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update site.json with version
+        run: |
+          VERSION="${{ needs.release.outputs.version }}"
+
+          # Add version field to site.json
+          jq --arg version "$VERSION" '. + {version: $version}' src/_data/site.json > tmp.json
+          mv tmp.json src/_data/site.json
+
+          # Show result
+          cat src/_data/site.json
+
+      - name: Commit version update
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add src/_data/site.json
+          git diff --staged --quiet || git commit -m "chore: update version to ${{ needs.release.outputs.version }} [skip ci]"
+          git push origin deploy
