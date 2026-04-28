@@ -115,11 +115,6 @@
             </svg>
           </button>
         </div>
-        <!-- Version -->
-        <div class="flex items-center justify-center">
-          <a href="https://github.com/rvailleux/saas-ui-patterns/releases" target="_blank" rel="noopener" class="text-[10px] text-text-muted/60 hover:text-text-muted transition-colors font-mono" title="View releases"
-          >{{ site.version }}</a>
-        </div>
       </div>
     </div>
   </aside>
@@ -171,6 +166,13 @@
     <div class="px-4 py-6 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       {{ content | safe }}
     </div>
+
+    <!-- Footer -->
+    <footer class="px-4 py-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-border">
+      <div class="flex items-center justify-end">
+        <a href="https://github.com/rvailleux/saas-ui-patterns/releases" target="_blank" rel="noopener" class="text-[10px] text-text-muted/60 hover:text-text-muted transition-colors font-mono" title="View releases">{{ site.version }}</a>
+      </div>
+    </footer>
   </main>
 
   <!-- Command Palette -->
