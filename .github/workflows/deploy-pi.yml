@@ -9,8 +9,8 @@ permissions:
   contents: write  # Required for creating releases
 
 jobs:
-  release:
-    name: Create GitHub Release
+  create-release:
+    name: 1. Create GitHub Release
     runs-on: ubuntu-latest
     outputs:
       version: ${{ steps.version.outputs.version }}
@@ -87,12 +87,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  deploy:
-    name: Deploy to Raspberry Pi
-    needs: release
+  update-version:
+    name: 2. Update Version on Pi
+    needs: create-release
     runs-on: ubuntu-latest
     steps:
-      - name: SSH deploy to Pi
+      - name: SSH to Pi and update version
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.DEPLOY_HOST }}
@@ -104,10 +104,24 @@ jobs:
             git fetch origin deploy
             git checkout deploy
             git pull origin deploy
-            # Update version in site.json before building
-            jq --arg version "${{ needs.release.outputs.version }}" '. + {version: $version}' src/_data/site.json > tmp.json
+            # Update version in site.json
+            jq --arg version "${{ needs.create-release.outputs.version }}" '. + {version: $version}' src/_data/site.json > tmp.json
             mv tmp.json src/_data/site.json
-            echo "Updated version to: ${{ needs.release.outputs.version }}"
-            docker compose up --build -d
-            echo "Deployed version: ${{ needs.release.outputs.version }}"
+            echo "✅ Updated version to: ${{ needs.create-release.outputs.version }}"
 
+  deploy:
+    name: 3. Deploy on Pi
+    needs: [create-release, update-version]
+    runs-on: ubuntu-latest
+    steps:
+      - name: SSH to Pi and deploy
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          port: ${{ secrets.DEPLOY_PORT }}
+          script: |
+            cd /home/romain/run/saas-ui-patterns
+            docker compose up --build -d
+            echo "✅ Deployed version: ${{ needs.create-release.outputs.version }}"
