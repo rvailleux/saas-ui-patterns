@@ -13,6 +13,37 @@
     </span>
   </div>
 
+  {# Top Prev/Next Navigation #}
+  <nav class="flex items-center justify-between mb-8" aria-label="Pattern navigation top">
+    <div>
+      {% if prevPat %}
+      <a href="/{{ locale }}/patterns/{{ prevPat.slug }}/" class="group flex items-center gap-2 text-sm text-text-muted hover:text-text-primary transition-colors">
+        <svg viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 transition-transform group-hover:-translate-x-1">
+          <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+        </svg>
+        <div class="flex flex-col">
+          <span class="text-xs text-text-muted">{{ i18n.prev_pattern[locale] }}</span>
+          <span class="font-medium text-text-primary">{{ prevPat.title[locale] }}</span>
+        </div>
+      </a>
+      {% endif %}
+    </div>
+
+    <div>
+      {% if nextPat %}
+      <a href="/{{ locale }}/patterns/{{ nextPat.slug }}/" class="group flex items-center gap-2 text-sm text-text-muted hover:text-text-primary transition-colors text-right">
+        <div class="flex flex-col">
+          <span class="text-xs text-text-muted">{{ i18n.next_pattern[locale] }}</span>
+          <span class="font-medium text-text-primary">{{ nextPat.title[locale] }}</span>
+        </div>
+        <svg viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 transition-transform group-hover:translate-x-1">
+          <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+        </svg>
+      </a>
+      {% endif %}
+    </div>
+  </nav>
+
   {# Category Badge #}
   <div class="mb-4">
     <span class="inline-flex items-center gap-1.5 text-xs font-medium text-accent-light px-2.5 py-1 rounded-full bg-accent/10">
