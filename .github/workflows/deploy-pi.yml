@@ -104,34 +104,10 @@ jobs:
             git fetch origin deploy
             git checkout deploy
             git pull origin deploy
+            # Update version in site.json before building
+            jq --arg version "${{ needs.release.outputs.version }}" '. + {version: $version}' src/_data/site.json > tmp.json
+            mv tmp.json src/_data/site.json
+            echo "Updated version to: ${{ needs.release.outputs.version }}"
             docker compose up --build -d
             echo "Deployed version: ${{ needs.release.outputs.version }}"
 
-  update-version:
-    name: Update version in site data
-    needs: release
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: deploy
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Update site.json with version
-        run: |
-          VERSION="${{ needs.release.outputs.version }}"
-
-          # Add version field to site.json
-          jq --arg version "$VERSION" '. + {version: $version}' src/_data/site.json > tmp.json
-          mv tmp.json src/_data/site.json
-
-          # Show result
-          cat src/_data/site.json
-
-      - name: Commit version update
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add src/_data/site.json
-          git diff --staged --quiet || git commit -m "chore: update version to ${{ needs.release.outputs.version }} [skip ci]"
-          git push origin deploy
