@@ -11,5 +11,6 @@
     "fr",
     "en"
   ],
-  "defaultLocale": "fr"
+  "defaultLocale": "fr",
+  "version": "dev"
 }
