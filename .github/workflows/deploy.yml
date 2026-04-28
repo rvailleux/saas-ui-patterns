@@ -30,9 +30,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Parse content
-        run: npm run parse
-
       - name: Build site
         run: npm run build
 
