@@ -6,7 +6,10 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write  # Required for creating releases
+  contents: write
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   create-release:
@@ -17,48 +20,35 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Need full history for tags
+          fetch-depth: 0
 
       - name: Generate version
         id: version
         run: |
-          # Date-based versioning: vYYYY.MM.DD-N
           DATE=$(date +'%Y.%m.%d')
-
-          # Check if there's already a release today
           LATEST_TAG=$(git tag -l "v${DATE}.*" --sort=-v:refname | head -1)
-
           if [ -n "$LATEST_TAG" ]; then
-            # Increment build number for today
             BUILD=$(echo "$LATEST_TAG" | grep -o '[0-9]*$' || echo "0")
             NEW_BUILD=$((BUILD + 1))
           else
             NEW_BUILD=1
           fi
-
           VERSION="v${DATE}-${NEW_BUILD}"
           echo "version=$VERSION" >> $GITHUB_OUTPUT
           echo "Generated version: $VERSION"
 
-      - name: Get commit messages since last release
+      - name: Get commit messages
         id: changelog
         run: |
-          # Get the last tag or use initial commit
           LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
-
           if [ -n "$LAST_TAG" ]; then
-            # Get commits since last tag
             CHANGES=$(git log "$LAST_TAG..HEAD" --pretty=format:'- %s' --no-merges)
           else
-            # Get last 10 commits if no previous tag
             CHANGES=$(git log -10 --pretty=format:'- %s' --no-merges)
           fi
-
-          # Escape for GitHub Actions
           CHANGES="${CHANGES//'%'/'%25'}"
           CHANGES="${CHANGES//$'\n'/'%0A'}"
           CHANGES="${CHANGES//$'\r'/'%0D'}"
-
           echo "changes<<EOF" >> $GITHUB_OUTPUT
           echo "$CHANGES" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
@@ -71,19 +61,13 @@ jobs:
           body: |
             ## Deployment ${{ steps.version.outputs.version }}
 
-            ### Changes included:
+            ### Changes:
             ${{ steps.changelog.outputs.changes }}
 
-            ### Deployment target
-            - **Environment:** Production (Raspberry Pi)
-            - **Deployed at:** ${{ github.event.head_commit.timestamp }}
-            - **Commit:** ${{ github.sha }}
-
             ---
-            *This release was automatically created by the deploy workflow.*
+            *Automated release*
           draft: false
           prerelease: false
-          generate_release_notes: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -102,12 +86,10 @@ jobs:
           script: |
             cd /home/romain/run/saas-ui-patterns
             git fetch origin deploy
-            git checkout deploy
-            git pull origin deploy
-            # Update version in site.json
+            git reset --hard origin/deploy
             jq --arg version "${{ needs.create-release.outputs.version }}" '. + {version: $version}' src/_data/site.json > tmp.json
             mv tmp.json src/_data/site.json
-            echo "✅ Updated version to: ${{ needs.create-release.outputs.version }}"
+            echo "Updated version to: ${{ needs.create-release.outputs.version }}"
 
   deploy:
     name: 3. Deploy on Pi
@@ -124,4 +106,4 @@ jobs:
           script: |
             cd /home/romain/run/saas-ui-patterns
             docker compose up --build -d
-            echo "✅ Deployed version: ${{ needs.create-release.outputs.version }}"
+            echo "Deployed: ${{ needs.create-release.outputs.version }}"
