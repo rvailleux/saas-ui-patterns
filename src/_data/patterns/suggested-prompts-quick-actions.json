@@ -79,9 +79,5 @@
   "why": {
     "fr": "La page blanche est le principal obstacle à l'adoption. \"Comment est-ce que je commence ?\" est la question que pose chaque nouvel utilisateur. Les suggestions contextuelles répondent directement à cette question avec des actions immédiatement utiles — pas des exemples génériques.",
     "en": "Resolves the blank page problem. New users don't know what to ask; experienced users don't always have time to think. Contextual suggestions lower the barrier to AI engagement and demonstrate the product's value instantly."
-  },
-  "demo": {
-    "fr": "```\n[Interface AI vide, contexte : ticket de bug]\n\n                   ✨ AI Assistant\n\n    Que puis-je faire pour vous ?\n\n    ┌──────────────────────────────────────┐\n    │ 📝 Rédiger les étapes de reproduc.  │\n    │ 🔍 Trouver des issues similaires    │\n    │ ✅ Générer des critères d'acceptance │\n    │ 🧪 Écrire des cas de test          │\n    └──────────────────────────────────────┘\n\n    [Écrire une instruction...          ↑]\n```",
-    "en": "```\nEmpty AI input on a ticket view:\n\n┌────────────────────────────────────────┐\n│                                        │\n│  💡 Suggested actions:                 │\n│                                        │\n│  [Summarise this ticket]               │\n│  [Suggest acceptance criteria]         │\n│  [Draft a reply to the last comment]   │\n│  [Estimate effort in story points]     │\n│                                        │\n└────────────────────────────────────────┘\n```"
   }
 }

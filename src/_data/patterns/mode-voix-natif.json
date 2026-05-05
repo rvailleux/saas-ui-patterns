@@ -89,9 +89,5 @@
   "why": {
     "fr": "Certains contextes sont incompatibles avec la frappe : mains occupées, déplacement, pensée à voix haute. Le mode voix natif n'est pas un simple STT (Speech-to-Text) converti en texte — c'est un mode d'interaction complet avec ses propres conventions. Il ouvre l'AI à des cas d'usage impossibles en texte.",
     "en": "Opens AI to mobile use cases, hands-free workflows, and accessibility needs. Voice is faster than typing for long inputs. Audio output allows consuming AI responses without reading. Real-time conversation changes the nature of the interaction."
-  },
-  "demo": {
-    "fr": "```\n[Mode voix actif]\n\n     🎤\n   ╭─────╮\n   │ ~~~ │  ← visualisation de la voix (waveform)\n   ╰─────╯\n\nVous : \"Résume les points clés du dernier meeting\"\n\n          ●●● [AI réfléchit]\n\nAI : [audio streamé] \"Lors du dernier meeting,\n      trois points principaux ont été abordés...\"\n\n[Retranscription visible en sous-texte]\n[⏸ Pause]  [🔁 Rejouer]  [📝 Voir en texte]\n```",
-    "en": "```\n┌────────────────────────────────────────┐\n│                                        │\n│            🎙️                          │\n│     Listening...                       │\n│                                        │\n│  ████████████░░░░░░░░░░  0:04         │\n│                                        │\n│  [⏹ Stop]  [✓ Send]  [✗ Cancel]       │\n│                                        │\n│  Or type your message below ↓          │\n└────────────────────────────────────────┘\n```"
   }
 }

@@ -79,9 +79,5 @@
   "why": {
     "fr": "Un agent autonome qui \"disparaît\" pendant 30 secondes est anxiogène. L'utilisateur ne sait pas si c'est en train de fonctionner, bloqué, ou en train de faire quelque chose d'indésirable. Le step tracker maintient la confiance par la transparence totale sur les actions en cours.",
     "en": "Transforms opaque waiting into a transparent process. The user knows where the agent is, what it has done, what remains. Reduces anxiety. Enables intervention (cancel, redirect) when the agent takes a wrong direction."
-  },
-  "demo": {
-    "fr": "```\n🤖 Agent en cours...                    [⏹ Arrêter]\n\n✅ Lecture du ticket #1234              2s\n✅ Analyse des issues similaires        5s\n⚙️  Rédaction de la solution...        ← en cours\n⏳ Tests unitaires                      en attente\n⏳ Création du PR                       en attente\n\n[██████████░░░░░░░░░░] 45%\n```",
-    "en": "```\n🤖 Agent executing your request...\n\n✅ Step 1: Analysed the requirements\n✅ Step 2: Searched existing codebase\n⏳ Step 3: Generating the component... (in progress)\n⏸  Step 4: Writing tests\n⏸  Step 5: Updating documentation\n\n[⏹ Stop]  [↩ Rollback to step 2]\n```"
   }
 }

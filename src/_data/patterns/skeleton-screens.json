@@ -81,9 +81,5 @@
   "why": {
     "fr": "Les skeleton screens réduisent la perception de latence en montrant que quelque chose arrive. Ils préviennent le layout shift (le contenu n'arrive pas en déplaçant l'UI) et maintiennent l'orientation spatiale de l'utilisateur pendant le chargement.",
     "en": "Skeleton screens reduce perceived latency by showing that something is coming. They prevent layout shift (content doesn't arrive and displace the UI) and maintain the user's spatial orientation during loading."
-  },
-  "demo": {
-    "fr": "```\nChargement d'une liste de contacts :\n\n┌────────────────────────────────────┐\n│ ████  ████████████████  ████████   │  ← animation shimmer\n│ ████  █████████  ████   ████       │    de gauche à droite\n│ ████  ████████████████  ████████   │\n│ ████  █████  ████████   █████      │\n└────────────────────────────────────┘\n```",
-    "en": "```\nLoading a contact list:\n\n┌────────────────────────────────────┐\n│ ████  ████████████████  ████████   │  ← shimmer animation\n│ ████  █████████  ████   ████       │    moving left to right\n│ ████  ████████████████  ████████   │\n│ ████  █████  ████████   █████      │\n└────────────────────────────────────┘\n```"
   }
 }

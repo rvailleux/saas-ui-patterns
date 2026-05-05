@@ -82,9 +82,5 @@
   "why": {
     "fr": "Remplace les barres d'outils toujours visibles par des actions disponibles à la demande. Réduit le bruit visuel tout en maintenant l'accessibilité des actions. Les utilisateurs expérimentés préfèrent le clic droit aux boutons dans la toolbar.",
     "en": "Replaces always-visible toolbars with on-demand actions. Reduces visual noise while keeping actions accessible. Experienced users prefer right-click to toolbar buttons."
-  },
-  "demo": {
-    "fr": "```\n[Clic droit sur un calque dans Figma]\n\n┌────────────────────────────┐\n│ Copier                ⌘C   │\n│ Coller ici            ⌘V   │\n│ Dupliquer             ⌘D   │\n├────────────────────────────┤\n│ Grouper               ⌘G   │\n│ Créer un composant         │\n├────────────────────────────┤\n│ Renommer              ⌘R   │\n│ Supprimer             ⌫    │\n└────────────────────────────┘\n```",
-    "en": "```\n[Right-click on a layer in Figma]\n\n┌────────────────────────────┐\n│ Copy                  ⌘C   │\n│ Paste here            ⌘V   │\n│ Duplicate             ⌘D   │\n├────────────────────────────┤\n│ Group                 ⌘G   │\n│ Create component           │\n├────────────────────────────┤\n│ Rename                ⌘R   │\n│ Delete                ⌫    │\n└────────────────────────────┘\n```"
   }
 }

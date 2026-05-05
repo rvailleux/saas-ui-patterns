@@ -79,9 +79,5 @@
   "why": {
     "fr": "Réduit massivement la perception de latence. L'utilisateur commence à lire pendant que la génération se poursuit. Le mouvement du texte signale que le système est actif. Psychologiquement, attendre une réponse partielle est moins frustrant qu'attendre une réponse complète.",
     "en": "Massively reduces perceived latency. The user starts reading while generation continues. The movement of text signals the system is active. Psychologically, waiting for a partial response is less frustrating than waiting for a complete one."
-  },
-  "demo": {
-    "fr": "```\n[Requête envoyée]\n\nSans streaming :            Avec streaming :\n                            Voici▌\n[······ 3s ······]          Voici une▌\n                            Voici une réponse▌\nVoici une réponse           Voici une réponse complète▌\ncomplète avec tous          Voici une réponse complète\nles détails.                avec tous les détails.\n```",
-    "en": "```\n[Request sent]\n\nWithout streaming:          With streaming:\n                            Here▌\n[······ 3s ······]          Here is▌\n                            Here is a response▌\nHere is a complete          Here is a complete response▌\nresponse with all           Here is a complete response\nthe details.                with all the details.\n```"
   }
 }

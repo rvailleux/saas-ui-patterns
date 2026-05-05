@@ -79,9 +79,5 @@
   "why": {
     "fr": "La génération AI est non déterministe. Une réponse insatisfaisante n'est pas forcément la \"bonne\" réponse — une autre seed peut donner quelque chose de bien meilleur. Le regenerate offre une seconde chance sans effort. Les variantes parallèles permettent une comparaison rapide pour les décisions créatives.",
     "en": "AI generation is probabilistic — the first response is not necessarily the best. Giving the ability to regenerate or compare variants transforms a one-shot interaction into an iterative one. Comparison between variants helps calibrate expectations."
-  },
-  "demo": {
-    "fr": "```\n🤖 [Première réponse générée]\n\n[↺ Régénérer]  [⊞ 3 variantes]  [👍]  [👎]\n\n─────────────────────────────────────────\n\nVariante A          Variante B          Variante C\n──────────          ──────────          ──────────\nTon formel          Ton direct          Ton amical\n[Utiliser]          [Utiliser]          [Utiliser]\n```",
-    "en": "```\n🤖 First response: \"Here is a version of your email...\"\n\n┌──────────────────────────────────────────┐\n│ [↺ Regenerate]  [≡ See 3 variants]      │\n└──────────────────────────────────────────┘\n\nVariants view:\n┌──────────────┬──────────────┬──────────────┐\n│ Variant A    │ Variant B    │ Variant C    │\n│ Formal tone  │ Casual tone  │ Concise      │\n│ [Use this]   │ [Use this]   │ [Use this]   │\n└──────────────┴──────────────┴──────────────┘\n```"
   }
 }

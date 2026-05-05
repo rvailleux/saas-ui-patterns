@@ -82,9 +82,5 @@
   "why": {
     "fr": "Les utilisateurs avancés travaillent simultanément sur plusieurs contextes. Les tabs persistants éliminent le coût cognitif de retrouver et rouvrir les mêmes éléments à chaque session. L'épinglage signale l'importance sans encombrer.",
     "en": "Power users work on multiple contexts simultaneously. Persistent tabs eliminate the cognitive cost of finding and reopening the same items each session. Pinning signals importance without cluttering."
-  },
-  "demo": {
-    "fr": "```\n┌──────────┬────────────┬──────────────┬───┐\n│ 📌 Home  │ #1234 Bug  │ Sprint Plan  │ + │\n└──────────┴────────────┴──────────────┴───┘\n    ▲              ▲\n    Épinglé,     Clic droit → Pin / Close /\n    non fermable  Close others / Close all\n```",
-    "en": "```\n┌──────────┬────────────┬──────────────┬───┐\n│ 📌 Home  │ #1234 Bug  │ Sprint Plan  │ + │\n└──────────┴────────────┴──────────────┴───┘\n    ▲              ▲\n    Pinned,      Right-click → Pin / Close /\n    not closable  Close others / Close all\n```"
   }
 }

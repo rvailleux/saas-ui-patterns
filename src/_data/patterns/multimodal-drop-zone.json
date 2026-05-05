@@ -80,9 +80,5 @@
   "why": {
     "fr": "Les utilisateurs pensent en termes de problème, pas de type de données. \"Regarde ce screenshot et dis-moi ce qui ne va pas\" est plus naturel que \"voici du texte décrivant un screenshot\". La multimodalité supprime la traduction mentale et permet des requêtes plus directes.",
     "en": "Multimodal AI can process images, PDFs, audio. The interaction model must match: dropping a file is more natural than attaching it via a file picker dialog. The drop zone makes multi-modal capability immediately discoverable."
-  },
-  "demo": {
-    "fr": "```\n┌─────────────────────────────────────────┐\n│                                         │\n│         Glissez vos fichiers ici        │\n│    ou cliquez pour parcourir            │\n│                                         │\n│    📷 Images  📄 PDF  🎵 Audio  📊 CSV  │\n│                                         │\n└─────────────────────────────────────────┘\n\nAprès upload :\n┌─────────────────────────────────────────┐\n│ 🖼️ screenshot-bug.png  ×               │\n│ 📄 rapport-q3.pdf      ×               │\n│ ─────────────────────────────────────  │\n│ [Que vois-tu dans ces fichiers ?    ↑] │\n└─────────────────────────────────────────┘\n```",
-    "en": "```\n┌────────────────────────────────────────┐\n│                                        │\n│     ┌─────────────────────────┐        │\n│     │                         │        │\n│     │   📎 Drop files here    │        │\n│     │   or click to browse    │        │\n│     │                         │        │\n│     │  Supports: PDF, PNG,    │        │\n│     │  JPG, MP3, MP4          │        │\n│     └─────────────────────────┘        │\n│                                        │\n└────────────────────────────────────────┘\n```"
   }
 }

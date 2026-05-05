@@ -81,9 +81,5 @@
   "why": {
     "fr": "Intègre l'AI directement dans le flux d'écriture sans sortir de l'éditeur. L'utilisateur reste dans son contexte cognitif. La génération se fait à la position du curseur, exactement là où le contenu est attendu.",
     "en": "Integrates AI directly into the writing flow without leaving the editor. The user stays in their cognitive context. Generation happens at cursor position, exactly where the content is expected."
-  },
-  "demo": {
-    "fr": "```\n# Mon rapport Q3\n\n/améliore ce paragraphe\n\n┌─────────────────────────────────────────┐\n│ ✨ Améliorer le paragraphe ci-dessus... │\n│ [Écrire des instructions...          ]  │\n│                                [Générer]│\n└─────────────────────────────────────────┘\n```",
-    "en": "```\n# My Q3 report\n\n/improve this paragraph\n\n┌─────────────────────────────────────────┐\n│ ✨ Improve the paragraph above...       │\n│ [Write instructions...               ]  │\n│                                [Generate]│\n└─────────────────────────────────────────┘\n```"
   }
 }

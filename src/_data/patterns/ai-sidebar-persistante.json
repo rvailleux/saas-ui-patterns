@@ -79,9 +79,5 @@
   "why": {
     "fr": "Évite de quitter l'application pour accéder à un outil AI externe. L'AI a accès au contexte de la vue courante (document ouvert, ticket sélectionné) sans que l'utilisateur ait à copier-coller. La persistance du fil permet de construire sur les échanges précédents.",
     "en": "Avoids leaving the application to access an external AI tool. The AI has access to the current view's context (open document, selected ticket) without the user having to copy-paste. Persistent history allows building on previous exchanges."
-  },
-  "demo": {
-    "fr": "```\n┌──────────────────────┬───────────────────┐\n│ CONTENU PRINCIPAL    │ AI Assistant      │\n│                      │ ─────────────── │\n│ # Mon ticket         │ 👤 Comment        │\n│ Description...       │ améliorer cette   │\n│                      │ description ?     │\n│                      │                   │\n│                      │ 🤖 Voici 3        │\n│                      │ suggestions...    │\n│                      │                   │\n│                      │ ────────────────  │\n│                      │ [Écrire...    ↑] │\n└──────────────────────┴───────────────────┘\n```",
-    "en": "```\n┌──────────────────────┬───────────────────┐\n│ MAIN CONTENT         │ AI Assistant      │\n│                      │ ─────────────── │\n│ # My ticket          │ 👤 How can I      │\n│ Description...       │ improve this      │\n│                      │ description?      │\n│                      │                   │\n│                      │ 🤖 Here are 3     │\n│                      │ suggestions...    │\n│                      │                   │\n│                      │ ────────────────  │\n│                      │ [Write...     ↑] │\n└──────────────────────┴───────────────────┘\n```"
   }
 }

@@ -79,9 +79,5 @@
   "why": {
     "fr": "Le moment de sélection est le signal d'intention le plus fort : l'utilisateur a identifié un contenu sur lequel il veut agir. Proposer des actions AI exactement à ce moment, sans déplacement vers une autre interface, est le plus court chemin vers la valeur.",
     "en": "The moment of selection is the strongest intent signal: the user has identified content they want to act on. Offering AI actions exactly at that moment, without switching to another interface, is the shortest path to value."
-  },
-  "demo": {
-    "fr": "```\nL'utilisateur sélectionne du texte :\n\n\"Cette fonctionnalité permettra aux utilisateurs de...\"\n ═══════════════════════════════════════\n              ┌───────────────────────────┐\n              │ ✨ Améliorer  📝 Résumer  │\n              │ 🌍 Traduire  💬 Expliquer │\n              └───────────────────────────┘\n```",
-    "en": "```\nUser selects text:\n\n\"This feature will allow users to...\"\n ═══════════════════════════════════\n              ┌───────────────────────────┐\n              │ ✨ Improve  📝 Summarise  │\n              │ 🌍 Translate  💬 Explain  │\n              └───────────────────────────┘\n```"
   }
 }

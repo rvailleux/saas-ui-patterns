@@ -80,9 +80,5 @@
   "why": {
     "fr": "Sépare clairement les deux niveaux hiérarchiques de navigation. Le top nav reste stable (ancrage cognitif), le left panel change selon le contexte sans perturber l'orientation de l'utilisateur. Particulièrement adapté aux applications avec des domaines fonctionnels très différents (ex : code vs issues vs settings dans GitHub).",
     "en": "Clearly separates the two hierarchical levels of navigation. The top nav stays stable (cognitive anchor); the left panel changes with context without disrupting the user's orientation. Especially suited to apps with very different functional domains (e.g. code vs issues vs settings in GitHub)."
-  },
-  "demo": {
-    "fr": "```\n┌─────────────────────────────────────────────┐\n│  Logo  |  Code  |  Issues  |  Actions  |  ▼ │  ← Top nav (fixe)\n├─────────┬───────────────────────────────────┤\n│ Issues  │                                   │\n│ ──────  │   #1234 Fix login bug             │\n│ Open    │   ─────────────────────────────   │\n│ Closed  │   Labels · Assignees · Milestone  │\n│ Labels  │                                   │\n│ Milest. │                                   │  ← Left panel contextuel\n└─────────┴───────────────────────────────────┘\n   ▲\n   Change quand on clique sur \"Actions\" dans le top nav\n```",
-    "en": "```\n┌─────────────────────────────────────────────┐\n│  Logo  |  Code  |  Issues  |  Actions  |  ▼ │  ← Top nav (fixed)\n├─────────┬───────────────────────────────────┤\n│ Issues  │                                   │\n│ ──────  │   #1234 Fix login bug             │\n│ Open    │   ─────────────────────────────   │\n│ Closed  │   Labels · Assignees · Milestone  │\n│ Labels  │                                   │\n│ Milest. │                                   │  ← Contextual left panel\n└─────────┴───────────────────────────────────┘\n   ▲\n   Changes when \"Actions\" is clicked in the top nav\n```"
   }
 }

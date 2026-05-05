@@ -79,9 +79,5 @@
   "why": {
     "fr": "Certains workflows nécessitent une comparaison simultanée (markdown source + preview, code + résultat, deux documents). Le split view élimine le alt-tab constant et donne les deux contextes en permanence.",
     "en": "Some workflows require simultaneous comparison (markdown source + preview, code + output, two documents). Split view eliminates constant alt-tabbing and keeps both contexts permanently visible."
-  },
-  "demo": {
-    "fr": "```\n┌───────────────────┬─┬───────────────────┐\n│ # Mon document    │ │ Mon document       │\n│                   │◄►│                  │\n│ Voici un **titre**│ │ Voici un **titre** │\n│ et du texte.      │ │ et du texte.       │\n│                   │ │                   │\n└───────────────────┴─┴───────────────────┘\n         ▲           ▲\n       Source    Poignée    Preview rendu\n                drag pour resize\n```",
-    "en": "```\n┌───────────────────┬─┬───────────────────┐\n│ # My document     │ │ My document        │\n│                   │◄►│                  │\n│ Here is a **title**│ │ Here is a title   │\n│ and some text.    │ │ and some text.     │\n│                   │ │                   │\n└───────────────────┴─┴───────────────────┘\n         ▲           ▲\n       Source    Handle    Rendered preview\n                drag to resize\n```"
   }
 }

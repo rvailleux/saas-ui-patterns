@@ -80,9 +80,5 @@
   "why": {
     "fr": "Différents utilisateurs ont des modèles mentaux différents. Le développeur veut la liste, le PM veut le board, le manager veut la timeline. Proposer plusieurs vues sur les mêmes données évite de dupliquer l'information et permet à chaque profil de travailler avec son paradigme.",
     "en": "Different users have different mental models. Developers want the list, PMs want the board, managers want the timeline. Offering multiple views on the same data avoids duplicating information and lets each profile work in their own paradigm."
-  },
-  "demo": {
-    "fr": "```\n[Board] [Liste] [Tableau] [Calendrier]   ← Switcher\n   ▲\nVue active\n\nBoard view:\n┌─────────┐  ┌──────────┐  ┌──────────┐\n│ To do   │  │ In prog. │  │ Done     │\n│ ─────── │  │ ──────── │  │ ──────── │\n│ Task A  │  │ Task C   │  │ Task E   │\n│ Task B  │  │ Task D   │  │          │\n└─────────┘  └──────────┘  └──────────┘\n```",
-    "en": "```\n[Board] [List] [Table] [Calendar]   ← Switcher\n   ▲\nActive view\n\nBoard view:\n┌─────────┐  ┌──────────┐  ┌──────────┐\n│ To do   │  │ In prog. │  │ Done     │\n│ ─────── │  │ ──────── │  │ ──────── │\n│ Task A  │  │ Task C   │  │ Task E   │\n│ Task B  │  │ Task D   │  │          │\n└─────────┘  └──────────┘  └──────────┘\n```"
   }
 }

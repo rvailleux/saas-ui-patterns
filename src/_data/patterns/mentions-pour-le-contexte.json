@@ -79,9 +79,5 @@
   "why": {
     "fr": "Résout le problème du contexte de l'AI de manière transparente. L'utilisateur contrôle exactement quelles données sont envoyées. L'AI a le bon contexte sans que l'utilisateur copie-colle. La mention est visible dans le prompt — ce qui est injecté est connu.",
     "en": "Solves the AI context problem transparently. The user controls exactly which data is sent. The AI has the right context without the user copy-pasting. The mention is visible in the prompt — what's injected is known."
-  },
-  "demo": {
-    "fr": "```\n[Prompt de l'utilisateur]\n\nRésume les blocages de @Sprint-12 et\nassigne les tâches critiques à @Alice\n\n          ↓ résolution avant envoi à l'AI\n\n[Prompt réel envoyé à l'API]\nRésume les blocages de [contenu complet du Sprint 12]\net assigne les tâches critiques à [Alice Martin, alice@company.com]\n```",
-    "en": "```\n[User prompt]\n\nSummarise the blockers in @Sprint-12 and\nassign the critical tasks to @Alice\n\n          ↓ resolution before sending to AI\n\n[Actual prompt sent to API]\nSummarise the blockers in [full Sprint 12 content]\nand assign the critical tasks to [Alice Martin, alice@company.com]\n```"
   }
 }
