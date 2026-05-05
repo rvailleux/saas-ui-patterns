@@ -1,0 +1,69 @@
+{
+  "id": 909,
+  "slug": "context-aware-responsive",
+  "category": "layout",
+  "title": {
+    "fr": "Design Responsif Contextuel",
+    "en": "Context-Aware Responsive Design"
+  },
+  "categoryLabel": {
+    "slug": "layout",
+    "fr": "Layout & Espace de Travail",
+    "en": "Layout & Workspace"
+  },
+  "firstSeenOn": {
+    "product": "HubSpot",
+    "url": "https://hubspot.com",
+    "approximateDate": "2020"
+  },
+  "examples": [
+    {
+      "name": "Salesforce Lightning",
+      "desc": {
+        "fr": "Interface adaptative selon le rôle : développeur voit API stats, marketeur voit campagnes",
+        "en": "Adaptive interface by role: developer sees API stats, marketer sees campaigns"
+      }
+    },
+    {
+      "name": "HubSpot",
+      "desc": {
+        "fr": "Tableaux de bord priorisés différemment selon la période (planning sprint vs review)",
+        "en": "Dashboards prioritized differently based on time period (sprint planning vs review)"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Par rôle** : Adaptez l'interface selon les responsabilités de l'utilisateur",
+      "**Par temps** : Priorisez différemment selon l'heure, le jour, la période",
+      "**Par comportement** : Les fonctionnalités fréquemment utilisées remontent",
+      "**Par appareil** : Au-delà du responsive classique - capabilities spécifiques"
+    ],
+    "en": [
+      "**By role** : Adapt interface based on user responsibilities",
+      "**By time** : Prioritize differently based on hour, day, period",
+      "**By behavior** : Frequently used features float to top",
+      "**By device** : Beyond classic responsive - specific capabilities"
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Cacher des fonctionnalités importantes sans moyen de les retrouver",
+      "❌ Changer l'interface trop souvent - perte de repères",
+      "❌ Ignorer les préférences utilisateur explicitement définies"
+    ],
+    "en": [
+      "❌ Hiding important features without way to find them",
+      "❌ Changing interface too often - loss of bearings",
+      "❌ Ignoring explicitly set user preferences"
+    ]
+  },
+  "what": {
+    "fr": "L'interface s'adapte selon les capacités de l'appareil, le rôle utilisateur, l'heure et le comportement passé - pas juste la taille d'écran.",
+    "en": "Interface adapts based on device capabilities, user role, time of day, and previous behavior - not just screen size."
+  },
+  "why": {
+    "fr": "Chaque utilisateur a des besoins différents selon le contexte. Un design contextuellement conscient maximise la pertinence et minimise la charge cognitive.",
+    "en": "Each user has different needs based on context. A contextually aware design maximizes relevance and minimizes cognitive load."
+  }
+}

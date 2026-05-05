@@ -1,0 +1,69 @@
+{
+  "id": 910,
+  "slug": "browser-notifications",
+  "category": "feedback",
+  "title": {
+    "fr": "Notifications Navigateur (Onglets en Arrière-plan)",
+    "en": "Browser Notifications (Background Tabs)"
+  },
+  "categoryLabel": {
+    "slug": "feedback",
+    "fr": "Feedback & États",
+    "en": "Feedback & States"
+  },
+  "firstSeenOn": {
+    "product": "Slack",
+    "url": "https://slack.com",
+    "approximateDate": "2014"
+  },
+  "examples": [
+    {
+      "name": "Gmail",
+      "desc": {
+        "fr": "Notifications système quand un nouvel email arrive et que l'onglet est caché",
+        "en": "System notifications when new email arrives and tab is hidden"
+      }
+    },
+    {
+      "name": "Paperclip AI",
+      "desc": {
+        "fr": "Notifications quand un agent termine son travail et que l'onglet est en arrière-plan",
+        "en": "Notifications when agent completes work and tab is backgrounded"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Respectez la visibilité** : Seulement quand l'onglet est caché ou inactif",
+      "**Soyez pertinent** : Notifiez pour des événements importants seulement",
+      "**Permettez le contrôle** : Options faciles pour désactiver ou ajuster",
+      "**Incluez le contexte** : La notification doit permettre une action directe"
+    ],
+    "en": [
+      "**Respect visibility** : Only when tab is hidden or inactive",
+      "**Be relevant** : Notify for important events only",
+      "**Allow control** : Easy options to disable or adjust",
+      "**Include context** : Notification should enable direct action"
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Spammer avec des notifications pour chaque petite mise à jour",
+      "❌ Demander la permission immédiatement au chargement de la page",
+      "❌ Notifications sans action possible ou lien vers l'app"
+    ],
+    "en": [
+      "❌ Spamming with notifications for every small update",
+      "❌ Requesting permission immediately on page load",
+      "❌ Notifications without actionable content or link to app"
+    ]
+  },
+  "what": {
+    "fr": "Notifications système (macOS Notification Center, Windows Action Center) quand l'onglet SaaS est caché mais que l'IA/agent termine son travail.",
+    "en": "System-level notifications when SaaS tab is hidden but AI/agent completes work - no more missed toasts."
+  },
+  "why": {
+    "fr": "Les utilisateurs travaillent dans plusieurs onglets. Sans notifications système, les tâches accomplies en arrière-plan passent inaperçues.",
+    "en": "Users work across multiple tabs. Without system notifications, background-completed tasks go unnoticed."
+  }
+}
