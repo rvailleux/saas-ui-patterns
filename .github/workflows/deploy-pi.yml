@@ -110,12 +110,15 @@ jobs:
             git config user.email "deploy@github-actions" || true
             git config user.name "GitHub Actions Deploy" || true
             git add src/_data/site.json
-            git commit -m "chore: update version to ${{ needs.create-release.outputs.version }}" || echo "No changes to commit"
+            git status
+            git commit -m "chore: update version to ${{ needs.create-release.outputs.version }}" && echo "✅ Committed version change" || echo "⚠️ No changes to commit (maybe already committed?)"
+            git log --oneline -1
             # Deploy with fresh build (no cache to ensure version update is picked up)
             docker compose down
             docker image prune -f
             docker compose build --no-cache
             docker compose up -d
             # Push version commit back to origin so future deploys see it
-            git push origin deploy || echo "Push failed, but deployment completed"
+            echo "Pushing version commit to origin/deploy..."
+            git push origin deploy && echo "✅ Pushed to origin/deploy" || echo "⚠️ Push failed, but deployment may still work"
             echo "✅ Deployed: ${{ needs.create-release.outputs.version }}"
