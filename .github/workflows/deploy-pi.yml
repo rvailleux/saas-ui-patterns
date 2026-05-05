@@ -87,9 +87,6 @@ jobs:
             cd /home/romain/run/saas-ui-patterns
             git fetch origin deploy
             git reset --hard origin/deploy
-            # Configure git for local commit (version update)
-            git config user.email "deploy@github-actions"
-            git config user.name "GitHub Actions Deploy"
             # Update version
             if command -v jq &> /dev/null; then
               jq --arg version "${{ needs.create-release.outputs.version }}" '. + {version: $version}' src/_data/site.json > tmp.json
@@ -109,10 +106,6 @@ jobs:
               exit 1
             fi
             echo "✅ Version verified: $UPDATED_VERSION"
-            # Commit the version change locally so Docker COPY picks it up
-            git add src/_data/site.json
-            git commit -m "chore: update version to ${{ needs.create-release.outputs.version }}" || echo "No changes to commit"
-            echo "✅ Version committed locally"
             # Deploy with fresh build
             docker compose down
             docker image prune -f
