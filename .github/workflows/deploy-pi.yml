@@ -83,20 +83,23 @@ jobs:
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_SSH_KEY }}
           port: ${{ secrets.DEPLOY_PORT }}
+          script_stop: true
           script: |
+            set -e
             cd /home/romain/run/saas-ui-patterns
+            echo "=== Fetching latest code ==="
             git fetch origin deploy
             git reset --hard origin/deploy
-            # Update version locally (not committed - just for this build)
+            echo "=== Updating version to ${{ needs.create-release.outputs.version }} ==="
             jq --arg version "${{ needs.create-release.outputs.version }}" '. + {version: $version}' src/_data/site.json > tmp.json
             mv tmp.json src/_data/site.json
-            echo "Building version: $(jq -r '.version' src/_data/site.json)"
-            # Force fresh Docker build with updated version
+            cat src/_data/site.json | grep version
+            echo "=== Building Docker image ==="
             docker compose down
             docker system prune -f --volumes
             docker compose build --no-cache
             docker compose up -d
-            # Verify deployed version
+            echo "=== Verifying deployment ==="
             sleep 5
             curl -s http://localhost:5003/fr/ | grep -oE "v20[0-9]{2}\.[0-9]{2}\.[0-9]{2}-[0-9]+" | head -1 || echo "Version check failed"
             echo "✅ Deployed"
