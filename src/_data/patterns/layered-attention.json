@@ -1,0 +1,69 @@
+{
+  "id": 902,
+  "slug": "layered-attention",
+  "category": "ai-context",
+  "title": {
+    "fr": "Attention Étagée (Monitoring d'Agent)",
+    "en": "Layered Attention (Agent Status Monitoring)"
+  },
+  "categoryLabel": {
+    "slug": "ai-context",
+    "fr": "AI — Contexte & Mémoire",
+    "en": "AI — Context & Memory"
+  },
+  "firstSeenOn": {
+    "product": "Devin",
+    "url": "https://devin.ai",
+    "approximateDate": "2024"
+  },
+  "examples": [
+    {
+      "name": "ChatGPT",
+      "desc": {
+        "fr": "Indicateurs de tâches en arrière-plan avec notifications contextuelles quand une réponse est prête",
+        "en": "Background task indicators with contextual notifications when responses are ready"
+      }
+    },
+    {
+      "name": "Cursor",
+      "desc": {
+        "fr": "Widget de statut à plusieurs niveaux montrant l'état du compilateur, des tests et des agents",
+        "en": "Multi-level status widget showing compiler, test, and agent states"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Respectez la hiérarchie d'attention** : Ambiant → Progression → Attention → Récapitulatif",
+      "**Commencez discretement** : Un badge pulsant presque imperceptible suffit pour l'état ambiant",
+      "**Escaladez proportionnellement** : Plus l'action demande d'attention, plus le signal doit être visible",
+      "**Permettez le désengagement** : L'utilisateur doit pouvoir rejeter une notification et retrouver l'info plus tard"
+    ],
+    "en": [
+      "**Respect the attention hierarchy** : Ambient → Progress → Attention → Summary",
+      "**Start discreetly** : A barely perceptible pulsing badge is enough for ambient state",
+      "**Escalate proportionally** : The more action required, the more visible the signal should be",
+      "**Allow disengagement** : Users should be able to dismiss a notification and find the info later"
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Commencer directement avec des notifications interruptives pour des tâches normales",
+      "❌ Bloquer l'interface avec des modals pour des états qui ne nécessitent pas d'action immédiate",
+      "❌ Ne pas fournir de chemin de retour après avoir ignoré une notification"
+    ],
+    "en": [
+      "❌ Starting immediately with interrupting notifications for normal tasks",
+      "❌ Blocking the UI with modals for states that don't require immediate action",
+      "❌ Not providing a way back after dismissing a notification"
+    ]
+  },
+  "what": {
+    "fr": "Un système de statut à quatre niveaux pour les tâches IA longues qui escalade les demandes d'attention proportionnellement.",
+    "en": "A four-tier status system for long-running AI tasks that escalates attention demands proportionally."
+  },
+  "why": {
+    "fr": "Les utilisateurs ont une capacité d'attention limitée. Ce pattern respecte leur flux de travail en demandant l'attention uniquement quand nécessaire, réduisant la fatigue cognitive et améliorant la productivité.",
+    "en": "Users have limited attention capacity. This pattern respects their workflow by demanding attention only when necessary, reducing cognitive fatigue and improving productivity."
+  }
+}
