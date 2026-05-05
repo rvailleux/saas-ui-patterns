@@ -1,0 +1,69 @@
+{
+  "id": 905,
+  "slug": "mixed-initiative",
+  "category": "ai-generation",
+  "title": {
+    "fr": "Contrôle à Initiative Mixte",
+    "en": "Mixed-Initiative Control"
+  },
+  "categoryLabel": {
+    "slug": "ai-generation",
+    "fr": "AI — Génération & Édition",
+    "en": "AI — Generation & Editing"
+  },
+  "firstSeenOn": {
+    "product": "Cursor",
+    "url": "https://cursor.sh",
+    "approximateDate": "2023"
+  },
+  "examples": [
+    {
+      "name": "Notion AI",
+      "desc": {
+        "fr": "L'utilisateur édite pendant que l'IA génère, suggestions en temps réel sans mode spécial",
+        "en": "User edits while AI generates, real-time suggestions without special mode"
+      }
+    },
+    {
+      "name": "Figma AI",
+      "desc": {
+        "fr": "Collaboration fluide où humain et IA modifient le design simultanément",
+        "en": "Fluid collaboration where human and AI modify design simultaneously"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Pas de mode 'IA'** : L'utilisateur ne bascule jamais dans un mode spécial - l'IA est toujours présente",
+      "**Édition simultanée** : L'utilisateur peut modifier pendant que l'IA génère",
+      "**Suggestions contextuelles** : L'IA propose pendant que l'utilisateur tape",
+      "**Fusion des curseurs** : Visualisez clairement qui écrit quoi"
+    ],
+    "en": [
+      "**No 'AI mode'** : User never switches to a special mode - AI is always present",
+      "**Simultaneous editing** : User can edit while AI is generating",
+      "**Contextual suggestions** : AI suggests while user is typing",
+      "**Cursor merging** : Clearly visualize who is writing what"
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Bloquer l'édition utilisateur pendant la génération IA",
+      "❌ Basculer entre 'mode normal' et 'mode IA' avec friction",
+      "❌ Écraser le travail de l'utilisateur sans avertissement"
+    ],
+    "en": [
+      "❌ Blocking user editing during AI generation",
+      "❌ Toggling between 'normal mode' and 'AI mode' with friction",
+      "❌ Overwriting user work without warning"
+    ]
+  },
+  "what": {
+    "fr": "Flux fluide de contrôle entre humain et IA - zones de travail parallèles où chacun peut prendre l'initiative sans action formelle de 'prise de contrôle'.",
+    "en": "Seamless flow of control between human and AI - parallel work zones where either can take initiative without formal 'take over' actions."
+  },
+  "why": {
+    "fr": "La collaboration la plus productive est celle où l'IA et l'humain travaillent en parallèle, pas en série. Cela réduit les temps d'attente et favorise l'itération rapide.",
+    "en": "The most productive collaboration is where AI and human work in parallel, not series. This reduces wait times and enables rapid iteration."
+  }
+}
