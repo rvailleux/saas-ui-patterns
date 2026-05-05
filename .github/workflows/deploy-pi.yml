@@ -21,6 +21,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          ref: deploy
 
       - name: Generate version
         id: version
@@ -36,6 +37,17 @@ jobs:
           VERSION="v${DATE}-${NEW_BUILD}"
           echo "version=$VERSION" >> $GITHUB_OUTPUT
           echo "Generated version: $VERSION"
+
+      - name: Update version in site.json
+        run: |
+          jq --arg version "${{ steps.version.outputs.version }}" '. + {version: $version}' src/_data/site.json > tmp.json
+          mv tmp.json src/_data/site.json
+          echo "Updated version to: ${{ steps.version.outputs.version }}"
+          git config user.email "deploy@github-actions"
+          git config user.name "GitHub Actions Deploy"
+          git add src/_data/site.json
+          git commit -m "chore: update version to ${{ steps.version.outputs.version }}" || echo "No changes to commit"
+          git push origin deploy || echo "Push failed"
 
       - name: Get commit messages
         id: changelog
@@ -72,11 +84,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   deploy:
-    name: 2. Update Version & Deploy on Pi
+    name: 2. Deploy on Pi
     needs: create-release
     runs-on: ubuntu-latest
     steps:
-      - name: SSH to Pi - Update version and deploy
+      - name: SSH to Pi - Deploy
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.DEPLOY_HOST }}
@@ -87,38 +99,9 @@ jobs:
             cd /home/romain/run/saas-ui-patterns
             git fetch origin deploy
             git reset --hard origin/deploy
-            # Update version
-            if command -v jq &> /dev/null; then
-              jq --arg version "${{ needs.create-release.outputs.version }}" '. + {version: $version}' src/_data/site.json > tmp.json
-              mv tmp.json src/_data/site.json
-              echo "✅ Updated version to: ${{ needs.create-release.outputs.version }}"
-            else
-              echo "❌ jq is not installed. Installing..."
-              sudo apt-get update && sudo apt-get install -y jq
-              jq --arg version "${{ needs.create-release.outputs.version }}" '. + {version: $version}' src/_data/site.json > tmp.json
-              mv tmp.json src/_data/site.json
-              echo "✅ Updated version to: ${{ needs.create-release.outputs.version }}"
-            fi
-            # Verify version update
-            UPDATED_VERSION=$(jq -r '.version' src/_data/site.json)
-            if [ "$UPDATED_VERSION" != "${{ needs.create-release.outputs.version }}" ]; then
-              echo "❌ Version update failed. Expected: ${{ needs.create-release.outputs.version }}, Got: $UPDATED_VERSION"
-              exit 1
-            fi
-            echo "✅ Version verified: $UPDATED_VERSION"
-            # Commit version change locally so Docker COPY picks it up
-            git config user.email "deploy@github-actions" || true
-            git config user.name "GitHub Actions Deploy" || true
-            git add src/_data/site.json
-            git status
-            git commit -m "chore: update version to ${{ needs.create-release.outputs.version }}" && echo "✅ Committed version change" || echo "⚠️ No changes to commit (maybe already committed?)"
-            git log --oneline -1
-            # Deploy with fresh build (no cache to ensure version update is picked up)
+            echo "Version in site.json: $(jq -r '.version' src/_data/site.json)"
             docker compose down
             docker image prune -f
             docker compose build --no-cache
             docker compose up -d
-            # Push version commit back to origin so future deploys see it
-            echo "Pushing version commit to origin/deploy..."
-            git push origin deploy && echo "✅ Pushed to origin/deploy" || echo "⚠️ Push failed, but deployment may still work"
-            echo "✅ Deployed: ${{ needs.create-release.outputs.version }}"
+            echo "✅ Deployed: $(jq -r '.version' src/_data/site.json)"
