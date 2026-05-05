@@ -1,0 +1,309 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #0f0f1a;
+      color: #e2e8f0;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      font-size: 13px;
+    }
+    .app {
+      flex: 1;
+      padding: 20px;
+      display: flex;
+      gap: 20px;
+    }
+    .sidebar {
+      width: 200px;
+      background: #1a1a2e;
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .sidebar-item {
+      padding: 8px 12px;
+      margin-bottom: 4px;
+      border-radius: 6px;
+      color: #94a3b8;
+      cursor: pointer;
+    }
+    .sidebar-item:hover { background: #252542; color: #fff; }
+    .main {
+      flex: 1;
+      background: #1a1a2e;
+      border-radius: 8px;
+      padding: 24px;
+    }
+    .taskbar {
+      height: 48px;
+      background: #151528;
+      border-top: 1px solid #2a2a45;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      gap: 16px;
+    }
+    .ambient-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      background: #252542;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    .ambient-badge:hover { background: #2f2f52; }
+    .ambient-badge.active { background: #1e3a5f; }
+    .pulse {
+      width: 8px;
+      height: 8px;
+      background: #3b82f6;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    .pulse.success { background: #22c55e; animation: none; }
+    .pulse.warning { background: #f59e0b; animation: pulse 1s infinite; }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.2); }
+    }
+    .panel {
+      position: absolute;
+      bottom: 60px;
+      left: 20px;
+      width: 320px;
+      background: #1e1e3a;
+      border: 1px solid #2a2a55;
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+      display: none;
+    }
+    .panel.open { display: block; }
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .panel-title { font-weight: 600; }
+    .close-btn {
+      background: none;
+      border: none;
+      color: #94a3b8;
+      cursor: pointer;
+      font-size: 18px;
+    }
+    .progress-bar {
+      height: 6px;
+      background: #2a2a55;
+      border-radius: 3px;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+      border-radius: 3px;
+      transition: width 0.3s ease;
+    }
+    .task-list { list-style: none; }
+    .task-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 0;
+      border-bottom: 1px solid #2a2a45;
+    }
+    .task-item:last-child { border-bottom: none; }
+    .task-status {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+    }
+    .task-status.pending { border: 2px solid #4b5563; }
+    .task-status.running { border: 2px solid #3b82f6; animation: spin 1s linear infinite; }
+    .task-status.done { background: #22c55e; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .btn {
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      font-size: 12px;
+    }
+    .btn-primary {
+      background: #3b82f6;
+      color: white;
+    }
+    .btn-secondary {
+      background: #2a2a55;
+      color: #e2e8f0;
+      margin-left: 8px;
+    }
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #1e3a5f;
+      border: 1px solid #3b82f6;
+      border-radius: 10px;
+      padding: 16px;
+      max-width: 300px;
+      display: none;
+      animation: slideIn 0.3s ease;
+    }
+    .notification.show { display: block; }
+    @keyframes slideIn {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    .notification-title { font-weight: 600; margin-bottom: 4px; }
+    .notification-text { color: #94a3b8; font-size: 12px; }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="sidebar">
+      <div class="sidebar-item">Dashboard</div>
+      <div class="sidebar-item">Projects</div>
+      <div class="sidebar-item">Analytics</div>
+      <div class="sidebar-item">Settings</div>
+    </div>
+    <div class="main">
+      <h2>Main Workspace</h2>
+      <p style="color: #94a3b8; margin-top: 12px;">Continue working while AI processes in background...</p>
+    </div>
+  </div>
+
+  <div class="taskbar">
+    <div class="ambient-badge" id="ambientBadge">
+      <div class="pulse" id="pulseDot"></div>
+      <span id="badgeText">AI Agent running</span>
+    </div>
+    <button class="btn btn-primary" onclick="startAgent()">Start Agent</button>
+    <button class="btn btn-secondary" onclick="resetDemo()">Reset</button>
+  </div>
+
+  <div class="panel" id="progressPanel">
+    <div class="panel-header">
+      <span class="panel-title">Code Review Agent</span>
+      <button class="close-btn" onclick="togglePanel()">&times;</button>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+    </div>
+    <ul class="task-list" id="taskList">
+      <li class="task-item">
+        <div class="task-status done">&#10003;</div>
+        <span>Analyzing repository structure</span>
+      </li>
+      <li class="task-item">
+        <div class="task-status running" id="currentTask">&#8635;</div>
+        <span id="currentTaskText">Checking for vulnerabilities...</span>
+      </li>
+      <li class="task-item">
+        <div class="task-status pending"></div>
+        <span>Generating recommendations</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="notification" id="notification">
+    <div class="notification-title">Agent Needs Attention</div>
+    <div class="notification-text">Found 3 critical issues requiring your review.</div>
+  </div>
+
+  <script>
+    let progress = 0;
+    let interval;
+    let isRunning = false;
+
+    const tasks = [
+      "Checking for vulnerabilities...",
+      "Scanning dependencies...",
+      "Analyzing code patterns...",
+      "Generating recommendations..."
+    ];
+
+    document.getElementById('ambientBadge').addEventListener('click', togglePanel);
+
+    function togglePanel() {
+      document.getElementById('progressPanel').classList.toggle('open');
+      document.getElementById('ambientBadge').classList.toggle('active');
+    }
+
+    function startAgent() {
+      if (isRunning) return;
+      isRunning = true;
+      progress = 0;
+
+      document.getElementById('ambientBadge').classList.add('active');
+      document.getElementById('pulseDot').className = 'pulse';
+      document.getElementById('badgeText').textContent = 'AI Agent running';
+
+      let taskIndex = 0;
+
+      interval = setInterval(() => {
+        progress += Math.random() * 8;
+        if (progress >= 75 && progress < 80) {
+          // Escalate to notification
+          document.getElementById('notification').classList.add('show');
+          document.getElementById('pulseDot').className = 'pulse warning';
+        }
+        if (progress >= 100) {
+          progress = 100;
+          clearInterval(interval);
+          completeAgent();
+        }
+        document.getElementById('progressFill').style.width = progress + '%';
+
+        // Update task text periodically
+        if (Math.random() > 0.7 && taskIndex < tasks.length - 1) {
+          taskIndex++;
+          document.getElementById('currentTaskText').textContent = tasks[taskIndex];
+        }
+      }, 200);
+    }
+
+    function completeAgent() {
+      document.getElementById('pulseDot').className = 'pulse success';
+      document.getElementById('badgeText').textContent = 'AI Agent complete';
+      document.getElementById('currentTask').className = 'task-status done';
+      document.getElementById('currentTask').innerHTML = '&#10003;';
+      document.getElementById('currentTaskText').textContent = 'All tasks completed';
+      isRunning = false;
+
+      setTimeout(() => {
+        document.getElementById('notification').classList.remove('show');
+      }, 3000);
+    }
+
+    function resetDemo() {
+      clearInterval(interval);
+      isRunning = false;
+      progress = 0;
+      document.getElementById('progressFill').style.width = '0%';
+      document.getElementById('pulseDot').className = 'pulse';
+      document.getElementById('badgeText').textContent = 'AI Agent running';
+      document.getElementById('currentTask').className = 'task-status running';
+      document.getElementById('currentTask').innerHTML = '&#8635;';
+      document.getElementById('currentTaskText').textContent = 'Checking for vulnerabilities...';
+      document.getElementById('notification').classList.remove('show');
+      document.getElementById('ambientBadge').classList.remove('active');
+    }
+  </script>
+</body>
+</html>
