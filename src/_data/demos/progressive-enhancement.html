@@ -1,0 +1,133 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #0f0f1a;
+      color: #e2e8f0;
+      height: 100vh;
+      overflow: hidden;
+      font-size: 13px;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+    }
+    .chat {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      max-width: 700px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .message {
+      background: #1a1a2e;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+    .message-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      font-size: 12px;
+      color: #94a3b8;
+    }
+    .avatar {
+      width: 24px;
+      height: 24px;
+      background: #3b82f6;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+    }
+    .content { line-height: 1.6; }
+    .skeleton-line {
+      height: 14px;
+      background: linear-gradient(90deg, #2a2a55 25%, #3a3a6c 50%, #2a2a55 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+      border-radius: 4px;
+      margin-bottom: 8px;
+    }
+    @keyframes shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    .sources {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid #2a2a55;
+    }
+    .sources-title {
+      font-size: 11px;
+      color: #64748b;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .source-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px;
+      background: #151528;
+      border-radius: 6px;
+      margin-bottom: 6px;
+      font-size: 12px;
+    }
+    .source-num {
+      width: 18px;
+      height: 18px;
+      background: #3b82f6;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+    }
+    .source-link { color: #3b82f6; text-decoration: none; }
+    .controls {
+      display: flex;
+      gap: 12px;
+      padding-top: 16px;
+    }
+    .btn {
+      padding: 10px 16px;
+      border-radius: 8px;
+      border: none;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .btn-primary { background: #3b82f6; color: white; }
+  </style>
+</head>
+<body>
+  <div class="chat">
+    <div class="message">
+      <div class="message-header">
+        <div class="avatar">AI</div>
+        <span>Assistant</span>
+      </div>
+      <div class="content" id="response">
+        <div class="skeleton-line" style="width: 100%"></div>
+        <div class="skeleton-line" style="width: 80%"></div>
+        <div class="skeleton-line" style="width: 60%"></div>
+      </div>
+    </div>
+  </div>
+  <div class="controls">
+    <button class="btn btn-primary" onclick="startProgressive()">Simulate Progressive Response</button>
+  </div>
+  <script>
+    function startProgressive() {
+      alert('Progressive response simulation starting...');
+    }
+  </script>
+</body>
+</html>
