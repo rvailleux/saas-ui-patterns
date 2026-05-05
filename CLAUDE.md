@@ -6,6 +6,15 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Build a multilingual static website that evangelises modern SaaS UI design patterns, deployed on GitHub Pages. All source content is in `content.md` (French, ~40 patterns across 8 categories).
 
+## For Contributors Using Claude Code
+
+Two project-local skills are available in `.claude/skills/`:
+
+- **`create-pattern`** — Interactive workflow to collect pattern info and generate the three required files
+- **`submit-pattern`** — Validates files, runs checklist, and submits PR via gh CLI
+
+Usage: Simply say "I want to add a pattern" or "Submit my pattern" in Claude Code.
+
 ## Stack Decisions
 
 - **Static site generator**: Eleventy (11ty) — zero-JS by default, no build lock-in

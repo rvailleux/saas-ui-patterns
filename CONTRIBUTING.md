@@ -4,6 +4,46 @@ Thank you for helping grow this reference. Every pattern added here has been see
 
 ---
 
+## Quick Start with Claude Code
+
+If you're using [Claude Code](https://claude.ai/code), two skills are available to help you contribute:
+
+### `create-pattern` — Add a New Pattern
+
+This skill guides you through creating a complete pattern submission:
+
+```bash
+# In Claude Code, just say:
+"I want to add a new pattern"
+"Create a pattern for [pattern name]"
+"Help me add a pattern"
+```
+
+The skill will:
+1. Collect all required information (slug, category, titles, examples, etc.)
+2. Create the three required files with proper structure
+3. Ensure your pattern meets project standards
+
+### `submit-pattern` — Submit via Pull Request
+
+Once your pattern files are ready:
+
+```bash
+# In Claude Code, just say:
+"Submit my pattern"
+"Create a PR for my pattern"
+"Open a pull request"
+```
+
+The skill will:
+1. Validate all required files exist
+2. Run through the submission checklist
+3. Create a properly named branch (`pattern/{slug}`)
+4. Build a complete PR description
+5. Submit via the GitHub CLI
+
+---
+
 ## Before you submit
 
 **Check for duplicates first.**
