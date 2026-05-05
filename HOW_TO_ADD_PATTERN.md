@@ -16,6 +16,22 @@ src/_data/demos/{slug}.json        # Demo height config (required)
 
 ---
 
+## Using Claude Code (Optional)
+
+If you're using [Claude Code](https://claude.ai/code), you can use the built-in skills to streamline this process:
+
+### Create Pattern Skill
+Just say: *"I want to add a new pattern"* or *"Create a pattern"*
+
+Claude will guide you through an interactive workflow to collect all pattern information and generate the three required files automatically.
+
+### Submit Pattern Skill
+Once files are ready, say: *"Submit my pattern"* or *"Create a PR"*
+
+Claude will validate your files, complete the checklist, and submit the pull request via the GitHub CLI.
+
+---
+
 ## Step 1: Choose a Slug
 
 Your slug should be:
