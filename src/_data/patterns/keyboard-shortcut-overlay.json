@@ -66,5 +66,13 @@
       "❌ Forgetting accessibility — overlay must be keyboard-navigable and screen-reader friendly",
       "❌ Requiring explicit close without Escape or external click support"
     ]
+  },
+  "what": {
+    "fr": "Une modale contextuelle accessible via raccourci clavier (Shift+? ou Cmd+K puis ?) qui affiche les raccourcis disponibles pour la vue actuelle, groupés par catégorie avec les combinaisons visuelles en badges de style touche.",
+    "en": "A contextual modal accessible via keyboard shortcut (Shift+? or Cmd+K then ?) that displays available shortcuts for the current view, grouped by category with visual key-style badges showing the key combinations."
+  },
+  "why": {
+    "fr": "Les utilisateurs avancés oublient les raccourcis — un overlay contextuel les aide à les réapprendre sans quitter leur flux. Le filtrage par vue évite la surcharge cognitive d'une liste de 50+ raccourcis. L'affichage visuel des touches (⌘K plutôt que 'Cmd+K') renforce la mémorisation.",
+    "en": "Power users forget shortcuts — a contextual overlay helps them relearn without leaving their flow. Filtering by current view avoids the cognitive overload of a list of 50+ shortcuts. Visual key display (⌘K instead of 'Cmd+K') reinforces muscle memory."
   }
 }
