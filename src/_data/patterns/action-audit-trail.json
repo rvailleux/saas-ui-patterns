@@ -1,0 +1,69 @@
+{
+  "id": 903,
+  "slug": "action-audit-trail",
+  "category": "ai-feedback",
+  "title": {
+    "fr": "Journal d'Audit des Actions",
+    "en": "Action Audit Trail"
+  },
+  "categoryLabel": {
+    "slug": "ai-feedback",
+    "fr": "AI — Feedback & Contrôle",
+    "en": "AI — Feedback & Control"
+  },
+  "firstSeenOn": {
+    "product": "GitHub Copilot",
+    "url": "https://github.com/copilot",
+    "approximateDate": "2023"
+  },
+  "examples": [
+    {
+      "name": "Cursor",
+      "desc": {
+        "fr": "Historique des modifications du Composer avec visualisation des diff et possibilité d'annuler",
+        "en": "Composer edit history with diff visualization and undo capability"
+      }
+    },
+    {
+      "name": "Devin",
+      "desc": {
+        "fr": "Log structuré de toutes les actions de l'agent avec horodatage et statut de réversibilité",
+        "en": "Structured log of all agent actions with timestamp and reversibility status"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Horodatez chaque action** : Date/heure précise pour chaque étape de l'agent",
+      "**Indiquez la réversibilité** : Marquez clairement ce qui peut être annulé vs irréversible",
+      "**Groupez par tâche** : Organisez les actions logiquement, pas chronologiquement",
+      "**Montrez les diffs** : Visualisez les changements de manière compréhensible"
+    ],
+    "en": [
+      "**Timestamp every action** : Precise date/time for each agent step",
+      "**Indicate reversibility** : Clearly mark what can be undone vs irreversible",
+      "**Group by task** : Organize actions logically, not just chronologically",
+      "**Show diffs** : Visualize changes in an understandable way"
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Ne masquez pas les actions derrière un simple \"l'IA a fait des changements\" vague",
+      "❌ N'omettez pas les appels d'outils avec leurs paramètres - c'est crucial pour la confiance",
+      "❌ Ne rendez pas le journal immuable si l'utilisateur veut nettoyer l'historique"
+    ],
+    "en": [
+      "❌ Don't hide actions behind a vague \"AI made some changes\" message",
+      "❌ Don't omit tool calls with their parameters - it's crucial for trust",
+      "❌ Don't make the log immutable if the user wants to clear history"
+    ]
+  },
+  "what": {
+    "fr": "Un log structuré et horodaté de chaque action IA - groupé par tâche, avec statut de réversibilité et annulation sélective.",
+    "en": "A timestamped, structured log of every AI action - grouped by task, with reversibility status and selective undo."
+  },
+  "why": {
+    "fr": "La confiance s'établit par l'inspectabilité. Les utilisateurs doivent comprendre exactement ce que l'IA a fait pour vérifier, corriger et apprendre.",
+    "en": "Trust is established through inspectability. Users must understand exactly what the AI did to verify, correct, and learn."
+  }
+}
