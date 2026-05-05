@@ -77,6 +77,12 @@ module.exports = function (eleventyConfig) {
     return idx < patterns.length - 1 ? patterns[idx + 1] : null;
   });
 
+  // RFC 3339 date format for sitemap
+  eleventyConfig.addFilter("dateToRfc3339", (date) => {
+    if (!date) return new Date().toISOString();
+    return new Date(date).toISOString();
+  });
+
   return {
     dir: {
       input: "src",

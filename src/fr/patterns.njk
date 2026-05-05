@@ -1,0 +1,31 @@
+---
+permalink: /fr/patterns/
+layout: base.njk
+locale: fr
+title: Tous les patterns
+tags: pages
+---
+
+<div class="mb-8">
+  <h1 class="text-2xl font-bold text-text-primary mb-2">Tous les patterns</h1>
+  <p class="text-text-secondary">{{ patterns.length }} patterns dans {{ categories | length }} catégories</p>
+</div>
+
+<div class="space-y-12">
+{% for cat in categories %}
+{% set catPatterns = patterns | filterByCategory(cat.slug) %}
+<section>
+  <h2 class="text-lg font-semibold text-text-primary mb-4 flex items-center gap-2">
+    <span class="text-accent">{{ cat.slug | categoryIcon | safe }}</span>
+    {{ cat.fr }}
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+    {% for pattern in catPatterns %}
+    <a href="/fr/patterns/{{ pattern.slug }}/" class="pattern-card-compact group">
+      <span class="font-medium group-hover:text-accent transition-colors">{{ pattern.title.fr }}</span>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endfor %}
+</div>
