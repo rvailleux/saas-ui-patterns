@@ -3,7 +3,7 @@
   "slug": "k-ai-intent",
   "category": "ai-access",
   "title": {
-    "fr": "⌘K → AI intent",
+    "fr": "⌘K → Intention IA",
     "en": "⌘K → AI Intent"
   },
   "categoryLabel": {
@@ -78,9 +78,5 @@
   "why": {
     "fr": "Un seul point d'entrée pour tout. L'utilisateur n'a pas besoin de choisir entre \"rechercher\" et \"demander à l'AI\" — la palette fait la distinction automatiquement. Réduit la friction d'adoption de l'AI en l'intégrant dans un pattern déjà familier.",
     "en": "One entry point for everything. The user doesn't need to choose between \"search\" and \"ask the AI\" — the palette makes the distinction automatically. Reduces the friction of AI adoption by integrating it into an already-familiar pattern."
-  },
-  "demo": {
-    "fr": "```\n⌘K →\n\nMode recherche :          Mode AI (détection automatique) :\n┌──────────────────┐      ┌──────────────────────────────┐\n│ 🔍 sprint 12     │      │ ✨ Résume les tickets ouverts │\n│ ─────────────    │  vs  │ ─────────────────────────────│\n│ 📋 Sprint 12     │      │ Appuyez sur Entrée pour      │\n│ 🔍 Voir tout...  │      │ demander à l'AI              │\n└──────────────────┘      └──────────────────────────────┘\n```",
-    "en": "```\n⌘K →\n\nSearch mode:              AI mode (auto-detected):\n┌──────────────────┐      ┌──────────────────────────────┐\n│ 🔍 sprint 12     │      │ ✨ Summarise open tickets     │\n│ ─────────────    │  vs  │ ─────────────────────────────│\n│ 📋 Sprint 12     │      │ Press Enter to ask the AI    │\n│ 🔍 See all...    │      │                              │\n└──────────────────┘      └──────────────────────────────┘\n```"
   }
 }

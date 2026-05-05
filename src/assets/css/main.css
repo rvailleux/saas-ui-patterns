@@ -147,15 +147,6 @@
     @apply px-2.5 py-0.5 rounded-full text-xs font-medium bg-surface-elevated text-text-secondary border border-border;
   }
 
-  /* Demo/ASCII art block */
-  .demo-block {
-    @apply bg-surface-elevated rounded-lg p-4 font-mono text-sm text-text-secondary overflow-x-auto;
-  }
-
-  .demo-block pre {
-    @apply m-0 whitespace-pre;
-  }
-
   /* Code block styles */
   pre code {
     @apply block font-mono text-sm;

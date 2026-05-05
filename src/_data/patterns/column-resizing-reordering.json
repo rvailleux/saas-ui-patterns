@@ -3,7 +3,7 @@
   "slug": "column-resizing-reordering",
   "category": "data",
   "title": {
-    "fr": "Column resizing & reordering",
+    "fr": "Redimensionnement et réorganisation de colonnes",
     "en": "Column Resizing & Reordering"
   },
   "categoryLabel": {
@@ -81,9 +81,5 @@
   "why": {
     "fr": "Les utilisateurs ont des workflows différents et valorisent des colonnes différentes. Donner le contrôle sur la disposition est un gage de respect de leur workflow. C'est la personnalisation minimale attendue de tout tableau de données professionnel.",
     "en": "Users have different workflows and value different columns. Giving control over layout is a sign of respect for their workflow. It's the minimum personalisation expected from any professional data table."
-  },
-  "demo": {
-    "fr": "```\n         Poignée de resize\n               ↓\n┌──────────────╫──────────┬──────────────┐\n│ Nom          ║ Statut   │ Date         │  ← drag header pour réordonner\n├──────────────╫──────────┼──────────────┤\n│              ║          │              │\n│   drag →→→  ║          │              │\n│              ║          │              │\n└──────────────╫──────────┴──────────────┘\n        curseur col-resize\n```",
-    "en": "```\nResize handle\n               ↓\n┌──────────────╫──────────┬──────────────┐\n│ Name         ║ Status   │ Date         │  ← drag header to reorder\n├──────────────╫──────────┼──────────────┤\n│              ║          │              │\n│   drag →→→  ║          │              │\n│              ║          │              │\n└──────────────╫──────────┴──────────────┘\n        col-resize cursor\n```"
   }
 }

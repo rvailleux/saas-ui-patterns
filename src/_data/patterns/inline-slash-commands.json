@@ -3,7 +3,7 @@
   "slug": "inline-slash-commands",
   "category": "commands",
   "title": {
-    "fr": "Inline slash commands",
+    "fr": "Commandes slash inline",
     "en": "Inline Slash Commands"
   },
   "categoryLabel": {
@@ -80,9 +80,5 @@
   "why": {
     "fr": "Élimine le besoin de barres d'outils encombrantes. L'utilisateur reste dans son flux d'écriture. Le menu est contextuel (déclenché à la position du curseur) et filtrable par frappe, ce qui le rend rapide même avec une grande liste d'options.",
     "en": "Eliminates the need for cluttered toolbars. The user stays in their writing flow. The menu is contextual (triggered at cursor position) and filterable by typing, making it fast even with a large list of options."
-  },
-  "demo": {
-    "fr": "```\nJ'écris mon document et je veux insérer...\n\n/tab                   ← filtrage en temps réel\n┌──────────────────────────────┐\n│ 📊 Tableau           ↵       │\n│ 📋 Template                  │\n│ 📑 Table des matières        │\n└──────────────────────────────┘\n```",
-    "en": "```\nI'm writing my document and want to insert...\n\n/tab                   ← real-time filtering\n┌──────────────────────────────┐\n│ 📊 Table             ↵       │\n│ 📋 Template                  │\n│ 📑 Table of contents         │\n└──────────────────────────────┘\n```"
   }
 }

@@ -79,9 +79,5 @@
   "why": {
     "fr": "Le contexte est une ressource précieuse. Reconstruire le contexte à chaque session est un coût cognitif et temporel. Les fils persistants permettent des workflows itératifs sur plusieurs jours — \"reprends notre discussion d'hier sur la spec\".",
     "en": "Context is a precious resource. Rebuilding context each session is a cognitive and time cost. Persistent threads enable iterative workflows spanning multiple days — \"pick up our discussion from yesterday about the spec\"."
-  },
-  "demo": {
-    "fr": "```\nLundi :\n👤 Aide-moi à rédiger la spec de ce ticket\n🤖 Voici une première version...\n\nMercredi (retour sur le même ticket) :\n[Historique visible en grisé]\n\n👤 Reprends la spec et ajoute une section erreurs\n🤖 [En utilisant le contexte de lundi...] Voici la version mise à jour...\n```",
-    "en": "```\nMonday:\n👤 Help me draft the spec for this ticket\n🤖 Here is a first version...\n\nWednesday (returning to the same ticket):\n[History visible in grey]\n\n👤 Revise the spec and add an error handling section\n🤖 [Using Monday's context...] Here is the updated version...\n```"
   }
 }

@@ -3,7 +3,7 @@
   "slug": "prompt-templates",
   "category": "ai-prompt",
   "title": {
-    "fr": "Prompt templates",
+    "fr": "Templates de prompts",
     "en": "Prompt Templates"
   },
   "categoryLabel": {
@@ -79,9 +79,5 @@
   "why": {
     "fr": "Le prompt engineering est une compétence rare. Les templates permettent aux utilisateurs avancés de créer des prompts efficaces une fois, et à tout le monde de les utiliser ensuite. Standardise les usages, maintient la qualité, et réduit le temps par tâche.",
     "en": "Not all users know how to write effective prompts. Templates codify best practices and transfer that knowledge to everyone. They also standardise AI usage within a team (same template = reproducible outputs)."
-  },
-  "demo": {
-    "fr": "```\nBibliothèque de templates (partagée par équipe) :\n\n📁 Commercial\n   └ Email de relance client        [Utiliser] [Modifier]\n   └ Synthèse d'appel de vente      [Utiliser] [Modifier]\n\n📁 Produit  \n   └ Rédaction de user story        [Utiliser] [Modifier]\n   └ Analyse de feedback utilisateur[Utiliser] [Modifier]\n\n[+ Créer un template]\n\n─────────────────────────────\n\nTemplate \"Rédaction de user story\" :\nEn tant que {{persona}}, je veux {{action}}\nafin de {{bénéfice}}.\n\nContexte : {{contexte_du_ticket}}\n\nVariables à remplir avant envoi :\n[persona      ] [action       ] [bénéfice      ]\n```",
-    "en": "```\nTemplate: \"Analyse user feedback\"\n\n┌────────────────────────────────────────────────┐\n│ Source: [Intercom conversations ▼]             │\n│ Period: [Last 30 days            ]             │\n│ Focus:  [Feature requests        ]             │\n│ Format: [Numbered list ▼]                      │\n│                                                │\n│                          [▶ Run this template] │\n└────────────────────────────────────────────────┘\n```"
   }
 }

@@ -80,9 +80,5 @@
   "why": {
     "fr": "Évite le coût de navigation aller-retour (liste → détail → retour à la liste). L'utilisateur garde le contexte de la liste tout en accédant aux détails. Particulièrement puissant pour les workflows de triage (issues, tickets, emails).",
     "en": "Avoids the round-trip navigation cost (list → detail → back to list). The user keeps the list context while accessing details. Especially powerful for triage workflows (issues, tickets, emails)."
-  },
-  "demo": {
-    "fr": "```\n┌─────────────────────┬──────────────────────┐\n│ LISTE               │ DÉTAIL               │\n│ ──────────────────  │ ──────────────────   │\n│ ▶ Bug login #1234   │ Bug login #1234      │\n│   Task A            │ ─────────────────    │\n│   Task B            │ Assigné : Alice      │\n│                     │ Statut : In progress │\n│                     │ Description...       │\n│                     │ [Edit]  [Close]      │\n└─────────────────────┴──────────────────────┘\n                        ▲\n              S'ouvre au clic sur un item,\n              se ferme avec Échap ou X\n```",
-    "en": "```\n┌─────────────────────┬──────────────────────┐\n│ LIST                │ DETAIL               │\n│ ──────────────────  │ ──────────────────   │\n│ ▶ Bug login #1234   │ Bug login #1234      │\n│   Task A            │ ─────────────────    │\n│   Task B            │ Assignee: Alice      │\n│                     │ Status: In progress  │\n│                     │ Description...       │\n│                     │ [Edit]  [Close]      │\n└─────────────────────┴──────────────────────┘\n                        ▲\n              Opens on item click,\n              closes with Esc or X\n```"
   }
 }

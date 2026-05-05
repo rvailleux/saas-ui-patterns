@@ -3,7 +3,7 @@
   "slug": "diff-view-accept-reject",
   "category": "ai-generation",
   "title": {
-    "fr": "Diff view accept/reject",
+    "fr": "Vue diff avec acceptation/rejet",
     "en": "Diff View Accept/Reject"
   },
   "categoryLabel": {
@@ -79,9 +79,5 @@
   "why": {
     "fr": "Donne le contrôle total à l'utilisateur. Il voit exactement ce que l'AI veut changer avant que ça soit appliqué. La granularité (accepter ligne par ligne) permet de prendre le meilleur de la suggestion sans accepter l'entier. C'est le pattern qui convertit la méfiance envers l'AI en confiance.",
     "en": "Gives the user full control. They see exactly what the AI wants to change before it's applied. Granularity (accepting line by line) lets them take the best of a suggestion without accepting everything. This pattern converts distrust of AI into confidence."
-  },
-  "demo": {
-    "fr": "```\n┌─────────────────────────────────────────────────┐\n│ - L'utilisateur peut modifier les paramètres.   │  ← rouge : supprimé\n│ + L'utilisateur peut personnaliser les          │  ← vert : ajouté\n│ + paramètres selon ses préférences.             │\n│                                                 │\n│   Le système enregistre les changements.        │  ← gris : inchangé\n├─────────────────────────────────────────────────┤\n│  [✓ Accepter tout]  [✗ Rejeter tout]  [Modifier]│\n└─────────────────────────────────────────────────┘\n```",
-    "en": "```\n┌─────────────────────────────────────────────────┐\n│ - The user can modify the settings.             │  ← red: deleted\n│ + The user can personalise the                  │  ← green: added\n│ + settings to their preferences.                │\n│                                                 │\n│   The system saves the changes.                 │  ← grey: unchanged\n├─────────────────────────────────────────────────┤\n│  [✓ Accept all]  [✗ Reject all]  [Edit]         │\n└─────────────────────────────────────────────────┘\n```"
   }
 }

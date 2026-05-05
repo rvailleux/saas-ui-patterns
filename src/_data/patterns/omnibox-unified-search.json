@@ -3,7 +3,7 @@
   "slug": "omnibox-unified-search",
   "category": "commands",
   "title": {
-    "fr": "Omnibox / unified search",
+    "fr": "Omnibox / Recherche unifiée",
     "en": "Omnibox / Unified Search"
   },
   "categoryLabel": {
@@ -80,9 +80,5 @@
   "why": {
     "fr": "Dans les applications complexes, l'utilisateur ne sait souvent pas exactement où chercher. L'omnibox centralise toutes les sources et laisse les résultats guider. C'est le Google de votre application.",
     "en": "In complex applications, users often don't know exactly where to look. The omnibox centralises all sources and lets results guide the way. It's the Google of your application."
-  },
-  "demo": {
-    "fr": "```\n┌─────────────────────────────────────────┐\n│ 🔍  \"alice\"                         ✕  │\n├─────────────────────────────────────────┤\n│ PERSONNES                               │\n│ 👤 Alice Martin  — Engineering         │\n│ 👤 Alice Dupont  — Marketing           │\n├─────────────────────────────────────────┤\n│ TICKETS                                │\n│ 🎫 #1201 Assigné à Alice               │\n│ 🎫 #987  Créé par Alice                │\n├─────────────────────────────────────────┤\n│ DOCUMENTS                              │\n│ 📄 Rapport Alice Q3                    │\n└─────────────────────────────────────────┘\n```",
-    "en": "```\n┌─────────────────────────────────────────┐\n│ 🔍  \"alice\"                         ✕  │\n├─────────────────────────────────────────┤\n│ PEOPLE                                  │\n│ 👤 Alice Martin  — Engineering         │\n│ 👤 Alice Dupont  — Marketing           │\n├─────────────────────────────────────────┤\n│ TICKETS                                 │\n│ 🎫 #1201 Assigned to Alice             │\n│ 🎫 #987  Created by Alice              │\n├─────────────────────────────────────────┤\n│ DOCUMENTS                               │\n│ 📄 Alice Q3 Report                     │\n└─────────────────────────────────────────┘\n```"
   }
 }

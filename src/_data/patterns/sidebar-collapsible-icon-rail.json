@@ -3,7 +3,7 @@
   "slug": "sidebar-collapsible-icon-rail",
   "category": "navigation",
   "title": {
-    "fr": "Sidebar collapsible icon-rail",
+    "fr": "Sidebar réductible en rail d'icônes",
     "en": "Sidebar Collapsible Icon Rail"
   },
   "categoryLabel": {
@@ -91,9 +91,5 @@
   "why": {
     "fr": "L'espace de travail est le bien le plus précieux d'une interface. La sidebar réduite libère de la largeur pour le contenu tout en maintenant la navigation accessible à tout moment. Les icônes seules suffisent aux utilisateurs réguliers ; les labels restent disponibles pour les nouveaux. C'est le meilleur compromis entre affordance et densité.",
     "en": "Workspace real estate is the most valuable resource in any interface. A collapsed sidebar frees up width for content while keeping navigation accessible at all times. Icons alone are enough for experienced users; labels remain available for newcomers. It's the best compromise between affordance and density."
-  },
-  "demo": {
-    "fr": "```\nÉtat ouvert (240px)          État réduit (48px)\n┌──────────────────┐         ┌────┐\n│ 📁  Projets      │         │ 📁 │\n│ 📋  Tâches       │  ───►   │ 📋 │\n│ 📊  Rapports     │         │ 📊 │\n│ ⚙️  Paramètres   │         │ ⚙️ │\n└──────────────────┘         └────┘\n                               ▲\n                         Hover → tooltip \"Projets\"\n                         ou flyout avec sous-menu\n```",
-    "en": "```\nOpen state (240px)           Collapsed state (48px)\n┌──────────────────┐         ┌────┐\n│ 📁  Projects     │         │ 📁 │\n│ 📋  Tasks        │  ───►   │ 📋 │\n│ 📊  Reports      │         │ 📊 │\n│ ⚙️  Settings     │         │ ⚙️ │\n└──────────────────┘         └────┘\n                               ▲\n                         Hover → tooltip \"Projects\"\n                         or flyout with sub-menu\n```"
   }
 }

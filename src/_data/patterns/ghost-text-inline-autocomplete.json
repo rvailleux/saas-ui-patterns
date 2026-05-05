@@ -3,7 +3,7 @@
   "slug": "ghost-text-inline-autocomplete",
   "category": "ai-generation",
   "title": {
-    "fr": "Ghost text / inline autocomplete",
+    "fr": "Texte fantôme / autocomplétion inline",
     "en": "Ghost Text / Inline Autocomplete"
   },
   "categoryLabel": {
@@ -80,9 +80,5 @@
   "why": {
     "fr": "Zéro friction : la suggestion est là, visible, acceptée en une touche. Pas de menu à ouvrir, pas de dialogue. Réduit considérablement le temps de saisie pour les utilisateurs qui trouvent les suggestions pertinentes. La touche Tab est le contrat universel — connu de tous depuis les IDEs.",
     "en": "Zero friction: the suggestion is there, visible, accepted in one keystroke. No menu to open, no dialog. Significantly reduces typing time for users who find the suggestions relevant. Tab is the universal contract — known to everyone from IDEs."
-  },
-  "demo": {
-    "fr": "```\nUtilisateur tape : \"Rédigez un email pour\"\nSuggestion AI  : \" confirmer le rendez-vous du 15 janvier\"\n\n[Rédigez un email pour confirmer le rendez-vous du 15 janvier]\n                      ↑ grisé, transparent\n                      Tab → accepté\n                      Toute autre touche → ignoré\n```",
-    "en": "```\nUser types:   \"Draft an email to\"\nAI suggestion: \" confirm the meeting on January 15th\"\n\n[Draft an email to confirm the meeting on January 15th]\n                      ↑ greyed out, transparent\n                      Tab → accepted\n                      Any other key → ignored\n```"
   }
 }

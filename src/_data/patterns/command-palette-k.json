@@ -3,7 +3,7 @@
   "slug": "command-palette-k",
   "category": "commands",
   "title": {
-    "fr": "Command palette (⌘K)",
+    "fr": "Palette de commandes (⌘K)",
     "en": "Command Palette (⌘K)"
   },
   "categoryLabel": {
@@ -89,9 +89,5 @@
   "why": {
     "fr": "C'est l'interface la plus efficace possible pour les utilisateurs avancés : une seule entrée pour tout. Élimine le besoin de connaître l'emplacement exact d'une feature dans l'UI. La recherche floue rend l'accès aux commandes rarement utilisées aussi rapide qu'aux commandes fréquentes.",
     "en": "It's the most efficient interface possible for power users: a single entry point for everything. Eliminates the need to know exactly where a feature lives in the UI. Fuzzy search makes rarely-used commands as fast to reach as frequent ones."
-  },
-  "demo": {
-    "fr": "```\n         ┌────────────────────────────────────┐\n         │ 🔍  Rechercher ou taper une commande│\n         ├────────────────────────────────────┤\n         │ 🕐 Récents                         │\n         │    Sprint 12 Planning              │\n         │    #1234 Bug login                 │\n         ├────────────────────────────────────┤\n         │ ⚡ Actions                          │\n         │    Créer une tâche          ⌘N     │\n         │    Changer de projet        ⌘P     │\n         │    Inviter un membre               │\n         └────────────────────────────────────┘\n```",
-    "en": "```\n┌────────────────────────────────────┐\n         │ 🔍  Search or type a command       │\n         ├────────────────────────────────────┤\n         │ 🕐 Recent                          │\n         │    Sprint 12 Planning              │\n         │    #1234 Bug login                 │\n         ├────────────────────────────────────┤\n         │ ⚡ Actions                          │\n         │    Create task              ⌘N     │\n         │    Switch project           ⌘P     │\n         │    Invite a member                 │\n         └────────────────────────────────────┘\n```"
   }
 }

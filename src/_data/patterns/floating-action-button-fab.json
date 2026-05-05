@@ -73,9 +73,5 @@
   "why": {
     "fr": "Le FAB matérialise la loi de Fitts : zone de grand bouton, positionnée proche du pouce sur mobile, toujours accessible quel que soit le scroll. Il signale clairement \"voilà ce que tu peux faire maintenant\".",
     "en": "The FAB embodies Fitts's Law: a large button zone positioned close to the thumb on mobile, always accessible regardless of scroll position. It clearly signals \"here's what you can do right now\"."
-  },
-  "demo": {
-    "fr": "```\n┌────────────────────────────────┐\n│                                │\n│   Liste de tâches...           │\n│                                │\n│                                │\n│                          ╭───╮ │  ← Hover / tap\n│                          │ + │ │     ↓\n│                          ╰───╯ │  ╭─────────────╮\n└────────────────────────────────┘  │ 📝 Nouvelle  │\n                                    │ 📁 Dossier   │\n                                    │ 📥 Importer  │\n                                    ╰─────────────╯\n```",
-    "en": "```\n┌────────────────────────────────┐\n│                                │\n│   Task list...                 │\n│                                │\n│                                │\n│                          ╭───╮ │  ← Hover / tap\n│                          │ + │ │     ↓\n│                          ╰───╯ │  ╭─────────────╮\n└────────────────────────────────┘  │ 📝 New task  │\n                                    │ 📁 Folder    │\n                                    │ 📥 Import    │\n                                    ╰─────────────╯\n```"
   }
 }

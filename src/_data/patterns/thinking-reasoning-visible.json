@@ -3,7 +3,7 @@
   "slug": "thinking-reasoning-visible",
   "category": "ai-feedback",
   "title": {
-    "fr": "Thinking / reasoning visible",
+    "fr": "Raisonnement visible",
     "en": "Visible Thinking / Reasoning"
   },
   "categoryLabel": {
@@ -79,9 +79,5 @@
   "why": {
     "fr": "Augmente massivement la confiance dans les réponses complexes. L'utilisateur peut voir si l'AI a bien compris la question, identifié les bons paramètres, et suivi une logique cohérente. Un raisonnement transparent est aussi plus facile à débugger et corriger.",
     "en": "Reduces the \"black box\" effect. The user understands why the AI arrives at a particular answer. Visible reasoning enables verification of the thought process and builds long-term trust. It also reduces anxiety during long thinking phases."
-  },
-  "demo": {
-    "fr": "```\n🤖 [Réflexion en cours...]                ← collapsable\n┌─────────────────────────────────────┐\n│ Je dois analyser les ventes Q3.     │\n│ Paramètres : période juillet-sept,  │\n│ comparaison avec Q3 2023...         │\n│ Je vois que les revenus ont crû de  │\n│ 23% mais les marges ont baissé...   │\n└─────────────────────────────────────┘\n\n**Analyse des ventes Q3** : La croissance du\nchiffre d'affaires (+23%) masque une pression\nsur les marges due à...\n```",
-    "en": "```\n🤖 [Thinking...]\n\n┌─ Reasoning (expandable) ────────────────────────┐\n│ • Analysing the request...                      │\n│ • Searching for relevant patterns...            │\n│ • Considering 3 possible approaches...          │\n│ • Selecting the most appropriate one...         │\n└─────────────────────────────────────────────────┘\n\nFinal answer:\n\"Here is the recommended implementation...\"\n```"
   }
 }

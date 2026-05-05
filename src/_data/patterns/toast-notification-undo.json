@@ -3,7 +3,7 @@
   "slug": "toast-notification-undo",
   "category": "feedback",
   "title": {
-    "fr": "Toast notification + undo",
+    "fr": "Notification toast + annulation",
     "en": "Toast Notification + Undo"
   },
   "categoryLabel": {
@@ -80,9 +80,5 @@
   "why": {
     "fr": "\"Êtes-vous sûr ?\" est le pattern UX le plus détesté : il interrompt, demande un effort cognitif, et n'empêche pas les erreurs (les utilisateurs cliquent \"Oui\" par réflexe). Le toast + undo est moins intrusif, aussi sûr, et plus rapide.",
     "en": "\"Are you sure?\" is the most hated UX pattern: it interrupts, demands cognitive effort, and doesn't prevent mistakes (users click \"Yes\" reflexively). Toast + undo is less intrusive, equally safe, and faster."
-  },
-  "demo": {
-    "fr": "```\nAction : supprimer un email\n\n[Aucune modale de confirmation]\n\n┌──────────────────────────────────┐\n│  Email archivé    [Annuler]   ✕  │  ← toast, disparaît après 5s\n└──────────────────────────────────┘\n          ▲\n    Clic \"Annuler\" → action reversée\n    Laisser disparaître → action confirmée\n```",
-    "en": "```\nAction: delete an email\n\n[No confirmation dialog]\n\n┌──────────────────────────────────┐\n│  Email archived    [Undo]     ✕  │  ← toast, disappears after 5s\n└──────────────────────────────────┘\n          ▲\n    Click \"Undo\" → action reversed\n    Let it disappear → action confirmed\n```"
   }
 }

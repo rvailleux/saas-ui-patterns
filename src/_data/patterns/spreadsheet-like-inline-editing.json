@@ -3,7 +3,7 @@
   "slug": "spreadsheet-like-inline-editing",
   "category": "data",
   "title": {
-    "fr": "Spreadsheet-like inline editing",
+    "fr": "Édition inline façon tableur",
     "en": "Spreadsheet-like Inline Editing"
   },
   "categoryLabel": {
@@ -80,9 +80,5 @@
   "why": {
     "fr": "Élimine le round-trip modal (cliquer pour ouvrir une modale, éditer, valider, fermer). Pour les workflows de data entry intensifs, la différence de vitesse est radicale. Les utilisateurs habitués à Excel/Sheets adoptent le pattern instantanément.",
     "en": "Eliminates the modal round-trip (click to open a modal, edit, confirm, close). For data-intensive workflows, the speed difference is dramatic. Users familiar with Excel/Sheets adopt this pattern instantly."
-  },
-  "demo": {
-    "fr": "```\n┌──────────────┬───────────┬────────────┐\n│ Nom          │ Statut    │ Priorité   │\n├──────────────┼───────────┼────────────┤\n│ Bug login    │ [In prog▼]│ High       │  ← clic → dropdown inline\n│ Fix CSS      │ Done      │[Medium   ▼]│  ← Tab navigue à la cellule suivante\n│ [Nouvelle...│           │            │  ← Entrée en bas = nouvelle ligne\n└──────────────┴───────────┴────────────┘\n```",
-    "en": "```\n┌──────────────┬───────────┬────────────┐\n│ Name         │ Status    │ Priority   │\n├──────────────┼───────────┼────────────┤\n│ Bug login    │ [In prog▼]│ High       │  ← click → inline dropdown\n│ Fix CSS      │ Done      │[Medium   ▼]│  ← Tab navigates to next cell\n│ [New...      │           │            │  ← Enter at bottom = new row\n└──────────────┴───────────┴────────────┘\n```"
   }
 }

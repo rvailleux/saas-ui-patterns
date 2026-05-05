@@ -80,9 +80,5 @@
   "why": {
     "fr": "Les vues filtrées sont souvent des \"vues de travail\" récurrentes. Les encoder dans l'URL permet : partager une vue précise par lien, sauvegarder une URL comme bookmark, et naviguer avec le bouton retour sans perdre ses filtres.",
     "en": "Filtered views are often recurring \"work views\". URL-encoding them allows: sharing a precise view via link, bookmarking a URL, and navigating back without losing filters."
-  },
-  "demo": {
-    "fr": "```\nURL : /issues?status=open&assignee=alice&priority=high&sort=updated\n\n┌──────────────────────────────────────────────────┐\n│ Filtres actifs :  [Ouvert ✕]  [Alice ✕]  [High ✕]│\n│                   + Ajouter un filtre             │\n├──────────────────────────────────────────────────┤\n│ Résultats (12)                         ↕ Récents  │\n│ ...                                               │\n└──────────────────────────────────────────────────┘\n```",
-    "en": "```\nURL: /issues?status=open&assignee=alice&priority=high&sort=updated\n\n┌──────────────────────────────────────────────────┐\n│ Active filters: [Open ✕]  [Alice ✕]  [High ✕]   │\n│                 + Add filter                      │\n├──────────────────────────────────────────────────┤\n│ Results (12)                           ↕ Recent  │\n│ ...                                               │\n└──────────────────────────────────────────────────┘\n```"
   }
 }

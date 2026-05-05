@@ -3,7 +3,7 @@
   "slug": "confidence-uncertainty-signal",
   "category": "ai-feedback",
   "title": {
-    "fr": "Confidence / uncertainty signal",
+    "fr": "Signal de confiance / incertitude",
     "en": "Confidence / Uncertainty Signal"
   },
   "categoryLabel": {
@@ -81,9 +81,5 @@
   "why": {
     "fr": "Une AI qui présente ses incertitudes avec la même confiance que ses certitudes est dangereuse. Signaler l'incertitude permet à l'utilisateur d'adapter son niveau de vérification. C'est aussi plus honnête — et la transparence sur les limites augmente la confiance globale dans le système.",
     "en": "AI hallucinations are real. A model that communicates its uncertainty is more trustworthy than one that asserts everything with the same confidence. The user learns to calibrate their trust based on these signals."
-  },
-  "demo": {
-    "fr": "```\nConfiance élevée :\n🤖 Le prix standard est 29€/mois. [📄 Grille tarifaire]\n\nConfiance faible :\n🤖 ⚠️ Je ne suis pas certain, mais je pense que\n   la fonctionnalité X est disponible en plan Pro.\n   [Vérifier dans la documentation]\n   \nHors contexte :\n🤖 ℹ️ Cette question dépasse mon contexte actuel.\n   Je ne peux pas y répondre de manière fiable.\n```",
-    "en": "```\n🤖 Responses with confidence levels:\n\n✅ High confidence:\n\"React 18 introduced concurrent features in March 2022.\"\n\n⚠️  Medium confidence:\n\"I believe the default timeout is 30s, but verify in the docs.\"\n\n❓ Low confidence:\n\"I'm not sure about this API — I recommend checking\nthe official documentation before using it.\"\n```"
   }
 }
