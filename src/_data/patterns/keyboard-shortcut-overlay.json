@@ -1,0 +1,70 @@
+{
+  "id": 901,
+  "slug": "keyboard-shortcut-overlay",
+  "category": "commands",
+  "title": {
+    "fr": "Overlay de raccourcis clavier",
+    "en": "Keyboard Shortcut Overlay"
+  },
+  "categoryLabel": {
+    "slug": "commands",
+    "fr": "Commandes & Recherche",
+    "en": "Commands & Search"
+  },
+  "firstSeenOn": {
+    "product": "Linear",
+    "url": "https://linear.app",
+    "approximateDate": "2022"
+  },
+  "examples": [
+    {
+      "name": "Linear",
+      "desc": {
+        "fr": "Affiche une modale contextuelle avec Cmd+K puis '?' — montre uniquement les raccourcis pertinents pour la vue actuelle",
+        "en": "Shows a contextual modal via Cmd+K then '?' — displays only shortcuts relevant to current view"
+      }
+    },
+    {
+      "name": "Figma",
+      "desc": {
+        "fr": "Ctrl+Shift+? ouvre un overlay contextuel groupé par thème (navigation, édition, présentation)",
+        "en": "Ctrl+Shift+? opens a contextual overlay grouped by theme (navigation, editing, presentation)"
+      }
+    },
+    {
+      "name": "Notion",
+      "desc": {
+        "fr": "Cmd+/ affiche l'aide contextuelle avec une section dédiée aux raccourcis de la page courante",
+        "en": "Cmd+/ shows contextual help with a dedicated section for current page shortcuts"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Contextualisez** : n'affichez pas tous les raccourcis — filtrez selon la vue ou le mode actif.",
+      "**Groupez logiquement** : utilisez des catégories (Navigation, Édition, Action) plutôt qu'une liste alphabétique.",
+      "**Montrez les combinaisons visuellement** : utilisez des badges de style touche (⌘K, Shift+?) plutôt que du texte brut.",
+      "**Supportez l'apprentissage progressif** : mettez en avant 3-5 raccourcis essentiels avant la liste complète."
+    ],
+    "en": [
+      "**Contextualize**: don't show all shortcuts — filter based on current view or active mode.",
+      "**Group logically**: use categories (Navigation, Editing, Action) rather than alphabetical lists.",
+      "**Show combinations visually**: use key-style badges (⌘K, Shift+?) rather than plain text.",
+      "**Support progressive learning**: highlight 3-5 essential shortcuts before the full list."
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Afficher une liste statique de 50+ raccourcis sans filtrage contextuel",
+      "❌ Utiliser des raccourcis pour ouvrir l'aide qui entrent en conflit avec le navigateur (ex: Cmd+H sur macOS)",
+      "❌ Oublier l'accessibilité — l'overlay doit être navigable au clavier et lisible par screen readers",
+      "❌ Nécessiter une fermeture explicite sans support de Escape ou clic externe"
+    ],
+    "en": [
+      "❌ Displaying a static list of 50+ shortcuts without contextual filtering",
+      "❌ Using help shortcuts that conflict with browser defaults (e.g., Cmd+H on macOS)",
+      "❌ Forgetting accessibility — overlay must be keyboard-navigable and screen-reader friendly",
+      "❌ Requiring explicit close without Escape or external click support"
+    ]
+  }
+}

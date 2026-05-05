@@ -8,20 +8,17 @@ Build a multilingual static website that evangelises modern SaaS UI design patte
 
 ## Stack Decisions
 
-- **Static site generator**: Eleventy (11ty) — zero-JS by default, GitHub Pages compatible, no build lock-in
+- **Static site generator**: Eleventy (11ty) — zero-JS by default, no build lock-in
 - **Styling**: Tailwind CSS via CDN or PostCSS — keep the design on-trend (glassmorphism, dark-first, fluid type)
 - **i18n**: Two locales minimum — `fr` (source) and `en` (translated). Locale switching via URL prefix (`/fr/`, `/en/`)
-- **Deployment**: GitHub Pages via `gh-pages` branch or GitHub Actions workflow (`.github/workflows/deploy.yml`)
+- **Deployment**: Raspberry Pi via Docker. The `deploy` branch triggers `deploy-pi.yml`, which SSHes into the Pi and runs `deploy.sh` (`docker compose up --build -d`).
 
 ## Commands
-
-Once scaffolded, the standard commands will be:
 
 ```bash
 npm install          # install deps
 npm run dev          # local dev server (http://localhost:8080)
 npm run build        # production build → _site/
-npm run deploy       # push _site/ to gh-pages branch
 ```
 
 ## Content Structure
@@ -69,12 +66,33 @@ The site itself must demonstrate the patterns it documents — use them as live 
 - Sticky breadcrumb showing current section
 - Dark mode first, light mode toggle
 
-## GitHub Pages Deployment
+## Deployment
 
-- Repo must be public (or GitHub Pro for private Pages)
-- Set `pathPrefix` in `.eleventy.js` to match the repo name if not at root domain
-- The `deploy` script must build then push `_site/` to the `gh-pages` branch:
-  ```bash
-  npx gh-pages -d _site
-  ```
-- GitHub Actions workflow triggers on push to `main`
+The site runs on a Raspberry Pi behind nginx, served via Docker.
+
+**Branch flow:**
+```
+feature/... → PR → main → PR → deploy → Pi (auto)
+```
+
+**Branch protection (enforced on admins too):**
+- `main`: no direct pushes; requires a reviewed PR to merge
+- `deploy`: no direct pushes; only PRs from `main` are accepted (others are auto-closed by `deploy-gate.yml`)
+
+**Triggering a deploy:**
+1. Open a PR from `main` → `deploy`
+2. Merge it — `deploy-pi.yml` fires automatically
+3. The Pi fetches `origin/deploy`, rebuilds the Docker image, and restarts the container
+
+**Secrets required in GitHub repo settings:**
+- `DEPLOY_HOST`, `DEPLOY_USER`, `DEPLOY_SSH_KEY`, `DEPLOY_PORT`
+
+## GitHub Actions workflows
+
+| File | Trigger | Purpose |
+|---|---|---|
+| `pattern-pr.yml` | PR opened to `main` | Validates branch name + required files, opens vote |
+| `vote-monitor.yml` | Daily 09:00 UTC | Closes expired vote periods, tags owner |
+| `deploy-pi.yml` | Push to `deploy` | SSHes to Pi, runs `deploy.sh` |
+| `deploy-gate.yml` | PR opened to `deploy` | Auto-closes PRs whose source is not `main` |
+| `setup-labels.yml` | Manual dispatch | Creates/updates all GitHub labels (run once) |

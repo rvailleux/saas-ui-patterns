@@ -1,0 +1,96 @@
+name: Deploy to Pi
+
+on:
+  push:
+    branches: [deploy]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  create-release:
+    name: 1. Create GitHub Release
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Generate version
+        id: version
+        run: |
+          DATE=$(date +'%Y.%m.%d')
+          LATEST_TAG=$(git tag -l "v${DATE}.*" --sort=-v:refname | head -1)
+          if [ -n "$LATEST_TAG" ]; then
+            BUILD=$(echo "$LATEST_TAG" | grep -o '[0-9]*$' || echo "0")
+            NEW_BUILD=$((BUILD + 1))
+          else
+            NEW_BUILD=1
+          fi
+          VERSION="v${DATE}-${NEW_BUILD}"
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Generated version: $VERSION"
+
+      - name: Get commit messages
+        id: changelog
+        run: |
+          LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+          if [ -n "$LAST_TAG" ]; then
+            CHANGES=$(git log "$LAST_TAG..HEAD" --pretty=format:'- %s' --no-merges)
+          else
+            CHANGES=$(git log -10 --pretty=format:'- %s' --no-merges)
+          fi
+          CHANGES="${CHANGES//'%'/'%25'}"
+          CHANGES="${CHANGES//$'\n'/'%0A'}"
+          CHANGES="${CHANGES//$'\r'/'%0D'}"
+          echo "changes<<EOF" >> $GITHUB_OUTPUT
+          echo "$CHANGES" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.version.outputs.version }}
+          name: Release ${{ steps.version.outputs.version }}
+          body: |
+            ## Deployment ${{ steps.version.outputs.version }}
+
+            ### Changes:
+            ${{ steps.changelog.outputs.changes }}
+
+            ---
+            *Automated release*
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  deploy:
+    name: 2. Update Version & Deploy on Pi
+    needs: create-release
+    runs-on: ubuntu-latest
+    steps:
+      - name: SSH to Pi - Update version and deploy
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          port: ${{ secrets.DEPLOY_PORT }}
+          script: |
+            cd /home/romain/run/saas-ui-patterns
+            git fetch origin deploy
+            git reset --hard origin/deploy
+            # Update version
+            jq --arg version "${{ needs.create-release.outputs.version }}" '. + {version: $version}' src/_data/site.json > tmp.json
+            mv tmp.json src/_data/site.json
+            echo "✅ Updated version to: ${{ needs.create-release.outputs.version }}"
+            # Deploy
+            docker compose up --build -d
+            echo "✅ Deployed: ${{ needs.create-release.outputs.version }}"

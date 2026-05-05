@@ -1,0 +1,218 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #0f0f1a;
+      color: #e2e8f0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      font-size: 14px;
+    }
+    .hint {
+      text-align: center;
+      color: #94a3b8;
+    }
+    .hint kbd {
+      background: #1e293b;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-family: inherit;
+      font-size: 13px;
+      border: 1px solid #334155;
+    }
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.8);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      backdrop-filter: blur(4px);
+    }
+    .overlay.active { display: flex; }
+    .modal {
+      background: #1e1e2e;
+      border-radius: 12px;
+      border: 1px solid #334155;
+      width: 90%;
+      max-width: 500px;
+      max-height: 80vh;
+      overflow: hidden;
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+    }
+    .modal-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid #334155;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .modal-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #f8fafc;
+    }
+    .context-badge {
+      font-size: 11px;
+      background: #3b82f6;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+    .modal-body {
+      padding: 16px 20px;
+      overflow-y: auto;
+      max-height: 50vh;
+    }
+    .shortcut-group {
+      margin-bottom: 20px;
+    }
+    .group-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #64748b;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+    .shortcut {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid #1e293b;
+    }
+    .shortcut:last-child { border-bottom: none; }
+    .shortcut-desc { color: #cbd5e1; font-size: 13px; }
+    .shortcut-keys {
+      display: flex;
+      gap: 4px;
+    }
+    .key {
+      background: #0f0f1a;
+      border: 1px solid #475569;
+      border-radius: 4px;
+      padding: 3px 8px;
+      font-size: 12px;
+      font-family: inherit;
+      color: #e2e8f0;
+      min-width: 24px;
+      text-align: center;
+    }
+    .featured {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 20px;
+    }
+    .featured-title {
+      font-size: 11px;
+      color: #3b82f6;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+    .close-btn {
+      background: none;
+      border: none;
+      color: #64748b;
+      cursor: pointer;
+      font-size: 18px;
+      padding: 4px;
+      line-height: 1;
+    }
+    .close-btn:hover { color: #e2e8f0; }
+  </style>
+</head>
+<body>
+  <div class="hint">
+    <p>Press <kbd>Shift</kbd> + <kbd>?</kbd> to view shortcuts</p>
+    <p style="margin-top: 12px; font-size: 12px;">Or click anywhere and press those keys</p>
+  </div>
+
+  <div class="overlay" id="overlay">
+    <div class="modal">
+      <div class="modal-header">
+        <span class="modal-title">Keyboard Shortcuts</span>
+        <span class="context-badge">Kanban View</span>
+        <button class="close-btn" onclick="closeOverlay()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="featured">
+          <div class="featured-title">Essential Shortcuts</div>
+          <div class="shortcut">
+            <span class="shortcut-desc">Quick search</span>
+            <div class="shortcut-keys"><span class="key">⌘</span><span class="key">K</span></div>
+          </div>
+          <div class="shortcut">
+            <span class="shortcut-desc">Create new issue</span>
+            <div class="shortcut-keys"><span class="key">C</span></div>
+          </div>
+        </div>
+
+        <div class="shortcut-group">
+          <div class="group-title">Navigation</div>
+          <div class="shortcut">
+            <span class="shortcut-desc">Go to inbox</span>
+            <div class="shortcut-keys"><span class="key">G</span><span class="key">I</span></div>
+          </div>
+          <div class="shortcut">
+            <span class="shortcut-desc">Go to issues</span>
+            <div class="shortcut-keys"><span class="key">G</span><span class="key">Q</span></div>
+          </div>
+        </div>
+
+        <div class="shortcut-group">
+          <div class="group-title">Actions</div>
+          <div class="shortcut">
+            <span class="shortcut-desc">Move to backlog</span>
+            <div class="shortcut-keys"><span class="key">M</span><span class="key">B</span></div>
+          </div>
+          <div class="shortcut">
+            <span class="shortcut-desc">Assign to me</span>
+            <div class="shortcut-keys"><span class="key">I</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const overlay = document.getElementById('overlay');
+    let shiftPressed = false;
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Shift') shiftPressed = true;
+      if (e.key === '?' && shiftPressed) {
+        e.preventDefault();
+        overlay.classList.add('active');
+      }
+      if (e.key === 'Escape' && overlay.classList.contains('active')) {
+        closeOverlay();
+      }
+    });
+
+    document.addEventListener('keyup', (e) => {
+      if (e.key === 'Shift') shiftPressed = false;
+    });
+
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) closeOverlay();
+    });
+
+    function closeOverlay() {
+      overlay.classList.remove('active');
+    }
+  </script>
+</body>
+</html>

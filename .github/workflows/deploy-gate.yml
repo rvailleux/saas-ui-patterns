@@ -1,0 +1,35 @@
+name: Deploy gate — only main can merge to deploy
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+    branches: [deploy]
+
+permissions:
+  pull-requests: write
+
+jobs:
+  check-source:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Reject PRs not coming from main
+        if: github.head_ref != 'main'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: `## ❌ Invalid source branch\n\nOnly \`main\` can be merged into \`deploy\`.\n\nThis PR comes from \`${{ github.head_ref }}\` and has been closed automatically.`
+            });
+            await github.rest.pulls.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number,
+              state: 'closed'
+            });
+
+      - name: Confirm valid source
+        if: github.head_ref == 'main'
+        run: echo "Source is main — deploy PR is valid."

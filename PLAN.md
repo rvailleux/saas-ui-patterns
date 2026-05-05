@@ -104,25 +104,22 @@ src/
 
 ---
 
-### Phase 5 — GitHub Actions deploy
+### Phase 5 — Deploy pipeline
 
-```yaml
-# .github/workflows/deploy.yml
-on:
-  push:
-    branches: [main]
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - checkout
-      - setup Node 20
-      - npm ci
-      - npm run build
-      - deploy _site/ to gh-pages branch
+The site runs on a Raspberry Pi via Docker. Deployment is triggered by pushing to the `deploy` branch.
+
+```
+main (protected) → PR → deploy (protected) → deploy-pi.yml → Pi
 ```
 
-Requires: repo must be public, Pages set to `gh-pages` branch in repo settings.
+`deploy-pi.yml` SSHes into the Pi and runs `deploy.sh`:
+```bash
+git fetch origin
+git reset --hard origin/deploy
+docker compose up --build -d
+```
+
+Branch protection is enforced on both `main` and `deploy` (including admins). The `deploy-gate.yml` workflow auto-closes any PR to `deploy` whose source is not `main`.
 
 ---
 
