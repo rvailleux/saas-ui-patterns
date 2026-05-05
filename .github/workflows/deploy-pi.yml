@@ -22,6 +22,7 @@ jobs:
         with:
           fetch-depth: 0
           ref: deploy
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Generate version
         id: version
@@ -38,16 +39,16 @@ jobs:
           echo "version=$VERSION" >> $GITHUB_OUTPUT
           echo "Generated version: $VERSION"
 
-      - name: Update version in site.json
+      - name: Update version and push to deploy
         run: |
           jq --arg version "${{ steps.version.outputs.version }}" '. + {version: $version}' src/_data/site.json > tmp.json
           mv tmp.json src/_data/site.json
-          echo "Updated version to: ${{ steps.version.outputs.version }}"
           git config user.email "deploy@github-actions"
           git config user.name "GitHub Actions Deploy"
           git add src/_data/site.json
-          git commit -m "chore: update version to ${{ steps.version.outputs.version }}" || echo "No changes to commit"
-          git push origin deploy || echo "Push failed"
+          git commit -m "chore: update version to ${{ steps.version.outputs.version }}" || exit 0
+          git push origin deploy
+          echo "✅ Updated and pushed version: ${{ steps.version.outputs.version }}"
 
       - name: Get commit messages
         id: changelog
@@ -99,9 +100,9 @@ jobs:
             cd /home/romain/run/saas-ui-patterns
             git fetch origin deploy
             git reset --hard origin/deploy
-            echo "Version in site.json: $(jq -r '.version' src/_data/site.json)"
+            echo "Deploying version: $(jq -r '.version' src/_data/site.json)"
             docker compose down
             docker image prune -f
             docker compose build --no-cache
             docker compose up -d
-            echo "✅ Deployed: $(jq -r '.version' src/_data/site.json)"
+            echo "✅ Deployed"
