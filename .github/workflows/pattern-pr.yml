@@ -137,7 +137,7 @@ jobs:
             // Build pattern list
             let patternList = '';
             for (const p of patterns) {
-              patternList += `- ${p}\\n';
+              patternList += '- ${p}\\n';
             }
 
             let body;
