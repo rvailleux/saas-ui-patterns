@@ -41,13 +41,13 @@ jobs:
               issue_number: context.issue.number,
               body: `## ❌ Invalid branch name
 
-Pattern PRs must use the branch naming convention:
-\`\`\`
-pattern/{slug}
-\`\`\`
-For example: \`pattern/sticky-column-header\`
+              Pattern PRs must use the branch naming convention:
+              \`\`\`
+              pattern/{slug}
+              \`\`\`
+              For example: \`pattern/sticky-column-header\`
 
-Please close this PR, rename your branch, and reopen. See [CONTRIBUTING.md](../blob/main/CONTRIBUTING.md) for details.`
+              Please close this PR, rename your branch, and reopen. See [CONTRIBUTING.md](../blob/main/CONTRIBUTING.md) for details.`
             });
             await github.rest.pulls.update({
               owner: context.repo.owner,
@@ -103,10 +103,10 @@ Please close this PR, rename your branch, and reopen. See [CONTRIBUTING.md](../b
               issue_number: context.issue.number,
               body: `## ⚠️ Missing required files
 
-This PR is missing the following required files:
-${missing}
+              This PR is missing the following required files:
+              ${missing}
 
-See [CONTRIBUTING.md](../blob/main/CONTRIBUTING.md#2-create-the-three-pattern-files) for the exact format and templates. Please push the missing files to this branch.`
+              See [CONTRIBUTING.md](../blob/main/CONTRIBUTING.md#2-create-the-three-pattern-files) for the exact format and templates. Please push the missing files to this branch.`
             });
             await github.rest.issues.addLabels({
               owner: context.repo.owner,
@@ -139,43 +139,43 @@ See [CONTRIBUTING.md](../blob/main/CONTRIBUTING.md#2-create-the-three-pattern-fi
               const patternList = patterns.map(p => `- \\`${p}\\``).join('\\n');
               body = `## 🗳️ Vote open — Batch PR (${patterns.length} patterns)
 
-              All required files are present. The **15-day community vote period** is now open.
+                            All required files are present. The **15-day community vote period** is now open.
 
-              **Patterns in this batch:**
-              ${patternList}
+                            **Patterns in this batch:**
+                            ${patternList}
 
-              | | |
-              |---|---|
-              | **Vote deadline** | ${deadlineStr} |
-              | **Decision** | After ${deadlineStr}, the repository owner will merge, request changes, or close |
+                            | | |
+                            |---|---|
+                            | **Vote deadline** | ${deadlineStr} |
+                            | **Decision** | After ${deadlineStr}, the repository owner will merge, request changes, or close |
 
-              **How to vote:**
-              - 👍 on this PR = in favour of all patterns
-              - 👎 on this PR = against (please comment which pattern and why)
-              - Leave a comment with specific feedback, missing examples, or implementation notes
+                            **How to vote:**
+                            - 👍 on this PR = in favour of all patterns
+                            - 👎 on this PR = against (please comment which pattern and why)
+                            - Leave a comment with specific feedback, missing examples, or implementation notes
 
-              Votes are advisory — the final decision rests with the maintainer.
+                            Votes are advisory — the final decision rests with the maintainer.
 
-              > This is an automated message. See [CONTRIBUTING.md](../blob/main/CONTRIBUTING.md#review-process) for the full process.`;
+                            > This is an automated message. See [CONTRIBUTING.md](../blob/main/CONTRIBUTING.md#review-process) for the full process.`;
             } else {
               const slug = patterns[0];
               body = `## 🗳️ Vote open — pattern \\`${slug}\\`
 
-              All required files are present. The **15-day community vote period** is now open.
+                            All required files are present. The **15-day community vote period** is now open.
 
-              | | |
-              |---|---|
-              | **Vote deadline** | ${deadlineStr} |
-              | **Decision** | After ${deadlineStr}, the repository owner will merge, request changes, or close |
+                            | | |
+                            |---|---|
+                            | **Vote deadline** | ${deadlineStr} |
+                            | **Decision** | After ${deadlineStr}, the repository owner will merge, request changes, or close |
 
-              **How to vote:**
-              - 👍 on this PR = in favour
-              - 👎 on this PR = against
-              - Leave a comment with specific feedback, missing examples, or implementation notes
+                            **How to vote:**
+                            - 👍 on this PR = in favour
+                            - 👎 on this PR = against
+                            - Leave a comment with specific feedback, missing examples, or implementation notes
 
-              Votes are advisory — the final decision rests with the maintainer.
+                            Votes are advisory — the final decision rests with the maintainer.
 
-              > This is an automated message. See [CONTRIBUTING.md](../blob/main/CONTRIBUTING.md#review-process) for the full process.`;
+                            > This is an automated message. See [CONTRIBUTING.md](../blob/main/CONTRIBUTING.md#review-process) for the full process.`;
             }
 
             await github.rest.issues.createComment({
