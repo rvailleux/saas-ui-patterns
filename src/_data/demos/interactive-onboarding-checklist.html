@@ -1,0 +1,297 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #0f0f1a;
+      color: #e2e8f0;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      padding: 20px;
+    }
+    .onboarding-widget {
+      width: 100%;
+      max-width: 360px;
+      background: #1a1a2e;
+      border-radius: 16px;
+      padding: 24px;
+      border: 1px solid #2a2a55;
+    }
+    .widget-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .progress-ring {
+      position: relative;
+      width: 56px;
+      height: 56px;
+      flex-shrink: 0;
+    }
+    .progress-ring svg {
+      transform: rotate(-90deg);
+    }
+    .progress-ring circle {
+      fill: none;
+      stroke-width: 4;
+    }
+    .progress-ring .bg {
+      stroke: #2a2a55;
+    }
+    .progress-ring .progress {
+      stroke: #3b82f6;
+      stroke-linecap: round;
+      transition: stroke-dashoffset 0.5s ease;
+    }
+    .progress-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 14px;
+      font-weight: 600;
+      color: #3b82f6;
+    }
+    .header-text h3 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .header-text p {
+      font-size: 12px;
+      color: #64748b;
+    }
+    .checklist {
+      list-style: none;
+    }
+    .checklist-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      border-radius: 10px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: 1px solid transparent;
+    }
+    .checklist-item:hover {
+      background: #252542;
+      border-color: #3b82f6;
+    }
+    .checklist-item.completed {
+      opacity: 0.6;
+    }
+    .checklist-item.completed .item-text {
+      text-decoration: line-through;
+      color: #64748b;
+    }
+    .checkbox {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid #64748b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+    .checklist-item.completed .checkbox {
+      background: #10b981;
+      border-color: #10b981;
+    }
+    .checkbox svg {
+      width: 12px;
+      height: 12px;
+      stroke: white;
+      stroke-width: 2.5;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      opacity: 0;
+      transform: scale(0.5);
+      transition: all 0.2s;
+    }
+    .checklist-item.completed .checkbox svg {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .item-text {
+      flex: 1;
+      font-size: 13px;
+    }
+    .item-arrow {
+      color: #64748b;
+      font-size: 14px;
+    }
+    .celebration {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #1a1a2e;
+      border: 1px solid #10b981;
+      border-radius: 20px;
+      padding: 40px;
+      text-align: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s;
+      z-index: 100;
+    }
+    .celebration.show {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1.05);
+    }
+    .celebration-icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+    }
+    .celebration h2 {
+      font-size: 20px;
+      color: #10b981;
+      margin-bottom: 8px;
+    }
+    .celebration p {
+      color: #94a3b8;
+    }
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      pointer-events: none;
+      animation: confetti-fall 2s ease-out forwards;
+    }
+    @keyframes confetti-fall {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(200px) rotate(720deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="onboarding-widget">
+    <div class="widget-header">
+      <div class="progress-ring">
+        <svg width="56" height="56">
+          <circle class="bg" cx="28" cy="28" r="24"></circle>
+          <circle class="progress" cx="28" cy="28" r="24"
+                  stroke-dasharray="150.8" stroke-dashoffset="150.8" id="progressCircle"></circle>
+        </svg>
+        <span class="progress-text" id="progressText">0%</span>
+      </div>
+      <div class="header-text">
+        <h3>Getting Started</h3>
+        <p>Complete these steps to get the most out of your workspace</p>
+      </div>
+    </div>
+
+    <ul class="checklist">
+      <li class="checklist-item" onclick="toggleItem(this, 0)">
+        <div class="checkbox">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        </div>
+        <span class="item-text">Complete your profile</span>
+        <span class="item-arrow">→</span>
+      </li>
+      <li class="checklist-item" onclick="toggleItem(this, 1)">
+        <div class="checkbox">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        </div>
+        <span class="item-text">Invite team members</span>
+        <span class="item-arrow">→</span>
+      </li>
+      <li class="checklist-item" onclick="toggleItem(this, 2)">
+        <div class="checkbox">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        </div>
+        <span class="item-text">Create your first project</span>
+        <span class="item-arrow">→</span>
+      </li>
+      <li class="checklist-item" onclick="toggleItem(this, 3)">
+        <div class="checkbox">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        </div>
+        <span class="item-text">Connect integrations</span>
+        <span class="item-arrow">→</span>
+      </li>
+      <li class="checklist-item" onclick="toggleItem(this, 4)">
+        <div class="checkbox">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        </div>
+        <span class="item-text">Download mobile app</span>
+        <span class="item-arrow">→</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="celebration" id="celebration">
+    <div class="celebration-icon">🎉</div>
+    <h2>All done!</h2>
+    <p>You're ready to go</p>
+  </div>
+
+  <script>
+    const totalItems = 5;
+    let completedItems = 0;
+    const circle = document.getElementById('progressCircle');
+    const progressText = document.getElementById('progressText');
+    const celebration = document.getElementById('celebration');
+    const circumference = 150.8;
+
+    function toggleItem(item, index) {
+      if (item.classList.contains('completed')) {
+        item.classList.remove('completed');
+        completedItems--;
+      } else {
+        item.classList.add('completed');
+        completedItems++;
+      }
+      updateProgress();
+
+      if (completedItems === totalItems) {
+        showCelebration();
+      }
+    }
+
+    function updateProgress() {
+      const percentage = Math.round((completedItems / totalItems) * 100);
+      const offset = circumference - (percentage / 100) * circumference;
+      circle.style.strokeDashoffset = offset;
+      progressText.textContent = percentage + '%';
+    }
+
+    function showCelebration() {
+      celebration.classList.add('show');
+      createConfetti();
+      setTimeout(() => {
+        celebration.classList.remove('show');
+      }, 3000);
+    }
+
+    function createConfetti() {
+      const colors = ['#3b82f6', '#10b981', '#f59e0b', '#ec4899', '#8b5cf6'];
+      for (let i = 0; i < 30; i++) {
+        setTimeout(() => {
+          const confetti = document.createElement('div');
+          confetti.className = 'confetti';
+          confetti.style.left = (Math.random() * 100) + '%';
+          confetti.style.top = '30%';
+          confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+          confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+          document.body.appendChild(confetti);
+          setTimeout(() => confetti.remove(), 2000);
+        }, i * 50);
+      }
+    }
+  </script>
+</body>
+</html>

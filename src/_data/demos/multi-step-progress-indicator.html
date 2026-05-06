@@ -1,0 +1,316 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #0f0f1a;
+      color: #e2e8f0;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      padding: 20px;
+    }
+    .wizard-container {
+      width: 100%;
+      max-width: 500px;
+    }
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+    .step-counter {
+      font-size: 14px;
+      font-weight: 500;
+      color: #94a3b8;
+    }
+    .step-counter span {
+      color: #3b82f6;
+      font-weight: 600;
+    }
+    .estimated-time {
+      font-size: 12px;
+      color: #64748b;
+    }
+    .stepper {
+      display: flex;
+      align-items: center;
+      margin-bottom: 32px;
+      position: relative;
+    }
+    .stepper-line {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: #2a2a55;
+      transform: translateY(-50%);
+      z-index: 0;
+    }
+    .stepper-progress {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      height: 2px;
+      background: #3b82f6;
+      transform: translateY(-50%);
+      z-index: 1;
+      transition: width 0.4s ease;
+    }
+    .step {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+      cursor: pointer;
+    }
+    .step-circle {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #1a1a2e;
+      border: 2px solid #2a2a55;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 600;
+      color: #64748b;
+      transition: all 0.3s ease;
+    }
+    .step.active .step-circle {
+      background: #3b82f6;
+      border-color: #3b82f6;
+      color: white;
+    }
+    .step.completed .step-circle {
+      background: #10b981;
+      border-color: #10b981;
+      color: white;
+    }
+    .step.completed .step-circle::after {
+      content: '✓';
+    }
+    .step.completed .step-circle span {
+      display: none;
+    }
+    .step-label {
+      margin-top: 8px;
+      font-size: 11px;
+      color: #64748b;
+      text-align: center;
+      white-space: nowrap;
+    }
+    .step.active .step-label {
+      color: #3b82f6;
+      font-weight: 500;
+    }
+    .step.completed .step-label {
+      color: #10b981;
+    }
+    .step-content {
+      background: #1a1a2e;
+      border: 1px solid #2a2a55;
+      border-radius: 12px;
+      padding: 24px;
+      min-height: 160px;
+    }
+    .step-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    .step-description {
+      color: #94a3b8;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    .step-fields {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .mock-input {
+      height: 40px;
+      background: #151528;
+      border: 1px solid #2a2a55;
+      border-radius: 8px;
+    }
+    .step-actions {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 24px;
+      gap: 12px;
+    }
+    .btn {
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: none;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-secondary {
+      background: transparent;
+      color: #94a3b8;
+      border: 1px solid #2a2a55;
+    }
+    .btn-secondary:hover {
+      background: #252542;
+    }
+    .btn-primary {
+      background: #3b82f6;
+      color: white;
+    }
+    .btn-primary:hover {
+      background: #2563eb;
+    }
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <div class="wizard-container">
+    <div class="progress-header">
+      <div class="step-counter">Step <span id="currentStepNum">1</span> of 4</div>
+      <div class="estimated-time">About 2 min remaining</div>
+    </div>
+
+    <div class="stepper">
+      <div class="stepper-line"></div>
+      <div class="stepper-progress" id="progressBar" style="width: 0%"></div>
+
+      <div class="step active" data-step="1" onclick="goToStep(1)">
+        <div class="step-circle"><span>1</span></div>
+        <div class="step-label">Account</div>
+      </div>
+      <div class="step" data-step="2" onclick="goToStep(2)">
+        <div class="step-circle"><span>2</span></div>
+        <div class="step-label">Profile</div>
+      </div>
+      <div class="step" data-step="3" onclick="goToStep(3)">
+        <div class="step-circle"><span>3</span></div>
+        <div class="step-label">Workspace</div>
+      </div>
+      <div class="step" data-step="4" onclick="goToStep(4)">
+        <div class="step-circle"><span>4</span></div>
+        <div class="step-label">Review</div>
+      </div>
+    </div>
+
+    <div class="step-content" id="stepContent">
+      <div class="step-title">Create your account</div>
+      <div class="step-description">Enter your email and password to get started.</div>
+      <div class="step-fields">
+        <div class="mock-input"></div>
+        <div class="mock-input"></div>
+      </div>
+    </div>
+
+    <div class="step-actions">
+      <button class="btn btn-secondary" id="backBtn" onclick="prevStep()" disabled>Back</button>
+      <button class="btn btn-primary" id="nextBtn" onclick="nextStep()">Continue</button>
+    </div>
+  </div>
+
+  <script>
+    let currentStep = 1;
+    const totalSteps = 4;
+
+    const stepContent = {
+      1: {
+        title: 'Create your account',
+        description: 'Enter your email and password to get started.',
+        inputs: 2
+      },
+      2: {
+        title: 'Complete your profile',
+        description: 'Tell us a bit about yourself and your role.',
+        inputs: 3
+      },
+      3: {
+        title: 'Set up your workspace',
+        description: 'Configure your team workspace settings.',
+        inputs: 2
+      },
+      4: {
+        title: 'Review and confirm',
+        description: 'Double-check your information before proceeding.',
+        inputs: 0
+      }
+    };
+
+    function updateUI() {
+      // Update counter
+      document.getElementById('currentStepNum').textContent = currentStep;
+
+      // Update progress bar
+      const progress = ((currentStep - 1) / (totalSteps - 1)) * 100;
+      document.getElementById('progressBar').style.width = progress + '%';
+
+      // Update steps
+      document.querySelectorAll('.step').forEach((step, index) => {
+        step.classList.remove('active', 'completed');
+        const stepNum = index + 1;
+        if (stepNum === currentStep) {
+          step.classList.add('active');
+        } else if (stepNum < currentStep) {
+          step.classList.add('completed');
+        }
+      });
+
+      // Update content
+      const content = stepContent[currentStep];
+      const contentDiv = document.getElementById('stepContent');
+      let inputsHtml = '';
+      for (let i = 0; i < content.inputs; i++) {
+        inputsHtml += '<div class="mock-input"></div>';
+      }
+      contentDiv.innerHTML = `
+        <div class="step-title">${content.title}</div>
+        <div class="step-description">${content.description}</div>
+        <div class="step-fields">${inputsHtml}</div>
+      `;
+
+      // Update buttons
+      document.getElementById('backBtn').disabled = currentStep === 1;
+      document.getElementById('nextBtn').textContent = currentStep === totalSteps ? 'Complete' : 'Continue';
+    }
+
+    function nextStep() {
+      if (currentStep < totalSteps) {
+        currentStep++;
+        updateUI();
+      }
+    }
+
+    function prevStep() {
+      if (currentStep > 1) {
+        currentStep--;
+        updateUI();
+      }
+    }
+
+    function goToStep(step) {
+      if (step <= currentStep) {
+        currentStep = step;
+        updateUI();
+      }
+    }
+  </script>
+</body>
+</html>

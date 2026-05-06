@@ -1,0 +1,80 @@
+{
+  "id": 929,
+  "slug": "multi-step-progress-indicator",
+  "category": "feedback",
+  "title": {
+    "fr": "Indicateur de Progression Multi-Étapes",
+    "en": "Multi-Step Progress Indicator"
+  },
+  "categoryLabel": {
+    "slug": "feedback",
+    "fr": "Feedback & États",
+    "en": "Feedback & States"
+  },
+  "firstSeenOn": {
+    "product": "Stripe",
+    "url": "https://stripe.com",
+    "approximateDate": "2015"
+  },
+  "examples": [
+    {
+      "name": "Stripe Checkout",
+      "desc": {
+        "fr": "Indicateur discret montrant l'étape actuelle avec transitions fluides",
+        "en": "Discrete indicator showing current step with smooth transitions"
+      }
+    },
+    {
+      "name": "Shopify",
+      "desc": {
+        "fr": "Stepper avec labels et connexions visuelles entre étapes",
+        "en": "Stepper with labels and visual connections between steps"
+      }
+    },
+    {
+      "name": "Gov.uk",
+      "desc": {
+        "fr": "Modèle accessible avec aria-current et support lecteur d'écran",
+        "en": "Accessible pattern with aria-current and screen reader support"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Maximum 5 étapes** : Au-delà, utiliser un indicateur de pourcentage",
+      "**Labels clairs** : Nommez chaque étape (pas juste des chiffres)",
+      "**Étapes complétées** : Visuellement distinctes (checkmark, couleur)",
+      "**Étape actuelle** : Mise en évidente avec aria-current='step'",
+      "**Navigation arrière** : Permettre de revenir aux étapes précédentes"
+    ],
+    "en": [
+      "**Max 5 steps** : Beyond that, use percentage indicator",
+      "**Clear labels** : Name each step (not just numbers)",
+      "**Completed steps** : Visually distinct (checkmark, color)",
+      "**Current step** : Highlight with aria-current='step'",
+      "**Back navigation** : Allow returning to previous steps"
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Trop d'étapes affichées - surcharge cognitive",
+      "❌ Pas d'indication de temps estimé restant",
+      "❌ Pas de bouton 'Retour' ou 'Précédent'",
+      "❌ Étapes sans titres descriptifs"
+    ],
+    "en": [
+      "❌ Too many steps shown - cognitive overload",
+      "❌ No indication of estimated time remaining",
+      "❌ No 'Back' or 'Previous' button",
+      "❌ Steps without descriptive titles"
+    ]
+  },
+  "what": {
+    "fr": "Compteur d'étapes indiquant la position actuelle dans un flux multi-étapes - 'Étape 2 sur 4' avec barre de progression visuelle.",
+    "en": "Step counter indicating current position in a multi-step flow - 'Step 2 of 4' with visual progress bar."
+  },
+  "why": {
+    "fr": "Les utilisateurs doivent savoir où ils sont dans un processus long. La progression visuelle réduit l'anxiété et les abandons.",
+    "en": "Users need to know where they are in a lengthy process. Visual progress reduces anxiety and abandonment."
+  }
+}
