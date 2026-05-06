@@ -134,21 +134,19 @@ jobs:
               labels: ['vote-open']
             });
 
-            const isBatch = '${{ steps.file-check.outputs.is_batch }}' === 'true';
-            const patterns = '${{ steps.file-check.outputs.patterns }}'.split(' ').filter(p => p);
-            const now = new Date();
-            const deadline = new Date(now.getTime() + 15 * 24 * 60 * 60 * 1000);
-            const deadlineStr = deadline.toISOString().split('T')[0];
-
             // Build pattern list
             let patternList = '';
-            if (isBatch) {
-              patternList = 'Patterns in this batch: ' + patterns.join(', ');
+            for (const p of patterns) {
+              patternList += `- ${p}\\n';
             }
 
-            const body = isBatch
-              ? `Vote open - Batch PR (${patterns.length} patterns)`
-              : `Vote open - pattern ${patterns[0]}`;
+            let body;
+            if (isBatch) {
+              body = '## Vote open - Batch PR (' + patterns.length + ' patterns)\\n\\n' +
+                     'Patterns:' + patternList;
+            } else {
+              body = '## Vote open - pattern ' + patterns[0];
+            }
 
             await github.rest.issues.createComment({
               owner: context.repo.owner,
