@@ -1,0 +1,80 @@
+{
+  "id": 934,
+  "slug": "org-chart-drilldown",
+  "category": "data",
+  "title": {
+    "fr": "Organigramme avec Drill-Down",
+    "en": "Org Chart with Drill-Down"
+  },
+  "categoryLabel": {
+    "slug": "data",
+    "fr": "Data & Tables",
+    "en": "Data & Tables"
+  },
+  "firstSeenOn": {
+    "product": "Workday",
+    "url": "https://workday.com",
+    "approximateDate": "2012"
+  },
+  "examples": [
+    {
+      "name": "Workday",
+      "desc": {
+        "fr": "Visualisation hiérarchique avec navigation fluide et fiches de profil",
+        "en": "Hierarchical visualization with smooth navigation and profile cards"
+      }
+    },
+    {
+      "name": "Pingboard",
+      "desc": {
+        "fr": "Organigramme interactif avec photos, rôles et contact rapide",
+        "en": "Interactive org chart with photos, roles and quick contact"
+      }
+    },
+    {
+      "name": "Microsoft Teams",
+      "desc": {
+        "fr": "Vue org intégrée avec présence en temps réel et actions de contact",
+        "en": "Integrated org view with real-time presence and contact actions"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Échelle adaptative** : Arbre pour <100 personnes, répertoire searchable pour 500+",
+      "**Navigation fluide** : Commencer de n'importe quel nœud, naviguer haut/bas",
+      "**Profil essentiel** : Photo, nom, titre, équipe - pas trop d'infos",
+      "**Recherche rapide** : Trouver par nom, titre, département, compétences",
+      "**Actions contextuelles** : Message, email, meeting depuis l'org chart"
+    ],
+    "en": [
+      "**Adaptive scale** : Tree for <100 people, searchable directory for 500+",
+      "**Smooth navigation** : Start from any node, navigate up/down",
+      "**Essential profile** : Photo, name, title, team - not too much info",
+      "**Quick search** : Find by name, title, department, skills",
+      "**Contextual actions** : Message, email, schedule from org chart"
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Organigramme figé - pas d'interaction possible",
+      "❌ Trop d'informations sur chaque nœud - surcharge",
+      "❌ Pas de recherche - navigation fastidieuse dans grandes orgs",
+      "❌ Pas à jour - données obsolètes décrédibilisent l'outil"
+    ],
+    "en": [
+      "❌ Static org chart - no interaction possible",
+      "❌ Too much info on each node - overwhelming",
+      "❌ No search - tedious navigation in large orgs",
+      "❌ Out of date - stale data undermines the tool"
+    ]
+  },
+  "what": {
+    "fr": "Visualisation hiérarchique qui passe d'un arbre compact à une vue détaillée par personne, avec recherche et navigation fluide.",
+    "en": "Hierarchical visualization that switches from compact tree to detailed person view, with search and smooth navigation."
+  },
+  "why": {
+    "fr": "Comprendre la structure de l'entreprise est essentiel. Un bon organigramme réduit la friction pour trouver qui fait quoi et comment contacter.",
+    "en": "Understanding company structure is essential. A good org chart reduces friction to find who does what and how to contact them."
+  }
+}

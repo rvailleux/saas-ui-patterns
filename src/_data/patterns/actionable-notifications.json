@@ -1,0 +1,80 @@
+{
+  "id": 936,
+  "slug": "actionable-notifications",
+  "category": "feedback",
+  "title": {
+    "fr": "Notifications Actionnables",
+    "en": "Actionable Notifications"
+  },
+  "categoryLabel": {
+    "slug": "feedback",
+    "fr": "Feedback & États",
+    "en": "Feedback & States"
+  },
+  "firstSeenOn": {
+    "product": "Slack",
+    "url": "https://slack.com",
+    "approximateDate": "2014"
+  },
+  "examples": [
+    {
+      "name": "Slack",
+      "desc": {
+        "fr": "Boutons d'action directement dans les notifications push (approve, archive)",
+        "en": "Action buttons directly in push notifications (approve, archive)"
+      }
+    },
+    {
+      "name": "iOS Calendar",
+      "desc": {
+        "fr": "Accepter/Refuser/Maybe directement depuis la notification",
+        "en": "Accept/Decline/Maybe directly from notification"
+      }
+    },
+    {
+      "name": "GitHub",
+      "desc": {
+        "fr": "Notifications rich avec approve/comment sans ouvrir l'app",
+        "en": "Rich notifications with approve/comment without opening app"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Actions primaires** : 1-2 actions maximum, clairement labellisées",
+      "**Feedback immédiat** : Confirmer visuellement que l'action a été prise",
+      "**Actions contextuelles** : Adapter aux types de notification",
+      "**Fallback app** : Si action impossible, ouvrir l'app à l'écran pertinent",
+      "**Gestion d'erreurs** : Retry silencieux si échec réseau"
+    ],
+    "en": [
+      "**Primary actions** : 1-2 actions maximum, clearly labeled",
+      "**Immediate feedback** : Visually confirm action was taken",
+      "**Contextual actions** : Adapt to notification types",
+      "**App fallback** : If action fails, open app to relevant screen",
+      "**Error handling** : Silent retry on network failure"
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Trop d'actions - surcharge cognitive",
+      "❌ Actions non pertinentes - confusantes",
+      "❌ Pas de feedback - incertitude sur le résultat",
+      "❌ Actions destructrices sans confirmation"
+    ],
+    "en": [
+      "❌ Too many actions - cognitive overload",
+      "❌ Irrelevant actions - confusing",
+      "❌ No feedback - uncertainty about outcome",
+      "❌ Destructive actions without confirmation"
+    ]
+  },
+  "what": {
+    "fr": "Notifications permettant d'agir directement sans ouvrir l'application - approve, reply, dismiss, etc.",
+    "en": "Notifications allowing direct action without opening the app - approve, reply, dismiss, etc."
+  },
+  "why": {
+    "fr": "Réduit la friction pour les actions courantes. L'utilisateur gagne du temps sans changer de contexte.",
+    "en": "Reduces friction for common actions. User saves time without switching context."
+  }
+}

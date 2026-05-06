@@ -1,0 +1,206 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #0f0f1a;
+      color: #e2e8f0;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      gap: 16px;
+    }
+    .demo-btn {
+      padding: 12px 24px;
+      border-radius: 8px;
+      border: none;
+      background: #3b82f6;
+      color: white;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .demo-btn:hover {
+      background: #2563eb;
+    }
+    .toast-container {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      z-index: 100;
+    }
+    .toast {
+      background: #1e1e3f;
+      border: 1px solid #3b82f6;
+      border-radius: 10px;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      min-width: 300px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+      animation: slideUp 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .toast.hiding {
+      animation: slideDown 0.3s ease forwards;
+    }
+    @keyframes slideDown {
+      to { opacity: 0; transform: translateY(20px); }
+    }
+    .toast-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #3b82f6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+    .toast-content {
+      flex: 1;
+    }
+    .toast-message {
+      font-weight: 500;
+      margin-bottom: 2px;
+    }
+    .toast-meta {
+      font-size: 11px;
+      color: #64748b;
+    }
+    .toast-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .toast-btn {
+      padding: 6px 14px;
+      border-radius: 6px;
+      border: none;
+      background: #3b82f6;
+      color: white;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .toast-btn:hover {
+      background: #2563eb;
+    }
+    .toast-close {
+      background: none;
+      border: none;
+      color: #64748b;
+      font-size: 18px;
+      cursor: pointer;
+      padding: 0;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .toast-close:hover {
+      color: #e2e8f0;
+    }
+    .progress-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 3px;
+      background: #3b82f6;
+      transition: width linear;
+    }
+  </style>
+</head>
+<body>
+  <button class="demo-btn" onclick="showToast('Email sent', 'Message sent to team@company.com')">Send Email</button>
+  <button class="demo-btn" onclick="showToast('Item deleted', 'Project "Q4 Roadmap" moved to trash')">Delete Item</button>
+  <button class="demo-btn" onclick="showToast('Changes saved', 'Document auto-saved at 2:34 PM')">Save Changes</button>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script>
+    let toastId = 0;
+    const activeToasts = new Map();
+
+    function showToast(title, description) {
+      const id = ++toastId;
+      const container = document.getElementById('toastContainer');
+
+      const toast = document.createElement('div');
+      toast.className = 'toast';
+      toast.id = `toast-${id}`;
+
+      toast.innerHTML = `
+        <div class="toast-icon">✓</div>
+        <div class="toast-content">
+          <div class="toast-message">${title}</div>
+          <div class="toast-meta">${description}</div>
+        </div>
+        <div class="toast-actions">
+          <button class="toast-btn" onclick="undoAction(${id})">Undo</button>
+          <button class="toast-close" onclick="dismissToast(${id})">×</button>
+        </div>
+        <div class="progress-bar" id="progress-${id}"></div>
+      `;
+
+      container.appendChild(toast);
+
+      // Animate progress bar
+      const progressBar = document.getElementById(`progress-${id}`);
+      setTimeout(() => {
+        progressBar.style.width = '100%';
+        progressBar.style.transition = 'width 8s linear';
+      }, 50);
+
+      // Auto dismiss
+      const timer = setTimeout(() => dismissToast(id), 8000);
+      activeToasts.set(id, { timer, toast });
+    }
+
+    function dismissToast(id) {
+      const data = activeToasts.get(id);
+      if (!data) return;
+
+      clearTimeout(data.timer);
+      data.toast.classList.add('hiding');
+      setTimeout(() => {
+        data.toast.remove();
+        activeToasts.delete(id);
+      }, 300);
+    }
+
+    function undoAction(id) {
+      const data = activeToasts.get(id);
+      if (!data) return;
+
+      // Show undo feedback
+      const btn = data.toast.querySelector('.toast-btn');
+      btn.textContent = 'Undone!';
+      btn.style.background = '#10b981';
+
+      setTimeout(() => dismissToast(id), 800);
+    }
+  </script>
+</body>
+</html>

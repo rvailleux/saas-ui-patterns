@@ -1,0 +1,277 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #0f0f1a;
+      color: #e2e8f0;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      padding: 20px;
+    }
+    .routing-demo {
+      width: 100%;
+      max-width: 480px;
+    }
+    .event-types {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .event-btn {
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #2a2a55;
+      background: #1a1a2e;
+      color: #94a3b8;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: left;
+    }
+    .event-btn:hover {
+      border-color: #3b82f6;
+      color: #e2e8f0;
+    }
+    .routing-flow {
+      background: #1a1a2e;
+      border: 1px solid #2a2a55;
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .flow-title {
+      font-size: 12px;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+    }
+    .routing-step {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      background: #252542;
+      border-radius: 8px;
+      margin-bottom: 8px;
+      opacity: 0.5;
+      transition: all 0.3s;
+    }
+    .routing-step.active {
+      opacity: 1;
+      background: #1e3a5f;
+      border: 1px solid #3b82f6;
+    }
+    .routing-step.completed {
+      opacity: 1;
+    }
+    .step-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #2a2a55;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+    .routing-step.active .step-icon {
+      background: #3b82f6;
+    }
+    .routing-step.completed .step-icon {
+      background: #10b981;
+    }
+    .step-content {
+      flex: 1;
+    }
+    .step-label {
+      font-weight: 500;
+      margin-bottom: 2px;
+    }
+    .step-desc {
+      font-size: 11px;
+      color: #64748b;
+    }
+    .step-arrow {
+      text-align: center;
+      color: #64748b;
+      font-size: 16px;
+      margin: 4px 0;
+    }
+    .recipient-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      background: #10b98122;
+      border: 1px solid #10b981;
+      border-radius: 8px;
+      margin-top: 12px;
+    }
+    .recipient-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #10b981, #3b82f6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+    }
+    .recipient-info {
+      flex: 1;
+    }
+    .recipient-name {
+      font-weight: 500;
+    }
+    .recipient-role {
+      font-size: 11px;
+      color: #64748b;
+    }
+    .recipient-channel {
+      font-size: 11px;
+      color: #10b981;
+    }
+  </style>
+</head>
+<body>
+  <div class="routing-demo">
+    <div class="event-types">
+      <button class="event-btn" onclick="simulateRouting('pto')">
+        <strong>PTO Request</strong><br>
+        <small>→ Direct Manager</small>
+      </button>
+      <button class="event-btn" onclick="simulateRouting('outage')">
+        <strong>System Outage</strong><br>
+        <small>→ On-call Engineer</small>
+      </button>
+      <button class="event-btn" onclick="simulateRouting('mention')">
+        <strong>Team Mention</strong><br>
+        <small>→ All Team Members</small>
+      </button>
+      <button class="event-btn" onclick="simulateRouting('deadline')">
+        <strong>Project Deadline</strong><br>
+        <small>→ Project Lead</small>
+      </button>
+    </div>
+
+    <div class="routing-flow" id="routingFlow">
+      <div class="flow-title">Routing Logic</div>
+
+      <div class="routing-step" id="step1">
+        <div class="step-icon">1</div>
+        <div class="step-content">
+          <div class="step-label">Event Classification</div>
+          <div class="step-desc">Identify event type and priority</div>
+        </div>
+      </div>
+
+      <div class="step-arrow">↓</div>
+
+      <div class="routing-step" id="step2">
+        <div class="step-icon">2</div>
+        <div class="step-content">
+          <div class="step-label">Role Resolution</div>
+          <div class="step-desc">Map to responsible role/person</div>
+        </div>
+      </div>
+
+      <div class="step-arrow">↓</div>
+
+      <div class="routing-step" id="step3">
+        <div class="step-icon">3</div>
+        <div class="step-content">
+          <div class="step-label">Availability Check</div>
+          <div class="step-desc">Verify working hours and status</div>
+        </div>
+      </div>
+
+      <div class="step-arrow">↓</div>
+
+      <div class="routing-step" id="step4">
+        <div class="step-icon">4</div>
+        <div class="step-content">
+          <div class="step-label">Channel Selection</div>
+          <div class="step-desc">Choose notification method</div>
+        </div>
+      </div>
+
+      <div class="recipient-card" id="recipientCard" style="display: none;">
+        <div class="recipient-avatar" id="recipAvatar">SC</div>
+        <div class="recipient-info">
+          <div class="recipient-name" id="recipName">Sarah Chen</div>
+          <div class="recipient-role" id="recipRole">Engineering Manager</div>
+          <div class="recipient-channel" id="recipChannel">📧 Email + 📱 Push</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const scenarios = {
+      pto: {
+        recipient: { name: 'Marcus Johnson', role: 'Direct Manager', avatar: 'MJ', channel: '💬 In-app + 📧 Email' }
+      },
+      outage: {
+        recipient: { name: 'Alice Brown', role: 'On-call Engineer', avatar: 'AB', channel: '📱 Push + 📞 SMS' }
+      },
+      mention: {
+        recipient: { name: 'Design Team', role: '4 members', avatar: 'DT', channel: '💬 Slack + 📧 Email' }
+      },
+      deadline: {
+        recipient: { name: 'Sarah Chen', role: 'Project Lead', avatar: 'SC', channel: '💬 In-app + 📱 Push' }
+      }
+    };
+
+    let simulationActive = false;
+
+    function simulateRouting(type) {
+      if (simulationActive) return;
+      simulationActive = true;
+
+      const scenario = scenarios[type];
+      document.getElementById('recipientCard').style.display = 'none';
+
+      // Reset steps
+      for (let i = 1; i <= 4; i++) {
+        document.getElementById(`step${i}`).className = 'routing-step';
+      }
+
+      // Animate through steps
+      let step = 1;
+      const interval = setInterval(() => {
+        if (step > 1) {
+          document.getElementById(`step${step-1}`).classList.remove('active');
+          document.getElementById(`step${step-1}`).classList.add('completed');
+        }
+
+        if (step <= 4) {
+          document.getElementById(`step${step}`).classList.add('active');
+          step++;
+        } else {
+          clearInterval(interval);
+          showRecipient(scenario.recipient);
+          simulationActive = false;
+        }
+      }, 600);
+    }
+
+    function showRecipient(r) {
+      document.getElementById('recipAvatar').textContent = r.avatar;
+      document.getElementById('recipName').textContent = r.name;
+      document.getElementById('recipRole').textContent = r.role;
+      document.getElementById('recipChannel').textContent = r.channel;
+      document.getElementById('recipientCard').style.display = 'flex';
+    }
+  </script>
+</body>
+</html>

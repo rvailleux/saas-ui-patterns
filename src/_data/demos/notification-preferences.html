@@ -1,0 +1,270 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #0f0f1a;
+      color: #e2e8f0;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      padding: 20px;
+    }
+    .prefs-container {
+      width: 100%;
+      max-width: 420px;
+      background: #1a1a2e;
+      border-radius: 12px;
+      border: 1px solid #2a2a55;
+      overflow: hidden;
+    }
+    .prefs-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid #2a2a55;
+    }
+    .prefs-title {
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+    .prefs-subtitle {
+      font-size: 12px;
+      color: #64748b;
+    }
+    .prefs-section {
+      padding: 16px 20px;
+      border-bottom: 1px solid #252542;
+    }
+    .section-title {
+      font-size: 11px;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+    }
+    .pref-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0;
+    }
+    .pref-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .pref-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      background: #252542;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+    .pref-text {
+      font-size: 13px;
+    }
+    .pref-toggle {
+      display: flex;
+      gap: 8px;
+    }
+    .channel-btn {
+      padding: 4px 10px;
+      border-radius: 4px;
+      border: 1px solid #2a2a55;
+      background: transparent;
+      color: #64748b;
+      font-size: 11px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .channel-btn.active {
+      background: #3b82f6;
+      color: white;
+      border-color: #3b82f6;
+    }
+    .dnd-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .toggle-switch {
+      width: 44px;
+      height: 24px;
+      background: #2a2a55;
+      border-radius: 12px;
+      position: relative;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .toggle-switch.active {
+      background: #3b82f6;
+    }
+    .toggle-switch::after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: white;
+      transition: transform 0.2s;
+    }
+    .toggle-switch.active::after {
+      transform: translateX(20px);
+    }
+    .dnd-text {
+      flex: 1;
+    }
+    .dnd-label {
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .dnd-hours {
+      font-size: 11px;
+      color: #64748b;
+    }
+    .urgency-pills {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .urgency-pill {
+      padding: 6px 12px;
+      border-radius: 16px;
+      border: 1px solid #2a2a55;
+      background: transparent;
+      color: #94a3b8;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .urgency-pill:hover {
+      border-color: #3b82f6;
+    }
+    .urgency-pill.active {
+      background: #3b82f6;
+      color: white;
+      border-color: #3b82f6;
+    }
+    .prefs-footer {
+      padding: 12px 20px;
+      background: #252542;
+      font-size: 11px;
+      color: #64748b;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="prefs-container">
+    <div class="prefs-header">
+      <div class="prefs-title">Notification Preferences</div>
+      <div class="prefs-subtitle">Customize how and when you receive notifications</div>
+    </div>
+
+    <div class="prefs-section">
+      <div class="section-title">By Event Type</div>
+
+      <div class="pref-row">
+        <div class="pref-label">
+          <div class="pref-icon">@</div>
+          <div class="pref-text">Mentions</div>
+        </div>
+        <div class="pref-toggle">
+          <button class="channel-btn active">In-app</button>
+          <button class="channel-btn active">Email</button>
+          <button class="channel-btn active">Push</button>
+        </div>
+      </div>
+
+      <div class="pref-row">
+        <div class="pref-label">
+          <div class="pref-icon">👤</div>
+          <div class="pref-text">Assignments</div>
+        </div>
+        <div class="pref-toggle">
+          <button class="channel-btn active">In-app</button>
+          <button class="channel-btn">Email</button>
+          <button class="channel-btn active">Push</button>
+        </div>
+      </div>
+
+      <div class="pref-row">
+        <div class="pref-label">
+          <div class="pref-icon">⏰</div>
+          <div class="pref-text">Deadlines</div>
+        </div>
+        <div class="pref-toggle">
+          <button class="channel-btn active">In-app</button>
+          <button class="channel-btn active">Email</button>
+          <button class="channel-btn">Push</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="prefs-section">
+      <div class="section-title">Delivery Schedule</div>
+
+      <div class="pref-row">
+        <div class="urgency-pills">
+          <button class="urgency-pill active">Immediate</button>
+          <button class="urgency-pill">Hourly Digest</button>
+          <button class="urgency-pill">Daily Summary</button>
+          <button class="urgency-pill">Weekly Report</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="prefs-section">
+      <div class="section-title">Do Not Disturb</div>
+
+      <div class="pref-row">
+        <div class="dnd-row">
+          <div class="toggle-switch" id="dndToggle" onclick="toggleDND()"></div>
+          <div class="dnd-text">
+            <div class="dnd-label">Quiet Hours</div>
+            <div class="dnd-hours">10:00 PM - 7:00 AM</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="prefs-footer">
+      Changes are saved automatically
+    </div>
+  </div>
+
+  <script>
+    // Toggle channel buttons
+    document.querySelectorAll('.channel-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        btn.classList.toggle('active');
+      });
+    });
+
+    // Toggle urgency pills
+    document.querySelectorAll('.urgency-pill').forEach(pill => {
+      pill.addEventListener('click', () => {
+        document.querySelectorAll('.urgency-pill').forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+      });
+    });
+
+    // Toggle DND
+    function toggleDND() {
+      document.getElementById('dndToggle').classList.toggle('active');
+    }
+  </script>
+</body>
+</html>

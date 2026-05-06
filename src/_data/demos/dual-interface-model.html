@@ -1,0 +1,262 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #0f0f1a;
+      color: #e2e8f0;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      padding: 20px;
+    }
+    .toggle-bar {
+      display: flex;
+      background: #1a1a2e;
+      border-radius: 10px;
+      padding: 4px;
+      margin-bottom: 20px;
+      border: 1px solid #2a2a55;
+    }
+    .toggle-btn {
+      padding: 8px 20px;
+      border: none;
+      background: transparent;
+      color: #64748b;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+    .toggle-btn.active {
+      background: #3b82f6;
+      color: white;
+    }
+    .interface-container {
+      width: 100%;
+      max-width: 600px;
+      height: 320px;
+      background: #1a1a2e;
+      border-radius: 12px;
+      border: 1px solid #2a2a55;
+      overflow: hidden;
+    }
+    .view {
+      display: none;
+      height: 100%;
+      padding: 20px;
+    }
+    .view.active {
+      display: block;
+    }
+    /* Employee View */
+    .emp-header {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    .task-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    .task-card {
+      background: #252542;
+      border-radius: 10px;
+      padding: 16px;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: 1px solid transparent;
+    }
+    .task-card:hover {
+      border-color: #3b82f6;
+      background: #2a2a55;
+    }
+    .task-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: #3b82f6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+    .task-card:nth-child(2) .task-icon { background: #10b981; }
+    .task-card:nth-child(3) .task-icon { background: #f59e0b; }
+    .task-card:nth-child(4) .task-icon { background: #8b5cf6; }
+    .task-title {
+      font-weight: 500;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+    .task-desc {
+      font-size: 12px;
+      color: #64748b;
+    }
+    /* Admin View */
+    .admin-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .admin-title {
+      font-size: 16px;
+      font-weight: 600;
+    }
+    .admin-actions {
+      display: flex;
+      gap: 8px;
+    }
+    .admin-btn {
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: none;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .admin-btn-primary {
+      background: #3b82f6;
+      color: white;
+    }
+    .admin-btn-secondary {
+      background: #252542;
+      color: #94a3b8;
+      border: 1px solid #2a2a55;
+    }
+    .data-table {
+      width: 100%;
+      font-size: 12px;
+    }
+    .data-table th {
+      text-align: left;
+      padding: 10px;
+      color: #64748b;
+      font-weight: 500;
+      border-bottom: 1px solid #2a2a55;
+    }
+    .data-table td {
+      padding: 10px;
+      border-bottom: 1px solid #252542;
+    }
+    .badge {
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 500;
+    }
+    .badge-active { background: #10b98133; color: #10b981; }
+    .badge-pending { background: #f59e0b33; color: #f59e0b; }
+    .badge-inactive { background: #64748b33; color: #64748b; }
+  </style>
+</head>
+<body>
+  <div class="toggle-bar">
+    <button class="toggle-btn active" onclick="switchView('employee')" id="empBtn">Employee View</button>
+    <button class="toggle-btn" onclick="switchView('admin')" id="adminBtn">Admin View</button>
+  </div>
+
+  <div class="interface-container">
+    <!-- Employee View -->
+    <div class="view active" id="employeeView">
+      <div class="emp-header">What would you like to do?</div>
+      <div class="task-grid">
+        <div class="task-card">
+          <div class="task-icon">💰</div>
+          <div class="task-title">View Pay Stub</div>
+          <div class="task-desc">Check your latest payslip</div>
+        </div>
+        <div class="task-card">
+          <div class="task-icon">📅</div>
+          <div class="task-title">Request Time Off</div>
+          <div class="task-desc">Submit vacation request</div>
+        </div>
+        <div class="task-card">
+          <div class="task-icon">📊</div>
+          <div class="task-title">My Benefits</div>
+          <div class="task-desc">Review coverage & claims</div>
+        </div>
+        <div class="task-card">
+          <div class="task-icon">📄</div>
+          <div class="task-title">Update Info</div>
+          <div class="task-desc">Change address, contact, etc.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Admin View -->
+    <div class="view" id="adminView">
+      <div class="admin-header">
+        <div class="admin-title">Employee Directory</div>
+        <div class="admin-actions">
+          <button class="admin-btn admin-btn-secondary">Export CSV</button>
+          <button class="admin-btn admin-btn-primary">+ Add Employee</button>
+        </div>
+      </div>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Department</th>
+            <th>Role</th>
+            <th>Status</th>
+            <th>Last Active</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Sarah Chen</td>
+            <td>Engineering</td>
+            <td>Senior Dev</td>
+            <td><span class="badge badge-active">Active</span></td>
+            <td>2 min ago</td>
+          </tr>
+          <tr>
+            <td>Marcus Johnson</td>
+            <td>Design</td>
+            <td>Lead Designer</td>
+            <td><span class="badge badge-active">Active</span></td>
+            <td>1 hour ago</td>
+          </tr>
+          <tr>
+            <td>Emma Wilson</td>
+            <td>Marketing</td>
+            <td>Manager</td>
+            <td><span class="badge badge-pending">On Leave</span></td>
+            <td>3 days ago</td>
+          </tr>
+          <tr>
+            <td>David Park</td>
+            <td>Sales</td>
+            <td>Rep</td>
+            <td><span class="badge badge-inactive">Inactive</span></td>
+            <td>2 weeks ago</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    function switchView(view) {
+      document.getElementById('employeeView').classList.remove('active');
+      document.getElementById('adminView').classList.remove('active');
+      document.getElementById('empBtn').classList.remove('active');
+      document.getElementById('adminBtn').classList.remove('active');
+
+      document.getElementById(view + 'View').classList.add('active');
+      document.getElementById(view === 'employee' ? 'empBtn' : 'adminBtn').classList.add('active');
+    }
+  </script>
+</body>
+</html>
