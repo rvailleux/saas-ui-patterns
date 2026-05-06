@@ -1,0 +1,175 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #0f0f1a;
+      color: #e2e8f0;
+      height: 100vh;
+      overflow: hidden;
+      font-size: 13px;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+    }
+    .comparison {
+      flex: 1;
+      display: flex;
+      gap: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .card {
+      flex: 1;
+      background: #1a1a2e;
+      border-radius: 12px;
+      padding: 20px;
+      border: 2px solid transparent;
+    }
+    .card.good {
+      border-color: #22c55e;
+    }
+    .card.bad {
+      border-color: #ef4444;
+      opacity: 0.7;
+    }
+    .card-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+    .card.good .card-label {
+      color: #22c55e;
+    }
+    .card.bad .card-label {
+      color: #ef4444;
+    }
+    .price {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .price-period {
+      color: #64748b;
+      font-size: 14px;
+    }
+    .features {
+      margin: 20px 0;
+      padding: 16px 0;
+      border-top: 1px solid #2a2a55;
+      border-bottom: 1px solid #2a2a55;
+    }
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+      font-size: 13px;
+    }
+    .feature-check {
+      color: #22c55e;
+    }
+    .cta-button {
+      width: 100%;
+      padding: 14px;
+      border-radius: 10px;
+      border: none;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .cta-good {
+      background: #22c55e;
+      color: white;
+    }
+    .cta-bad {
+      background: #ef4444;
+      color: white;
+    }
+    .hidden-cost {
+      font-size: 11px;
+      color: #ef4444;
+      margin-top: 8px;
+      font-style: italic;
+    }
+    .cancellation {
+      margin-top: 12px;
+      font-size: 12px;
+      color: #94a3b8;
+    }
+    .controls {
+      display: flex;
+      gap: 12px;
+      padding-top: 16px;
+      justify-content: center;
+    }
+    .btn {
+      padding: 10px 16px;
+      border-radius: 8px;
+      border: none;
+      font-size: 12px;
+      cursor: pointer;
+      background: #3b82f6;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="comparison">
+    <div class="card bad">
+      <div class="card-label">❌ Dark Pattern</div>
+      <div class="price">$9<span class="price-period">/month*</span></div>
+      <div class="features">
+        <div class="feature-item">
+          <span class="feature-check">✓</span>
+          <span>All features included</span>
+        </div>
+        <div class="feature-item">
+          <span class="feature-check">✓</span>
+          <span>Unlimited usage</span>
+        </div>
+      </div>
+      <button class="cta-button cta-bad" onclick="showDark()">Sign Up Now!</button>
+      <div class="hidden-cost">*Plus $29 setup fee, auto-renews yearly</div>
+    </div>
+
+    <div class="card good">
+      <div class="card-label">✓ Ethical Design</div>
+      <div class="price">$12<span class="price-period">/month</span></div>
+      <div class="features">
+        <div class="feature-item">
+          <span class="feature-check">✓</span>
+          <span>All features included</span>
+        </div>
+        <div class="feature-item">
+          <span class="feature-check">✓</span>
+          <span>Unlimited usage</span>
+        </div>
+      </div>
+      <button class="cta-button cta-good" onclick="showEthical()">Start Free Trial</button>
+      <div class="cancellation">✓ Cancel anytime, no questions asked</div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button class="btn" onclick="showPrinciples()">View Ethical Principles</button>
+  </div>
+
+  <script>
+    function showDark() {
+      alert('This uses hidden fees and deceptive practices');
+    }
+    function showEthical() {
+      alert('Transparent pricing with easy cancellation!');
+    }
+    function showPrinciples() {
+      alert('1. Transparent pricing\n2. Easy cancellation\n3. No hidden renewals\n4. Clear distinction of ads');
+    }
+  </script>
+</body>
+</html>

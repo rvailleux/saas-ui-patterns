@@ -1,0 +1,69 @@
+{
+  "id": 916,
+  "slug": "privacy-first",
+  "category": "feedback",
+  "title": {
+    "fr": "UX Privacy-First (Architecture de Consentement)",
+    "en": "Privacy-First UX (Consent Architecture)"
+  },
+  "categoryLabel": {
+    "slug": "feedback",
+    "fr": "Feedback & États",
+    "en": "Feedback & States"
+  },
+  "firstSeenOn": {
+    "product": "Apple",
+    "url": "https://apple.com/privacy",
+    "approximateDate": "2021"
+  },
+  "examples": [
+    {
+      "name": "App Tracking Transparency",
+      "desc": {
+        "fr": "Demande contextuelle d'autorisation avec explication claire du pourquoi",
+        "en": "Contextual permission request with clear explanation of why"
+      }
+    },
+    {
+      "name": "GDPR-compliant Cookie UX",
+      "desc": {
+        "fr": "Contrôles granulaires et options de refus faciles d'accès",
+        "en": "Granular controls and easily accessible opt-out options"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Demandez au bon moment** : Explication du POURQUOI au point de besoin",
+      "**Contrôles granulaires** : Permettez le choix par type de donnée",
+      "**Sorties faciles** : Désinscription et suppression de compte simples",
+      "**Transparence** : Montrez l'utilisation des données dans l'interface"
+    ],
+    "en": [
+      "**Ask at right time** : Explain WHY at point of need",
+      "**Granular controls** : Allow choice by data type",
+      "**Easy exits** : Simple unsubscribe and account deletion",
+      "**Transparency** : Show data usage in the interface"
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Demandes de permission au premier lancement sans contexte",
+      "❌ Options de refus cachées ou difficiles à trouver",
+      "❌ Paramètres de confidentialité noyés dans les menus"
+    ],
+    "en": [
+      "❌ Permission requests on first launch without context",
+      "❌ Hidden or hard-to-find opt-out options",
+      "❌ Privacy settings buried in menus"
+    ]
+  },
+  "what": {
+    "fr": "Opt-ins transparents, permissions compréhensibles, contrôles opt-out faciles - pas cachés dans les paramètres.",
+    "en": "Transparent opt-ins, easy-to-understand permissions, easy opt-out controls - not buried in settings."
+  },
+  "why": {
+    "fr": "La confiance est le fondement de l'adoption. Les utilisateurs plus informés et en contrôle sont des utilisateurs plus engagés.",
+    "en": "Trust is the foundation of adoption. More informed and in-control users are more engaged users."
+  }
+}

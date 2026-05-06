@@ -1,0 +1,71 @@
+{
+  "id": 917,
+  "slug": "ethical-design",
+  "category": "feedback",
+  "title": {
+    "fr": "Design Éthique (Anti-Dark Patterns)",
+    "en": "Ethical Design (Anti-Dark Patterns)"
+  },
+  "categoryLabel": {
+    "slug": "feedback",
+    "fr": "Feedback & États",
+    "en": "Feedback & States"
+  },
+  "firstSeenOn": {
+    "product": "Basecamp",
+    "url": "https://basecamp.com",
+    "approximateDate": "2010"
+  },
+  "examples": [
+    {
+      "name": "Honest Pricing Pages",
+      "desc": {
+        "fr": "Prix transparents avant inscription, pas de frais cachés",
+        "en": "Transparent pricing before signup, no hidden fees"
+      }
+    },
+    {
+      "name": "Easy Cancellation",
+      "desc": {
+        "fr": "Résiliation aussi simple que l'inscription - pas de 'rétention' agressive",
+        "en": "Cancellation as easy as signup - no aggressive 'retention'"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Prix transparents** : Visible avant inscription, pas de surprises",
+      "**Résiliation facile** : Aussi simple que l'inscription",
+      "**Renouvellement visible** : Notifications avant renouvellement auto",
+      "**Distinction claire** : Publicités vs contenu clairement identifiés"
+    ],
+    "en": [
+      "**Transparent pricing** : Visible before signup, no surprises",
+      "**Easy cancellation** : As simple as signup",
+      "**Visible renewal** : Notifications before auto-renewal",
+      "**Clear distinction** : Ads vs content clearly identified"
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Prix cachés jusqu'à la dernière étape",
+      "❌ Résiliation complexe intentionnellement frustrante",
+      "❌ Renouvellement auto sans préavis",
+      "❌ Publicités déguisées en contenu"
+    ],
+    "en": [
+      "❌ Hidden pricing until last step",
+      "❌ Intentionally frustrating cancellation flow",
+      "❌ Auto-renewal without notice",
+      "❌ Ads disguised as content"
+    ]
+  },
+  "what": {
+    "fr": "Rejet explicite des UX trompeuses - prix transparents, résiliation claire, pas de renouvellement caché.",
+    "en": "Explicit rejection of deceptive UX - transparent pricing, clear cancellation, no hidden renewals."
+  },
+  "why": {
+    "fr": "La confiance est un actif commercial. Les dark patterns génèrent du churn et détruisent la réputation à long terme.",
+    "en": "Trust is a business asset. Dark patterns generate churn and destroy long-term reputation."
+  }
+}

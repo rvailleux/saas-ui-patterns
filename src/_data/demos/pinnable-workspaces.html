@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #0f0f1a;
+      color: #e2e8f0;
+      height: 100vh;
+      overflow: hidden;
+      font-size: 13px;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+    }
+    .workspace {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      max-width: 700px;
+      margin: 0 auto;
+      width: 100%;
+      background: #1a1a2e;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .tab-bar {
+      display: flex;
+      background: #151528;
+      padding: 8px 8px 0;
+      gap: 4px;
+      border-bottom: 1px solid #2a2a55;
+    }
+    .tab {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: #1a1a2e;
+      border-radius: 8px 8px 0 0;
+      font-size: 12px;
+      cursor: pointer;
+      border: 1px solid transparent;
+      border-bottom: none;
+    }
+    .tab.active {
+      background: #252542;
+      border-color: #3b82f6;
+    }
+    .tab.pinned::before {
+      content: '📌';
+      font-size: 10px;
+    }
+    .tab-close {
+      margin-left: 4px;
+      opacity: 0.5;
+    }
+    .tab-close:hover { opacity: 1; }
+    .workspace-content {
+      flex: 1;
+      padding: 20px;
+    }
+    .workspace-controls {
+      display: flex;
+      gap: 12px;
+      padding: 12px;
+      background: #151528;
+      border-top: 1px solid #2a2a55;
+    }
+    .btn {
+      padding: 8px 14px;
+      border-radius: 6px;
+      border: none;
+      font-size: 12px;
+      cursor: pointer;
+      background: #3b82f6;
+      color: white;
+    }
+    .btn-secondary {
+      background: #2a2a55;
+    }
+  </style>
+</head>
+<body>
+  <div class="workspace">
+    <div class="tab-bar">
+      <div class="tab pinned active" onclick="switchTab(this)">Dashboard</div>
+      <div class="tab" onclick="switchTab(this)">Report Q4</div>
+      <div class="tab" onclick="switchTab(this)">User Analytics</div>
+      <div class="tab pinned" onclick="switchTab(this)">Settings</div>
+    </div>
+
+    <div class="workspace-content">
+      <div style="color: #64748b;">Active workspace content...</div>
+    </div>
+
+    <div class="workspace-controls">
+      <button class="btn" onclick="pinCurrent()">Pin Tab</button>
+      <button class="btn btn-secondary" onclick="saveWorkspace()">Save Workspace</button>
+      <button class="btn btn-secondary" onclick="restoreSession()">Restore Session</button>
+    </div>
+  </div>
+
+  <script>
+    function switchTab(tab) {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+    }
+    function pinCurrent() {
+      const active = document.querySelector('.tab.active');
+      active.classList.toggle('pinned');
+    }
+    function saveWorkspace() {
+      alert('Workspace configuration saved!');
+    }
+    function restoreSession() {
+      alert('Previous session restored!');
+    }
+  </script>
+</body>
+</html>

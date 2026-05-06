@@ -1,0 +1,69 @@
+{
+  "id": 919,
+  "slug": "intelligent-caching",
+  "category": "data",
+  "title": {
+    "fr": "Mise en Cache Intelligente et Pré-fetching",
+    "en": "Intelligent Caching and Pre-fetching"
+  },
+  "categoryLabel": {
+    "slug": "data",
+    "fr": "Data & Tables",
+    "en": "Data & Tables"
+  },
+  "firstSeenOn": {
+    "product": "Vercel",
+    "url": "https://vercel.com",
+    "approximateDate": "2020"
+  },
+  "examples": [
+    {
+      "name": "AI Suggestion Systems",
+      "desc": {
+        "fr": "Suggestions IA pré-générées avant que l'utilisateur ne demande",
+        "en": "AI suggestions pre-generated before user asks"
+      }
+    },
+    {
+      "name": "Dashboard Widgets",
+      "desc": {
+        "fr": "Widgets de tableau de bord chargés avant le scroll",
+        "en": "Dashboard widgets loaded before scroll"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Prédisez les besoins** : Chargez ce que l'utilisateur va probablement vouloir",
+      "**Cachez intelligemment** : Gardez en mémoire les données fréquemment accédées",
+      "**Soyez discret** : Le pré-chargement ne doit pas ralentir l'interaction",
+      "**Invalidez proprement** : Mettez à jour le cache quand les données changent"
+    ],
+    "en": [
+      "**Predict needs** : Load what user will likely want",
+      "**Cache intelligently** : Keep frequently accessed data in memory",
+      "**Be discreet** : Pre-loading shouldn't slow interaction",
+      "**Invalidate cleanly** : Update cache when data changes"
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Pré-charger trop de données - gaspillage de bande passante",
+      "❌ Cache obsolète montrant des données incorrectes",
+      "❌ Ralentissement perceptible à cause du pré-chargement"
+    ],
+    "en": [
+      "❌ Pre-loading too much data - bandwidth waste",
+      "❌ Stale cache showing incorrect data",
+      "❌ Perceptible slowdown from pre-loading"
+    ]
+  },
+  "what": {
+    "fr": "Chargement prédictif de contenu IA et données basé sur les patterns utilisateur - latence perçue zéro.",
+    "en": "Predictive loading of AI content and data based on user patterns - zero perceived latency."
+  },
+  "why": {
+    "fr": "La vitesse perçue est plus importante que la vitesse réelle. Le pré-chargement intelligent crée une expérience instantanée.",
+    "en": "Perceived speed is more important than actual speed. Intelligent pre-loading creates an instant experience."
+  }
+}
