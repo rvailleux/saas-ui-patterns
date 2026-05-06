@@ -134,48 +134,18 @@ jobs:
               labels: ['vote-open']
             });
 
+            // Build pattern list
+            let patternList = '';
+            for (const p of patterns) {
+              patternList += `- ${p}\\n';
+            }
+
             let body;
             if (isBatch) {
-              const patternList = patterns.map(p => `- \\`${p}\\``).join('\\n');
-              body = `## 🗳️ Vote open — Batch PR (${patterns.length} patterns)
-
-                            All required files are present. The **15-day community vote period** is now open.
-
-                            **Patterns in this batch:**
-                            ${patternList}
-
-                            | | |
-                            |---|---|
-                            | **Vote deadline** | ${deadlineStr} |
-                            | **Decision** | After ${deadlineStr}, the repository owner will merge, request changes, or close |
-
-                            **How to vote:**
-                            - 👍 on this PR = in favour of all patterns
-                            - 👎 on this PR = against (please comment which pattern and why)
-                            - Leave a comment with specific feedback, missing examples, or implementation notes
-
-                            Votes are advisory — the final decision rests with the maintainer.
-
-                            > This is an automated message. See [CONTRIBUTING.md](../blob/main/CONTRIBUTING.md#review-process) for the full process.`;
+              body = '## Vote open - Batch PR (' + patterns.length + ' patterns)\\n\\n' +
+                     'Patterns:' + patternList;
             } else {
-              const slug = patterns[0];
-              body = `## 🗳️ Vote open — pattern \\`${slug}\\`
-
-                            All required files are present. The **15-day community vote period** is now open.
-
-                            | | |
-                            |---|---|
-                            | **Vote deadline** | ${deadlineStr} |
-                            | **Decision** | After ${deadlineStr}, the repository owner will merge, request changes, or close |
-
-                            **How to vote:**
-                            - 👍 on this PR = in favour
-                            - 👎 on this PR = against
-                            - Leave a comment with specific feedback, missing examples, or implementation notes
-
-                            Votes are advisory — the final decision rests with the maintainer.
-
-                            > This is an automated message. See [CONTRIBUTING.md](../blob/main/CONTRIBUTING.md#review-process) for the full process.`;
+              body = '## Vote open - pattern ' + patterns[0];
             }
 
             await github.rest.issues.createComment({
