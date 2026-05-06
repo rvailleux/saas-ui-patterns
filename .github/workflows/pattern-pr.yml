@@ -2,7 +2,7 @@ name: Pattern PR — validate & open vote
 
 on:
   pull_request:
-    types: [opened, reopened]
+    types: [opened, reopened, synchronize]
     branches: [main]
 
 permissions:
