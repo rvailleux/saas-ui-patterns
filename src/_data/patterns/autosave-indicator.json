@@ -1,0 +1,69 @@
+{
+  "id": 923,
+  "slug": "autosave-indicator",
+  "category": "feedback",
+  "title": {
+    "fr": "Sauvegarde Auto avec Indicateur",
+    "en": "Autosave with Visual Indicator"
+  },
+  "categoryLabel": {
+    "slug": "feedback",
+    "fr": "Feedback & États",
+    "en": "Feedback & States"
+  },
+  "firstSeenOn": {
+    "product": "Google Docs",
+    "url": "https://docs.google.com",
+    "approximateDate": "2006"
+  },
+  "examples": [
+    {
+      "name": "Notion",
+      "desc": {
+        "fr": "Indicateur de sauvegarde en temps réel avec horodatage",
+        "en": "Real-time save indicator with timestamp"
+      }
+    },
+    {
+      "name": "Figma",
+      "desc": {
+        "fr": "Sauvegarde continue avec indicateur d'état",
+        "en": "Continuous save with status indicator"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**États clairs** : Idle → Typing → Saving → Saved → Error",
+      "**Indicateur discret** : Pas intrusif mais visible",
+      "**Timestamp** : 'Saved at 3:04 PM' pour la confiance",
+      "**Bouton Save visible** : Même si désactivé, pour rassurer"
+    ],
+    "en": [
+      "**Clear states** : Idle → Typing → Saving → Saved → Error",
+      "**Discreet indicator** : Not intrusive but visible",
+      "**Timestamp** : 'Saved at 3:04 PM' for confidence",
+      "**Save button visible** : Even if disabled, for reassurance"
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Aucun feedback pendant la sauvegarde",
+      "❌ Indication 'Saved' permanente (pas de changement d'état)",
+      "❌ Pas de gestion d'erreur visible"
+    ],
+    "en": [
+      "❌ No feedback during saving",
+      "❌ Permanent 'Saved' indication (no state change)",
+      "❌ No visible error handling"
+    ]
+  },
+  "what": {
+    "fr": "Sauvegarde automatique avec indicateur discret - 'Saving...' → 'Saved at 3:04 PM'.",
+    "en": "Automatic save with unobtrusive indicator - 'Saving...' → 'Saved at 3:04 PM'."
+  },
+  "why": {
+    "fr": "L'anxiété de perte de données est réelle. Un indicateur visible rassure l'utilisateur sans interrompre son flux.",
+    "en": "Data loss anxiety is real. A visible indicator reassures users without interrupting flow."
+  }
+}

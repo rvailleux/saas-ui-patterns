@@ -1,0 +1,213 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #0f0f1a;
+      color: #e2e8f0;
+      height: 100vh;
+      overflow: hidden;
+      font-size: 13px;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+    }
+    .editor {
+      flex: 1;
+      max-width: 700px;
+      margin: 0 auto;
+      width: 100%;
+      background: #1a1a2e;
+      border-radius: 12px;
+      padding: 24px;
+    }
+    .editor-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid #2a2a55;
+    }
+    .doc-title {
+      font-size: 16px;
+      font-weight: 600;
+    }
+    .save-status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: #64748b;
+    }
+    .save-status.saving {
+      color: #3b82f6;
+    }
+    .save-status.saved {
+      color: #22c55e;
+    }
+    .save-status.error {
+      color: #ef4444;
+    }
+    .status-icon {
+      width: 16px;
+      height: 16px;
+    }
+    .spinner {
+      border: 2px solid #3b82f6;
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    .editor-content {
+      min-height: 200px;
+      padding: 16px;
+      background: #151528;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      outline: none;
+    }
+    .editor-content:focus {
+      border-color: #3b82f6;
+    }
+    .save-button {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 16px;
+      padding: 10px 16px;
+      background: #3b82f6;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 13px;
+      cursor: pointer;
+    }
+    .save-button:disabled {
+      background: #2a2a55;
+      color: #64748b;
+      cursor: default;
+    }
+    .controls {
+      display: flex;
+      gap: 12px;
+      padding-top: 16px;
+      justify-content: center;
+    }
+    .btn {
+      padding: 10px 16px;
+      border-radius: 8px;
+      border: none;
+      font-size: 12px;
+      cursor: pointer;
+      background: #3b82f6;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="editor">
+    <div class="editor-header">
+      <div class="doc-title">Document Draft</div>
+      <div class="save-status" id="saveStatus">
+        <span class="status-icon" id="statusIcon">✓</span>
+        <span id="statusText">Saved</span>
+      </div>
+    </div>
+
+    <div class="editor-content" contenteditable="true" id="editor" oninput="onType()">
+      Start typing to see autosave in action...
+    </div>
+
+    <button class="save-button" id="saveBtn" disabled>
+      <span>💾</span>
+      <span>Saved</span>
+    </button>
+  </div>
+
+  <div class="controls">
+    <button class="btn" onclick="simulateError()">Simulate Error</button>
+    <button class="btn" onclick="resetDemo()">Reset</button>
+  </div>
+
+  <script>
+    let saveTimeout;
+    let isSaving = false;
+
+    function onType() {
+      if (isSaving) return;
+
+      updateStatus('typing');
+
+      clearTimeout(saveTimeout);
+      saveTimeout = setTimeout(() => {
+        saveDocument();
+      }, 1500);
+    }
+
+    function saveDocument() {
+      updateStatus('saving');
+      isSaving = true;
+
+      setTimeout(() => {
+        const now = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        updateStatus('saved', now);
+        isSaving = false;
+      }, 1000);
+    }
+
+    function updateStatus(state, time) {
+      const statusEl = document.getElementById('saveStatus');
+      const iconEl = document.getElementById('statusIcon');
+      const textEl = document.getElementById('statusText');
+      const btn = document.getElementById('saveBtn');
+
+      statusEl.className = 'save-status ' + state;
+
+      switch(state) {
+        case 'typing':
+          iconEl.textContent = '○';
+          textEl.textContent = 'Typing...';
+          btn.disabled = true;
+          btn.innerHTML = '<span>💾</span><span>Saving soon...</span>';
+          break;
+        case 'saving':
+          iconEl.innerHTML = '<div class="spinner"></div>';
+          textEl.textContent = 'Saving...';
+          btn.disabled = true;
+          btn.innerHTML = '<span>💾</span><span>Saving...</span>';
+          break;
+        case 'saved':
+          iconEl.textContent = '✓';
+          textEl.textContent = 'Saved at ' + time;
+          btn.disabled = true;
+          btn.innerHTML = '<span>💾</span><span>Saved</span>';
+          break;
+        case 'error':
+          iconEl.textContent = '⚠';
+          textEl.textContent = 'Unable to save';
+          btn.disabled = false;
+          btn.innerHTML = '<span>🔄</span><span>Retry</span>';
+          break;
+      }
+    }
+
+    function simulateError() {
+      updateStatus('error');
+    }
+
+    function resetDemo() {
+      clearTimeout(saveTimeout);
+      isSaving = false;
+      updateStatus('saved', new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
+      document.getElementById('editor').textContent = 'Start typing to see autosave in action...';
+    }
+  </script>
+</body>
+</html>

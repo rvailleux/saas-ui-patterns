@@ -1,0 +1,69 @@
+{
+  "id": 921,
+  "slug": "bulk-actions",
+  "category": "data",
+  "title": {
+    "fr": "Actions en Masse avec Modèle de Sélection",
+    "en": "Bulk Actions with Selection Model"
+  },
+  "categoryLabel": {
+    "slug": "data",
+    "fr": "Data & Tables",
+    "en": "Data & Tables"
+  },
+  "firstSeenOn": {
+    "product": "Gmail",
+    "url": "https://gmail.com",
+    "approximateDate": "2004"
+  },
+  "examples": [
+    {
+      "name": "Linear",
+      "desc": {
+        "fr": "Sélection multi-lignes avec barre d'actions persistante",
+        "en": "Multi-row selection with persistent action bar"
+      }
+    },
+    {
+      "name": "Airtable",
+      "desc": {
+        "fr": "Sélection étendue avec actions groupées",
+        "en": "Extended selection with grouped actions"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Checkbox par ligne** : Colonne dédiée pour la sélection",
+      "**Sélectionner tout** : Différencier 'tous visibles' vs 'tous total'",
+      "**Barre d'actions persistante** : Actions disponibles toujours visibles",
+      "**Badge de compte** : '47 sélectionnés' clairement affiché"
+    ],
+    "en": [
+      "**Checkbox per row** : Dedicated column for selection",
+      "**Select all** : Differentiate 'all visible' vs 'all total'",
+      "**Persistent action bar** : Available actions always visible",
+      "**Count badge** : '47 selected' clearly displayed"
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Actions destructives sans confirmation avec nombre affecté",
+      "❌ Sélection perdue lors du changement de page",
+      "❌ Pas d'indication claire du nombre d'éléments sélectionnés"
+    ],
+    "en": [
+      "❌ Destructive actions without confirmation of affected count",
+      "❌ Selection lost when changing pages",
+      "❌ No clear indication of selected items count"
+    ]
+  },
+  "what": {
+    "fr": "Modèle de sélection multiple pour agir sur plusieurs enregistrements simultanément - colonne checkbox, sélectionner tout, barre d'action persistante.",
+    "en": "Multi-select pattern for acting on multiple records simultaneously - checkbox column, select-all, persistent action bar."
+  },
+  "why": {
+    "fr": "Les actions répétitives sont une source de frustration. Le bulk permet d'automatiser les tâches courantes sur de grands ensembles de données.",
+    "en": "Repetitive actions are a source of frustration. Bulk enables automating common tasks on large datasets."
+  }
+}

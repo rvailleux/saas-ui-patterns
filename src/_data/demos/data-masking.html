@@ -1,0 +1,172 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #0f0f1a;
+      color: #e2e8f0;
+      height: 100vh;
+      overflow: hidden;
+      font-size: 13px;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+    }
+    .data-panel {
+      flex: 1;
+      max-width: 500px;
+      margin: 0 auto;
+      width: 100%;
+      background: #1a1a2e;
+      border-radius: 12px;
+      padding: 24px;
+    }
+    .panel-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    .field {
+      margin-bottom: 20px;
+    }
+    .field-label {
+      font-size: 11px;
+      color: #64748b;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .sensitive-field {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      background: #151528;
+      border-radius: 8px;
+    }
+    .masked-value {
+      flex: 1;
+      font-family: monospace;
+      font-size: 14px;
+    }
+    .reveal-btn {
+      padding: 6px 12px;
+      background: #2a2a55;
+      border: none;
+      border-radius: 6px;
+      color: #3b82f6;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .reveal-btn:hover {
+      background: #3b82f6;
+      color: white;
+    }
+    .audit-log {
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid #2a2a55;
+    }
+    .audit-title {
+      font-size: 11px;
+      color: #64748b;
+      margin-bottom: 12px;
+    }
+    .audit-entry {
+      font-size: 12px;
+      color: #94a3b8;
+      margin-bottom: 6px;
+    }
+    .controls {
+      display: flex;
+      gap: 12px;
+      padding-top: 16px;
+      justify-content: center;
+    }
+    .btn {
+      padding: 10px 16px;
+      border-radius: 8px;
+      border: none;
+      font-size: 12px;
+      cursor: pointer;
+      background: #3b82f6;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="data-panel">
+    <div class="panel-title">Employee Record</div>
+
+    <div class="field">
+      <div class="field-label">Social Security Number</div>
+      <div class="sensitive-field">
+        <span class="masked-value" id="ssn">***-**-6789</span>
+        <button class="reveal-btn" onclick="toggleReveal('ssn', '123-45-6789')">Reveal</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="field-label">Bank Account</div>
+      <div class="sensitive-field">
+        <span class="masked-value" id="bank">**** **** **** 4242</span>
+        <button class="reveal-btn" onclick="toggleReveal('bank', '4242 4242 4242 4242')">Reveal</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="field-label">Salary</div>
+      <div class="sensitive-field">
+        <span class="masked-value" id="salary">$***,***</span>
+        <button class="reveal-btn" onclick="toggleReveal('salary', '$125,000')">Reveal</button>
+      </div>
+    </div>
+
+    <div class="audit-log">
+      <div class="audit-title">Audit Log</div>
+      <div class="audit-entry" id="auditLog">No recent reveals</div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button class="btn" onclick="resetMasking()">Reset All</button>
+  </div>
+
+  <script>
+    const originalValues = {
+      ssn: '***-**-6789',
+      bank: '**** **** **** 4242',
+      salary: '$***,***'
+    };
+
+    function toggleReveal(fieldId, realValue) {
+      const el = document.getElementById(fieldId);
+      const btn = el.nextElementSibling;
+
+      if (el.textContent.includes('*')) {
+        el.textContent = realValue;
+        btn.textContent = 'Hide';
+        logAudit(fieldId);
+      } else {
+        el.textContent = originalValues[fieldId];
+        btn.textContent = 'Reveal';
+      }
+    }
+
+    function logAudit(field) {
+      const timestamp = new Date().toLocaleTimeString();
+      document.getElementById('auditLog').textContent =
+        `${timestamp}: ${field} revealed by Admin User`;
+    }
+
+    function resetMasking() {
+      Object.keys(originalValues).forEach(id => {
+        document.getElementById(id).textContent = originalValues[id];
+        document.getElementById(id).nextElementSibling.textContent = 'Reveal';
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+{
+  "id": 924,
+  "slug": "draft-state",
+  "category": "feedback",
+  "title": {
+    "fr": "État Brouillon / Récupération de Session",
+    "en": "Draft State / Session Recovery"
+  },
+  "categoryLabel": {
+    "slug": "feedback",
+    "fr": "Feedback & États",
+    "en": "Feedback & States"
+  },
+  "firstSeenOn": {
+    "product": "Gmail",
+    "url": "https://gmail.com",
+    "approximateDate": "2008"
+  },
+  "examples": [
+    {
+      "name": "Typeform",
+      "desc": {
+        "fr": "Récupération de formulaire long après fermeture accidentelle",
+        "en": "Long form recovery after accidental closure"
+      }
+    },
+    {
+      "name": "Long-form Editors",
+      "desc": {
+        "fr": "Sauvegarde locale du contenu avant publication",
+        "en": "Local content save before publishing"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Auto-save local** : Stockage browser pour récupération",
+      "**Prompt de restauration** : 'Restaurer le brouillon précédent ?'",
+      "**Options claires** : Restaurer, ignorer, ou comparer",
+      "**Expiration** : Suppression auto après X jours"
+    ],
+    "en": [
+      "**Auto-save local** : Browser storage for recovery",
+      "**Restore prompt** : 'Restore previous draft?'",
+      "**Clear options** : Restore, discard, or compare",
+      "**Expiration** : Auto-delete after X days"
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Perte de données lors de la navigation",
+      "❌ Pas de confirmation avant écrasement du brouillon",
+      "❌ Brouillons qui s'accumulent sans nettoyage"
+    ],
+    "en": [
+      "❌ Data loss on navigation",
+      "❌ No confirmation before overwriting draft",
+      "❌ Drafts accumulating without cleanup"
+    ]
+  },
+  "what": {
+    "fr": "Données de formulaire persistées dans localStorage pour récupération après navigation accidentelle, fermeture d'onglet ou crash.",
+    "en": "Form data persisted to localStorage for recovery after accidental navigation, tab close, or crash."
+  },
+  "why": {
+    "fr": "Le travail perdu est une source majeure de frustration. Les brouillons automatiques protègent contre les accidents.",
+    "en": "Lost work is a major source of frustration. Automatic drafts protect against accidents."
+  }
+}
