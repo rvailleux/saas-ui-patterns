@@ -1,0 +1,69 @@
+{
+  "id": 912,
+  "slug": "spatial-ui",
+  "category": "layout",
+  "title": {
+    "fr": "UI Spatiale / Organisation en Couches 3D",
+    "en": "Spatial UI / 3D Layered Organization"
+  },
+  "categoryLabel": {
+    "slug": "layout",
+    "fr": "Layout & Espace de Travail",
+    "en": "Layout & Workspace"
+  },
+  "firstSeenOn": {
+    "product": "Apple Vision Pro",
+    "url": "https://apple.com/vision-pro",
+    "approximateDate": "2023"
+  },
+  "examples": [
+    {
+      "name": "Figma",
+      "desc": {
+        "fr": "Hiérarchie visuelle avec profondeur : outils en premier plan, canvas au centre, calques en arrière",
+        "en": "Visual hierarchy with depth: tools foreground, canvas mid, layers background"
+      }
+    },
+    {
+      "name": "VisionOS Apps",
+      "desc": {
+        "fr": "Fenêtres flottantes à différentes profondeurs créant un espace de travail 3D",
+        "en": "Floating windows at different depths creating 3D workspace"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Premier plan** : Actions critiques, alertes, modales (z-index élevé)",
+      "**Plan moyen** : Espace de travail actif, outils en cours d'utilisation",
+      "**Arrière-plan** : Contexte, référence, historique (z-index bas)",
+      "**Ombres et flou** : Utilisez pour créer la profondeur perçue"
+    ],
+    "en": [
+      "**Foreground** : Critical actions, alerts, modals (high z-index)",
+      "**Mid-ground** : Active workspace, tools in use",
+      "**Background** : Context, reference, history (low z-index)",
+      "**Shadows and blur** : Use to create perceived depth"
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Tout mettre au même niveau - plat et confus",
+      "❌ Trop de couches - surcharge cognitive",
+      "❌ Ombres inconsistantes qui cassent l'illusion de profondeur"
+    ],
+    "en": [
+      "❌ Putting everything at same level - flat and confusing",
+      "❌ Too many layers - cognitive overload",
+      "❌ Inconsistent shadows that break depth illusion"
+    ]
+  },
+  "what": {
+    "fr": "Couches de profondeur tridimensionnelles organisant le contenu : premier plan (critique), plan moyen (actif), arrière-plan (référence).",
+    "en": "Three-dimensional depth layers organizing content: foreground (critical), mid-ground (active), background (reference)."
+  },
+  "why": {
+    "fr": "La profondeur spatiale reflète comment nous organisons naturellement notre environnement. Cela crée une hiérarchie visuelle intuitive sans effort cognitif.",
+    "en": "Spatial depth mirrors how we naturally organize our environment. It creates intuitive visual hierarchy without cognitive effort."
+  }
+}

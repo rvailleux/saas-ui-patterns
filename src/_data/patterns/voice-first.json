@@ -1,0 +1,69 @@
+{
+  "id": 915,
+  "slug": "voice-first",
+  "category": "commands",
+  "title": {
+    "fr": "Interface Commande Vocale",
+    "en": "Voice-First Command Interface"
+  },
+  "categoryLabel": {
+    "slug": "commands",
+    "fr": "Commandes & Recherche",
+    "en": "Commands & Search"
+  },
+  "firstSeenOn": {
+    "product": "Salesforce Einstein",
+    "url": "https://salesforce.com/einstein",
+    "approximateDate": "2016"
+  },
+  "examples": [
+    {
+      "name": "Siri Shortcuts",
+      "desc": {
+        "fr": "Commandes vocales pour tâches métier complexes dans les apps",
+        "en": "Voice commands for complex business tasks within apps"
+      }
+    },
+    {
+      "name": "Voice-enabled CRM",
+      "desc": {
+        "fr": "Saisie de données mains-libres pour commerciaux en déplacement",
+        "en": "Hands-free data entry for salespeople on the go"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Commandes naturelles** : Pas de syntaxe rigide - comprendre l'intention",
+      "**Confirmation visuelle** : Montrer ce qui a été compris avant exécution",
+      "**Fallback clavier** : Toujours permettre la saisie manuelle",
+      "**Contexte persistant** : Se souvenir des références précédentes"
+    ],
+    "en": [
+      "**Natural commands** : No rigid syntax - understand intent",
+      "**Visual confirmation** : Show what was understood before execution",
+      "**Keyboard fallback** : Always allow manual input",
+      "**Persistent context** : Remember previous references"
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Exiger une syntaxe exacte - frustrant",
+      "❌ Pas de feedback sur ce qui a été compris",
+      "❌ Forcer la voix quand le contexte ne s'y prête pas"
+    ],
+    "en": [
+      "❌ Requiring exact syntax - frustrating",
+      "❌ No feedback on what was understood",
+      "❌ Forcing voice when context doesn't suit"
+    ]
+  },
+  "what": {
+    "fr": "Interface commandée par la voix pour tâches répétitives ou critiques vitesse - pas seulement recherche.",
+    "en": "Hands-free workflow execution for repetitive or speed-critical tasks - not just search."
+  },
+  "why": {
+    "fr": "La voix est plus rapide que le clavier pour certaines tâches. Elle libère les mains et les yeux pour d'autres activités.",
+    "en": "Voice is faster than keyboard for some tasks. It frees hands and eyes for other activities."
+  }
+}

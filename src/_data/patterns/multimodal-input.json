@@ -1,0 +1,69 @@
+{
+  "id": 914,
+  "slug": "multimodal-input",
+  "category": "commands",
+  "title": {
+    "fr": "Orchestration Multimodale",
+    "en": "Multimodal Input Orchestration"
+  },
+  "categoryLabel": {
+    "slug": "commands",
+    "fr": "Commandes & Recherche",
+    "en": "Commands & Search"
+  },
+  "firstSeenOn": {
+    "product": "Microsoft Surface",
+    "url": "https://microsoft.com/surface",
+    "approximateDate": "2015"
+  },
+  "examples": [
+    {
+      "name": "iPad + Magic Keyboard",
+      "desc": {
+        "fr": "Transition fluide entre touch, clavier et Apple Pencil dans la même session",
+        "en": "Seamless transition between touch, keyboard, and Apple Pencil in same session"
+      }
+    },
+    {
+      "name": "Multimodal AI Assistants",
+      "desc": {
+        "fr": "Voice pour lancer, touch pour affiner, texte pour préciser",
+        "en": "Voice to initiate, touch to refine, text to specify"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Transitions fluides** : Même session, méthodes d'input interchangeables",
+      "**Chaque mode a sa force** : Voix pour lancer, souris pour préciser, clavier pour texte",
+      "**État partagé** : Le contenu persiste entre les modes",
+      "**Feedback adaptatif** : Retour visuel adapté au mode actif"
+    ],
+    "en": [
+      "**Smooth transitions** : Same session, interchangeable input methods",
+      "**Each mode has strength** : Voice to initiate, mouse to refine, keyboard for text",
+      "**Shared state** : Content persists between modes",
+      "**Adaptive feedback** : Visual feedback adapted to active mode"
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Forcer un mode unique pour toute une tâche",
+      "❌ Perdre le contexte lors du changement de mode",
+      "❌ Feedback identique quel que soit le mode d'input"
+    ],
+    "en": [
+      "❌ Forcing single mode for entire task",
+      "❌ Losing context when switching modes",
+      "❌ Identical feedback regardless of input mode"
+    ]
+  },
+  "what": {
+    "fr": "Transitions fluides entre méthodes d'input dans la même session - clavier, souris, touch, voix, stylet, gestes.",
+    "en": "Seamless transitions between input methods in same session - keyboard, mouse, touch, voice, stylus, gesture."
+  },
+  "why": {
+    "fr": "Différentes situations appellent différentes méthodes d'input. Les meilleures interfaces s'adaptent au contexte sans friction.",
+    "en": "Different situations call for different input methods. Best interfaces adapt to context without friction."
+  }
+}

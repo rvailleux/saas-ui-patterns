@@ -1,0 +1,164 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #0f0f1a;
+      color: #e2e8f0;
+      height: 100vh;
+      overflow: hidden;
+      font-size: 13px;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+    }
+    .voice-interface {
+      flex: 1;
+      max-width: 500px;
+      margin: 0 auto;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+    }
+    .mic-button {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      border: none;
+      color: white;
+      font-size: 48px;
+      cursor: pointer;
+      box-shadow: 0 10px 40px rgba(59, 130, 246, 0.4);
+      transition: all 0.3s;
+    }
+    .mic-button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 15px 50px rgba(59, 130, 246, 0.5);
+    }
+    .mic-button.active {
+      animation: pulse-mic 2s infinite;
+    }
+    @keyframes pulse-mic {
+      0%, 100% { box-shadow: 0 10px 40px rgba(59, 130, 246, 0.4); }
+      50% { box-shadow: 0 10px 60px rgba(59, 130, 246, 0.8); }
+    }
+    .transcript {
+      text-align: center;
+      min-height: 60px;
+    }
+    .transcript-text {
+      font-size: 18px;
+      color: #e2e8f0;
+    }
+    .transcript-hint {
+      font-size: 13px;
+      color: #64748b;
+      margin-top: 8px;
+    }
+    .command-suggestions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+    }
+    .suggestion-chip {
+      padding: 8px 14px;
+      background: #1a1a2e;
+      border: 1px solid #2a2a55;
+      border-radius: 20px;
+      font-size: 12px;
+      color: #94a3b8;
+      cursor: pointer;
+    }
+    .suggestion-chip:hover {
+      border-color: #3b82f6;
+      color: #fff;
+    }
+    .result-panel {
+      width: 100%;
+      background: #1a1a2e;
+      border-radius: 12px;
+      padding: 20px;
+      display: none;
+    }
+    .result-panel.show {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .result-title {
+      font-size: 12px;
+      color: #64748b;
+      margin-bottom: 8px;
+    }
+    .result-content {
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="voice-interface">
+    <button class="mic-button" id="micBtn" onclick="toggleVoice()">🎤</button>
+
+    <div class="transcript">
+      <div class="transcript-text" id="transcript">Tap and speak a command</div>
+      <div class="transcript-hint">Try: "Log 3 hours to Project Alpha"</div>
+    </div>
+
+    <div class="command-suggestions">
+      <div class="suggestion-chip" onclick="setCommand('Log 3 hours to Project Alpha')">Log hours</div>
+      <div class="suggestion-chip" onclick="setCommand("What's our churn rate?")">Check metric</div>
+      <div class="suggestion-chip" onclick="setCommand('Schedule meeting with John')">Schedule</div>
+      <div class="suggestion-chip" onclick="setCommand('Create task: Review Q4 report')">Create task</div>
+    </div>
+
+    <div class="result-panel" id="resultPanel">
+      <div class="result-title">Command understood</div>
+      <div class="result-content" id="resultContent"></div>
+    </div>
+  </div>
+
+  <script>
+    let isListening = false;
+
+    function toggleVoice() {
+      const btn = document.getElementById('micBtn');
+      const transcript = document.getElementById('transcript');
+
+      isListening = !isListening;
+      btn.classList.toggle('active', isListening);
+
+      if (isListening) {
+        transcript.textContent = 'Listening...';
+        setTimeout(() => {
+          transcript.textContent = 'Log 3 hours to Project Alpha';
+          showResult('Logging 3 hours to Project Alpha (confirmed)');
+          toggleVoice();
+        }, 2000);
+      } else {
+        transcript.textContent = 'Tap and speak a command';
+      }
+    }
+
+    function setCommand(text) {
+      document.getElementById('transcript').textContent = text;
+      showResult(`Executing: ${text}`);
+    }
+
+    function showResult(text) {
+      document.getElementById('resultContent').textContent = text;
+      document.getElementById('resultPanel').classList.add('show');
+    }
+  </script>
+</body>
+</html>

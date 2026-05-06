@@ -1,0 +1,69 @@
+{
+  "id": 913,
+  "slug": "split-notifications",
+  "category": "feedback",
+  "title": {
+    "fr": "Notifications Séparées et Paramètres Rapides",
+    "en": "Split Notifications and Quick Settings"
+  },
+  "categoryLabel": {
+    "slug": "feedback",
+    "fr": "Feedback & États",
+    "en": "Feedback & States"
+  },
+  "firstSeenOn": {
+    "product": "Android",
+    "url": "https://android.com",
+    "approximateDate": "2014"
+  },
+  "examples": [
+    {
+      "name": "iOS",
+      "desc": {
+        "fr": "Centre de notification distinct du Centre de contrôle",
+        "en": "Notification Center separate from Control Center"
+      }
+    },
+    {
+      "name": "Android",
+      "desc": {
+        "fr": "Panneau de notification et quick settings séparés mais cohésifs",
+        "en": "Notification shade and quick settings separated but cohesive"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Séparez les concepts** : Événements/messages vs contrôles/système",
+      "**Sémantique claire** : Chaque panneau a un but distinct",
+      "**Accès rapide** : Les deux doivent être accessibles en un geste",
+      "**Cohérence visuelle** : Même langage visuel malgré la séparation"
+    ],
+    "en": [
+      "**Separate concepts** : Events/messages vs controls/system",
+      "**Clear semantics** : Each panel has distinct purpose",
+      "**Quick access** : Both should be reachable in one gesture",
+      "**Visual consistency** : Same visual language despite separation"
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Mélanger les contrôles et les notifications dans le même flux",
+      "❌ Rendre l'accès aux paramètres trop compliqué",
+      "❌ Styles visuels radicalement différents créant de la confusion"
+    ],
+    "en": [
+      "❌ Mixing controls and notifications in same stream",
+      "❌ Making settings access too complicated",
+      "❌ Radically different visual styles creating confusion"
+    ]
+  },
+  "what": {
+    "fr": "Séparation de la timeline de notification (événements/messages) et du panneau de paramètres rapides (contrôles/système).",
+    "en": "Separating notification timeline (events/messages) from quick settings panel (device/system controls)."
+  },
+  "why": {
+    "fr": "Réduit la charge cognitive en clarifiant la structure sémantique. Moins d'erreurs de manipulation et meilleure accessibilité.",
+    "en": "Reduces cognitive load by clarifying semantic structure. Fewer accidental toggles and better accessibility."
+  }
+}

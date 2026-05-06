@@ -1,0 +1,69 @@
+{
+  "id": 911,
+  "slug": "motion-functional-guide",
+  "category": "feedback",
+  "title": {
+    "fr": "Mouvement comme Guide Fonctionnel",
+    "en": "Motion as Functional Guide"
+  },
+  "categoryLabel": {
+    "slug": "feedback",
+    "fr": "Feedback & États",
+    "en": "Feedback & States"
+  },
+  "firstSeenOn": {
+    "product": "Linear",
+    "url": "https://linear.app",
+    "approximateDate": "2020"
+  },
+  "examples": [
+    {
+      "name": "Stripe Checkout",
+      "desc": {
+        "fr": "Animations montrant les transitions d'état et la progression du paiement",
+        "en": "Animations showing state transitions and payment progress"
+      }
+    },
+    {
+      "name": "iOS Springboard",
+      "desc": {
+        "fr": "Mouvements qui indiquent hiérarchie et changements de contexte",
+        "en": "Motion indicating hierarchy and context changes"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Montrez l'origine** : D'où vient cet élément ? (indice d'origine)",
+      "**Montrez les changements** : Qu'est-ce qui vient de changer ? (transition d'état)",
+      "**Guidez l'attention** : Où regarder ensuite ? (direction)",
+      "**Gardez sous 300ms** : Au-delà, ça semble lent"
+    ],
+    "en": [
+      "**Show origin** : Where did this element come from? (origin hint)",
+      "**Show changes** : What just changed? (state transition)",
+      "**Guide attention** : Where to look next? (direction)",
+      "**Keep under 300ms** : Beyond that feels slow"
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Animation purement décorative sans fonction",
+      "❌ Durées trop longues qui ralentissent le flux",
+      "❌ Mouvements excessifs qui créent de la fatigue"
+    ],
+    "en": [
+      "❌ Purely decorative animation without function",
+      "❌ Durations too long that slow down flow",
+      "❌ Excessive motion that creates fatigue"
+    ]
+  },
+  "what": {
+    "fr": "L'animation montre la hiérarchie, la direction et les changements de contexte - jamais juste du décor visuel.",
+    "en": "Animation shows hierarchy, direction, and context changes - never just visual flair."
+  },
+  "why": {
+    "fr": "Le mouvement est un langage naturel. Utilisé fonctionnellement, il réduit la charge cognitive en expliquant les changements d'interface.",
+    "en": "Motion is a natural language. Used functionally, it reduces cognitive load by explaining interface changes."
+  }
+}
