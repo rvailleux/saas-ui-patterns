@@ -1,0 +1,328 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #0f0f1a;
+      color: #e2e8f0;
+      height: 100vh;
+      overflow: hidden;
+      font-size: 13px;
+      display: flex;
+      flex-direction: column;
+    }
+    .container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      max-width: 800px;
+      margin: 0 auto;
+      width: 100%;
+      padding: 20px;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid #2a2a55;
+    }
+    .header h2 { font-size: 16px; }
+    .stats {
+      display: flex;
+      gap: 16px;
+      font-size: 12px;
+      color: #94a3b8;
+    }
+    .timeline {
+      flex: 1;
+      overflow-y: auto;
+      padding-right: 8px;
+    }
+    .timeline::-webkit-scrollbar { width: 6px; }
+    .timeline::-webkit-scrollbar-thumb { background: #3a3a5c; border-radius: 3px; }
+    .task-group {
+      margin-bottom: 20px;
+      border: 1px solid #2a2a55;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .task-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      background: #1a1a2e;
+      cursor: pointer;
+    }
+    .task-header:hover { background: #252542; }
+    .task-icon {
+      width: 28px;
+      height: 28px;
+      background: #3b82f6;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+    .task-info { flex: 1; }
+    .task-title { font-weight: 500; }
+    .task-meta { font-size: 11px; color: #64748b; margin-top: 2px; }
+    .task-status {
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 500;
+    }
+    .status-completed { background: #1e3a2f; color: #22c55e; }
+    .status-running { background: #1e3a5f; color: #3b82f6; }
+    .expand-icon { color: #64748b; transition: transform 0.2s; }
+    .task-group.open .expand-icon { transform: rotate(180deg); }
+    .task-actions {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      background: #151528;
+    }
+    .task-group.open .task-actions { max-height: 400px; }
+    .action-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 16px 12px 56px;
+      border-bottom: 1px solid #252542;
+    }
+    .action-item:last-child { border-bottom: none; }
+    .action-timeline {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 16px;
+    }
+    .action-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #3b82f6;
+    }
+    .action-line {
+      width: 2px;
+      flex: 1;
+      background: #2a2a55;
+      min-height: 20px;
+    }
+    .action-content { flex: 1; }
+    .action-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+    .action-name { font-weight: 500; }
+    .action-time { font-size: 11px; color: #64748b; }
+    .action-detail {
+      font-size: 12px;
+      color: #94a3b8;
+      font-family: monospace;
+      background: #1a1a2e;
+      padding: 8px;
+      border-radius: 6px;
+      margin-top: 8px;
+    }
+    .reversibility {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      margin-top: 6px;
+    }
+    .reversible { color: #22c55e; }
+    .irreversible { color: #ef4444; }
+    .action-buttons {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .btn {
+      padding: 4px 10px;
+      border-radius: 4px;
+      border: none;
+      font-size: 11px;
+      cursor: pointer;
+    }
+    .btn-undo {
+      background: #3b82f6;
+      color: white;
+    }
+    .btn-view {
+      background: #2a2a55;
+      color: #94a3b8;
+    }
+    .controls {
+      display: flex;
+      gap: 12px;
+      padding: 16px 0;
+      border-top: 1px solid #2a2a55;
+    }
+    .btn-primary {
+      padding: 8px 16px;
+      background: #3b82f6;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h2>Action Audit Trail</h2>
+      <div class="stats">
+        <span>12 actions</span>
+        <span>3 reversible</span>
+        <span>Last: 2m ago</span>
+      </div>
+    </div>
+
+    <div class="timeline">
+      <div class="task-group open">
+        <div class="task-header" onclick="toggleTask(this)">
+          <div class="task-icon">📝</div>
+          <div class="task-info">
+            <div class="task-title">Refactor user authentication</div>
+            <div class="task-meta">Started 5 minutes ago • 4 actions</div>
+          </div>
+          <span class="task-status status-completed">Completed</span>
+          <span class="expand-icon">▼</span>
+        </div>
+        <div class="task-actions">
+          <div class="action-item">
+            <div class="action-timeline">
+              <div class="action-dot"></div>
+              <div class="action-line"></div>
+            </div>
+            <div class="action-content">
+              <div class="action-header">
+                <span class="action-name">Read file: auth.ts</span>
+                <span class="action-time">14:32:05</span>
+              </div>
+              <div class="action-detail">src/lib/auth.ts (247 lines)</div>
+              <div class="reversibility reversible">✓ Reversible</div>
+            </div>
+          </div>
+          <div class="action-item">
+            <div class="action-timeline">
+              <div class="action-dot"></div>
+              <div class="action-line"></div>
+            </div>
+            <div class="action-content">
+              <div class="action-header">
+                <span class="action-name">Write file: auth.ts</span>
+                <span class="action-time">14:32:18</span>
+              </div>
+              <div class="action-detail">-18 lines, +42 lines</div>
+              <div class="reversibility reversible">✓ Reversible</div>
+              <div class="action-buttons">
+                <button class="btn btn-undo" onclick="undoAction(event)">Undo</button>
+                <button class="btn btn-view" onclick="viewDiff(event)">View diff</button>
+              </div>
+            </div>
+          </div>
+          <div class="action-item">
+            <div class="action-timeline">
+              <div class="action-dot"></div>
+              <div class="action-line"></div>
+            </div>
+            <div class="action-content">
+              <div class="action-header">
+                <span class="action-name">Run command: npm test</span>
+                <span class="action-time">14:32:45</span>
+              </div>
+              <div class="action-detail">exit code: 0 (all tests passed)</div>
+              <div class="reversibility irreversible">✗ Irreversible</div>
+            </div>
+          </div>
+          <div class="action-item">
+            <div class="action-timeline">
+              <div class="action-dot"></div>
+            </div>
+            <div class="action-content">
+              <div class="action-header">
+                <span class="action-name">Commit changes</span>
+                <span class="action-time">14:33:02</span>
+              </div>
+              <div class="action-detail">feat: refactor auth with JWT tokens</div>
+              <div class="reversibility irreversible">✗ Irreversible</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="task-group">
+        <div class="task-header" onclick="toggleTask(this)">
+          <div class="task-icon">🔍</div>
+          <div class="task-info">
+            <div class="task-title">Analyze dependencies</div>
+            <div class="task-meta">Started 12 minutes ago • 3 actions</div>
+          </div>
+          <span class="task-status status-completed">Completed</span>
+          <span class="expand-icon">▼</span>
+        </div>
+        <div class="task-actions">
+          <div class="action-item">
+            <div class="action-timeline">
+              <div class="action-dot"></div>
+              <div class="action-line"></div>
+            </div>
+            <div class="action-content">
+              <div class="action-header">
+                <span class="action-name">Read file: package.json</span>
+                <span class="action-time">14:25:10</span>
+              </div>
+              <div class="reversibility reversible">✓ Reversible</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button class="btn-primary" onclick="addNewTask()">Add Task</button>
+      <button class="btn-primary" onclick="exportTrail()">Export Log</button>
+    </div>
+  </div>
+
+  <script>
+    function toggleTask(header) {
+      header.parentElement.classList.toggle('open');
+    }
+
+    function undoAction(e) {
+      e.stopPropagation();
+      if (confirm('Undo this action?')) {
+        alert('Action undone!');
+      }
+    }
+
+    function viewDiff(e) {
+      e.stopPropagation();
+      alert('Opening diff view...');
+    }
+
+    function addNewTask() {
+      alert('Adding new task to audit trail...');
+    }
+
+    function exportTrail() {
+      alert('Exporting audit log as JSON...');
+    }
+  </script>
+</body>
+</html>
