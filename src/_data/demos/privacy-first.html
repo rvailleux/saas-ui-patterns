@@ -1,0 +1,159 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #0f0f1a;
+      color: #e2e8f0;
+      height: 100vh;
+      overflow: hidden;
+      font-size: 13px;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+    }
+    .container {
+      flex: 1;
+      max-width: 500px;
+      margin: 0 auto;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .permission-sheet {
+      background: #1a1a2e;
+      border-radius: 16px;
+      padding: 24px;
+      border: 1px solid #2a2a55;
+    }
+    .permission-icon {
+      width: 48px;
+      height: 48px;
+      background: #3b82f6;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-bottom: 16px;
+    }
+    .permission-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .permission-why {
+      color: #94a3b8;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+    .data-usage {
+      background: #151528;
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 20px;
+    }
+    .data-usage-title {
+      font-size: 11px;
+      color: #64748b;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      letter-spacing: 0.5px;
+    }
+    .usage-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      font-size: 12px;
+    }
+    .usage-check {
+      color: #22c55e;
+    }
+    .permission-actions {
+      display: flex;
+      gap: 12px;
+    }
+    .btn {
+      flex: 1;
+      padding: 12px;
+      border-radius: 10px;
+      border: none;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+    .btn-allow {
+      background: #3b82f6;
+      color: white;
+    }
+    .btn-deny {
+      background: transparent;
+      color: #94a3b8;
+      border: 1px solid #2a2a55;
+    }
+    .controls {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      padding-top: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="permission-sheet">
+      <div class="permission-icon">📍</div>
+      <div class="permission-title">Allow Location Access?</div>
+      <div class="permission-why">
+        We use your location to show nearby service providers and calculate accurate delivery times.
+      </div>
+
+      <div class="data-usage">
+        <div class="data-usage-title">How we use this data</div>
+        <div class="usage-item">
+          <span class="usage-check">✓</span>
+          <span>Find nearby providers</span>
+        </div>
+        <div class="usage-item">
+          <span class="usage-check">✓</span>
+          <span>Calculate delivery ETA</span>
+        </div>
+        <div class="usage-item">
+          <span class="usage-check">✗</span>
+          <span style="color: #64748b;">Track your movements</span>
+        </div>
+        <div class="usage-item">
+          <span class="usage-check">✗</span>
+          <span style="color: #64748b;">Share with third parties</span>
+        </div>
+      </div>
+
+      <div class="permission-actions">
+        <button class="btn btn-deny" onclick="denyPermission()">Don't Allow</button>
+        <button class="btn btn-allow" onclick="allowPermission()">Allow While Using</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button class="btn btn-allow" onclick="showSettings()">Privacy Settings</button>
+  </div>
+
+  <script>
+    function allowPermission() {
+      alert('Permission granted with context!');
+    }
+    function denyPermission() {
+      alert('Permission denied gracefully');
+    }
+    function showSettings() {
+      alert('Opening granular privacy controls...');
+    }
+  </script>
+</body>
+</html>
