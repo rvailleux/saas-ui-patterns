@@ -1,0 +1,69 @@
+{
+  "id": 904,
+  "slug": "escalation-pathways",
+  "category": "ai-feedback",
+  "title": {
+    "fr": "Chemins d'Escalade (Agent → Humain)",
+    "en": "Escalation Pathways (Agent → Human Handoff)"
+  },
+  "categoryLabel": {
+    "slug": "ai-feedback",
+    "fr": "AI — Feedback & Contrôle",
+    "en": "AI — Feedback & Control"
+  },
+  "firstSeenOn": {
+    "product": "Replit Agent",
+    "url": "https://replit.com",
+    "approximateDate": "2024"
+  },
+  "examples": [
+    {
+      "name": "Enterprise AI Governance",
+      "desc": {
+        "fr": "Points de contrôle pour les actions sensibles nécessitant approbation humaine avant exécution",
+        "en": "Checkpoint gates for sensitive actions requiring human approval before execution"
+      }
+    },
+    {
+      "name": "Customer Support Bots",
+      "desc": {
+        "fr": "Transfert automatique vers un agent humain quand la confiance est insuffisante",
+        "en": "Automatic handoff to human agent when confidence is insufficient"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Définissez des seuils clairs** : Confiance < 80%, actions financières, conflits détectés",
+      "**Pause élégante** : L'agent sauvegarde son état et attend, ne plante pas",
+      "**Contexte complet** : Présentez à l'humain toutes les infos nécessaires pour décider",
+      "**Reprise fluide** : Après la décision humaine, l'agent continue sans redémarrage"
+    ],
+    "en": [
+      "**Define clear thresholds** : Confidence < 80%, financial actions, detected conflicts",
+      "**Pause gracefully** : Agent saves state and waits, doesn't crash",
+      "**Full context** : Present human with all info needed to decide",
+      "**Seamless resume** : After human decision, agent continues without restart"
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Escalader trop souvent - cela annule l'intérêt de l'automatisation",
+      "❌ Ne pas fournir de contexte - l'humain ne sait pas pourquoi on lui demande",
+      "❌ Bloquer indéfiniment sans timeout ou rappel"
+    ],
+    "en": [
+      "❌ Escalating too frequently - defeats the purpose of automation",
+      "❌ Not providing context - human doesn't know why they're being asked",
+      "❌ Blocking indefinitely without timeout or reminder"
+    ]
+  },
+  "what": {
+    "fr": "Déclencheurs structurés pour quand l'IA rencontre ambiguïté, conflits ou limites d'autorisation - pause élégante pour input humain.",
+    "en": "Structured triggers for when AI hits ambiguity, conflicts, or authorization limits - pausing gracefully for human input."
+  },
+  "why": {
+    "fr": "Les agents IA ne sont pas infaillibles. Les points d'escalade bien conçus préviennent les erreurs coûteuses tout en maintenant l'autonomie là où l'IA excelle.",
+    "en": "AI agents are not infallible. Well-designed escalation points prevent costly errors while maintaining autonomy where AI excels."
+  }
+}
