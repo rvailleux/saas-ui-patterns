@@ -1,0 +1,69 @@
+{
+  "id": 901,
+  "slug": "ambient-execution",
+  "category": "ai-context",
+  "title": {
+    "fr": "Exécution Ambiante (Travail en Arrière-plan)",
+    "en": "Ambient Execution (Background Work)"
+  },
+  "categoryLabel": {
+    "slug": "ai-context",
+    "fr": "AI — Contexte & Mémoire",
+    "en": "AI — Context & Memory"
+  },
+  "firstSeenOn": {
+    "product": "Devin",
+    "url": "https://devin.ai",
+    "approximateDate": "2024"
+  },
+  "examples": [
+    {
+      "name": "Cursor",
+      "desc": {
+        "fr": "Indicateurs de tâches en arrière-plan dans la barre d'état avec possibilité d'afficher les détails",
+        "en": "Background task indicators in the status bar with expandable details"
+      }
+    },
+    {
+      "name": "Paperclip AI",
+      "desc": {
+        "fr": "Badge ambiant persistant montrant l'état des exécutions d'agents même lorsque l'application est en arrière-plan",
+        "en": "Persistent ambient badge showing agent execution status even when app is backgrounded"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Commencez subtilement** : Utilisez un badge ou une pulsation discrète dans la barre de tâches pour indiquer l'activité sans distraire",
+      "**Progressez par niveaux** : Ambiant → Panneau de progression → Notification d'interruption → Rapport récapitulatif",
+      "**Persistez à travers les contextes** : L'état doit rester visible quand l'utilisateur change d'onglet ou d'application",
+      "**Offrez un contrôle** : Permettez à l'utilisateur d'accéder aux détails ou d'annuler l'opération à tout moment"
+    ],
+    "en": [
+      "**Start subtly** : Use a discreet badge or pulse in the taskbar to indicate activity without distraction",
+      "**Progress in tiers** : Ambient → Progress panel → Interrupting notification → Summary report",
+      "**Persist across contexts** : State should remain visible when user switches tabs or applications",
+      "**Offer control** : Let users access details or cancel the operation at any time"
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Ne bloquez pas l'interface avec des écrans de chargement plein écran qui empêchent le travail parallèle",
+      "❌ Ne perdez pas l'état quand l'utilisateur change d'onglet - le travail en arrière-plan doit rester perceptible",
+      "❌ N'envoyez pas de notifications interruptives pour des tâches qui se déroulent normalement"
+    ],
+    "en": [
+      "❌ Don't block the UI with full-screen loading states that prevent parallel work",
+      "❌ Don't lose state when user switches tabs - background work must remain perceptible",
+      "❌ Don't send interrupting notifications for tasks that are proceeding normally"
+    ]
+  },
+  "what": {
+    "fr": "Un modèle d'exécution persistant pour les agents IA asynchrones qui reste visible à travers différentes surfaces et états d'attention - pas seulement un transcript de chat.",
+    "en": "A persistent run model for async AI agents that stays visible across surfaces and attention states - not just a chat transcript."
+  },
+  "why": {
+    "fr": "Les utilisateurs ne veulent pas attendre passivement qu'une IA termine. Ce pattern permet le travail parallèle tout en maintenant la conscience de l'état de l'agent, renforçant la confiance par la perceptibilité constante.",
+    "en": "Users don't want to passively wait for AI to finish. This pattern enables parallel work while maintaining awareness of agent state, building trust through constant perceptibility."
+  }
+}
