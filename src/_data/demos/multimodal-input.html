@@ -1,0 +1,175 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #0f0f1a;
+      color: #e2e8f0;
+      height: 100vh;
+      overflow: hidden;
+      font-size: 13px;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+    }
+    .workspace {
+      flex: 1;
+      display: flex;
+      gap: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .canvas {
+      flex: 1;
+      background: #1a1a2e;
+      border-radius: 12px;
+      padding: 20px;
+      position: relative;
+    }
+    .input-modes {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 80px;
+    }
+    .mode-btn {
+      aspect-ratio: 1;
+      background: #1a1a2e;
+      border: 2px solid #2a2a55;
+      border-radius: 12px;
+      color: #94a3b8;
+      cursor: pointer;
+      font-size: 20px;
+      transition: all 0.2s;
+    }
+    .mode-btn:hover { border-color: #3b82f6; }
+    .mode-btn.active {
+      background: #3b82f6;
+      border-color: #3b82f6;
+      color: white;
+    }
+    .chart-area {
+      height: 200px;
+      background: #151528;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+    .data-point {
+      width: 12px;
+      height: 60px;
+      background: #3b82f6;
+      border-radius: 2px;
+      margin: 0 4px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .data-point:hover { background: #60a5fa; transform: scaleY(1.1); }
+    .annotation {
+      position: absolute;
+      background: #fef3c7;
+      color: #92400e;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+    }
+    .voice-indicator {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px;
+      background: #1e3a5f;
+      border-radius: 8px;
+      margin-top: 12px;
+    }
+    .voice-indicator.active { display: flex; }
+    .voice-wave {
+      display: flex;
+      gap: 3px;
+      align-items: center;
+    }
+    .wave-bar {
+      width: 4px;
+      background: #3b82f6;
+      border-radius: 2px;
+      animation: wave 0.5s infinite ease-in-out;
+    }
+    @keyframes wave {
+      0%, 100% { height: 8px; }
+      50% { height: 24px; }
+    }
+    .controls {
+      display: flex;
+      gap: 12px;
+      padding-top: 16px;
+      justify-content: center;
+    }
+    .btn {
+      padding: 10px 16px;
+      border-radius: 8px;
+      border: none;
+      font-size: 12px;
+      cursor: pointer;
+      background: #3b82f6;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="workspace">
+    <div class="canvas">
+      <div style="font-size: 12px; color: #94a3b8; margin-bottom: 12px;">Q1 Revenue Chart</div>
+      <div class="chart-area" id="chartArea">
+        <div class="data-point" style="height: 40px;"></div>
+        <div class="data-point" style="height: 80px;"></div>
+        <div class="data-point" style="height: 60px;"></div>
+        <div class="data-point" style="height: 100px;"></div>
+        <div class="data-point" style="height: 75px;"></div>
+        <div class="data-point" style="height: 90px;"></div>
+      </div>
+      <div class="voice-indicator" id="voiceIndicator">
+        <div class="voice-wave">
+          <div class="wave-bar" style="animation-delay: 0s;"></div>
+          <div class="wave-bar" style="animation-delay: 0.1s;"></div>
+          <div class="wave-bar" style="animation-delay: 0.2s;"></div>
+          <div class="wave-bar" style="animation-delay: 0.3s;"></div>
+        </div>
+        <span>Listening...</span>
+      </div>
+    </div>
+    <div class="input-modes">
+      <button class="mode-btn active" onclick="setMode('mouse')" title="Mouse">🖱️</button>
+      <button class="mode-btn" onclick="setMode('touch')" title="Touch">👆</button>
+      <button class="mode-btn" onclick="setMode('voice')" title="Voice">🎤</button>
+      <button class="mode-btn" onclick="setMode('stylus')" title="Stylus">✏️</button>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button class="btn" onclick="simulateMultimodal()">Simulate Session</button>
+  </div>
+
+  <script>
+    function setMode(mode) {
+      document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+      event.target.classList.add('active');
+      document.getElementById('voiceIndicator').classList.toggle('active', mode === 'voice');
+    }
+    function simulateMultimodal() {
+      alert('Voice: "Show Q1 revenue" → Touch: Pinch to zoom → Stylus: Annotate peak');
+    }
+    document.getElementById('chartArea').addEventListener('click', (e) => {
+      if (e.target.classList.contains('data-point')) {
+        alert('Data point selected with current input mode');
+      }
+    });
+  </script>
+</body>
+</html>
