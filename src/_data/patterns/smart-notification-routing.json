@@ -1,0 +1,80 @@
+{
+  "id": 937,
+  "slug": "smart-notification-routing",
+  "category": "feedback",
+  "title": {
+    "fr": "Routage Intelligent des Notifications",
+    "en": "Smart Notification Routing"
+  },
+  "categoryLabel": {
+    "slug": "feedback",
+    "fr": "Feedback & États",
+    "en": "Feedback & States"
+  },
+  "firstSeenOn": {
+    "product": "PagerDuty",
+    "url": "https://pagerduty.com",
+    "approximateDate": "2010"
+  },
+  "examples": [
+    {
+      "name": "PagerDuty",
+      "desc": {
+        "fr": "Escalade automatique basée sur escalade policies et schedules",
+        "en": "Automatic escalation based on escalation policies and schedules"
+      }
+    },
+    {
+      "name": "Slack",
+      "desc": {
+        "fr": "Routage par mention, canal, thread avec priorité adaptative",
+        "en": "Routing by mention, channel, thread with adaptive priority"
+      }
+    },
+    {
+      "name": "Linear",
+      "desc": {
+        "fr": "Notifications intelligentes selon rôle: assignee, creator, subscriber",
+        "en": "Smart notifications based on role: assignee, creator, subscriber"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Règles basées sur le rôle** : Manager pour validation, équipe pour execution",
+      "**Escalade progressive** : In-app → Email → SMS → Appel",
+      "**Horaires de travail** : Respecter les fuseaux et heures de bureau",
+      "**Priorité contextuelle** : P1 = immédiat, P4 = digest quotidien",
+      "**Override utilisateur** : Permettre configuration personnelle"
+    ],
+    "en": [
+      "**Role-based rules** : Manager for approval, team for execution",
+      "**Progressive escalation** : In-app → Email → SMS → Call",
+      "**Working hours** : Respect timezones and business hours",
+      "**Contextual priority** : P1 = immediate, P4 = daily digest",
+      "**User override** : Allow personal configuration"
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Tout le monde notifié pour tout - fatigue alerte",
+      "❌ Pas de respect des fuseaux horaires - réveils intempestifs",
+      "❌ Pas d'escalade - incidents non résolus si personne ne répond",
+      "❌ Routage statique - ne suit pas les changements d'équipe"
+    ],
+    "en": [
+      "❌ Everyone notified for everything - alert fatigue",
+      "❌ No timezone respect - untimely wake-ups",
+      "❌ No escalation - unresolved incidents if no one responds",
+      "❌ Static routing - doesn't follow team changes"
+    ]
+  },
+  "what": {
+    "fr": "Système de routage notifiant la bonne personne au bon moment selon rôle, priorité, disponibilité.",
+    "en": "Routing system notifying the right person at the right time based on role, priority, availability."
+  },
+  "why": {
+    "fr": "Réduit la fatigue de notification en envoyant chaque alerte à qui de droit, quand approprié.",
+    "en": "Reduces notification fatigue by sending each alert to the right person, when appropriate."
+  }
+}

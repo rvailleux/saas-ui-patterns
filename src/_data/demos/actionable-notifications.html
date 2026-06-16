@@ -1,0 +1,217 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #0f0f1a;
+      color: #e2e8f0;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      padding: 20px;
+      gap: 16px;
+    }
+    .trigger-btn {
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: none;
+      background: #3b82f6;
+      color: white;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+    .notifications-panel {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 320px;
+    }
+    .notification {
+      background: #1e1e3f;
+      border: 1px solid #2a2a55;
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+      animation: slideIn 0.3s ease;
+    }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(100%); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    .notification.hiding {
+      animation: slideOut 0.3s ease forwards;
+    }
+    @keyframes slideOut {
+      to { opacity: 0; transform: translateX(100%); }
+    }
+    .notif-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .notif-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .notif-icon.pto { background: #10b98133; }
+    .notif-icon.message { background: #3b82f633; }
+    .notif-icon.review { background: #f59e0b33; }
+    .notif-content {
+      flex: 1;
+    }
+    .notif-app {
+      font-size: 11px;
+      color: #64748b;
+      margin-bottom: 2px;
+    }
+    .notif-title {
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .notif-body {
+      font-size: 12px;
+      color: #94a3b8;
+      line-height: 1.5;
+    }
+    .notif-actions {
+      display: flex;
+      gap: 8px;
+    }
+    .notif-btn {
+      flex: 1;
+      padding: 8px 12px;
+      border-radius: 6px;
+      border: none;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .notif-btn-primary {
+      background: #3b82f6;
+      color: white;
+    }
+    .notif-btn-primary:hover {
+      background: #2563eb;
+    }
+    .notif-btn-secondary {
+      background: #252542;
+      color: #94a3b8;
+      border: 1px solid #2a2a55;
+    }
+    .notif-btn-secondary:hover {
+      background: #2a2a55;
+    }
+    .notif-btn.success {
+      background: #10b981;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <button class="trigger-btn" onclick="showPTORequest()">PTO Request</button>
+  <button class="trigger-btn" onclick="showMessage()">New Message</button>
+  <button class="trigger-btn" onclick="showCodeReview()">Code Review</button>
+
+  <div class="notifications-panel" id="notifPanel"></div>
+
+  <script>
+    let notifId = 0;
+
+    function showPTORequest() {
+      showNotification({
+        type: 'pto',
+        icon: '🏖️',
+        app: 'HR System',
+        title: 'PTO Request',
+        body: 'Emma Wilson requested vacation from Jun 15-20',
+        primary: 'Approve',
+        secondary: 'Decline'
+      });
+    }
+
+    function showMessage() {
+      showNotification({
+        type: 'message',
+        icon: '💬',
+        app: 'Slack',
+        title: 'New Message',
+        body: 'Sarah: Can you review the Q4 roadmap?',
+        primary: 'Reply',
+        secondary: 'Mark Read'
+      });
+    }
+
+    function showCodeReview() {
+      showNotification({
+        type: 'review',
+        icon: '👀',
+        app: 'GitHub',
+        title: 'Review Requested',
+        body: 'Marcus Johnson requested your review on #2847',
+        primary: 'Review',
+        secondary: 'Later'
+      });
+    }
+
+    function showNotification(data) {
+      const id = ++notifId;
+      const panel = document.getElementById('notifPanel');
+
+      const notif = document.createElement('div');
+      notif.className = 'notification';
+      notif.id = `notif-${id}`;
+
+      notif.innerHTML = `
+        <div class="notif-header">
+          <div class="notif-icon ${data.type}">${data.icon}</div>
+          <div class="notif-content">
+            <div class="notif-app">${data.app}</div>
+            <div class="notif-title">${data.title}</div>
+            <div class="notif-body">${data.body}</div>
+          </div>
+        </div>
+        <div class="notif-actions">
+          <button class="notif-btn notif-btn-primary" onclick="handleAction(${id}, this, '${data.primary}')">${data.primary}</button>
+          <button class="notif-btn notif-btn-secondary" onclick="dismissNotif(${id})">${data.secondary}</button>
+        </div>
+      `;
+
+      panel.appendChild(notif);
+
+      setTimeout(() => dismissNotif(id), 10000);
+    }
+
+    function handleAction(id, btn, originalText) {
+      btn.textContent = '✓ Done';
+      btn.classList.add('success');
+      setTimeout(() => dismissNotif(id), 800);
+    }
+
+    function dismissNotif(id) {
+      const notif = document.getElementById(`notif-${id}`);
+      if (!notif) return;
+      notif.classList.add('hiding');
+      setTimeout(() => notif.remove(), 300);
+    }
+  </script>
+</body>
+</html>

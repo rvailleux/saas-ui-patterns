@@ -1,0 +1,80 @@
+{
+  "id": 933,
+  "slug": "dual-interface-model",
+  "category": "layout",
+  "title": {
+    "fr": "Modèle d'Interface Dual (Admin vs Utilisateur)",
+    "en": "Dual Interface Model (Admin vs Casual User)"
+  },
+  "categoryLabel": {
+    "slug": "layout",
+    "fr": "Layout & Workspace",
+    "en": "Layout & Workspace"
+  },
+  "firstSeenOn": {
+    "product": "Salesforce",
+    "url": "https://salesforce.com",
+    "approximateDate": "2015"
+  },
+  "examples": [
+    {
+      "name": "Salesforce Lightning",
+      "desc": {
+        "fr": "Interface admin dense avec configuration vs vue simplifiée pour utilisateurs finaux",
+        "en": "Dense admin interface with configuration vs simplified view for end users"
+      }
+    },
+    {
+      "name": "Workday",
+      "desc": {
+        "fr": "Portail RH orienté tâches pour employés vs tableau de bord analytique pour RH",
+        "en": "Task-oriented HR portal for employees vs analytical dashboard for HR"
+      }
+    },
+    {
+      "name": "BambooHR",
+      "desc": {
+        "fr": "Navigation par tâches ('Voir ma fiche de paie') plutôt que par modules",
+        "en": "Task-based navigation ('View my pay stub') rather than module-based"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Navigation par tâches** : 'Que veux-je faire ?' pas 'Où est le module ?'",
+      "**Densité adaptative** : Tables complètes pour admins, cards simplifiées pour users",
+      "**Terminologie** : Langage métier simple, pas de jargon technique",
+      "**Mobile-first** : Interface employée souvent mobile, admin souvent desktop",
+      "**Switch fluide** : Basculer de rôle sans reconnexion"
+    ],
+    "en": [
+      "**Task-based navigation** : 'What do I want to do?' not 'Where is the module?'",
+      "**Adaptive density** : Full tables for admins, simplified cards for users",
+      "**Terminology** : Plain business language, no technical jargon",
+      "**Mobile-first** : Employee interface often mobile, admin often desktop",
+      "**Seamless switching** : Switch roles without re-login"
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Même interface pour tous - surcharge des utilisateurs occasionnels",
+      "❌ Jargon technique pour employés - incompréhension",
+      "❌ Navigation par modules - perte de l'utilisateur",
+      "❌ Pas de mode mobile pour l'interface employé"
+    ],
+    "en": [
+      "❌ Same interface for everyone - overwhelms occasional users",
+      "❌ Technical jargon for employees - confusion",
+      "❌ Module-based navigation - user gets lost",
+      "❌ No mobile mode for employee interface"
+    ]
+  },
+  "what": {
+    "fr": "Interfaces complètement séparées pour utilisateurs power (admins) vs occasionnels (employés) - densité, navigation et terminologie adaptées.",
+    "en": "Completely separate interfaces for power users (admins) vs occasional users (employees) - density, navigation and terminology adapted."
+  },
+  "why": {
+    "fr": "Les besoins diffèrent radicalement. Les admins configurent et analysent, les employés veulent accomplir des tâches simples rapidement.",
+    "en": "Needs differ radically. Admins configure and analyze, employees want to complete simple tasks quickly."
+  }
+}

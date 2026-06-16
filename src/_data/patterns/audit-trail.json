@@ -1,0 +1,80 @@
+{
+  "id": 935,
+  "slug": "audit-trail",
+  "category": "data",
+  "title": {
+    "fr": "Journal d'Audit / Activité",
+    "en": "Audit Trail / Activity Log"
+  },
+  "categoryLabel": {
+    "slug": "data",
+    "fr": "Data & Tables",
+    "en": "Data & Tables"
+  },
+  "firstSeenOn": {
+    "product": "GitHub",
+    "url": "https://github.com",
+    "approximateDate": "2008"
+  },
+  "examples": [
+    {
+      "name": "GitHub",
+      "desc": {
+        "fr": "Historique complet avec diff view, blame et filtrage par auteur",
+        "en": "Complete history with diff view, blame and author filtering"
+      }
+    },
+    {
+      "name": "Linear",
+      "desc": {
+        "fr": "Timeline d'activité avec regroupement par date et filtres",
+        "en": "Activity timeline with date grouping and filters"
+      }
+    },
+    {
+      "name": "Workday",
+      "desc": {
+        "fr": "Audit trail compliance avec export et immutabilité garantie",
+        "en": "Compliance audit trail with export and guaranteed immutability"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Immutabilité** : Les entrées ne peuvent pas être modifiées ou supprimées",
+      "**5W clairs** : Qui, Quoi, Quand, Où, Pourquoi pour chaque action",
+      "**Filtrage avancé** : Par date, utilisateur, type d'action, ressource",
+      "**Export** : CSV/PDF pour compliance et analyse externe",
+      "**Diff view** : Visualiser les changements, pas juste le fait qu'il y en a eu"
+    ],
+    "en": [
+      "**Immutability** : Entries cannot be modified or deleted",
+      "**Clear 5W** : Who, What, When, Where, Why for each action",
+      "**Advanced filtering** : By date, user, action type, resource",
+      "**Export** : CSV/PDF for compliance and external analysis",
+      "**Diff view** : Visualize changes, not just that they occurred"
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Logs modifiables - invalide la confiance",
+      "❌ Informations insuffisantes - impossible d'auditer",
+      "❌ Pas de filtrage - recherche impossible dans gros volumes",
+      "❌ Rétention courte - non compliant pour certains secteurs"
+    ],
+    "en": [
+      "❌ Editable logs - invalidates trust",
+      "❌ Insufficient information - impossible to audit",
+      "❌ No filtering - search impossible in large volumes",
+      "❌ Short retention - non-compliant for some industries"
+    ]
+  },
+  "what": {
+    "fr": "Journal horodaté et filtrable de toutes les actions - immuable, exportable, avec visualisation des différences.",
+    "en": "Timestamped and filterable log of all actions - immutable, exportable, with diff visualization."
+  },
+  "why": {
+    "fr": "Essentiel pour la compliance, le debugging et la confiance. Les utilisateurs et auditeurs doivent pouvoir inspecter ce qui s'est passé.",
+    "en": "Essential for compliance, debugging and trust. Users and auditors must be able to inspect what happened."
+  }
+}

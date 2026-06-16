@@ -1,0 +1,80 @@
+{
+  "id": 932,
+  "slug": "pull-to-refresh",
+  "category": "feedback",
+  "title": {
+    "fr": "Pull-to-Refresh / Swipe Actions",
+    "en": "Pull-to-Refresh / Swipe Actions"
+  },
+  "categoryLabel": {
+    "slug": "feedback",
+    "fr": "Feedback & États",
+    "en": "Feedback & States"
+  },
+  "firstSeenOn": {
+    "product": "Twitter",
+    "url": "https://twitter.com",
+    "approximateDate": "2009"
+  },
+  "examples": [
+    {
+      "name": "iOS Mail",
+      "desc": {
+        "fr": "Swipe gauche pour supprimer, droite pour marquer lu avec retour haptique",
+        "en": "Swipe left to delete, right to mark read with haptic feedback"
+      }
+    },
+    {
+      "name": "Linear Mobile",
+      "desc": {
+        "fr": "Pull-to-refresh avec spinner élastique et bounce naturel",
+        "en": "Pull-to-refresh with elastic spinner and natural bounce"
+      }
+    },
+    {
+      "name": "Notion Mobile",
+      "desc": {
+        "fr": "Swipe actions révélant boutons contextuels avec icônes",
+        "en": "Swipe actions revealing contextual buttons with icons"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Seuil de déclenchement** : 60-80px de pull avant activation",
+      "**Retour haptique** : Vibration subtile au seuil et à l'action",
+      "**Bounce élastique** : Animation physique naturelle au relâchement",
+      "**Swipe partiel** : Révéler actions sans navigation complète",
+      "**Feedback visuel** : Couleurs distinctes par action (rouge=delete, vert=archive)"
+    ],
+    "en": [
+      "**Trigger threshold** : 60-80px pull before activation",
+      "**Haptic feedback** : Subtle vibration at threshold and action",
+      "**Elastic bounce** : Natural physics animation on release",
+      "**Partial swipe** : Reveal actions without full navigation",
+      "**Visual feedback** : Distinct colors per action (red=delete, green=archive)"
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Seuil trop bas - refresh accidentels fréquents",
+      "❌ Pas de retour haptique - manque de confirmation",
+      "❌ Swipe qui bloque le scroll vertical",
+      "❌ Actions swipe trop proches - erreurs de sélection"
+    ],
+    "en": [
+      "❌ Threshold too low - frequent accidental refreshes",
+      "❌ No haptic feedback - missing confirmation",
+      "❌ Swipe blocks vertical scrolling",
+      "❌ Swipe actions too close together - selection errors"
+    ]
+  },
+  "what": {
+    "fr": "Gestes mobiles pour rafraîchir les listes (pull-down) et révéler actions rapides (swipe horizontal).",
+    "en": "Mobile gestures for refreshing lists (pull-down) and revealing quick actions (horizontal swipe)."
+  },
+  "why": {
+    "fr": "Les gestes sont naturels sur mobile. Le pull-to-refresh est devenu un standard universel, le swipe permet actions rapides sans ouvrir l'item.",
+    "en": "Gestures are natural on mobile. Pull-to-refresh has become a universal standard, swipe enables quick actions without opening the item."
+  }
+}

@@ -1,0 +1,353 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #0f0f1a;
+      color: #e2e8f0;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      padding: 20px;
+    }
+    .org-container {
+      width: 100%;
+      max-width: 500px;
+      background: #1a1a2e;
+      border-radius: 12px;
+      border: 1px solid #2a2a55;
+      overflow: hidden;
+    }
+    .org-header {
+      padding: 16px;
+      border-bottom: 1px solid #2a2a55;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .back-btn {
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: none;
+      background: #252542;
+      color: #94a3b8;
+      font-size: 12px;
+      cursor: pointer;
+      display: none;
+    }
+    .back-btn.visible {
+      display: block;
+    }
+    .org-title {
+      font-weight: 600;
+      font-size: 14px;
+    }
+    .org-content {
+      padding: 20px;
+      min-height: 280px;
+    }
+    /* Tree View */
+    .tree-level {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+    .node {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .node:hover {
+      transform: scale(1.05);
+    }
+    .node-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 16px;
+      margin-bottom: 8px;
+      border: 2px solid #3b82f6;
+    }
+    .node-name {
+      font-weight: 500;
+      font-size: 12px;
+    }
+    .node-role {
+      font-size: 11px;
+      color: #64748b;
+    }
+    .children {
+      display: flex;
+      gap: 24px;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 2px solid #2a2a55;
+      position: relative;
+    }
+    .children::before {
+      content: '';
+      position: absolute;
+      top: -16px;
+      left: 50%;
+      width: 2px;
+      height: 16px;
+      background: #2a2a55;
+      transform: translateX(-50%);
+    }
+    /* Detail View */
+    .detail-view {
+      display: none;
+    }
+    .detail-view.active {
+      display: block;
+    }
+    .profile-card {
+      text-align: center;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #2a2a55;
+      margin-bottom: 20px;
+    }
+    .profile-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 28px;
+      margin: 0 auto 16px;
+    }
+    .profile-name {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .profile-role {
+      color: #64748b;
+      margin-bottom: 16px;
+    }
+    .profile-actions {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+    }
+    .profile-btn {
+      padding: 8px 16px;
+      border-radius: 6px;
+      border: none;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .profile-btn-primary {
+      background: #3b82f6;
+      color: white;
+    }
+    .profile-btn-secondary {
+      background: #252542;
+      color: #94a3b8;
+      border: 1px solid #2a2a55;
+    }
+    .direct-reports {
+      margin-top: 20px;
+    }
+    .section-title {
+      font-size: 12px;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+    }
+    .report-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .report-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px;
+      background: #252542;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .report-item:hover {
+      background: #2a2a55;
+    }
+    .report-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #10b981, #3b82f6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 500;
+    }
+    .report-info {
+      flex: 1;
+    }
+    .report-name {
+      font-weight: 500;
+      font-size: 13px;
+    }
+    .report-role {
+      font-size: 11px;
+      color: #64748b;
+    }
+  </style>
+</head>
+<body>
+  <div class="org-container">
+    <div class="org-header">
+      <button class="back-btn" id="backBtn" onclick="showTree()">← Back</button>
+      <div class="org-title">Organization Chart</div>
+    </div>
+
+    <div class="org-content">
+      <!-- Tree View -->
+      <div class="tree-view" id="treeView">
+        <div class="tree-level">
+          <div class="node" onclick="showDetail('sarah')">
+            <div class="node-avatar">SC</div>
+            <div class="node-name">Sarah Chen</div>
+            <div class="node-role">CEO</div>
+          </div>
+          <div class="children">
+            <div class="node" onclick="showDetail('marcus')">
+              <div class="node-avatar" style="background: linear-gradient(135deg, #ec4899, #f59e0b); border-color: #ec4899;">MJ</div>
+              <div class="node-name">Marcus Johnson</div>
+              <div class="node-role">VP Engineering</div>
+            </div>
+            <div class="node" onclick="showDetail('emma')">
+              <div class="node-avatar" style="background: linear-gradient(135deg, #10b981, #3b82f6); border-color: #10b981;">EW</div>
+              <div class="node-name">Emma Wilson</div>
+              <div class="node-role">VP Design</div>
+            </div>
+            <div class="node" onclick="showDetail('david')">
+              <div class="node-avatar" style="background: linear-gradient(135deg, #f59e0b, #ef4444); border-color: #f59e0b;">DP</div>
+              <div class="node-name">David Park</div>
+              <div class="node-role">VP Sales</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Detail View -->
+      <div class="detail-view" id="detailView">
+        <div class="profile-card">
+          <div class="profile-avatar" id="detailAvatar">SC</div>
+          <div class="profile-name" id="detailName">Sarah Chen</div>
+          <div class="profile-role" id="detailRole">CEO</div>
+          <div class="profile-actions">
+            <button class="profile-btn profile-btn-primary">Message</button>
+            <button class="profile-btn profile-btn-secondary">Schedule</button>
+          </div>
+        </div>
+
+        <div class="direct-reports">
+          <div class="section-title">Direct Reports</div>
+          <div class="report-list" id="reportList">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const people = {
+      sarah: {
+        name: 'Sarah Chen',
+        role: 'CEO',
+        initials: 'SC',
+        gradient: 'linear-gradient(135deg, #3b82f6, #8b5cf6)',
+        reports: [
+          { name: 'Marcus Johnson', role: 'VP Engineering', initials: 'MJ', gradient: 'linear-gradient(135deg, #ec4899, #f59e0b)' },
+          { name: 'Emma Wilson', role: 'VP Design', initials: 'EW', gradient: 'linear-gradient(135deg, #10b981, #3b82f6)' },
+          { name: 'David Park', role: 'VP Sales', initials: 'DP', gradient: 'linear-gradient(135deg, #f59e0b, #ef4444)' }
+        ]
+      },
+      marcus: {
+        name: 'Marcus Johnson',
+        role: 'VP Engineering',
+        initials: 'MJ',
+        gradient: 'linear-gradient(135deg, #ec4899, #f59e0b)',
+        reports: [
+          { name: 'Alice Brown', role: 'Engineering Manager', initials: 'AB', gradient: 'linear-gradient(135deg, #8b5cf6, #3b82f6)' },
+          { name: 'Bob Smith', role: 'Senior Engineer', initials: 'BS', gradient: 'linear-gradient(135deg, #10b981, #8b5cf6)' }
+        ]
+      },
+      emma: {
+        name: 'Emma Wilson',
+        role: 'VP Design',
+        initials: 'EW',
+        gradient: 'linear-gradient(135deg, #10b981, #3b82f6)',
+        reports: [
+          { name: 'Carol Lee', role: 'Design Manager', initials: 'CL', gradient: 'linear-gradient(135deg, #ec4899, #8b5cf6)' }
+        ]
+      },
+      david: {
+        name: 'David Park',
+        role: 'VP Sales',
+        initials: 'DP',
+        gradient: 'linear-gradient(135deg, #f59e0b, #ef4444)',
+        reports: [
+          { name: 'Dan Miller', role: 'Sales Manager', initials: 'DM', gradient: 'linear-gradient(135deg, #3b82f6, #10b981)' },
+          { name: 'Eve White', role: 'Account Executive', initials: 'EW', gradient: 'linear-gradient(135deg, #8b5cf6, #ec4899)' }
+        ]
+      }
+    };
+
+    function showDetail(personId) {
+      const person = people[personId];
+      if (!person) return;
+
+      document.getElementById('treeView').style.display = 'none';
+      document.getElementById('detailView').classList.add('active');
+      document.getElementById('backBtn').classList.add('visible');
+
+      document.getElementById('detailAvatar').textContent = person.initials;
+      document.getElementById('detailAvatar').style.background = person.gradient;
+      document.getElementById('detailName').textContent = person.name;
+      document.getElementById('detailRole').textContent = person.role;
+
+      const reportList = document.getElementById('reportList');
+      reportList.innerHTML = person.reports.map(r => `
+        <div class="report-item">
+          <div class="report-avatar" style="background: ${r.gradient}">${r.initials}</div>
+          <div class="report-info">
+            <div class="report-name">${r.name}</div>
+            <div class="report-role">${r.role}</div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function showTree() {
+      document.getElementById('treeView').style.display = 'block';
+      document.getElementById('detailView').classList.remove('active');
+      document.getElementById('backBtn').classList.remove('visible');
+    }
+  </script>
+</body>
+</html>
