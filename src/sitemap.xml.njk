@@ -1,0 +1,25 @@
+---
+permalink: /sitemap.xml
+layout: null
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  {%- for item in collections.all %}
+  {%- if item.url and not item.data.excludeFromSitemap and item.url != "/sitemap.xml" %}
+  <url>
+    <loc>{{ site.url }}{{ item.url }}</loc>
+    <lastmod>{{ item.date | dateToRfc3339 }}</lastmod>
+    {%- if item.url == "/fr/" or item.url == "/en/" %}
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    {%- elif "/patterns/" in item.url and item.url != "/fr/patterns/" and item.url != "/en/patterns/" %}
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    {%- else %}
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    {%- endif %}
+  </url>
+  {%- endif %}
+  {%- endfor %}
+</urlset>

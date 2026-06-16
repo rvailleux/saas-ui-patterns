@@ -1,0 +1,177 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #0f0f1a;
+      color: #e2e8f0;
+      height: 100vh;
+      overflow: hidden;
+      font-size: 13px;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+    }
+    .compose-area {
+      flex: 1;
+      max-width: 600px;
+      margin: 0 auto;
+      width: 100%;
+      background: #1a1a2e;
+      border-radius: 12px;
+      padding: 24px;
+    }
+    .compose-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .compose-title { font-size: 16px; font-weight: 600; }
+    .draft-badge {
+      padding: 4px 10px;
+      background: #fef3c7;
+      color: #92400e;
+      border-radius: 12px;
+      font-size: 11px;
+      display: none;
+    }
+    .draft-badge.show { display: block; }
+    .form-field {
+      margin-bottom: 16px;
+    }
+    .form-label {
+      font-size: 11px;
+      color: #64748b;
+      margin-bottom: 6px;
+      display: block;
+    }
+    .form-input {
+      width: 100%;
+      padding: 10px 14px;
+      background: #151528;
+      border: 1px solid #2a2a55;
+      border-radius: 8px;
+      color: #e2e8f0;
+      font-size: 13px;
+    }
+    .form-input:focus {
+      outline: none;
+      border-color: #3b82f6;
+    }
+    .restore-prompt {
+      display: none;
+      background: #1e3a5f;
+      border: 1px solid #3b82f6;
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+    .restore-prompt.show { display: block; }
+    .restore-title { font-weight: 500; margin-bottom: 8px; }
+    .restore-text { font-size: 12px; color: #94a3b8; margin-bottom: 12px; }
+    .restore-actions { display: flex; gap: 8px; }
+    .btn {
+      padding: 8px 14px;
+      border-radius: 6px;
+      border: none;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .btn-primary { background: #3b82f6; color: white; }
+    .btn-secondary { background: #2a2a55; color: #e2e8f0; }
+    .controls {
+      display: flex;
+      gap: 12px;
+      padding-top: 16px;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="compose-area">
+    <div class="compose-header">
+      <div class="compose-title">New Message</div>
+      <div class="draft-badge" id="draftBadge">Draft saved</div>
+    </div>
+
+    <div class="restore-prompt" id="restorePrompt">
+      <div class="restore-title">📝 Restore previous draft?</div>
+      <div class="restore-text">You have an unsaved draft from 10 minutes ago.</div>
+      <div class="restore-actions">
+        <button class="btn btn-primary" onclick="restoreDraft()">Restore</button>
+        <button class="btn btn-secondary" onclick="discardDraft()">Discard</button>
+      </div>
+    </div>
+
+    <div class="form-field">
+      <label class="form-label">To</label>
+      <input type="text" class="form-input" id="toField" placeholder="recipient@example.com">
+    </div>
+
+    <div class="form-field">
+      <label class="form-label">Subject</label>
+      <input type="text" class="form-input" id="subjectField" placeholder="Subject">
+    </div>
+
+    <div class="form-field">
+      <label class="form-label">Message</label>
+      <textarea class="form-input" id="messageField" rows="6" placeholder="Write your message..."></textarea>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button class="btn btn-primary" onclick="simulateCrash()">Simulate Crash/Reload</button>
+    <button class="btn btn-secondary" onclick="clearDraft()">Clear Draft</button>
+  </div>
+
+  <script>
+    // Simulate localStorage draft
+    let hasDraft = false;
+
+    // Auto-save simulation
+    setInterval(() => {
+      const hasContent = document.getElementById('subjectField').value ||
+                        document.getElementById('messageField').value;
+      if (hasContent) {
+        document.getElementById('draftBadge').classList.add('show');
+        hasDraft = true;
+        setTimeout(() => {
+          document.getElementById('draftBadge').classList.remove('show');
+        }, 2000);
+      }
+    }, 5000);
+
+    function simulateCrash() {
+      if (hasDraft || document.getElementById('subjectField').value) {
+        document.getElementById('restorePrompt').classList.add('show');
+      } else {
+        alert('No draft to restore. Type something first!');
+      }
+    }
+
+    function restoreDraft() {
+      document.getElementById('toField').value = 'john@example.com';
+      document.getElementById('subjectField').value = 'Re: Project Update';
+      document.getElementById('messageField').value = 'Hi,\n\nHere is the update on our progress...';
+      document.getElementById('restorePrompt').classList.remove('show');
+      alert('Draft restored!');
+    }
+
+    function discardDraft() {
+      document.getElementById('restorePrompt').classList.remove('show');
+      hasDraft = false;
+    }
+
+    function clearDraft() {
+      document.getElementById('toField').value = '';
+      document.getElementById('subjectField').value = '';
+      document.getElementById('messageField').value = '';
+      hasDraft = false;
+    }
+  </script>
+</body>
+</html>

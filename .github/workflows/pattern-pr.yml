@@ -2,7 +2,7 @@ name: Pattern PR — validate & open vote
 
 on:
   pull_request:
-    types: [opened, reopened]
+    types: [opened, reopened, synchronize]
     branches: [main]
 
 permissions:
@@ -15,6 +15,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Check branch naming
         id: branch-check
@@ -37,7 +39,15 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.issue.number,
-              body: `## ❌ Invalid branch name\n\nPattern PRs must use the branch naming convention:\n\`\`\`\npattern/{slug}\n\`\`\`\nFor example: \`pattern/sticky-column-header\`\n\nPlease close this PR, rename your branch, and reopen. See [CONTRIBUTING.md](../blob/main/CONTRIBUTING.md) for details.`
+              body: `## ❌ Invalid branch name
+
+              Pattern PRs must use the branch naming convention:
+              \`\`\`
+              pattern/{slug}
+              \`\`\`
+              For example: \`pattern/sticky-column-header\`
+
+              Please close this PR, rename your branch, and reopen. See [CONTRIBUTING.md](../blob/main/CONTRIBUTING.md) for details.`
             });
             await github.rest.pulls.update({
               owner: context.repo.owner,
@@ -52,9 +62,28 @@ jobs:
         run: |
           SLUG="${{ steps.branch-check.outputs.slug }}"
           MISSING=""
-          [ ! -f "src/_data/patterns/${SLUG}.json" ] && MISSING="${MISSING}\n- \`src/_data/patterns/${SLUG}.json\`"
-          [ ! -f "src/_data/demos/${SLUG}.html" ]    && MISSING="${MISSING}\n- \`src/_data/demos/${SLUG}.html\`"
-          [ ! -f "src/_data/demos/${SLUG}.json" ]    && MISSING="${MISSING}\n- \`src/_data/demos/${SLUG}.json\`"
+
+          # Check if this is a batch PR (slug starts with "batch-")
+          if [[ "$SLUG" == batch-* ]]; then
+            # Batch PR: validate all pattern files changed in the PR
+            echo "is_batch=true" >> $GITHUB_OUTPUT
+            # Get list of added/modified pattern files
+            PATTERNS=$(git diff --name-only origin/main...HEAD | grep -E '^src/_data/patterns/.*\.json$' | sed 's|src/_data/patterns/||' | sed 's|\.json$||' | tr '\n' ' ')
+            for PATTERN_SLUG in $PATTERNS; do
+              [ ! -f "src/_data/patterns/${PATTERN_SLUG}.json" ] && MISSING="${MISSING}\\n- src/_data/patterns/${PATTERN_SLUG}.json"
+              [ ! -f "src/_data/demos/${PATTERN_SLUG}.html" ]    && MISSING="${MISSING}\\n- src/_data/demos/${PATTERN_SLUG}.html"
+              [ ! -f "src/_data/demos/${PATTERN_SLUG}.json" ]    && MISSING="${MISSING}\\n- src/_data/demos/${PATTERN_SLUG}.json"
+            done
+            echo "patterns=$PATTERNS" >> $GITHUB_OUTPUT
+          else
+            # Single pattern PR: validate single slug
+            echo "is_batch=false" >> $GITHUB_OUTPUT
+            [ ! -f "src/_data/patterns/${SLUG}.json" ] && MISSING="${MISSING}\\n- src/_data/patterns/${SLUG}.json"
+            [ ! -f "src/_data/demos/${SLUG}.html" ]    && MISSING="${MISSING}\\n- src/_data/demos/${SLUG}.html"
+            [ ! -f "src/_data/demos/${SLUG}.json" ]    && MISSING="${MISSING}\\n- src/_data/demos/${SLUG}.json"
+            echo "patterns=$SLUG" >> $GITHUB_OUTPUT
+          fi
+
           echo "missing=$MISSING" >> $GITHUB_OUTPUT
           if [ -z "$MISSING" ]; then
             echo "files_ok=true" >> $GITHUB_OUTPUT
@@ -72,7 +101,12 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.issue.number,
-              body: `## ⚠️ Missing required files\n\nThis PR is missing the following required files:\n${missing}\n\nSee [CONTRIBUTING.md](../blob/main/CONTRIBUTING.md#2-create-the-three-pattern-files) for the exact format and templates. Please push the missing files to this branch.`
+              body: `## ⚠️ Missing required files
+
+              This PR is missing the following required files:
+              ${missing}
+
+              See [CONTRIBUTING.md](../blob/main/CONTRIBUTING.md#2-create-the-three-pattern-files) for the exact format and templates. Please push the missing files to this branch.`
             });
             await github.rest.issues.addLabels({
               owner: context.repo.owner,
@@ -86,7 +120,8 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
-            const slug = '${{ steps.branch-check.outputs.slug }}';
+            const isBatch = '${{ steps.file-check.outputs.is_batch }}' === 'true';
+            const patterns = '${{ steps.file-check.outputs.patterns }}'.split(' ').filter(p => p);
             const now = new Date();
             const deadline = new Date(now.getTime() + 15 * 24 * 60 * 60 * 1000);
             const deadlineStr = deadline.toISOString().split('T')[0];
@@ -99,10 +134,23 @@ jobs:
               labels: ['vote-open']
             });
 
-            // Post vote announcement comment
+            // Build pattern list
+            let patternList = '';
+            for (const p of patterns) {
+              patternList += '- ${p}\\n';
+            }
+
+            let body;
+            if (isBatch) {
+              body = '## Vote open - Batch PR (' + patterns.length + ' patterns)\\n\\n' +
+                     'Patterns:' + patternList;
+            } else {
+              body = '## Vote open - pattern ' + patterns[0];
+            }
+
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.issue.number,
-              body: `## 🗳️ Vote open — pattern \`${slug}\`\n\nAll required files are present. The **15-day community vote period** is now open.\n\n| | |\n|---|---|\n| **Vote deadline** | ${deadlineStr} |\n| **Decision** | After ${deadlineStr}, the repository owner will merge, request changes, or close |\n\n**How to vote:**\n- 👍 on this PR = in favour\n- 👎 on this PR = against\n- Leave a comment with specific feedback, missing examples, or implementation notes\n\nVotes are advisory — the final decision rests with the maintainer.\n\n> This is an automated message. See [CONTRIBUTING.md](../blob/main/CONTRIBUTING.md#review-process) for the full process.`
+              body: body
             });

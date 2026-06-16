@@ -1,0 +1,80 @@
+{
+  "id": 928,
+  "slug": "interactive-onboarding-checklist",
+  "category": "feedback",
+  "title": {
+    "fr": "Checklist d'Onboarding Interactive",
+    "en": "Interactive Onboarding Checklist"
+  },
+  "categoryLabel": {
+    "slug": "feedback",
+    "fr": "Feedback & États",
+    "en": "Feedback & States"
+  },
+  "firstSeenOn": {
+    "product": "Linear",
+    "url": "https://linear.app",
+    "approximateDate": "2021"
+  },
+  "examples": [
+    {
+      "name": "Linear",
+      "desc": {
+        "fr": "Checklist d'activation avec barre de progression circulaire et auto-complétion",
+        "en": "Activation checklist with circular progress bar and auto-completion"
+      }
+    },
+    {
+      "name": "Slack",
+      "desc": {
+        "fr": "Guide de démarrage avec tâches progressives et célébration visuelle",
+        "en": "Getting started guide with progressive tasks and visual celebration"
+      }
+    },
+    {
+      "name": "Notion",
+      "desc": {
+        "fr": "Checklist contextuelle avec deep links vers chaque action requise",
+        "en": "Contextual checklist with deep links to each required action"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**5-7 items maximum** : Ne surcharger pas l'utilisateur",
+      "**Auto-complétion** : Détectez les actions, ne demandez pas de cases manuelles",
+      "**Deep links** : Chaque item doit mener directement à l'action",
+      "**Célébration** : Animation de succès à 100% de complétion",
+      "**Persistance** : Reste accessible après fermeture"
+    ],
+    "en": [
+      "**5-7 items max** : Don't overwhelm the user",
+      "**Auto-complete** : Detect actions, don't require manual checkboxes",
+      "**Deep links** : Each item leads directly to the action",
+      "**Celebration** : Success animation at 100% completion",
+      "**Persistence** : Remains accessible after dismissal"
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Cases à cocher manuelles - friction inutile",
+      "❌ Plus de 7 items - découragement",
+      "❌ Checklist non récupérable après fermeture",
+      "❌ Aucun retour visuel sur la progression"
+    ],
+    "en": [
+      "❌ Manual checkboxes - unnecessary friction",
+      "❌ More than 7 items - discouraging",
+      "❌ Checklist not recoverable after dismissal",
+      "❌ No visual feedback on progress"
+    ]
+  },
+  "what": {
+    "fr": "Widget persistant montrant la progression à travers les tâches d'activation - s'auto-complète quand l'utilisateur agit.",
+    "en": "Persistent widget showing progress through activation tasks - auto-completes when user takes action."
+  },
+  "why": {
+    "fr": "L'onboarding est critique pour la rétention. Un checklist interactif guide sans imposer, et la célébration renforce la motivation.",
+    "en": "Onboarding is critical for retention. An interactive checklist guides without imposing, and celebration reinforces motivation."
+  }
+}

@@ -1,0 +1,161 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #0f0f1a;
+      color: #e2e8f0;
+      height: 100vh;
+      overflow: hidden;
+      font-size: 13px;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+    }
+    .cache-demo {
+      flex: 1;
+      max-width: 600px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .cache-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .cache-title { font-weight: 500; }
+    .cache-stats {
+      display: flex;
+      gap: 16px;
+      font-size: 12px;
+    }
+    .stat { color: #64748b; }
+    .stat-value { color: #22c55e; font-weight: 600; }
+    .content-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .content-card {
+      aspect-ratio: 16/10;
+      background: #1a1a2e;
+      border-radius: 10px;
+      padding: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+    .content-card.cached::before {
+      content: '⚡';
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      font-size: 12px;
+    }
+    .card-skeleton {
+      height: 100%;
+      background: linear-gradient(90deg, #2a2a55 25%, #3a3a6c 50%, #2a2a55 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+      border-radius: 6px;
+    }
+    .card-content {
+      display: none;
+      height: 100%;
+    }
+    .content-card.loaded .card-skeleton { display: none; }
+    .content-card.loaded .card-content { display: block; }
+    @keyframes shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    .controls {
+      display: flex;
+      gap: 12px;
+      padding-top: 16px;
+      justify-content: center;
+    }
+    .btn {
+      padding: 10px 16px;
+      border-radius: 8px;
+      border: none;
+      font-size: 12px;
+      cursor: pointer;
+      background: #3b82f6;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="cache-demo">
+    <div class="cache-header">
+      <div class="cache-title">Smart Content Loading</div>
+      <div class="cache-stats">
+        <div class="stat">Cached: <span class="stat-value" id="cachedCount">0/6</span></div>
+        <div class="stat">Load time: <span class="stat-value" id="loadTime">0ms</span></div>
+      </div>
+    </div>
+
+    <div class="content-grid" id="contentGrid">
+      <div class="content-card cached" data-index="1">
+        <div class="card-skeleton"></div>
+        <div class="card-content">📊 Analytics</div>
+      </div>
+      <div class="content-card" data-index="2">
+        <div class="card-skeleton"></div>
+        <div class="card-content">📈 Reports</div>
+      </div>
+      <div class="content-card" data-index="3">
+        <div class="card-skeleton"></div>
+        <div class="card-content">👥 Users</div>
+      </div>
+      <div class="content-card" data-index="4">
+        <div class="card-skeleton"></div>
+        <div class="card-content">💰 Revenue</div>
+      </div>
+      <div class="content-card" data-index="5">
+        <div class="card-skeleton"></div>
+        <div class="card-content">🎯 Goals</div>
+      </div>
+      <div class="content-card" data-index="6">
+        <div class="card-skeleton"></div>
+        <div class="card-content">🔔 Alerts</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button class="btn" onclick="simulateLoad()">Simulate Load</button>
+    <button class="btn" onclick="preloadAll()">Preload All</button>
+  </div>
+
+  <script>
+    function simulateLoad() {
+      const cards = document.querySelectorAll('.content-card');
+      let loaded = 0;
+
+      cards.forEach((card, i) => {
+        setTimeout(() => {
+          card.classList.add('loaded');
+          loaded++;
+          document.getElementById('cachedCount').textContent = `${loaded}/${cards.length}`;
+        }, i * 200);
+      });
+
+      document.getElementById('loadTime').textContent = '120ms';
+    }
+
+    function preloadAll() {
+      document.querySelectorAll('.content-card').forEach(card => {
+        card.classList.add('cached');
+        card.classList.add('loaded');
+      });
+      document.getElementById('cachedCount').textContent = '6/6';
+      document.getElementById('loadTime').textContent = '0ms';
+    }
+  </script>
+</body>
+</html>

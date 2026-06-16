@@ -1,0 +1,69 @@
+{
+  "id": 906,
+  "slug": "progressive-enhancement",
+  "category": "ai-generation",
+  "title": {
+    "fr": "Amélioration Progressive (Réponses IA)",
+    "en": "Progressive Enhancement (AI Responses)"
+  },
+  "categoryLabel": {
+    "slug": "ai-generation",
+    "fr": "AI — Génération & Édition",
+    "en": "AI — Generation & Editing"
+  },
+  "firstSeenOn": {
+    "product": "Perplexity",
+    "url": "https://perplexity.ai",
+    "approximateDate": "2022"
+  },
+  "examples": [
+    {
+      "name": "ChatGPT",
+      "desc": {
+        "fr": "Streaming des tokens avec amélioration progressive de la réponse",
+        "en": "Token streaming with progressively improving responses"
+      }
+    },
+    {
+      "name": "Perplexity",
+      "desc": {
+        "fr": "Réponse instantanée suivie des sources et détails",
+        "en": "Instant answer followed by sources and details"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Accusé de réception immédiat** : Montrez que l'IA a compris la demande sous 100ms",
+      "**Squelette d'abord** : Structure de la réponse avant le contenu détaillé",
+      "**Streaming progressif** : Ajoutez les détails et citations au fur et à mesure",
+      "**Polish final** : Métadonnées et actions une fois le contenu complet"
+    ],
+    "en": [
+      "**Immediate acknowledgment** : Show AI understood the request within 100ms",
+      "**Skeleton first** : Response structure before detailed content",
+      "**Progressive streaming** : Add details and citations as they become available",
+      "**Final polish** : Metadata and actions once content is complete"
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Faire attendre l'utilisateur jusqu'à la réponse complète",
+      "❌ Montrer un simple spinner sans indication de progression",
+      "❌ Modifier radicalement la réponse après l'affichage initial"
+    ],
+    "en": [
+      "❌ Making user wait for complete response",
+      "❌ Showing simple spinner without progress indication",
+      "❌ Radically changing response after initial display"
+    ]
+  },
+  "what": {
+    "fr": "Réponse basique immédiate, puis ajout progressif de détails, citations et précision - plutôt qu'attendre la complétion totale.",
+    "en": "Immediate basic response, then progressively add detail, citations, and accuracy - rather than waiting for full completion."
+  },
+  "why": {
+    "fr": "Les utilisateurs perçoivent le temps différemment quand ils voient du progrès. Une réponse partielle rapide semble plus rapide qu'une attente passive.",
+    "en": "Users perceive time differently when they see progress. A quick partial response feels faster than passive waiting."
+  }
+}

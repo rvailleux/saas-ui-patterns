@@ -1,0 +1,80 @@
+{
+  "id": 931,
+  "slug": "toast-undo-action",
+  "category": "feedback",
+  "title": {
+    "fr": "Toast avec Action Annuler",
+    "en": "Toast with Undo Action"
+  },
+  "categoryLabel": {
+    "slug": "feedback",
+    "fr": "Feedback & États",
+    "en": "Feedback & States"
+  },
+  "firstSeenOn": {
+    "product": "Gmail",
+    "url": "https://gmail.com",
+    "approximateDate": "2009"
+  },
+  "examples": [
+    {
+      "name": "Gmail",
+      "desc": {
+        "fr": "Undo Send avec compte à rebours de 30 secondes",
+        "en": "Undo Send with 30-second countdown"
+      }
+    },
+    {
+      "name": "Linear",
+      "desc": {
+        "fr": "Toast discret avec action undo pour delete/archive",
+        "en": "Discrete toast with undo action for delete/archive"
+      }
+    },
+    {
+      "name": "Notion",
+      "desc": {
+        "fr": "Notification éphémère avec option de restauration",
+        "en": "Ephemeral notification with restore option"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Délai 5-10s** : Assez long pour réagir, pas assez pour bloquer",
+      "**Action claire** : Bouton 'Annuler' ou 'Undo' visible",
+      "**Sans confirmation** : Remplace les modales 'Êtes-vous sûr ?'",
+      "**Auto-dismiss** : Disparaît après timeout, mais reste accessible",
+      "**Stackable** : Plusieurs toasts peuvent s'empiler"
+    ],
+    "en": [
+      "**5-10s delay** : Long enough to react, not too long to block",
+      "**Clear action** : Visible 'Undo' or 'Cancel' button",
+      "**No confirmation** : Replaces 'Are you sure?' modals",
+      "**Auto-dismiss** : Disappears after timeout, but stays accessible",
+      "**Stackable** : Multiple toasts can stack"
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Timeout trop court - pas le temps de réagir",
+      "❌ Pas d'option undo - force les confirmations modales",
+      "❌ Toast qui bloque l'interface",
+      "❌ Message trop vague - 'Action effectuée'"
+    ],
+    "en": [
+      "❌ Timeout too short - no time to react",
+      "❌ No undo option - forces modal confirmations",
+      "❌ Toast blocks the interface",
+      "❌ Message too vague - 'Action completed'"
+    ]
+  },
+  "what": {
+    "fr": "Notification éphémère avec bouton 'Annuler' - remplace les dialogues de confirmation.",
+    "en": "Ephemeral notification with 'Undo' button - replaces confirmation dialogs."
+  },
+  "why": {
+    "fr": "Les confirmations interrompent le flux. Un toast avec undo permet d'agir vite tout en offrant une sortie de secours.",
+    "en": "Confirmations interrupt flow. A toast with undo allows fast action while offering an escape hatch."
+  }
+}

@@ -1,0 +1,237 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #0f0f1a;
+      color: #e2e8f0;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      padding: 20px;
+    }
+    .audit-container {
+      width: 100%;
+      max-width: 520px;
+      background: #1a1a2e;
+      border-radius: 12px;
+      border: 1px solid #2a2a55;
+      overflow: hidden;
+    }
+    .audit-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid #2a2a55;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .audit-title {
+      font-weight: 600;
+      font-size: 14px;
+    }
+    .audit-filters {
+      display: flex;
+      gap: 8px;
+    }
+    .filter-btn {
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: 1px solid #2a2a55;
+      background: #252542;
+      color: #94a3b8;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .filter-btn.active {
+      background: #3b82f6;
+      color: white;
+      border-color: #3b82f6;
+    }
+    .audit-list {
+      max-height: 300px;
+      overflow-y: auto;
+    }
+    .audit-item {
+      padding: 14px 20px;
+      border-bottom: 1px solid #252542;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .audit-item:last-child {
+      border-bottom: none;
+    }
+    .audit-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 500;
+      flex-shrink: 0;
+    }
+    .audit-content {
+      flex: 1;
+    }
+    .audit-action {
+      margin-bottom: 4px;
+      line-height: 1.5;
+    }
+    .audit-action strong {
+      color: #e2e8f0;
+    }
+    .audit-action .target {
+      color: #3b82f6;
+      font-weight: 500;
+    }
+    .audit-meta {
+      display: flex;
+      gap: 12px;
+      font-size: 11px;
+      color: #64748b;
+    }
+    .audit-time::before {
+      content: '🕐 ';
+    }
+    .audit-ip::before {
+      content: '📍 ';
+    }
+    .audit-badge {
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 500;
+      text-transform: uppercase;
+    }
+    .badge-created { background: #10b98133; color: #10b981; }
+    .badge-updated { background: #3b82f633; color: #3b82f6; }
+    .badge-deleted { background: #ef444433; color: #ef4444; }
+    .badge-viewed { background: #64748b33; color: #64748b; }
+    .audit-footer {
+      padding: 12px 20px;
+      border-top: 1px solid #2a2a55;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .export-btn {
+      padding: 8px 16px;
+      border-radius: 6px;
+      border: 1px solid #2a2a55;
+      background: transparent;
+      color: #94a3b8;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .export-btn:hover {
+      background: #252542;
+    }
+    .immutability-note {
+      font-size: 11px;
+      color: #64748b;
+    }
+    .immutability-note::before {
+      content: '🔒 ';
+    }
+  </style>
+</head>
+<body>
+  <div class="audit-container">
+    <div class="audit-header">
+      <div class="audit-title">Activity Log</div>
+      <div class="audit-filters">
+        <button class="filter-btn active">All</button>
+        <button class="filter-btn">Changes</button>
+        <button class="filter-btn">Security</button>
+      </div>
+    </div>
+
+    <div class="audit-list">
+      <div class="audit-item">
+        <div class="audit-avatar">SC</div>
+        <div class="audit-content">
+          <div class="audit-action">
+            <strong>Sarah Chen</strong> updated <span class="target">Q4 Roadmap</span>
+          </div>
+          <div class="audit-meta">
+            <span class="audit-time">2 minutes ago</span>
+            <span class="audit-ip">192.168.1.45</span>
+            <span class="audit-badge badge-updated">Updated</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="audit-item">
+        <div class="audit-avatar" style="background: linear-gradient(135deg, #ec4899, #f59e0b)">MJ</div>
+        <div class="audit-content">
+          <div class="audit-action">
+            <strong>Marcus Johnson</strong> created <span class="target">API Integration Spec</span>
+          </div>
+          <div class="audit-meta">
+            <span class="audit-time">1 hour ago</span>
+            <span class="audit-ip">192.168.1.62</span>
+            <span class="audit-badge badge-created">Created</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="audit-item">
+        <div class="audit-avatar" style="background: linear-gradient(135deg, #10b981, #3b82f6)">EW</div>
+        <div class="audit-content">
+          <div class="audit-action">
+            <strong>Emma Wilson</strong> deleted <span class="target">Draft mockups v2</span>
+          </div>
+          <div class="audit-meta">
+            <span class="audit-time">3 hours ago</span>
+            <span class="audit-ip">192.168.1.78</span>
+            <span class="audit-badge badge-deleted">Deleted</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="audit-item">
+        <div class="audit-avatar" style="background: linear-gradient(135deg, #f59e0b, #ef4444)">DP</div>
+        <div class="audit-content">
+          <div class="audit-action">
+            <strong>David Park</strong> viewed <span class="target">Sales Report Q3</span>
+          </div>
+          <div class="audit-meta">
+            <span class="audit-time">5 hours ago</span>
+            <span class="audit-ip">192.168.1.91</span>
+            <span class="audit-badge badge-viewed">Viewed</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="audit-item">
+        <div class="audit-avatar">SC</div>
+        <div class="audit-content">
+          <div class="audit-action">
+            <strong>Sarah Chen</strong> changed role of <strong>Alice Brown</strong> to <span class="target">Engineering Manager</span>
+          </div>
+          <div class="audit-meta">
+            <span class="audit-time">Yesterday</span>
+            <span class="audit-ip">192.168.1.45</span>
+            <span class="audit-badge badge-updated">Updated</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="audit-footer">
+      <button class="export-btn">Export CSV</button>
+      <span class="immutability-note">Tamper-proof audit trail</span>
+    </div>
+  </div>
+</body>
+</html>

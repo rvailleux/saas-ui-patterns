@@ -1,0 +1,69 @@
+{
+  "id": 920,
+  "slug": "pinnable-workspaces",
+  "category": "layout",
+  "title": {
+    "fr": "Espaces de Travail Épinglables Persistants",
+    "en": "Persistent Pinnable Workspaces"
+  },
+  "categoryLabel": {
+    "slug": "layout",
+    "fr": "Layout & Espace de Travail",
+    "en": "Layout & Workspace"
+  },
+  "firstSeenOn": {
+    "product": "VS Code",
+    "url": "https://code.visualstudio.com",
+    "approximateDate": "2015"
+  },
+  "examples": [
+    {
+      "name": "Cursor",
+      "desc": {
+        "fr": "Onglets persistants avec restauration de session",
+        "en": "Persistent tabs with session restore"
+      }
+    },
+    {
+      "name": "Obsidian",
+      "desc": {
+        "fr": "Workspaces avec plusieurs fichiers et panneaux",
+        "en": "Workspaces with multiple files and panels"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Persistance** : Les espaces survivent aux fermetures de session",
+      "**Épinglage** : Marquez les docs/projets importants",
+      "**Groupes** : Organisez par projet ou contexte",
+      "**Restauration** : Récupérez après crash ou déconnexion"
+    ],
+    "en": [
+      "**Persistence** : Workspaces survive session closes",
+      "**Pinning** : Mark important docs/projects",
+      "**Groups** : Organize by project or context",
+      "**Restore** : Recover after crash or disconnect"
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Perte de travail lors de la fermeture accidentelle",
+      "❌ Pas de moyen de retrouver les onglets fermés",
+      "❌ Impossible de sauvegarder des configurations de workspace"
+    ],
+    "en": [
+      "❌ Losing work on accidental close",
+      "❌ No way to recover closed tabs",
+      "❌ Unable to save workspace configurations"
+    ]
+  },
+  "what": {
+    "fr": "Items d'espace de travail comme onglets persistants et épinglables - survivent aux sessions, réordonnables, restaurables.",
+    "en": "Workspace items as persistent, pinnable tabs - survive across sessions, can be reordered, restored."
+  },
+  "why": {
+    "fr": "Les utilisateurs ont des workflows complexes avec plusieurs contextes. La persistance réduit la friction de reconfiguration constante.",
+    "en": "Users have complex workflows with multiple contexts. Persistence reduces friction of constant reconfiguration."
+  }
+}

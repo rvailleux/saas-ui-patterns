@@ -1,0 +1,69 @@
+{
+  "id": 908,
+  "slug": "no-ui-invisible",
+  "category": "ai-context",
+  "title": {
+    "fr": "No-UI / UX Invisible",
+    "en": "No-UI / Invisible UX"
+  },
+  "categoryLabel": {
+    "slug": "ai-context",
+    "fr": "AI — Contexte & Mémoire",
+    "en": "AI — Context & Memory"
+  },
+  "firstSeenOn": {
+    "product": "Expensify",
+    "url": "https://expensify.com",
+    "approximateDate": "2015"
+  },
+  "examples": [
+    {
+      "name": "Analytics Tools",
+      "desc": {
+        "fr": "Rapports hebdomadaires pré-générés basés sur les comportements passés",
+        "en": "Pre-generated weekly reports based on past behaviors"
+      }
+    },
+    {
+      "name": "CRM Systems",
+      "desc": {
+        "fr": "Mise à jour auto des scores de leads pendant l'absence de l'utilisateur",
+        "en": "Auto-updating lead scores while user is away"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Agissez en arrière-plan** : L'utilisateur ne doit rien faire pour déclencher l'action",
+      "**Soyez fiable** : Les actions doivent se produire systématiquement",
+      "**Soyez réversible** : Permettez l'annulation si l'action était incorrecte",
+      "**Informez discrètement** : Résumés périodiques, pas notifications instantanées"
+    ],
+    "en": [
+      "**Act in background** : User shouldn't need to do anything to trigger action",
+      "**Be reliable** : Actions must happen consistently",
+      "**Be reversible** : Allow undo if action was incorrect",
+      "**Inform discretely** : Periodic summaries, not instant notifications"
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Agir sans que l'utilisateur puisse comprendre ou contrôler",
+      "❌ Ennuyer avec des notifications pour chaque action automatique",
+      "❌ Rendre des actions irréversibles sans confirmation"
+    ],
+    "en": [
+      "❌ Acting without user being able to understand or control",
+      "❌ Annoying with notifications for every automatic action",
+      "❌ Making actions irreversible without confirmation"
+    ]
+  },
+  "what": {
+    "fr": "Actions qui se produisent avant que l'utilisateur ait à faire quoi que ce soit - auto-catégorisation, pré-planification, organisation en arrière-plan.",
+    "en": "Actions that happen before the user has to do anything - auto-categorization, pre-scheduling, background organization."
+  },
+  "why": {
+    "fr": "La véritable automation élimine la charge cognitive. Quand l'IA gère les tâches routinières sans demander, les utilisateurs peuvent se concentrer sur le travail à plus forte valeur.",
+    "en": "True automation removes cognitive load. When AI handles routine tasks without asking, users can focus on higher-value work."
+  }
+}

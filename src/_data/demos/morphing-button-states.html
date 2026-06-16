@@ -1,0 +1,240 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #0f0f1a;
+      color: #e2e8f0;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      gap: 24px;
+    }
+    .demo-section {
+      text-align: center;
+    }
+    .demo-label {
+      font-size: 11px;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+    }
+    .morph-btn {
+      position: relative;
+      padding: 14px 32px;
+      border-radius: 8px;
+      border: none;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow: hidden;
+      min-width: 140px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .morph-btn.idle {
+      background: #3b82f6;
+      color: white;
+    }
+    .morph-btn:hover.idle {
+      background: #2563eb;
+    }
+    .morph-btn.loading {
+      background: #1e40af;
+      color: white;
+      cursor: wait;
+    }
+    .morph-btn.success {
+      background: #10b981;
+      color: white;
+    }
+    .morph-btn.error {
+      background: #ef4444;
+      color: white;
+    }
+    .btn-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+    }
+    .btn-text {
+      transition: opacity 0.2s;
+    }
+    .spinner {
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      display: none;
+    }
+    .loading .spinner {
+      display: block;
+    }
+    .loading .btn-text {
+      display: none;
+    }
+    .checkmark {
+      width: 20px;
+      height: 20px;
+      stroke: white;
+      stroke-width: 3;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 48;
+      stroke-dashoffset: 48;
+      display: none;
+    }
+    .success .checkmark {
+      display: block;
+      animation: drawCheck 0.3s ease forwards;
+    }
+    .success .btn-text {
+      opacity: 0;
+    }
+    .error-icon {
+      width: 20px;
+      height: 20px;
+      stroke: white;
+      stroke-width: 2.5;
+      fill: none;
+      stroke-linecap: round;
+      display: none;
+    }
+    .error .error-icon {
+      display: block;
+      animation: shake 0.4s ease;
+    }
+    .error .btn-text {
+      display: none;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    @keyframes drawCheck {
+      to { stroke-dashoffset: 0; }
+    }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-4px); }
+      40%, 80% { transform: translateX(4px); }
+    }
+    .controls {
+      display: flex;
+      gap: 12px;
+      margin-top: 32px;
+    }
+    .control-btn {
+      padding: 8px 16px;
+      border-radius: 6px;
+      border: 1px solid #2a2a55;
+      background: #1a1a2e;
+      color: #94a3b8;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .control-btn:hover {
+      background: #252542;
+      color: #e2e8f0;
+    }
+  </style>
+</head>
+<body>
+  <div class="demo-section">
+    <div class="demo-label">Success Flow</div>
+    <button class="morph-btn idle" id="successBtn" onclick="triggerSuccess()">
+      <div class="btn-content">
+        <div class="spinner"></div>
+        <span class="btn-text">Save Changes</span>
+        <svg class="checkmark" viewBox="0 0 24 24">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      </div>
+    </button>
+  </div>
+
+  <div class="demo-section">
+    <div class="demo-label">Error Flow</div>
+    <button class="morph-btn idle" id="errorBtn" onclick="triggerError()">
+      <div class="btn-content">
+        <div class="spinner"></div>
+        <span class="btn-text">Submit</span>
+        <svg class="error-icon" viewBox="0 0 24 24">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </div>
+    </button>
+  </div>
+
+  <div class="controls">
+    <button class="control-btn" onclick="resetAll()">Reset All</button>
+  </div>
+
+  <script>
+    let successTimer, errorTimer;
+
+    function triggerSuccess() {
+      const btn = document.getElementById('successBtn');
+      if (!btn.classList.contains('idle')) return;
+
+      btn.classList.remove('idle');
+      btn.classList.add('loading');
+
+      setTimeout(() => {
+        btn.classList.remove('loading');
+        btn.classList.add('success');
+
+        successTimer = setTimeout(() => {
+          btn.classList.remove('success');
+          btn.classList.add('idle');
+        }, 2000);
+      }, 1500);
+    }
+
+    function triggerError() {
+      const btn = document.getElementById('errorBtn');
+      if (!btn.classList.contains('idle')) return;
+
+      btn.classList.remove('idle');
+      btn.classList.add('loading');
+
+      setTimeout(() => {
+        btn.classList.remove('loading');
+        btn.classList.add('error');
+
+        errorTimer = setTimeout(() => {
+          btn.classList.remove('error');
+          btn.classList.add('idle');
+        }, 2000);
+      }, 1500);
+    }
+
+    function resetAll() {
+      clearTimeout(successTimer);
+      clearTimeout(errorTimer);
+
+      ['successBtn', 'errorBtn'].forEach(id => {
+        const btn = document.getElementById(id);
+        btn.className = 'morph-btn idle';
+      });
+    }
+  </script>
+</body>
+</html>

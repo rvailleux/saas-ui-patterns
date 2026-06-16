@@ -1,0 +1,80 @@
+{
+  "id": 930,
+  "slug": "morphing-button-states",
+  "category": "feedback",
+  "title": {
+    "fr": "Boutons à États Morphing",
+    "en": "Morphing Button States"
+  },
+  "categoryLabel": {
+    "slug": "feedback",
+    "fr": "Feedback & États",
+    "en": "Feedback & States"
+  },
+  "firstSeenOn": {
+    "product": "Figma",
+    "url": "https://figma.com",
+    "approximateDate": "2018"
+  },
+  "examples": [
+    {
+      "name": "Linear",
+      "desc": {
+        "fr": "Bouton qui se transforme en spinner puis checkmark avec animation fluide",
+        "en": "Button morphs into spinner then checkmark with smooth animation"
+      }
+    },
+    {
+      "name": "Stripe",
+      "desc": {
+        "fr": "États de paiement avec transitions sans à-coups et retour automatique",
+        "en": "Payment states with smooth transitions and auto-reset"
+      }
+    },
+    {
+      "name": "GitHub",
+      "desc": {
+        "fr": "Bouton 'Save' avec indicateur de sauvegarde puis confirmation",
+        "en": "'Save' button with saving indicator then confirmation"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Séquence claire** : Idle → Loading → Success → Reset",
+      "**Transitions fluides** : 200-300ms, easing naturel",
+      "**Texte descriptif** : 'Saving...' plutôt que juste un spinner",
+      "**Retour auto** : Réinitialiser après 2-3 secondes en succès",
+      "**État d'erreur** : Prévoir un état d'échec avec retry"
+    ],
+    "en": [
+      "**Clear sequence** : Idle → Loading → Success → Reset",
+      "**Smooth transitions** : 200-300ms, natural easing",
+      "**Descriptive text** : 'Saving...' rather than just spinner",
+      "**Auto-reset** : Reset after 2-3 seconds on success",
+      "**Error state** : Include failure state with retry"
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Bouton qui ne change pas - l'utilisateur clique en rage",
+      "❌ Pas de retour après succès - blocage de l'interface",
+      "❌ Transitions trop lentes ou saccadées",
+      "❌ Pas d'état d'erreur - échec silencieux"
+    ],
+    "en": [
+      "❌ Button doesn't change - user rage-clicks",
+      "❌ No reset after success - interface blocked",
+      "❌ Transitions too slow or jarring",
+      "❌ No error state - silent failure"
+    ]
+  },
+  "what": {
+    "fr": "Bouton qui se transforme pour montrer la progression de l'action - Submit devient Spinner puis Checkmark.",
+    "en": "Button transforms to show action progress - Submit becomes Spinner then Checkmark."
+  },
+  "why": {
+    "fr": "Évite les clics multiples impatients, confirme visuellement que l'action est en cours puis terminée avec succès.",
+    "en": "Prevents impatient multiple clicks, visually confirms action is in progress then completed successfully."
+  }
+}

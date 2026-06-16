@@ -1,0 +1,80 @@
+{
+  "id": 938,
+  "slug": "notification-preferences",
+  "category": "feedback",
+  "title": {
+    "fr": "Préférences de Notification Granulaires",
+    "en": "Notification Preferences Granularity"
+  },
+  "categoryLabel": {
+    "slug": "feedback",
+    "fr": "Feedback & États",
+    "en": "Feedback & States"
+  },
+  "firstSeenOn": {
+    "product": "GitHub",
+    "url": "https://github.com",
+    "approximateDate": "2012"
+  },
+  "examples": [
+    {
+      "name": "Slack",
+      "desc": {
+        "fr": "Contrôle granulaire par canal: mute, mention-only, all activity",
+        "en": "Granular control per channel: mute, mention-only, all activity"
+      }
+    },
+    {
+      "name": "Linear",
+      "desc": {
+        "fr": "Préférences par projet, par type d'événement, par canal",
+        "en": "Preferences per project, per event type, per channel"
+      }
+    },
+    {
+      "name": "GitHub",
+      "desc": {
+        "fr": "Watch repos avec niveaux: ignoring, releases only, all activity",
+        "en": "Watch repos with levels: ignoring, releases only, all activity"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Par type d'événement** : Mention, assignation, deadline, update",
+      "**Par canal** : In-app, email, push, SMS - indépendamment",
+      "**Par urgence** : Immédiat, digest quotidien, hebdomadaire",
+      "**Do Not Disturb** : Horaires personnalisables par jour",
+      "**Règles custom** : 'Notifie-moi que si...' par projet/équipe"
+    ],
+    "en": [
+      "**By event type** : Mention, assignment, deadline, update",
+      "**By channel** : In-app, email, push, SMS - independently",
+      "**By urgency** : Immediate, daily digest, weekly",
+      "**Do Not Disturb** : Customizable schedules per day",
+      "**Custom rules** : 'Notify me only if...' by project/team"
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Tout ou rien - pas de contrôle fin",
+      "❌ Paramètres cachés - difficiles à trouver",
+      "❌ Pas de prévisualisation - utilisateur ne sait pas ce qui va arriver",
+      "❌ Pas de DND - notifications en pleine nuit"
+    ],
+    "en": [
+      "❌ All or nothing - no fine control",
+      "❌ Hidden settings - hard to find",
+      "❌ No preview - user doesn't know what will happen",
+      "❌ No DND - notifications in middle of night"
+    ]
+  },
+  "what": {
+    "fr": "Contrôle fin des notifications par type d'événement, canal, urgence, projet - avec règles personnalisables et DND.",
+    "en": "Fine-grained notification control by event type, channel, urgency, project - with customizable rules and DND."
+  },
+  "why": {
+    "fr": "Chaque utilisateur a des besoins différents. La granularité permet de réduire le bruit tout en gardant l'essentiel.",
+    "en": "Every user has different needs. Granularity allows reducing noise while keeping what's essential."
+  }
+}

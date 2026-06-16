@@ -1,0 +1,69 @@
+{
+  "id": 918,
+  "slug": "data-storytelling",
+  "category": "data",
+  "title": {
+    "fr": "Data Storytelling (Visualisation Narrative)",
+    "en": "Data Storytelling (Narrative Visualization)"
+  },
+  "categoryLabel": {
+    "slug": "data",
+    "fr": "Data & Tables",
+    "en": "Data & Tables"
+  },
+  "firstSeenOn": {
+    "product": "Tableau",
+    "url": "https://tableau.com",
+    "approximateDate": "2015"
+  },
+  "examples": [
+    {
+      "name": "Google Analytics Intelligence",
+      "desc": {
+        "fr": "Explications en langage naturel des changements de données",
+        "en": "Natural language explanations of data changes"
+      }
+    },
+    {
+      "name": "Notion AI",
+      "desc": {
+        "fr": "Résumés narratifs des bases de données",
+        "en": "Narrative summaries of databases"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Contextualisez** : Donnez le contexte, pas juste les chiffres",
+      "**Expliquez le pourquoi** : 'Vous avez +15% grâce à X, malgré Y'",
+      "**Permettez l'exploration** : 'Pourquoi cela s'est-il passé ?' cliquable",
+      "**Comparez** : Période précédente, objectifs, benchmarks"
+    ],
+    "en": [
+      "**Contextualize** : Give context, not just numbers",
+      "**Explain why** : 'You had 15% growth because of X, despite Y'",
+      "**Enable exploration** : 'Why did this happen?' clickable",
+      "**Compare** : Previous period, goals, benchmarks"
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Graphiques sans contexte ni explication",
+      "❌ Trop de données brutes sans narration",
+      "❌ Aucune possibilité d'explorer plus en profondeur"
+    ],
+    "en": [
+      "❌ Charts without context or explanation",
+      "❌ Too much raw data without narrative",
+      "❌ No ability to drill deeper"
+    ]
+  },
+  "what": {
+    "fr": "Présentation des insights sous forme de récits avec contexte - 'Vous avez +15% grâce à X, malgré Y' plutôt que graphiques bruts.",
+    "en": "Presenting insights as narratives with context - 'You had 15% growth because of X, despite Y' rather than raw charts."
+  },
+  "why": {
+    "fr": "Les données seules ne suffisent pas. Les utilisateurs ont besoin de comprendre le 'pourquoi' et les implications pour prendre des décisions.",
+    "en": "Data alone is insufficient. Users need to understand the 'why' and implications to make decisions."
+  }
+}
