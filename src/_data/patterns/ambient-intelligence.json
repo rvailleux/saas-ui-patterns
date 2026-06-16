@@ -1,0 +1,69 @@
+{
+  "id": 907,
+  "slug": "ambient-intelligence",
+  "category": "ai-context",
+  "title": {
+    "fr": "Intelligence Ambiante (Zero-UI)",
+    "en": "Ambient Intelligence (Zero-UI)"
+  },
+  "categoryLabel": {
+    "slug": "ai-context",
+    "fr": "AI — Contexte & Mémoire",
+    "en": "AI — Context & Memory"
+  },
+  "firstSeenOn": {
+    "product": "Gmail",
+    "url": "https://gmail.com",
+    "approximateDate": "2018"
+  },
+  "examples": [
+    {
+      "name": "Notion",
+      "desc": {
+        "fr": "Suggestions basées sur les habitudes : 'Vous mettez habituellement ce document à jour le lundi'",
+        "en": "Habit-based suggestions: 'You usually update this doc on Mondays'"
+      }
+    },
+    {
+      "name": "Linear",
+      "desc": {
+        "fr": "Assignation auto-suggérée basée sur les patterns de tickets passés",
+        "en": "Auto-suggested assignee based on past ticket patterns"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Soyez prédictif** : Anticipez les besoins basés sur le contexte et l'historique",
+      "**Soyez discret** : Les suggestions doivent être faciles à ignorer",
+      "**Expliquez le pourquoi** : 'Vous n'avez pas répondu à cet email important' > 'Notification'",
+      "**Respectez la vie privée** : Ne soyez pas effrayant - consentement implicite"
+    ],
+    "en": [
+      "**Be predictive** : Anticipate needs based on context and history",
+      "**Be discreet** : Suggestions should be easy to ignore",
+      "**Explain why** : 'You haven't replied to this important email' > 'Notification'",
+      "**Respect privacy** : Don't be creepy - implicit consent"
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Être trop intrusif ou 'effrayant' avec les prédictions",
+      "❌ Ne pas expliquer pourquoi la suggestion est faite",
+      "❌ Ignorer le contexte - suggestions hors propos"
+    ],
+    "en": [
+      "❌ Being too intrusive or 'creepy' with predictions",
+      "❌ Not explaining why the suggestion is being made",
+      "❌ Ignoring context - irrelevant suggestions"
+    ]
+  },
+  "what": {
+    "fr": "L'IA détecte le contexte et fournit assistance sans interaction explicite - pas de prompts, pas de clics.",
+    "en": "AI senses context and provides assistance without explicit user interaction - no prompts, no clicks."
+  },
+  "why": {
+    "fr": "Les meilleures interfaces sont celles que vous n'utilisez pas. L'intelligence ambiante élimine la friction en agissant avant même que l'utilisateur ne sache qu'il a besoin de quelque chose.",
+    "en": "The best interfaces are the ones you don't use. Ambient intelligence removes friction by acting before the user even knows they need something."
+  }
+}

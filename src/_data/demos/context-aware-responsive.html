@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #0f0f1a;
+      color: #e2e8f0;
+      height: 100vh;
+      overflow: hidden;
+      font-size: 13px;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+    }
+    .role-selector {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+      justify-content: center;
+    }
+    .role-btn {
+      padding: 10px 20px;
+      background: #1a1a2e;
+      border: 1px solid #2a2a55;
+      border-radius: 8px;
+      color: #94a3b8;
+      cursor: pointer;
+      font-size: 12px;
+    }
+    .role-btn.active {
+      background: #3b82f6;
+      border-color: #3b82f6;
+      color: white;
+    }
+    .dashboard {
+      flex: 1;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .widget {
+      background: #1a1a2e;
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .widget-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .widget-title { font-weight: 500; }
+    .widget-priority {
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 10px;
+    }
+    .priority-high { background: #fef3c7; color: #92400e; }
+    .priority-medium { background: #1e3a5f; color: #3b82f6; }
+    .priority-low { background: #2a2a55; color: #64748b; }
+    .widget-content { color: #94a3b8; font-size: 12px; }
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+  <div class="role-selector">
+    <button class="role-btn active" onclick="setRole('developer')">Developer</button>
+    <button class="role-btn" onclick="setRole('marketer')">Marketer</button>
+    <button class="role-btn" onclick="setRole('executive')">Executive</button>
+  </div>
+
+  <div class="dashboard" id="dashboard">
+    <div class="widget" data-dev="high" data-mkt="low" data-exec="low">
+      <div class="widget-header">
+        <span class="widget-title">API Performance</span>
+        <span class="widget-priority priority-high">High Priority</span>
+      </div>
+      <div class="widget-content">Response time: 45ms | Error rate: 0.02%</div>
+    </div>
+    <div class="widget" data-dev="medium" data-mkt="high" data-exec="medium">
+      <div class="widget-header">
+        <span class="widget-title">Campaign Metrics</span>
+        <span class="widget-priority priority-high">High Priority</span>
+      </div>
+      <div class="widget-content">CTR: 3.2% | Conversions: 247</div>
+    </div>
+    <div class="widget" data-dev="low" data-mkt="low" data-exec="high">
+      <div class="widget-header">
+        <span class="widget-title">Revenue Overview</span>
+        <span class="widget-priority priority-high">High Priority</span>
+      </div>
+      <div class="widget-content">$1.2M ARR | Growth: +15%</div>
+    </div>
+  </div>
+
+  <script>
+    function setRole(role) {
+      document.querySelectorAll('.role-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+
+      document.querySelectorAll('.widget').forEach(widget => {
+        const priority = widget.dataset[role === 'developer' ? 'dev' : role === 'marketer' ? 'mkt' : 'exec'];
+        const badge = widget.querySelector('.widget-priority');
+        badge.className = 'widget-priority priority-' + priority;
+        badge.textContent = priority === 'high' ? 'High Priority' : priority === 'medium' ? 'Medium' : 'Low Priority';
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #0f0f1a;
+      color: #e2e8f0;
+      height: 100vh;
+      overflow: hidden;
+      font-size: 13px;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+    }
+    .dashboard {
+      flex: 1;
+      max-width: 700px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .card {
+      background: #1a1a2e;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .card-title { font-weight: 500; }
+    .card-badge {
+      padding: 4px 10px;
+      background: #1e3a2f;
+      color: #22c55e;
+      border-radius: 12px;
+      font-size: 11px;
+    }
+    .expense-list { display: flex; flex-direction: column; gap: 10px; }
+    .expense-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      background: #151528;
+      border-radius: 8px;
+    }
+    .expense-icon {
+      width: 36px;
+      height: 36px;
+      background: #2a2a55;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+    .expense-details { flex: 1; }
+    .expense-vendor { font-weight: 500; }
+    .expense-category {
+      font-size: 11px;
+      color: #22c55e;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .expense-amount { font-weight: 600; }
+    .auto-indicator {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 12px;
+      background: #1e3a2f;
+      border-radius: 20px;
+      font-size: 11px;
+      color: #22c55e;
+      margin-top: 12px;
+    }
+    .pulse {
+      width: 6px;
+      height: 6px;
+      background: #22c55e;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+    .controls {
+      display: flex;
+      gap: 12px;
+      padding-top: 16px;
+      justify-content: center;
+    }
+    .btn {
+      padding: 10px 16px;
+      border-radius: 8px;
+      border: none;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .btn-primary { background: #3b82f6; color: white; }
+  </style>
+</head>
+<body>
+  <div class="dashboard">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Recent Expenses</div>
+        <div class="card-badge">Auto-categorized</div>
+      </div>
+      <div class="expense-list">
+        <div class="expense-item">
+          <div class="expense-icon">🍽️</div>
+          <div class="expense-details">
+            <div class="expense-vendor">Restaurant Le Petit</div>
+            <div class="expense-category">✓ Auto: Meals & Entertainment</div>
+          </div>
+          <div class="expense-amount">$45.00</div>
+        </div>
+        <div class="expense-item">
+          <div class="expense-icon">🚗</div>
+          <div class="expense-details">
+            <div class="expense-vendor">Uber</div>
+            <div class="expense-category">✓ Auto: Transportation</div>
+          </div>
+          <div class="expense-amount">$23.50</div>
+        </div>
+        <div class="expense-item">
+          <div class="expense-icon">📦</div>
+          <div class="expense-details">
+            <div class="expense-vendor">Amazon</div>
+            <div class="expense-category">✓ Auto: Office Supplies</div>
+          </div>
+          <div class="expense-amount">$67.99</div>
+        </div>
+      </div>
+      <div class="auto-indicator">
+        <div class="pulse"></div>
+        <span>AI categorizing new expenses automatically...</span>
+      </div>
+    </div>
+  </div>
+  <div class="controls">
+    <button class="btn btn-primary" onclick="addExpense()">Simulate New Expense</button>
+  </div>
+  <script>
+    function addExpense() {
+      alert('New expense auto-categorized in background!');
+    }
+  </script>
+</body>
+</html>
