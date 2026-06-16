@@ -1,0 +1,69 @@
+{
+  "id": 922,
+  "slug": "data-masking",
+  "category": "data",
+  "title": {
+    "fr": "Masquage de Données Sensibles",
+    "en": "Data Masking for Sensitive Fields"
+  },
+  "categoryLabel": {
+    "slug": "data",
+    "fr": "Data & Tables",
+    "en": "Data & Tables"
+  },
+  "firstSeenOn": {
+    "product": "Workday",
+    "url": "https://workday.com",
+    "approximateDate": "2012"
+  },
+  "examples": [
+    {
+      "name": "Banking Apps",
+      "desc": {
+        "fr": "Numéros de compte masqués avec révélation intentionnelle",
+        "en": "Masked account numbers with intentional reveal"
+      }
+    },
+    {
+      "name": "HR SaaS",
+      "desc": {
+        "fr": "Données de salaire masquées par défaut pour la conformité",
+        "en": "Salary data masked by default for compliance"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Masquage par défaut** : Protège contre les regards indiscrets",
+      "**Révélation intentionnelle** : Clic pour afficher, pas hover",
+      "**Audit trail** : Log des consultations pour conformité",
+      "**Contrôles par rôle** : Visibilité basée sur les permissions"
+    ],
+    "en": [
+      "**Mask by default** : Protects from shoulder surfing",
+      "**Intentional reveal** : Click to show, not hover",
+      "**Audit trail** : Log views for compliance",
+      "**Role-based controls** : Visibility based on permissions"
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Données sensibles visibles par défaut",
+      "❌ Révélation au survol (accidents fréquents)",
+      "❌ Pas de log d'audit pour la conformité"
+    ],
+    "en": [
+      "❌ Sensitive data visible by default",
+      "❌ Reveal on hover (frequent accidents)",
+      "❌ No audit logging for compliance"
+    ]
+  },
+  "what": {
+    "fr": "Données sensibles masquées par défaut avec action intentionnelle pour révéler - protège du shoulder surfing.",
+    "en": "Sensitive data masked by default with intentional action to reveal - protects from shoulder surfing."
+  },
+  "why": {
+    "fr": "La conformité et la vie privée exigent de protéger les données sensibles. Le masquage réduit les risques tout en maintenant l'accessibilité.",
+    "en": "Compliance and privacy require protecting sensitive data. Masking reduces risk while maintaining accessibility."
+  }
+}

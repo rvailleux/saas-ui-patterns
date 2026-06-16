@@ -1,0 +1,279 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #0f0f1a;
+      color: #e2e8f0;
+      height: 100vh;
+      overflow: hidden;
+      font-size: 13px;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+    }
+    .form-container {
+      flex: 1;
+      max-width: 450px;
+      margin: 0 auto;
+      width: 100%;
+      background: #1a1a2e;
+      border-radius: 12px;
+      padding: 28px;
+    }
+    .form-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+    .field {
+      margin-bottom: 20px;
+    }
+    .field-label {
+      display: block;
+      font-size: 12px;
+      color: #94a3b8;
+      margin-bottom: 6px;
+    }
+    .field-input {
+      width: 100%;
+      padding: 12px 14px;
+      background: #151528;
+      border: 1px solid #2a2a55;
+      border-radius: 8px;
+      color: #e2e8f0;
+      font-size: 14px;
+      transition: border-color 0.2s;
+    }
+    .field-input:focus {
+      outline: none;
+      border-color: #3b82f6;
+    }
+    .field-input.valid {
+      border-color: #22c55e;
+    }
+    .field-input.invalid {
+      border-color: #ef4444;
+    }
+    .field-hint {
+      font-size: 12px;
+      color: #64748b;
+      margin-top: 6px;
+      min-height: 18px;
+    }
+    .field-hint.error {
+      color: #ef4444;
+    }
+    .field-hint.success {
+      color: #22c55e;
+    }
+    .validation-icon {
+      float: right;
+      margin-top: -32px;
+      margin-right: 12px;
+      font-size: 16px;
+    }
+    .submit-btn {
+      width: 100%;
+      padding: 14px;
+      background: #3b82f6;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+    .submit-btn:disabled {
+      background: #2a2a55;
+      color: #64748b;
+      cursor: not-allowed;
+    }
+    .controls {
+      display: flex;
+      gap: 12px;
+      padding-top: 16px;
+      justify-content: center;
+    }
+    .btn {
+      padding: 10px 16px;
+      border-radius: 8px;
+      border: none;
+      font-size: 12px;
+      cursor: pointer;
+      background: #3b82f6;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <div class="form-title">Create Account</div>
+
+    <div class="field">
+      <label class="field-label">Email</label>
+      <input type="email" class="field-input" id="email" placeholder="you@example.com" onblur="validateEmail()">
+      <span class="validation-icon" id="emailIcon"></span>
+      <div class="field-hint" id="emailHint">We'll never share your email</div>
+    </div>
+
+    <div class="field">
+      <label class="field-label">Password</label>
+      <input type="password" class="field-input" id="password" placeholder="••••••••" oninput="debounceValidatePassword()">
+      <span class="validation-icon" id="passwordIcon"></span>
+      <div class="field-hint" id="passwordHint">At least 8 characters with a number</div>
+    </div>
+
+    <div class="field">
+      <label class="field-label">Username</label>
+      <input type="text" class="field-input" id="username" placeholder="johnsmith" oninput="debounceValidateUsername()">
+      <span class="validation-icon" id="usernameIcon"></span>
+      <div class="field-hint" id="usernameHint">Letters, numbers, and underscores only</div>
+    </div>
+
+    <button class="submit-btn" id="submitBtn" onclick="submitForm()">Create Account</button>
+  </div>
+
+  <div class="controls">
+    <button class="btn" onclick="fillValid()">Fill Valid Data</button>
+    <button class="btn" onclick="fillInvalid()">Fill Invalid Data</button>
+  </div>
+
+  <script>
+    let passwordTimeout, usernameTimeout;
+
+    function debounceValidatePassword() {
+      clearTimeout(passwordTimeout);
+      const hint = document.getElementById('passwordHint');
+      hint.textContent = 'Checking...';
+      hint.className = 'field-hint';
+
+      passwordTimeout = setTimeout(() => {
+        validatePassword();
+      }, 500);
+    }
+
+    function debounceValidateUsername() {
+      clearTimeout(usernameTimeout);
+      const hint = document.getElementById('usernameHint');
+      hint.textContent = 'Checking availability...';
+      hint.className = 'field-hint';
+
+      usernameTimeout = setTimeout(() => {
+        validateUsername();
+      }, 600);
+    }
+
+    function validateEmail() {
+      const input = document.getElementById('email');
+      const hint = document.getElementById('emailHint');
+      const icon = document.getElementById('emailIcon');
+      const email = input.value;
+
+      if (!email) {
+        resetField(input, hint, icon);
+        return;
+      }
+
+      const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+      if (isValid) {
+        input.className = 'field-input valid';
+        hint.textContent = 'Looks good!';
+        hint.className = 'field-hint success';
+        icon.textContent = '✓';
+      } else {
+        input.className = 'field-input invalid';
+        hint.textContent = 'Please enter a valid email address';
+        hint.className = 'field-hint error';
+        icon.textContent = '✕';
+      }
+    }
+
+    function validatePassword() {
+      const input = document.getElementById('password');
+      const hint = document.getElementById('passwordHint');
+      const icon = document.getElementById('passwordIcon');
+      const password = input.value;
+
+      if (!password) {
+        resetField(input, hint, icon);
+        return;
+      }
+
+      const hasNumber = /\d/.test(password);
+      const isLongEnough = password.length >= 8;
+
+      if (isLongEnough && hasNumber) {
+        input.className = 'field-input valid';
+        hint.textContent = 'Strong password!';
+        hint.className = 'field-hint success';
+        icon.textContent = '✓';
+      } else {
+        input.className = 'field-input invalid';
+        hint.textContent = 'Need 8+ characters with at least one number';
+        hint.className = 'field-hint error';
+        icon.textContent = '✕';
+      }
+    }
+
+    function validateUsername() {
+      const input = document.getElementById('username');
+      const hint = document.getElementById('usernameHint');
+      const icon = document.getElementById('usernameIcon');
+      const username = input.value;
+
+      if (!username) {
+        resetField(input, hint, icon);
+        return;
+      }
+
+      const isValid = /^[a-zA-Z0-9_]+$/.test(username);
+
+      if (isValid) {
+        input.className = 'field-input valid';
+        hint.textContent = 'Username available!';
+        hint.className = 'field-hint success';
+        icon.textContent = '✓';
+      } else {
+        input.className = 'field-input invalid';
+        hint.textContent = 'Only letters, numbers, and underscores allowed';
+        hint.className = 'field-hint error';
+        icon.textContent = '✕';
+      }
+    }
+
+    function resetField(input, hint, icon) {
+      input.className = 'field-input';
+      hint.className = 'field-hint';
+      icon.textContent = '';
+    }
+
+    function fillValid() {
+      document.getElementById('email').value = 'john@example.com';
+      document.getElementById('password').value = 'mypassword123';
+      document.getElementById('username').value = 'johnsmith';
+      validateEmail();
+      validatePassword();
+      validateUsername();
+    }
+
+    function fillInvalid() {
+      document.getElementById('email').value = 'invalid-email';
+      document.getElementById('password').value = 'short';
+      document.getElementById('username').value = 'john@smith!';
+      validateEmail();
+      validatePassword();
+      validateUsername();
+    }
+
+    function submitForm() {
+      alert('Form submitted!');
+    }
+  </script>
+</body>
+</html>

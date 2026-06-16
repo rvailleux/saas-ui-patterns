@@ -1,0 +1,69 @@
+{
+  "id": 925,
+  "slug": "inline-validation",
+  "category": "feedback",
+  "title": {
+    "fr": "Validation Inline avec Debounce",
+    "en": "Inline Validation with Debounce"
+  },
+  "categoryLabel": {
+    "slug": "feedback",
+    "fr": "Feedback & États",
+    "en": "Feedback & States"
+  },
+  "firstSeenOn": {
+    "product": "Stripe",
+    "url": "https://stripe.com",
+    "approximateDate": "2011"
+  },
+  "examples": [
+    {
+      "name": "Gov.uk",
+      "desc": {
+        "fr": "Validation par champ avec messages d'erreur clairs",
+        "en": "Per-field validation with clear error messages"
+      }
+    },
+    {
+      "name": "Modern Signup Flows",
+      "desc": {
+        "fr": "Validation en temps réel sans punir la saisie",
+        "en": "Real-time validation without punishing typing"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Debounce 300-500ms** : Validez après pause, pas pendant chaque frappe",
+      "**Temps réel** : Formats (email, téléphone) - on blur pour contenu",
+      "**Messages clairs** : Dites ce qui est attendu, pas juste 'invalide'",
+      "**Accessibilité** : aria-invalid, aria-describedby pour lecteurs d'écran"
+    ],
+    "en": [
+      "**Debounce 300-500ms** : Validate after pause, not during each keystroke",
+      "**Real-time** : Format checks - on blur for content",
+      "**Clear messages** : Say what's expected, not just 'invalid'",
+      "**Accessibility** : aria-invalid, aria-describedby for screen readers"
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Valider trop tôt - message d'erreur pendant la saisie",
+      "❌ Messages génériques sans indication de correction",
+      "❌ Ignorer l'accessibilité pour les lecteurs d'écran"
+    ],
+    "en": [
+      "❌ Validating too early - error while typing",
+      "❌ Generic messages without correction guidance",
+      "❌ Ignoring accessibility for screen readers"
+    ]
+  },
+  "what": {
+    "fr": "Validation de champ en temps réel avec debounce - ne punit pas l'utilisateur pendant la saisie.",
+    "en": "Real-time field validation with debounce - doesn't punish user while typing."
+  },
+  "why": {
+    "fr": "La validation immédiate réduit les erreurs en fin de formulaire. Le debounce respecte le flux de saisie.",
+    "en": "Immediate validation reduces end-of-form errors. Debounce respects typing flow."
+  }
+}
