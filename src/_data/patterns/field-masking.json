@@ -1,0 +1,69 @@
+{
+  "id": 926,
+  "slug": "field-masking",
+  "category": "feedback",
+  "title": {
+    "fr": "Masquage de Champ / Auto-formatage",
+    "en": "Field Masking / Auto-Formatting"
+  },
+  "categoryLabel": {
+    "slug": "feedback",
+    "fr": "Feedback & États",
+    "en": "Feedback & States"
+  },
+  "firstSeenOn": {
+    "product": "Stripe",
+    "url": "https://stripe.com",
+    "approximateDate": "2011"
+  },
+  "examples": [
+    {
+      "name": "Square",
+      "desc": {
+        "fr": "Formatage automatique des numéros de carte et téléphone",
+        "en": "Automatic formatting of card numbers and phone"
+      }
+    },
+    {
+      "name": "Payment Forms",
+      "desc": {
+        "fr": "Formatage des devises avec séparateurs de milliers",
+        "en": "Currency formatting with thousand separators"
+      }
+    }
+  ],
+  "guide": {
+    "fr": [
+      "**Formatez en temps réel** : Téléphone (XXX) XXX-XXXX",
+      "**Préservez la position curseur** : Ne déplacez pas pendant la saisie",
+      "**Autorisez le copier-coller** : Nettoyez le format automatiquement",
+      "**Normalisez côté serveur** : Format client pour l'affichage uniquement"
+    ],
+    "en": [
+      "**Format in real-time** : Phone (XXX) XXX-XXXX",
+      "**Preserve cursor position** : Don't jump while typing",
+      "**Allow paste** : Clean format automatically",
+      "**Normalize server-side** : Client format for display only"
+    ]
+  },
+  "pitfalls": {
+    "fr": [
+      "❌ Casser le copier-coller avec formatage strict",
+      "❌ Déplacer le curseur de façon inattendue",
+      "❌ Rejeter des formats valides à cause de l'espace"
+    ],
+    "en": [
+      "❌ Breaking copy-paste with strict formatting",
+      "❌ Moving cursor unexpectedly",
+      "❌ Rejecting valid formats due to spacing"
+    ]
+  },
+  "what": {
+    "fr": "Input qui se formate pendant la saisie - téléphones, cartes, dates - sans bloquer les entrées valides.",
+    "en": "Input that formats as user types - phone, cards, dates - without blocking valid input."
+  },
+  "why": {
+    "fr": "Le formatage visuel réduit les erreurs de saisie et facilite la vérification sans ajouter de friction.",
+    "en": "Visual formatting reduces entry errors and makes verification easier without adding friction."
+  }
+}

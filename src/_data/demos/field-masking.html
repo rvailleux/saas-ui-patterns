@@ -1,0 +1,146 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #0f0f1a;
+      color: #e2e8f0;
+      height: 100vh;
+      overflow: hidden;
+      font-size: 13px;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+    }
+    .form-container {
+      flex: 1;
+      max-width: 400px;
+      margin: 0 auto;
+      width: 100%;
+      background: #1a1a2e;
+      border-radius: 12px;
+      padding: 28px;
+    }
+    .form-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+    .field {
+      margin-bottom: 20px;
+    }
+    .field-label {
+      display: block;
+      font-size: 12px;
+      color: #94a3b8;
+      margin-bottom: 6px;
+    }
+    .field-input {
+      width: 100%;
+      padding: 12px 14px;
+      background: #151528;
+      border: 1px solid #2a2a55;
+      border-radius: 8px;
+      color: #e2e8f0;
+      font-size: 14px;
+      font-family: monospace;
+    }
+    .field-input:focus {
+      outline: none;
+      border-color: #3b82f6;
+    }
+    .controls {
+      display: flex;
+      gap: 12px;
+      padding-top: 16px;
+      justify-content: center;
+    }
+    .btn {
+      padding: 10px 16px;
+      border-radius: 8px;
+      border: none;
+      font-size: 12px;
+      cursor: pointer;
+      background: #3b82f6;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <div class="form-title">Payment Details</div>
+
+    <div class="field">
+      <label class="field-label">Phone Number</label>
+      <input type="text" class="field-input" id="phone" placeholder="(XXX) XXX-XXXX" maxlength="14">
+    </div>
+
+    <div class="field">
+      <label class="field-label">Credit Card</label>
+      <input type="text" class="field-input" id="card" placeholder="XXXX XXXX XXXX XXXX" maxlength="19">
+    </div>
+
+    <div class="field">
+      <label class="field-label">Expiry Date</label>
+      <input type="text" class="field-input" id="expiry" placeholder="MM/YY" maxlength="5">
+    </div>
+
+    <div class="field">
+      <label class="field-label">Amount</label>
+      <input type="text" class="field-input" id="amount" placeholder="$0.00">
+    </div>
+  </div>
+
+  <div class="controls">
+    <button class="btn" onclick="clearAll()">Clear All</button>
+  </div>
+
+  <script>
+    // Phone masking
+    document.getElementById('phone').addEventListener('input', function(e) {
+      let value = e.target.value.replace(/\D/g, '');
+      if (value.length >= 6) {
+        value = `(${value.slice(0,3)}) ${value.slice(3,6)}-${value.slice(6,10)}`;
+      } else if (value.length >= 3) {
+        value = `(${value.slice(0,3)}) ${value.slice(3)}`;
+      }
+      e.target.value = value;
+    });
+
+    // Card masking
+    document.getElementById('card').addEventListener('input', function(e) {
+      let value = e.target.value.replace(/\D/g, '');
+      value = value.match(/.{1,4}/g)?.join(' ') || value;
+      e.target.value = value;
+    });
+
+    // Expiry masking
+    document.getElementById('expiry').addEventListener('input', function(e) {
+      let value = e.target.value.replace(/\D/g, '');
+      if (value.length >= 2) {
+        value = value.slice(0,2) + '/' + value.slice(2,4);
+      }
+      e.target.value = value;
+    });
+
+    // Currency masking
+    document.getElementById('amount').addEventListener('input', function(e) {
+      let value = e.target.value.replace(/[^\d.]/g, '');
+      if (value) {
+        value = '$' + parseFloat(value).toLocaleString('en-US', {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2
+        });
+      }
+      e.target.value = value;
+    });
+
+    function clearAll() {
+      document.querySelectorAll('.field-input').forEach(input => input.value = '');
+    }
+  </script>
+</body>
+</html>
